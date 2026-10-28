@@ -1,0 +1,101 @@
+{
+  "run_id": "run_20261023_015957_70d5c6",
+  "judged_time": "2026-10-23T01:59:57+08:00",
+  "source_file": "evidence/parsed/run_20261023_015957_70d5c6_parsed.json",
+  "collect_time": "2026-10-23T01:59:57+08:00",
+  "rule_source": "b03_rules.json",
+  "rules_loaded": 8,
+  "rule_results": [
+    {
+      "id": "R1",
+      "name": "高温预警",
+      "indicator": "temperature",
+      "verdict": "偏高",
+      "matched": false,
+      "value": 30.0,
+      "unit": "℃",
+      "description": "气温超过 30 ℃ 会加速叶片蒸腾与呼吸消耗,抑制番茄坐果与果实着色。",
+      "advice": "开启侧窗与顶窗通风,必要时启动湿帘风机降温。"
+    },
+    {
+      "id": "R2",
+      "name": "低温预警",
+      "indicator": "temperature",
+      "verdict": "偏低",
+      "matched": false,
+      "value": 30.0,
+      "unit": "℃",
+      "description": "气温低于 15 ℃ 时番茄生长缓慢,花粉活力下降,易出现落花落果。",
+      "advice": "关闭通风口并启动加温设备,保持棚温不低于 15 ℃。"
+    },
+    {
+      "id": "R3",
+      "name": "高湿病害风险",
+      "indicator": "humidity",
+      "verdict": "偏高",
+      "matched": false,
+      "value": 45.0,
+      "unit": "%RH",
+      "description": "相对湿度高于 85 %RH 时叶片易结露,灰霉病、晚疫病发生风险升高。",
+      "advice": "加强通风排湿,控制浇水,必要时开启除湿设备。"
+    },
+    {
+      "id": "R4",
+      "name": "低湿授粉不良",
+      "indicator": "humidity",
+      "verdict": "偏低",
+      "matched": false,
+      "value": 45.0,
+      "unit": "%RH",
+      "description": "相对湿度低于 45 %RH 时花粉易失活、柱头干枯,影响授粉坐果。",
+      "advice": "向地面或走道喷雾增湿,避免高温时段大通风。"
+    },
+    {
+      "id": "R5",
+      "name": "CO₂不足光合受限",
+      "indicator": "co2",
+      "verdict": "偏低",
+      "matched": false,
+      "value": 1500.0,
+      "unit": "ppm",
+      "description": "CO₂ 浓度低于 800 ppm 时叶片光合速率下降,植株生长与产量受限。",
+      "advice": "白天适时通风引入新鲜空气,或开启 CO₂ 增施设备。"
+    },
+    {
+      "id": "R6",
+      "name": "CO₂偏高需通风",
+      "indicator": "co2",
+      "verdict": "偏高",
+      "matched": false,
+      "value": 1500.0,
+      "unit": "ppm",
+      "description": "CO₂ 浓度高于 1500 ppm 提示棚内空气交换不足,高浓度下气孔关闭反而抑制光合。",
+      "advice": "打开通风口换气,并检查 CO₂ 增施设备是否补给过量。"
+    },
+    {
+      "id": "R7",
+      "name": "光照不足",
+      "indicator": "light",
+      "verdict": "偏低",
+      "matched": false,
+      "value": 10000.0,
+      "unit": "lux",
+      "description": "光照低于 10000 lux 时光合作用不足,植株易徒长,开花坐果受影响。",
+      "advice": "清洁棚膜提高透光率,阴雨天开启补光灯。"
+    },
+    {
+      "id": "R8",
+      "name": "强光灼伤风险",
+      "indicator": "light",
+      "verdict": "偏高",
+      "matched": false,
+      "value": 10000.0,
+      "unit": "lux",
+      "description": "光照高于 70000 lux 时强光直射易灼伤叶片与果实,产生日灼果。",
+      "advice": "开启遮阳网或喷涂遮光剂,减少午后强光直射。"
+    }
+  ],
+  "triggered_rules": [],
+  "conclusion": "正常",
+  "conclusion_basis": "8 条规则均未触发,各项指标均在适宜区间。"
+}

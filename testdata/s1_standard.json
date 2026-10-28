@@ -1,0 +1,22 @@
+{
+  "scenario": "S1",
+  "name": "标准适宜环境",
+  "description": "四项指标全部处于番茄大棚适宜区间(温度 15~30 ℃、湿度 45~85 %RH、CO₂ 800~1500 ppm、光照 10000~70000 lux),预期 B02 四项全判适宜、B03 判正常、最终结论为正常。",
+  "inputs": {
+    "temperature": 25.0,
+    "humidity": 63.0,
+    "co2": 850.0,
+    "light": 31000.0
+  },
+  "expected": {
+    "parsed_verdicts": {
+      "temperature": "适宜",
+      "humidity": "适宜",
+      "co2": "适宜",
+      "light": "适宜"
+    },
+    "rule_conclusion": "正常",
+    "final_conclusion_prefix": "正常"
+  },
+  "run_command": "printf '25\\n63\\n850\\n31000\\n' | py b07_main.py"
+}

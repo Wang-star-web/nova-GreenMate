@@ -1,0 +1,62 @@
+{
+  "run_id": "run_20261023_010059_f489de",
+  "parsed_time": "2026-10-23T01:00:59+08:00",
+  "source_file": "evidence/raw/run_20261023_010059_f489de.json",
+  "collect_time": "2026-10-23T01:00:59+08:00",
+  "rules": {
+    "temperature": {
+      "low": 15.0,
+      "high": 30.0,
+      "unit": "℃"
+    },
+    "humidity": {
+      "low": 45.0,
+      "high": 85.0,
+      "unit": "%RH"
+    },
+    "co2": {
+      "low": 800.0,
+      "high": 1500.0,
+      "unit": "ppm"
+    },
+    "light": {
+      "low": 10000.0,
+      "high": 70000.0,
+      "unit": "lux"
+    }
+  },
+  "indicators": [
+    {
+      "key": "temperature",
+      "name": "温度",
+      "unit": "℃",
+      "value": 25.0,
+      "verdict": "适宜",
+      "basis": "25 ℃ 位于适宜区间 [15, 30] ℃,判定为适宜"
+    },
+    {
+      "key": "humidity",
+      "name": "湿度",
+      "unit": "%RH",
+      "value": 65.0,
+      "verdict": "适宜",
+      "basis": "65 %RH 位于适宜区间 [45, 85] %RH,判定为适宜"
+    },
+    {
+      "key": "co2",
+      "name": "CO₂浓度",
+      "unit": "ppm",
+      "value": 800.0,
+      "verdict": "适宜",
+      "basis": "800 ppm 位于适宜区间 [800, 1500] ppm,判定为适宜"
+    },
+    {
+      "key": "light",
+      "name": "光照",
+      "unit": "lux",
+      "value": 4500.0,
+      "verdict": "偏低",
+      "basis": "4500 lux 低于适宜下限 10000 lux,判定为偏低"
+    }
+  ]
+}

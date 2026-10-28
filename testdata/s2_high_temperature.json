@@ -1,0 +1,23 @@
+{
+  "scenario": "S2",
+  "name": "单项指标偏高(温度偏高)",
+  "description": "仅温度一项偏高(32 ℃ > 30 ℃),其余三项均在番茄大棚适宜区间内。预期 B02 温度判偏高、其余判适宜;B03 触发规则 R1 高温预警、判需要预警;最终结论为需要预警。",
+  "inputs": {
+    "temperature": 32.0,
+    "humidity": 63.0,
+    "co2": 850.0,
+    "light": 31000.0
+  },
+  "expected": {
+    "parsed_verdicts": {
+      "temperature": "偏高",
+      "humidity": "适宜",
+      "co2": "适宜",
+      "light": "适宜"
+    },
+    "rule_conclusion": "需要预警",
+    "triggered_rules": ["R1"],
+    "final_conclusion_prefix": "需要预警"
+  },
+  "run_command": "printf '32\\n63\\n850\\n31000\\n' | py b07_main.py"
+}

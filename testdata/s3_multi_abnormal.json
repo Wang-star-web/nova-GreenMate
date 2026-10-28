@@ -1,0 +1,23 @@
+{
+  "scenario": "S3",
+  "name": "多项指标异常(高温高湿弱光)",
+  "description": "温度偏高(33 ℃)、湿度偏高(88 %RH)、光照偏低(8000 lux)三项同时偏离适宜区间,CO₂ 适宜。预期 B02 温度/湿度判偏高、光照判偏低;B03 触发 R1、R3、R7 三条规则判需要预警;最终结论为需要预警。",
+  "inputs": {
+    "temperature": 33.0,
+    "humidity": 88.0,
+    "co2": 900.0,
+    "light": 8000.0
+  },
+  "expected": {
+    "parsed_verdicts": {
+      "temperature": "偏高",
+      "humidity": "偏高",
+      "co2": "适宜",
+      "light": "偏低"
+    },
+    "rule_conclusion": "需要预警",
+    "triggered_rules": ["R1", "R3", "R7"],
+    "final_conclusion_prefix": "需要预警"
+  },
+  "run_command": "printf '33\\n88\\n900\\n8000\\n' | py b07_main.py"
+}

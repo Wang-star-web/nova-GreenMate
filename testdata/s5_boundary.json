@@ -1,0 +1,23 @@
+{
+  "scenario": "S5",
+  "name": "临界边界值",
+  "description": "四项指标恰好卡在适宜/异常分界线上(温度 30 ℃=上限、湿度 45 %RH=下限、CO₂ 1500 ppm=上限、光照 10000 lux=下限)。系统语义为闭区间:边界值判适宜。预期 B02 四项全判适宜、B03 判正常、最终结论为正常。",
+  "inputs": {
+    "temperature": 30.0,
+    "humidity": 45.0,
+    "co2": 1500.0,
+    "light": 10000.0
+  },
+  "expected": {
+    "parsed_verdicts": {
+      "temperature": "适宜",
+      "humidity": "适宜",
+      "co2": "适宜",
+      "light": "适宜"
+    },
+    "rule_conclusion": "正常",
+    "triggered_rules": [],
+    "final_conclusion_prefix": "正常"
+  },
+  "run_command": "printf '30\\n45\\n1500\\n10000\\n' | py b07_main.py"
+}
