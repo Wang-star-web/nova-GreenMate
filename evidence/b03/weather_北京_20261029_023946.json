@@ -1,0 +1,40 @@
+{
+  "provider": "qweather",
+  "retrieved_at": "2026-10-29T02:39:45+08:00",
+  "query": {
+    "method": "GET",
+    "url": "https://devapi.qweather.com/v7/weather/3d",
+    "params": {
+      "location": "101010100",
+      "key": "***REDACTED***"
+    }
+  },
+  "status": "error",
+  "error": {
+    "error_type": "api_key_error",
+    "message": "HTTP 403 认证失败,API Key 无效或已过期(接口返回: Invalid Host - An invalid or unauthorized API Host.)"
+  },
+  "location": "北京(39.9042,116.4074)",
+  "analysis_time": "2026-10-29T02:39:45+08:00",
+  "forecast_time": null,
+  "temperature": {
+    "value": null,
+    "unit": "℃"
+  },
+  "humidity": {
+    "value": null,
+    "unit": "%RH"
+  },
+  "precipitation_probability": {
+    "value": null,
+    "unit": "%"
+  },
+  "cloud_cover": {
+    "value": null,
+    "unit": "%"
+  },
+  "shortwave_radiation": {
+    "value": null,
+    "unit": "W/m²"
+  }
+}

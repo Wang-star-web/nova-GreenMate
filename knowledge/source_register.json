@@ -1,0 +1,62 @@
+[
+  {
+    "source_id": "s1",
+    "title": "番茄大棚温度管理",
+    "author": "GreenMate 项目组(Claude 编写)",
+    "date": "2026-10-29",
+    "origin": "GreenMate 课程项目自编模拟资料:由项目组(Claude)依据公开番茄栽培农学知识(农业院校教材与农技推广资料中的通用结论)整理编写,阈值对齐本项目 b03_rules.json 规则 R1~R8;非任何出版社、期刊或官方机构的正式出版物,不可作为真实农业生产指导依据。",
+    "file": "knowledge/sources/s1_temperature.md",
+    "encoding": "utf-8",
+    "char_count": 765,
+    "sha256": "c2586ef17f4d30b03786a0040493ac821b14e3d6c52cc40696bcadde1a080c21",
+    "chunk_count": 6
+  },
+  {
+    "source_id": "s2",
+    "title": "大棚湿度与 CO₂ 管理",
+    "author": "GreenMate 项目组(Claude 编写)",
+    "date": "2026-10-29",
+    "origin": "GreenMate 课程项目自编模拟资料:由项目组(Claude)依据公开番茄栽培农学知识(农业院校教材与农技推广资料中的通用结论)整理编写,阈值对齐本项目 b03_rules.json 规则 R1~R8;非任何出版社、期刊或官方机构的正式出版物,不可作为真实农业生产指导依据。",
+    "file": "knowledge/sources/s2_humidity_co2.md",
+    "encoding": "utf-8",
+    "char_count": 766,
+    "sha256": "44995e214ed2ed005f4226346cbbecefa3ba7a654a9147fbf121c1f520b71f00",
+    "chunk_count": 6
+  },
+  {
+    "source_id": "s3",
+    "title": "番茄光照管理",
+    "author": "GreenMate 项目组(Claude 编写)",
+    "date": "2026-10-29",
+    "origin": "GreenMate 课程项目自编模拟资料:由项目组(Claude)依据公开番茄栽培农学知识(农业院校教材与农技推广资料中的通用结论)整理编写,阈值对齐本项目 b03_rules.json 规则 R1~R8;非任何出版社、期刊或官方机构的正式出版物,不可作为真实农业生产指导依据。",
+    "file": "knowledge/sources/s3_light.md",
+    "encoding": "utf-8",
+    "char_count": 570,
+    "sha256": "b9b3f8a254aa0b64db2bae937b2e5142eec0a26968cb53260bec2bcd9b497135",
+    "chunk_count": 4
+  },
+  {
+    "source_id": "s4",
+    "title": "番茄水肥管理",
+    "author": "GreenMate 项目组(Claude 编写)",
+    "date": "2026-10-29",
+    "origin": "GreenMate 课程项目自编模拟资料:由项目组(Claude)依据公开番茄栽培农学知识(农业院校教材与农技推广资料中的通用结论)整理编写,阈值对齐本项目 b03_rules.json 规则 R1~R8;非任何出版社、期刊或官方机构的正式出版物,不可作为真实农业生产指导依据。",
+    "file": "knowledge/sources/s4_water_fertilizer.md",
+    "encoding": "utf-8",
+    "char_count": 605,
+    "sha256": "827e501127afbafb7ae97752fb221f7e22b524d827063532c71618b39330ab0e",
+    "chunk_count": 5
+  },
+  {
+    "source_id": "s5",
+    "title": "番茄病虫害防治与授粉采收",
+    "author": "GreenMate 项目组(Claude 编写)",
+    "date": "2026-10-29",
+    "origin": "GreenMate 课程项目自编模拟资料:由项目组(Claude)依据公开番茄栽培农学知识(农业院校教材与农技推广资料中的通用结论)整理编写,阈值对齐本项目 b03_rules.json 规则 R1~R8;非任何出版社、期刊或官方机构的正式出版物,不可作为真实农业生产指导依据。",
+    "file": "knowledge/sources/s5_pest_harvest.md",
+    "encoding": "utf-8",
+    "char_count": 700,
+    "sha256": "334e986d625feb6a2eb47bd9568fbf1e4bb002d77357b8abbef372a3b4b4c2c3",
+    "chunk_count": 6
+  }
+]

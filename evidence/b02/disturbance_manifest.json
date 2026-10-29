@@ -1,0 +1,87 @@
+{
+  "generator_version": "1.0",
+  "seed": "42",
+  "anchor": "2026-10-29 01:00:00",
+  "grid": {
+    "start": "2026-10-22 01:30:00",
+    "end": "2026-10-29 01:00:00",
+    "step_minutes": 30,
+    "points": 336
+  },
+  "disturbances": [
+    {
+      "scenario": "disturbance_high_temp",
+      "start": "2026-10-23 10:00:00",
+      "end": "2026-10-23 13:00:00",
+      "duration_hours": 3.0,
+      "points": 7,
+      "affected_parameters": [
+        "temperature"
+      ],
+      "targets": {
+        "temperature": 33.0
+      },
+      "rules": "R1 高温"
+    },
+    {
+      "scenario": "disturbance_high_humidity",
+      "start": "2026-10-24 14:00:00",
+      "end": "2026-10-24 16:30:00",
+      "duration_hours": 2.5,
+      "points": 6,
+      "affected_parameters": [
+        "humidity"
+      ],
+      "targets": {
+        "humidity": 88.0
+      },
+      "rules": "R3 高湿"
+    },
+    {
+      "scenario": "disturbance_high_co2",
+      "start": "2026-10-25 08:30:00",
+      "end": "2026-10-25 11:30:00",
+      "duration_hours": 3.0,
+      "points": 7,
+      "affected_parameters": [
+        "co2"
+      ],
+      "targets": {
+        "co2": 1600.0
+      },
+      "rules": "R6 CO₂偏高"
+    },
+    {
+      "scenario": "disturbance_low_light",
+      "start": "2026-10-26 11:00:00",
+      "end": "2026-10-26 13:00:00",
+      "duration_hours": 2.0,
+      "points": 5,
+      "affected_parameters": [
+        "light"
+      ],
+      "targets": {
+        "light": 8000.0
+      },
+      "rules": "R7 弱光"
+    },
+    {
+      "scenario": "disturbance_multi",
+      "start": "2026-10-27 13:00:00",
+      "end": "2026-10-27 17:00:00",
+      "duration_hours": 4.0,
+      "points": 9,
+      "affected_parameters": [
+        "humidity",
+        "light",
+        "temperature"
+      ],
+      "targets": {
+        "temperature": 33.0,
+        "humidity": 88.0,
+        "light": 8000.0
+      },
+      "rules": "R1+R3+R7"
+    }
+  ]
+}

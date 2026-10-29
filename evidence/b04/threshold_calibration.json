@@ -1,0 +1,80 @@
+{
+  "calibrated_at": "2026-10-29T21:35:52+08:00",
+  "threshold_current": 0.17,
+  "threshold_recommended": 0.17,
+  "covered_min": 0.2149,
+  "uncovered_max": 0.1234,
+  "separation": 0.09150000000000001,
+  "queries": [
+    {
+      "query": "番茄适宜生长温度是多少",
+      "covered": true,
+      "status": "ok",
+      "top1_score": 0.3366,
+      "top1_source": "s1"
+    },
+    {
+      "query": "大棚空气湿度多少合适",
+      "covered": true,
+      "status": "ok",
+      "top1_score": 0.3228,
+      "top1_source": "s2"
+    },
+    {
+      "query": "CO₂浓度多少合适",
+      "covered": true,
+      "status": "ok",
+      "top1_score": 0.443,
+      "top1_source": "s2"
+    },
+    {
+      "query": "光照不足怎么办",
+      "covered": true,
+      "status": "ok",
+      "top1_score": 0.3317,
+      "top1_source": "s3"
+    },
+    {
+      "query": "番茄灰霉病怎么防治",
+      "covered": true,
+      "status": "ok",
+      "top1_score": 0.3041,
+      "top1_source": "s5"
+    },
+    {
+      "query": "番茄如何授粉",
+      "covered": true,
+      "status": "ok",
+      "top1_score": 0.4338,
+      "top1_source": "s5"
+    },
+    {
+      "query": "番茄坐果期要追什么肥",
+      "covered": true,
+      "status": "ok",
+      "top1_score": 0.2149,
+      "top1_source": "s4"
+    },
+    {
+      "query": "比特币价格是多少",
+      "covered": false,
+      "status": "insufficient",
+      "top1_score": 0.0552,
+      "top1_source": "s4"
+    },
+    {
+      "query": "量子计算是什么",
+      "covered": false,
+      "status": "insufficient",
+      "top1_score": 0.0743,
+      "top1_source": "s1"
+    },
+    {
+      "query": "番茄股票代码",
+      "covered": false,
+      "status": "insufficient",
+      "top1_score": 0.1234,
+      "top1_source": "s1"
+    }
+  ]
+}

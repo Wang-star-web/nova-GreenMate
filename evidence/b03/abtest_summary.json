@@ -1,0 +1,27 @@
+{
+  "generated_at": "2026-10-29T02:30:32+08:00",
+  "result": "PASS",
+  "city_a": "北京",
+  "city_b": "广州",
+  "window_hours": 6.0,
+  "provider": "open-meteo",
+  "compared_fields": {
+    "temperature": {
+      "a": 9.0,
+      "b": 25.3,
+      "differ": true
+    },
+    "humidity": {
+      "a": 59.0,
+      "b": 64.0,
+      "differ": true
+    },
+    "precipitation_probability": {
+      "a": 0.0,
+      "b": 19.0,
+      "differ": true
+    }
+  },
+  "differ": true,
+  "reasons": []
+}

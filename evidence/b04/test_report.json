@@ -1,0 +1,100 @@
+{
+  "checked_at": "2026-10-29T18:00:41+08:00",
+  "threshold": 0.17,
+  "summary": {
+    "total": 11,
+    "passed": 11,
+    "failed": 0
+  },
+  "checks": [
+    {
+      "id": "c1",
+      "name": "资料覆盖",
+      "query": "番茄适宜生长温度是多少",
+      "expected": "命中 s1",
+      "actual": "status=ok top1=s1_c001(score=0.3366) top3=['s1', 's1', 's2']",
+      "passed": true
+    },
+    {
+      "id": "c2",
+      "name": "资料覆盖",
+      "query": "大棚空气湿度多少合适",
+      "expected": "命中 s2",
+      "actual": "status=ok top1=s2_c001(score=0.3228) top3=['s2', 's2', 's2']",
+      "passed": true
+    },
+    {
+      "id": "c3",
+      "name": "资料覆盖",
+      "query": "CO₂浓度多少合适",
+      "expected": "命中 s2",
+      "actual": "status=ok top1=s2_c004(score=0.4430) top3=['s2', 's2', 's2']",
+      "passed": true
+    },
+    {
+      "id": "c4",
+      "name": "资料覆盖",
+      "query": "光照不足怎么办",
+      "expected": "命中 s3",
+      "actual": "status=ok top1=s3_c001(score=0.3317) top3=['s3', 's3', 's3']",
+      "passed": true
+    },
+    {
+      "id": "c5",
+      "name": "资料覆盖",
+      "query": "番茄灰霉病怎么防治",
+      "expected": "命中 s5",
+      "actual": "status=ok top1=s5_c003(score=0.3041) top3=['s5', 's5', 's5']",
+      "passed": true
+    },
+    {
+      "id": "c6",
+      "name": "资料覆盖",
+      "query": "番茄如何授粉",
+      "expected": "命中 s5",
+      "actual": "status=ok top1=s5_c001(score=0.4338) top3=['s5', 's5', 's1']",
+      "passed": true
+    },
+    {
+      "id": "c7",
+      "name": "资料覆盖",
+      "query": "番茄坐果期要追什么肥",
+      "expected": "命中 s4",
+      "actual": "status=ok top1=s4_c002(score=0.2149) top3=['s4', 's4', 's4']",
+      "passed": true
+    },
+    {
+      "id": "c8",
+      "name": "资料不足边界",
+      "query": "比特币价格是多少",
+      "expected": "insufficient",
+      "actual": "status=insufficient top1_score=0.0552",
+      "passed": true
+    },
+    {
+      "id": "c9",
+      "name": "资料不足边界",
+      "query": "量子计算是什么",
+      "expected": "insufficient",
+      "actual": "status=insufficient top1_score=0.0743",
+      "passed": true
+    },
+    {
+      "id": "c10",
+      "name": "资料不足边界",
+      "query": "番茄股票代码",
+      "expected": "insufficient",
+      "actual": "status=insufficient top1_score=0.1234",
+      "passed": true
+    },
+    {
+      "id": "c0",
+      "name": "溯源校验",
+      "query": "全部覆盖类用例的引用",
+      "expected": "每条引用可追溯回原文",
+      "actual": "检查 50 条引用全部可追溯回原文",
+      "passed": true
+    }
+  ],
+  "fingerprint": "ece7e61d3a27"
+}

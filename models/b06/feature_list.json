@@ -1,0 +1,31 @@
+{
+  "model_version": "B06-ML-v3",
+  "feature_list": [
+    "temperature_current",
+    "temperature_mean",
+    "temperature_std",
+    "temperature_min",
+    "temperature_max",
+    "temperature_delta",
+    "humidity_current",
+    "humidity_mean",
+    "humidity_std",
+    "humidity_min",
+    "humidity_max",
+    "humidity_delta",
+    "co2_current",
+    "co2_mean",
+    "co2_std",
+    "co2_min",
+    "co2_max",
+    "co2_delta",
+    "light_current",
+    "light_mean",
+    "light_std",
+    "light_min",
+    "light_max",
+    "light_delta",
+    "hour_sin",
+    "hour_cos"
+  ]
+}

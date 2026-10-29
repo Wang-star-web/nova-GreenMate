@@ -1,0 +1,42 @@
+{
+  "provider": "open-meteo",
+  "retrieved_at": "2026-10-29T02:24:56+08:00",
+  "query": {
+    "method": "GET",
+    "url": "https://api.open-meteo.com/v1/forecast",
+    "params": {
+      "latitude": 999.0,
+      "longitude": 116.0,
+      "hourly": "temperature_2m,relative_humidity_2m,precipitation_probability,cloud_cover,shortwave_radiation",
+      "timezone": "Asia/Shanghai"
+    }
+  },
+  "status": "error",
+  "error": {
+    "error_type": "bad_param",
+    "message": "天气接口返回参数错误(HTTP 400): Latitude must be in range of -90 to 90°. Given: 999.0."
+  },
+  "location": "999.0000,116.0000",
+  "analysis_time": "2026-10-29T02:24:56+08:00",
+  "forecast_time": null,
+  "temperature": {
+    "value": null,
+    "unit": "℃"
+  },
+  "humidity": {
+    "value": null,
+    "unit": "%RH"
+  },
+  "precipitation_probability": {
+    "value": null,
+    "unit": "%"
+  },
+  "cloud_cover": {
+    "value": null,
+    "unit": "%"
+  },
+  "shortwave_radiation": {
+    "value": null,
+    "unit": "W/m²"
+  }
+}

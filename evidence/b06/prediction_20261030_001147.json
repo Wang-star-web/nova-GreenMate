@@ -1,0 +1,46 @@
+{
+  "prediction": "NORMAL",
+  "probability": {
+    "NORMAL": 0.995,
+    "WATCH": 0.005
+  },
+  "model_version": "B06-ML-v2",
+  "MODEL_OUTPUT": "B06_ML",
+  "generated_at": "2026-10-30T00:11:47+08:00",
+  "window": {
+    "start": "2026-10-28 17:30:00",
+    "end": "2026-10-28 20:00:00",
+    "points": 6
+  },
+  "features": {
+    "temperature_current": 23.4,
+    "temperature_mean": 24.816667,
+    "temperature_std": 1.125019,
+    "temperature_min": 23.4,
+    "temperature_max": 26.3,
+    "temperature_delta": -2.9,
+    "humidity_current": 63.0,
+    "humidity_mean": 58.75,
+    "humidity_std": 2.594417,
+    "humidity_min": 55.9,
+    "humidity_max": 63.0,
+    "humidity_delta": 7.1,
+    "co2_current": 1159.0,
+    "co2_mean": 1078.5,
+    "co2_std": 56.979821,
+    "co2_min": 1003.0,
+    "co2_max": 1159.0,
+    "co2_delta": 156.0,
+    "light_current": 0.0,
+    "light_mean": 496.5,
+    "light_std": 1071.955923,
+    "light_min": 0.0,
+    "light_max": 2672.0,
+    "light_delta": -2672.0,
+    "hour_sin": -0.866025,
+    "hour_cos": 0.5
+  },
+  "label_source": "DERIVED_LABEL: 规则派生(阈值表 b03_rules.json R1~R8),源=environment_samples 原始参数值,非 sim_scenario",
+  "status": "ok",
+  "error": null
+}

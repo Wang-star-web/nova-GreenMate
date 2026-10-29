@@ -1,0 +1,38 @@
+{
+  "built_at": "2026-10-29T02:58:33+08:00",
+  "build_fingerprint": "f9608a7f0fe3b36585b230cbbf98000f5901935ebaadcdc32066b20a512f0cd5",
+  "total_chunks": 27,
+  "vocab_size": 2486,
+  "sources": [
+    {
+      "source_id": "s1",
+      "title": "番茄大棚温度管理",
+      "sha256": "c2586ef17f4d30b03786a0040493ac821b14e3d6c52cc40696bcadde1a080c21",
+      "chunk_count": 6
+    },
+    {
+      "source_id": "s2",
+      "title": "大棚湿度与 CO₂ 管理",
+      "sha256": "44995e214ed2ed005f4226346cbbecefa3ba7a654a9147fbf121c1f520b71f00",
+      "chunk_count": 6
+    },
+    {
+      "source_id": "s3",
+      "title": "番茄光照管理",
+      "sha256": "b9b3f8a254aa0b64db2bae937b2e5142eec0a26968cb53260bec2bcd9b497135",
+      "chunk_count": 4
+    },
+    {
+      "source_id": "s4",
+      "title": "番茄水肥管理",
+      "sha256": "827e501127afbafb7ae97752fb221f7e22b524d827063532c71618b39330ab0e",
+      "chunk_count": 5
+    },
+    {
+      "source_id": "s5",
+      "title": "番茄病虫害防治与授粉采收",
+      "sha256": "334e986d625feb6a2eb47bd9568fbf1e4bb002d77357b8abbef372a3b4b4c2c3",
+      "chunk_count": 6
+    }
+  ]
+}

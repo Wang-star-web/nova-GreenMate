@@ -1,0 +1,444 @@
+{
+  "model_version": "B06-ML-v3",
+  "model_type": "RandomForestClassifier",
+  "trained_at": "2026-10-30T00:12:26+08:00",
+  "window": {
+    "input_hours": 3,
+    "input_points": 6,
+    "step_minutes": 30,
+    "predict_hours_min": 1,
+    "predict_hours_max": 2,
+    "predict_points": 4
+  },
+  "split": {
+    "boundary": "2026-10-27 01:30",
+    "train_end": "2026-10-27 01:00:00",
+    "test_start": "2026-10-27 01:30:00"
+  },
+  "label_rule": {
+    "name": "DERIVED_LABEL",
+    "source": "environment_samples 原始参数值",
+    "thresholds": {
+      "temperature": [
+        15.0,
+        30.0
+      ],
+      "humidity": [
+        45.0,
+        85.0
+      ],
+      "co2": [
+        800.0,
+        1500.0
+      ],
+      "light": [
+        10000.0,
+        70000.0
+      ],
+      "light_daylight_hours": [
+        6,
+        18
+      ]
+    },
+    "not_used": [
+      "sim_scenario",
+      "weather"
+    ]
+  },
+  "features": {
+    "count": 26,
+    "params": [
+      "temperature",
+      "humidity",
+      "co2",
+      "light"
+    ],
+    "per_param": [
+      "current",
+      "mean",
+      "std",
+      "min",
+      "max",
+      "delta"
+    ],
+    "time_features": [
+      "hour_sin",
+      "hour_cos"
+    ]
+  },
+  "model_params": {
+    "n_estimators": 200,
+    "random_state": 42,
+    "class_weight": "balanced",
+    "n_jobs": -1
+  },
+  "metrics": {
+    "baseline": {
+      "accuracy": 0.6739,
+      "macro_f1": 0.4026,
+      "watch_precision": 0.0,
+      "watch_recall": 0.0,
+      "watch_f1": 0.0,
+      "confusion_matrix": [
+        [
+          62,
+          0
+        ],
+        [
+          30,
+          0
+        ]
+      ],
+      "classification_report": {
+        "NORMAL": {
+          "precision": 0.6739130434782609,
+          "recall": 1.0,
+          "f1-score": 0.8051948051948052,
+          "support": 62.0
+        },
+        "WATCH": {
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1-score": 0.0,
+          "support": 30.0
+        },
+        "accuracy": 0.6739130434782609,
+        "macro avg": {
+          "precision": 0.33695652173913043,
+          "recall": 0.5,
+          "f1-score": 0.4025974025974026,
+          "support": 92.0
+        },
+        "weighted avg": {
+          "precision": 0.45415879017013233,
+          "recall": 0.6739130434782609,
+          "f1-score": 0.5426312817617166,
+          "support": 92.0
+        }
+      },
+      "probabilities": {
+        "mean_p_watch_true_watch": 0.0,
+        "mean_p_watch_true_normal": 0.0
+      }
+    },
+    "model": {
+      "accuracy": 0.8696,
+      "macro_f1": 0.86,
+      "watch_precision": 0.7368,
+      "watch_recall": 0.9333,
+      "watch_f1": 0.8235,
+      "confusion_matrix": [
+        [
+          52,
+          10
+        ],
+        [
+          2,
+          28
+        ]
+      ],
+      "classification_report": {
+        "NORMAL": {
+          "precision": 0.9629629629629629,
+          "recall": 0.8387096774193549,
+          "f1-score": 0.896551724137931,
+          "support": 62.0
+        },
+        "WATCH": {
+          "precision": 0.7368421052631579,
+          "recall": 0.9333333333333333,
+          "f1-score": 0.8235294117647058,
+          "support": 30.0
+        },
+        "accuracy": 0.8695652173913043,
+        "macro avg": {
+          "precision": 0.8499025341130604,
+          "recall": 0.886021505376344,
+          "f1-score": 0.8600405679513184,
+          "support": 92.0
+        },
+        "weighted avg": {
+          "precision": 0.8892279006695482,
+          "recall": 0.8695652173913043,
+          "f1-score": 0.8727401005379664,
+          "support": 92.0
+        }
+      },
+      "probabilities": {
+        "mean_p_watch_true_watch": 0.8108,
+        "mean_p_watch_true_normal": 0.2206
+      }
+    },
+    "verdict": "通过: 模型 macro-F1 0.8600 > 基线 0.4026"
+  },
+  "dataset": {
+    "train": {
+      "windows": 235,
+      "normal": 147,
+      "watch": 88
+    },
+    "test": {
+      "windows": 92,
+      "normal": 62,
+      "watch": 30
+    },
+    "excluded_tail_windows": 4,
+    "label_boundary_note": "5 个训练窗(锚点 10-26 23:00 ~ 10-27 01:00)的标签引用了边界后的样本值,仅作监督标签、绝不作为特征;全部训练特征严格位于边界之前(walk-forward 标准实践)。"
+  },
+  "leak_checks": [
+    {
+      "id": "leak_1_time_order",
+      "name": "训练锚点全部早于测试锚点",
+      "passed": true,
+      "detail": "train 最大 2026-10-27 01:00:00 < test 最小 2026-10-27 01:30:00"
+    },
+    {
+      "id": "leak_2_anchor_disjoint",
+      "name": "训练/测试锚点集合不相交",
+      "passed": true,
+      "detail": "train 235 个 / test 92 个锚点"
+    },
+    {
+      "id": "leak_3_row_hash",
+      "name": "测试特征行绝不参与训练",
+      "passed": true,
+      "detail": "train 235 行 / test 92 行,哈希无交集"
+    }
+  ],
+  "error_analysis": {
+    "counts": {
+      "fp": 10,
+      "fn": 2
+    },
+    "samples": [
+      {
+        "kind": "fp",
+        "anchor": "2026-10-28 09:00:00",
+        "true_label": "NORMAL",
+        "predicted": "WATCH",
+        "p_watch": 0.84,
+        "input_window": [
+          {
+            "sample_time": "2026-10-28 06:30:00",
+            "temperature": 20.5,
+            "humidity": 66.6,
+            "co2": 1233.0,
+            "light": 3048.0
+          },
+          {
+            "sample_time": "2026-10-28 07:00:00",
+            "temperature": 21.9,
+            "humidity": 64.8,
+            "co2": 1215.0,
+            "light": 7878.0
+          },
+          {
+            "sample_time": "2026-10-28 07:30:00",
+            "temperature": 22.3,
+            "humidity": 64.1,
+            "co2": 1195.0,
+            "light": 14174.0
+          },
+          {
+            "sample_time": "2026-10-28 08:00:00",
+            "temperature": 23.2,
+            "humidity": 62.5,
+            "co2": 1145.0,
+            "light": 21199.0
+          },
+          {
+            "sample_time": "2026-10-28 08:30:00",
+            "temperature": 23.4,
+            "humidity": 59.4,
+            "co2": 1105.0,
+            "light": 28738.0
+          },
+          {
+            "sample_time": "2026-10-28 09:00:00",
+            "temperature": 24.3,
+            "humidity": 60.2,
+            "co2": 1085.0,
+            "light": 35480.0
+          }
+        ],
+        "features": {
+          "temperature_current": 24.3,
+          "temperature_mean": 22.599999999999998,
+          "temperature_std": 1.3326664999166167,
+          "temperature_min": 20.5,
+          "temperature_max": 24.3,
+          "temperature_delta": 3.8000000000000007,
+          "humidity_current": 60.2,
+          "humidity_mean": 62.93333333333333,
+          "humidity_std": 2.772483844257114,
+          "humidity_min": 59.4,
+          "humidity_max": 66.6,
+          "humidity_delta": -6.3999999999999915,
+          "co2_current": 1085.0,
+          "co2_mean": 1163.0,
+          "co2_std": 60.66300355240545,
+          "co2_min": 1085.0,
+          "co2_max": 1233.0,
+          "co2_delta": -148.0,
+          "light_current": 35480.0,
+          "light_mean": 18419.5,
+          "light_std": 12415.21830255115,
+          "light_min": 3048.0,
+          "light_max": 35480.0,
+          "light_delta": 32432.0,
+          "hour_sin": 0.7071067811865476,
+          "hour_cos": -0.7071067811865475
+        },
+        "prediction_window_truth": [
+          {
+            "sample_time": "2026-10-28 09:30:00",
+            "temperature": 24.9,
+            "humidity": 58.2,
+            "co2": 1053.0,
+            "light": 42412.0
+          },
+          {
+            "sample_time": "2026-10-28 10:00:00",
+            "temperature": 25.5,
+            "humidity": 56.9,
+            "co2": 1018.0,
+            "light": 48301.0
+          },
+          {
+            "sample_time": "2026-10-28 10:30:00",
+            "temperature": 26.2,
+            "humidity": 56.5,
+            "co2": 1006.0,
+            "light": 53370.0
+          },
+          {
+            "sample_time": "2026-10-28 11:00:00",
+            "temperature": 26.5,
+            "humidity": 54.1,
+            "co2": 979.0,
+            "light": 56830.0
+          }
+        ],
+        "explanation": "假阳性:输入窗 2026-10-28 06:30:00 出现 白天光照 3048 lux 超出 10000~70000 —— 模型从训练集(每日黎明/黄昏弱光 WATCH 与 disturbance_low_light/multi 的弱光模式)学到'弱光→WATCH',但预测窗 4 个样本全部在适宜带内(无违规),故为误报。"
+      },
+      {
+        "kind": "fn",
+        "anchor": "2026-10-27 11:00:00",
+        "true_label": "WATCH",
+        "predicted": "NORMAL",
+        "p_watch": 0.32,
+        "input_window": [
+          {
+            "sample_time": "2026-10-27 08:30:00",
+            "temperature": 23.7,
+            "humidity": 61.5,
+            "co2": 1117.0,
+            "light": 28665.0
+          },
+          {
+            "sample_time": "2026-10-27 09:00:00",
+            "temperature": 24.4,
+            "humidity": 58.4,
+            "co2": 1085.0,
+            "light": 35943.0
+          },
+          {
+            "sample_time": "2026-10-27 09:30:00",
+            "temperature": 24.7,
+            "humidity": 59.2,
+            "co2": 1065.0,
+            "light": 42411.0
+          },
+          {
+            "sample_time": "2026-10-27 10:00:00",
+            "temperature": 25.7,
+            "humidity": 58.6,
+            "co2": 1012.0,
+            "light": 48343.0
+          },
+          {
+            "sample_time": "2026-10-27 10:30:00",
+            "temperature": 26.3,
+            "humidity": 56.8,
+            "co2": 998.0,
+            "light": 53527.0
+          },
+          {
+            "sample_time": "2026-10-27 11:00:00",
+            "temperature": 26.5,
+            "humidity": 54.0,
+            "co2": 976.0,
+            "light": 56699.0
+          }
+        ],
+        "features": {
+          "temperature_current": 26.5,
+          "temperature_mean": 25.216666666666665,
+          "temperature_std": 1.121457385131805,
+          "temperature_min": 23.7,
+          "temperature_max": 26.5,
+          "temperature_delta": 2.8000000000000007,
+          "humidity_current": 54.0,
+          "humidity_mean": 58.083333333333336,
+          "humidity_std": 2.5142924783458978,
+          "humidity_min": 54.0,
+          "humidity_max": 61.5,
+          "humidity_delta": -7.5,
+          "co2_current": 976.0,
+          "co2_mean": 1042.1666666666667,
+          "co2_std": 55.12682347701544,
+          "co2_min": 976.0,
+          "co2_max": 1117.0,
+          "co2_delta": -141.0,
+          "light_current": 56699.0,
+          "light_mean": 44264.666666666664,
+          "light_std": 10705.812284299966,
+          "light_min": 28665.0,
+          "light_max": 56699.0,
+          "light_delta": 28034.0,
+          "hour_sin": 0.258819045102521,
+          "hour_cos": -0.9659258262890682
+        },
+        "prediction_window_truth": [
+          {
+            "sample_time": "2026-10-27 11:30:00",
+            "temperature": 27.2,
+            "humidity": 54.9,
+            "co2": 953.0,
+            "light": 59127.0
+          },
+          {
+            "sample_time": "2026-10-27 12:00:00",
+            "temperature": 28.2,
+            "humidity": 53.9,
+            "co2": 932.0,
+            "light": 60063.0
+          },
+          {
+            "sample_time": "2026-10-27 12:30:00",
+            "temperature": 27.8,
+            "humidity": 53.8,
+            "co2": 930.0,
+            "light": 59322.0
+          },
+          {
+            "sample_time": "2026-10-27 13:00:00",
+            "temperature": 32.8,
+            "humidity": 87.5,
+            "co2": 900.0,
+            "light": 7972.0
+          }
+        ],
+        "explanation": "假阴性:输入窗全部样本均在适宜带内(模型无任何违规信号可依据),预测窗内 2026-10-27 13:00:00 起出现 温度 32.8℃ 超出 15~30;湿度 87.5% 超出 45~85;白天光照 7972 lux 超出 10000~70000 —— 突变发生在预测窗内、尚未出现在输入窗,属时间序列前推预测的固有局限,如实说明。"
+      }
+    ]
+  },
+  "label_source": "DERIVED_LABEL: 规则派生(阈值表 b03_rules.json R1~R8),源=environment_samples 原始参数值,非 sim_scenario",
+  "library_versions": {
+    "sklearn": "1.9.1",
+    "pandas": "3.0.6",
+    "numpy": "2.5.3",
+    "joblib": "1.6.0",
+    "python": "3.12.10"
+  }
+}

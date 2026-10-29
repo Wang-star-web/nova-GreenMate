@@ -1,0 +1,14 @@
+{
+  "case": "参数错误",
+  "called_at": "2026-10-29T22:21:00+08:00",
+  "tool": "get_environment_history",
+  "arguments": {
+    "hours": -5
+  },
+  "tool_result": {
+    "status": "error",
+    "error_type": "value_error",
+    "message": "参数取值非法: hours 必须为正数"
+  },
+  "passed": true
+}

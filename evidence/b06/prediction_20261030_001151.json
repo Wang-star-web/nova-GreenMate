@@ -1,0 +1,21 @@
+{
+  "prediction": null,
+  "probability": null,
+  "model_version": "B06-ML-v2",
+  "MODEL_OUTPUT": "B06_ML",
+  "generated_at": "2026-10-30T00:11:51+08:00",
+  "window": null,
+  "features": null,
+  "label_source": "DERIVED_LABEL: 规则派生(阈值表 b03_rules.json R1~R8),源=environment_samples 原始参数值,非 sim_scenario",
+  "status": "error",
+  "error": {
+    "code": "insufficient_history",
+    "message": "输入窗口不足(需以 sample_time 为末点的连续 6 个 30 分钟网格样本)",
+    "detail": {
+      "sample_time": "2026-10-22 00:00:00",
+      "available_points": 0,
+      "required": 6,
+      "required_grid": "30min"
+    }
+  }
+}

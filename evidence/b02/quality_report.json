@@ -1,0 +1,92 @@
+{
+  "checked_at": "2026-10-30T00:12:07+08:00",
+  "db_path": "data\\environment.db",
+  "summary": {
+    "total": 10,
+    "passed": 10,
+    "failed": 0
+  },
+  "checks": [
+    {
+      "id": "c1_schema",
+      "name": "表结构完整",
+      "passed": true,
+      "actual": "environment_samples(9 列) + b02_meta(2 列)",
+      "expected": "两表存在且字段齐全",
+      "detail": "字段齐全即可通过"
+    },
+    {
+      "id": "c2_row_count",
+      "name": "样本行数",
+      "passed": true,
+      "actual": "336 行",
+      "expected": "== 336 (30 分钟 × 7 天)",
+      "detail": "行数恒等于 336"
+    },
+    {
+      "id": "c3_nulls",
+      "name": "空值检查",
+      "passed": true,
+      "actual": "0 个空值",
+      "expected": "全列无 NULL",
+      "detail": "NOT NULL 约束 + 生成器逐点写值"
+    },
+    {
+      "id": "c4_duplicates",
+      "name": "重复检查",
+      "passed": true,
+      "actual": "0 个重复采样时间",
+      "expected": "0 个重复",
+      "detail": "UNIQUE(sample_time) 约束兜底"
+    },
+    {
+      "id": "c5_continuity",
+      "name": "时间连续性",
+      "passed": true,
+      "actual": "格式异常 0,非网格时刻 0,断点 0,首末跨度 167.5h",
+      "expected": "全点 30 分钟等距、无断点、跨度 167.5h",
+      "detail": "固定网格 + 严格格式"
+    },
+    {
+      "id": "c6_legal_range",
+      "name": "合法范围",
+      "passed": true,
+      "actual": "0 个越界值",
+      "expected": "温度 5~40 / 湿度 30~90 / CO₂ 300~2000 / 光照 0~100000",
+      "detail": "生成时钳制合法范围"
+    },
+    {
+      "id": "c7_outliers",
+      "name": "离群点检查",
+      "passed": true,
+      "actual": "0 个离群点;最大修正 z 分数 2.26",
+      "expected": "|修正 z| > 3.5 的样本为 0",
+      "detail": "残差(值-模型期望)MAD 稳健检测,昼夜结构不误报"
+    },
+    {
+      "id": "c8_segment_count",
+      "name": "扰动段数量",
+      "passed": true,
+      "actual": "5 段",
+      "expected": "4~6 段",
+      "detail": "扰动片段连续 run 分组计数"
+    },
+    {
+      "id": "c9_distribution",
+      "name": "扰动段均匀分布",
+      "passed": true,
+      "actual": "各段时长 3.0/2.5/3.0/2.0/4.0 h;起始间隔 [28.0, 18.5, 26.5, 26.0] h,首末跨度 99.0 h",
+      "expected": "各段 2~4h、日历日互异、间隔 ≤40h、跨度 ≥96h",
+      "detail": "与生成自校验同规则"
+    },
+    {
+      "id": "c10_meta",
+      "name": "元数据可追溯",
+      "passed": true,
+      "actual": "缺失 无;seed=42",
+      "expected": "b02_meta 含版本/种子/锚点/生成时间,seed=42",
+      "detail": "write_meta 落盘生成器配置"
+    }
+  ],
+  "fingerprint": "ee85de629ded"
+}

@@ -1,0 +1,234 @@
+{
+  "generated_at": "2026-10-29T01:07:59+08:00",
+  "db_path": "data\\environment.db",
+  "windows": {
+    "all": {
+      "window": {
+        "start": "2026-10-22 01:30:00",
+        "end": "2026-10-29 01:00:00"
+      },
+      "count": 336,
+      "first": {
+        "sample_time": "2026-10-22 01:30:00",
+        "source_type": "SIMULATED",
+        "temperature": 17.7,
+        "humidity": 70.0,
+        "co2": 1391.0,
+        "light": 0.0
+      },
+      "last": {
+        "sample_time": "2026-10-29 01:00:00",
+        "source_type": "SIMULATED",
+        "temperature": 17.4,
+        "humidity": 70.4,
+        "co2": 1402.0,
+        "light": 29.0
+      },
+      "parameters": {
+        "temperature": {
+          "count": 336,
+          "min": 17.2,
+          "max": 33.3,
+          "mean": 23.25,
+          "std": 4.34505723645382,
+          "slope_per_hour": 0.001857921077107045
+        },
+        "humidity": {
+          "count": 336,
+          "min": 51.5,
+          "max": 89.5,
+          "mean": 63.647619047619045,
+          "std": 8.387509920849723,
+          "slope_per_hour": 0.010543804926195638
+        },
+        "co2": {
+          "count": 336,
+          "min": 886.0,
+          "max": 1610.0,
+          "mean": 1162.080357142857,
+          "std": 187.81779699149317,
+          "slope_per_hour": -0.0859993166849095
+        },
+        "light": {
+          "count": 336,
+          "min": 0.0,
+          "max": 60214.0,
+          "mean": 15261.419642857143,
+          "std": 21097.005075548106,
+          "slope_per_hour": -30.87035013571397
+        }
+      }
+    },
+    "last_7d": {
+      "window": {
+        "start": "2026-10-22 01:00:00",
+        "end": "2026-10-29 01:00:00"
+      },
+      "count": 336,
+      "first": {
+        "sample_time": "2026-10-22 01:30:00",
+        "source_type": "SIMULATED",
+        "temperature": 17.7,
+        "humidity": 70.0,
+        "co2": 1391.0,
+        "light": 0.0
+      },
+      "last": {
+        "sample_time": "2026-10-29 01:00:00",
+        "source_type": "SIMULATED",
+        "temperature": 17.4,
+        "humidity": 70.4,
+        "co2": 1402.0,
+        "light": 29.0
+      },
+      "parameters": {
+        "temperature": {
+          "count": 336,
+          "min": 17.2,
+          "max": 33.3,
+          "mean": 23.25,
+          "std": 4.34505723645382,
+          "slope_per_hour": 0.001857921077107045
+        },
+        "humidity": {
+          "count": 336,
+          "min": 51.5,
+          "max": 89.5,
+          "mean": 63.647619047619045,
+          "std": 8.387509920849723,
+          "slope_per_hour": 0.010543804926195638
+        },
+        "co2": {
+          "count": 336,
+          "min": 886.0,
+          "max": 1610.0,
+          "mean": 1162.080357142857,
+          "std": 187.81779699149317,
+          "slope_per_hour": -0.0859993166849095
+        },
+        "light": {
+          "count": 336,
+          "min": 0.0,
+          "max": 60214.0,
+          "mean": 15261.419642857143,
+          "std": 21097.005075548106,
+          "slope_per_hour": -30.87035013571397
+        }
+      }
+    },
+    "last_3d": {
+      "window": {
+        "start": "2026-10-26 01:00:00",
+        "end": "2026-10-29 01:00:00"
+      },
+      "count": 145,
+      "first": {
+        "sample_time": "2026-10-26 01:00:00",
+        "source_type": "SIMULATED",
+        "temperature": 17.5,
+        "humidity": 72.2,
+        "co2": 1406.0,
+        "light": 0.0
+      },
+      "last": {
+        "sample_time": "2026-10-29 01:00:00",
+        "source_type": "SIMULATED",
+        "temperature": 17.4,
+        "humidity": 70.4,
+        "co2": 1402.0,
+        "light": 29.0
+      },
+      "parameters": {
+        "temperature": {
+          "count": 145,
+          "min": 17.2,
+          "max": 33.2,
+          "mean": 23.267586206896553,
+          "std": 4.471031492325231,
+          "slope_per_hour": 0.012684616595811675
+        },
+        "humidity": {
+          "count": 145,
+          "min": 51.6,
+          "max": 88.9,
+          "mean": 64.26206896551724,
+          "std": 8.870355349307518,
+          "slope_per_hour": -0.013504172571248618
+        },
+        "co2": {
+          "count": 145,
+          "min": 888.0,
+          "max": 1411.0,
+          "mean": 1152.4689655172415,
+          "std": 178.48284445930238,
+          "slope_per_hour": -0.5813572665721933
+        },
+        "light": {
+          "count": 145,
+          "min": 0.0,
+          "max": 60063.0,
+          "mean": 13232.275862068966,
+          "std": 19623.215363470623,
+          "slope_per_hour": 56.490749488269564
+        }
+      }
+    },
+    "last_24h": {
+      "window": {
+        "start": "2026-10-28 01:00:00",
+        "end": "2026-10-29 01:00:00"
+      },
+      "count": 49,
+      "first": {
+        "sample_time": "2026-10-28 01:00:00",
+        "source_type": "SIMULATED",
+        "temperature": 18.0,
+        "humidity": 70.4,
+        "co2": 1394.0,
+        "light": 14.0
+      },
+      "last": {
+        "sample_time": "2026-10-29 01:00:00",
+        "source_type": "SIMULATED",
+        "temperature": 17.4,
+        "humidity": 70.4,
+        "co2": 1402.0,
+        "light": 29.0
+      },
+      "parameters": {
+        "temperature": {
+          "count": 49,
+          "min": 17.2,
+          "max": 28.7,
+          "mean": 22.89183673469388,
+          "std": 4.0109660481554545,
+          "slope_per_hour": 0.1036122448979592
+        },
+        "humidity": {
+          "count": 49,
+          "min": 52.2,
+          "max": 71.6,
+          "mean": 62.285714285714285,
+          "std": 6.9112529013679325,
+          "slope_per_hour": -0.1785714285714285
+        },
+        "co2": {
+          "count": 49,
+          "min": 893.0,
+          "max": 1405.0,
+          "mean": 1155.3469387755101,
+          "std": 180.70700860559802,
+          "slope_per_hour": -4.5685714285714285
+        },
+        "light": {
+          "count": 49,
+          "min": 0.0,
+          "max": 59910.0,
+          "mean": 16365.30612244898,
+          "std": 22152.406707289618,
+          "slope_per_hour": -328.19489795918366
+        }
+      }
+    }
+  }
+}

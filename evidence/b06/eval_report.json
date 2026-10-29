@@ -1,0 +1,121 @@
+{
+  "evaluated_at": "2026-10-30T00:11:39+08:00",
+  "model_version": "B06-ML-v2",
+  "stored_metrics": {
+    "accuracy": 0.8696,
+    "macro_f1": 0.86,
+    "watch_precision": 0.7368,
+    "watch_recall": 0.9333,
+    "watch_f1": 0.8235,
+    "confusion_matrix": [
+      [
+        52,
+        10
+      ],
+      [
+        2,
+        28
+      ]
+    ],
+    "classification_report": {
+      "NORMAL": {
+        "precision": 0.9629629629629629,
+        "recall": 0.8387096774193549,
+        "f1-score": 0.896551724137931,
+        "support": 62.0
+      },
+      "WATCH": {
+        "precision": 0.7368421052631579,
+        "recall": 0.9333333333333333,
+        "f1-score": 0.8235294117647058,
+        "support": 30.0
+      },
+      "accuracy": 0.8695652173913043,
+      "macro avg": {
+        "precision": 0.8499025341130604,
+        "recall": 0.886021505376344,
+        "f1-score": 0.8600405679513184,
+        "support": 92.0
+      },
+      "weighted avg": {
+        "precision": 0.8892279006695482,
+        "recall": 0.8695652173913043,
+        "f1-score": 0.8727401005379664,
+        "support": 92.0
+      }
+    },
+    "probabilities": {
+      "mean_p_watch_true_watch": 0.8108,
+      "mean_p_watch_true_normal": 0.2206
+    }
+  },
+  "recomputed_metrics": {
+    "accuracy": 0.8696,
+    "macro_f1": 0.86,
+    "watch_precision": 0.7368,
+    "watch_recall": 0.9333,
+    "watch_f1": 0.8235,
+    "confusion_matrix": [
+      [
+        52,
+        10
+      ],
+      [
+        2,
+        28
+      ]
+    ],
+    "classification_report": {
+      "NORMAL": {
+        "precision": 0.9629629629629629,
+        "recall": 0.8387096774193549,
+        "f1-score": 0.896551724137931,
+        "support": 62.0
+      },
+      "WATCH": {
+        "precision": 0.7368421052631579,
+        "recall": 0.9333333333333333,
+        "f1-score": 0.8235294117647058,
+        "support": 30.0
+      },
+      "accuracy": 0.8695652173913043,
+      "macro avg": {
+        "precision": 0.8499025341130604,
+        "recall": 0.886021505376344,
+        "f1-score": 0.8600405679513184,
+        "support": 92.0
+      },
+      "weighted avg": {
+        "precision": 0.8892279006695482,
+        "recall": 0.8695652173913043,
+        "f1-score": 0.8727401005379664,
+        "support": 92.0
+      }
+    },
+    "probabilities": {
+      "mean_p_watch_true_watch": 0.8108,
+      "mean_p_watch_true_normal": 0.2206
+    }
+  },
+  "consistent": true,
+  "leak_checks": [
+    {
+      "id": "leak_1_time_order",
+      "name": "训练锚点全部早于测试锚点",
+      "passed": true,
+      "detail": "train 最大 2026-10-27 01:00:00 < test 最小 2026-10-27 01:30:00"
+    },
+    {
+      "id": "leak_2_anchor_disjoint",
+      "name": "训练/测试锚点集合不相交",
+      "passed": true,
+      "detail": "train 235 个 / test 92 个锚点"
+    },
+    {
+      "id": "leak_3_row_hash",
+      "name": "测试特征行绝不参与训练",
+      "passed": true,
+      "detail": "train 235 行 / test 92 行,哈希无交集"
+    }
+  ]
+}
