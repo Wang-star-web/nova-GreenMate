@@ -1,0 +1,1308 @@
+{
+  "run_id": "run_20261030_014923_e2a04e",
+  "trace_version": "1.0",
+  "generated_at": "2026-10-30T01:49:24+08:00",
+  "scenario": {
+    "scenario_id": "S2",
+    "name": "渐进漂移",
+    "description": "锚点时刻参数仍处于适宜带,但过去 2.5 小时持续漂移(温度上升、湿度下降、光照上升),B06 模型已提前预警——规则与模型分歧,系统应输出 需要关注/attention/中。",
+    "anchor_sample_time": "2026-10-27 12:30:00",
+    "history_hours": 24,
+    "trend_hours": 2.5,
+    "location": "北京",
+    "knowledge_query": "大棚空气湿度多少合适",
+    "degrade": {
+      "weather": null,
+      "knowledge": null
+    },
+    "llm_explain": true,
+    "expected": {
+      "conclusion": "需要关注",
+      "attention_level": "attention",
+      "trust": "中",
+      "note": "规则无违规,但趋势四参数超幅值阈值 + 模型 WATCH(规则与模型健康分歧,保守升级)"
+    }
+  },
+  "steps": {
+    "tool_results": [
+      {
+        "seq": 1,
+        "step": "tool_results",
+        "tool": "b02_current",
+        "marker": "SIMULATED",
+        "arguments": {},
+        "result": {
+          "sample_time": "2026-10-29 01:00:00",
+          "source_type": "SIMULATED",
+          "temperature": 17.4,
+          "humidity": 70.4,
+          "co2": 1402.0,
+          "light": 29.0
+        },
+        "status": "ok",
+        "error": null,
+        "called_at": "2026-10-30T01:49:23+08:00"
+      },
+      {
+        "seq": 2,
+        "step": "tool_results",
+        "tool": "b02_anchor",
+        "marker": "SIMULATED",
+        "arguments": {
+          "start": "2026-10-27 12:30:00",
+          "end": "2026-10-27 12:30:00"
+        },
+        "result": [
+          {
+            "sample_time": "2026-10-27 12:30:00",
+            "source_type": "SIMULATED",
+            "temperature": 27.8,
+            "humidity": 53.8,
+            "co2": 930.0,
+            "light": 59322.0
+          }
+        ],
+        "status": "ok",
+        "error": null,
+        "called_at": "2026-10-30T01:49:23+08:00"
+      },
+      {
+        "seq": 3,
+        "step": "tool_results",
+        "tool": "b01_raw",
+        "marker": "SIMULATED",
+        "arguments": {
+          "record": {
+            "run_id": "run_20261030_014923_e2a04e",
+            "collect_time": "2026-10-27T12:30:00+08:00",
+            "source_type": "SIMULATED",
+            "data": {
+              "temperature": {
+                "value": 27.8,
+                "unit": "℃"
+              },
+              "humidity": {
+                "value": 53.8,
+                "unit": "%RH"
+              },
+              "co2": {
+                "value": 930.0,
+                "unit": "ppm"
+              },
+              "light": {
+                "value": 59322.0,
+                "unit": "lux"
+              }
+            },
+            "valid_ranges": {
+              "temperature": {
+                "min": 5.0,
+                "max": 40.0,
+                "unit": "℃"
+              },
+              "humidity": {
+                "min": 30.0,
+                "max": 90.0,
+                "unit": "%RH"
+              },
+              "co2": {
+                "min": 300.0,
+                "max": 2000.0,
+                "unit": "ppm"
+              },
+              "light": {
+                "min": 0.0,
+                "max": 100000.0,
+                "unit": "lux"
+              }
+            }
+          }
+        },
+        "result": true,
+        "status": "ok",
+        "error": null,
+        "called_at": "2026-10-30T01:49:23+08:00"
+      },
+      {
+        "seq": 4,
+        "step": "tool_results",
+        "tool": "b02_history",
+        "marker": "SIMULATED",
+        "arguments": {
+          "start": "2026-10-26 12:30:00",
+          "end": "2026-10-27 12:30:00"
+        },
+        "result": [
+          {
+            "sample_time": "2026-10-26 12:30:00",
+            "source_type": "SIMULATED",
+            "temperature": 28.1,
+            "humidity": 52.5,
+            "co2": 912.0,
+            "light": 8183.0
+          },
+          {
+            "sample_time": "2026-10-26 13:00:00",
+            "source_type": "SIMULATED",
+            "temperature": 28.6,
+            "humidity": 53.4,
+            "co2": 898.0,
+            "light": 7907.0
+          },
+          {
+            "sample_time": "2026-10-26 13:30:00",
+            "source_type": "SIMULATED",
+            "temperature": 28.5,
+            "humidity": 53.0,
+            "co2": 900.0,
+            "light": 53131.0
+          },
+          {
+            "sample_time": "2026-10-26 14:00:00",
+            "source_type": "SIMULATED",
+            "temperature": 28.8,
+            "humidity": 51.6,
+            "co2": 897.0,
+            "light": 48346.0
+          },
+          {
+            "sample_time": "2026-10-26 14:30:00",
+            "source_type": "SIMULATED",
+            "temperature": 28.2,
+            "humidity": 52.8,
+            "co2": 904.0,
+            "light": 42694.0
+          },
+          {
+            "sample_time": "2026-10-26 15:00:00",
+            "source_type": "SIMULATED",
+            "temperature": 28.1,
+            "humidity": 54.3,
+            "co2": 913.0,
+            "light": 35541.0
+          },
+          {
+            "sample_time": "2026-10-26 15:30:00",
+            "source_type": "SIMULATED",
+            "temperature": 28.1,
+            "humidity": 53.8,
+            "co2": 926.0,
+            "light": 28228.0
+          },
+          {
+            "sample_time": "2026-10-26 16:00:00",
+            "source_type": "SIMULATED",
+            "temperature": 27.8,
+            "humidity": 53.8,
+            "co2": 946.0,
+            "light": 21085.0
+          },
+          {
+            "sample_time": "2026-10-26 16:30:00",
+            "source_type": "SIMULATED",
+            "temperature": 27.6,
+            "humidity": 54.8,
+            "co2": 947.0,
+            "light": 14286.0
+          },
+          {
+            "sample_time": "2026-10-26 17:00:00",
+            "source_type": "SIMULATED",
+            "temperature": 27.0,
+            "humidity": 55.8,
+            "co2": 980.0,
+            "light": 7996.0
+          },
+          {
+            "sample_time": "2026-10-26 17:30:00",
+            "source_type": "SIMULATED",
+            "temperature": 26.6,
+            "humidity": 56.6,
+            "co2": 1010.0,
+            "light": 2917.0
+          },
+          {
+            "sample_time": "2026-10-26 18:00:00",
+            "source_type": "SIMULATED",
+            "temperature": 25.6,
+            "humidity": 57.1,
+            "co2": 1027.0,
+            "light": 139.0
+          },
+          {
+            "sample_time": "2026-10-26 18:30:00",
+            "source_type": "SIMULATED",
+            "temperature": 24.8,
+            "humidity": 57.7,
+            "co2": 1062.0,
+            "light": 0.0
+          },
+          {
+            "sample_time": "2026-10-26 19:00:00",
+            "source_type": "SIMULATED",
+            "temperature": 24.1,
+            "humidity": 59.7,
+            "co2": 1099.0,
+            "light": 19.0
+          },
+          {
+            "sample_time": "2026-10-26 19:30:00",
+            "source_type": "SIMULATED",
+            "temperature": 24.0,
+            "humidity": 61.8,
+            "co2": 1110.0,
+            "light": 195.0
+          },
+          {
+            "sample_time": "2026-10-26 20:00:00",
+            "source_type": "SIMULATED",
+            "temperature": 23.0,
+            "humidity": 62.9,
+            "co2": 1157.0,
+            "light": 0.0
+          },
+          {
+            "sample_time": "2026-10-26 20:30:00",
+            "source_type": "SIMULATED",
+            "temperature": 22.0,
+            "humidity": 64.6,
+            "co2": 1172.0,
+            "light": 280.0
+          },
+          {
+            "sample_time": "2026-10-26 21:00:00",
+            "source_type": "SIMULATED",
+            "temperature": 21.9,
+            "humidity": 65.1,
+            "co2": 1229.0,
+            "light": 280.0
+          },
+          {
+            "sample_time": "2026-10-26 21:30:00",
+            "source_type": "SIMULATED",
+            "temperature": 21.1,
+            "humidity": 65.2,
+            "co2": 1254.0,
+            "light": 0.0
+          },
+          {
+            "sample_time": "2026-10-26 22:00:00",
+            "source_type": "SIMULATED",
+            "temperature": 20.3,
+            "humidity": 66.6,
+            "co2": 1280.0,
+            "light": 103.0
+          },
+          {
+            "sample_time": "2026-10-26 22:30:00",
+            "source_type": "SIMULATED",
+            "temperature": 19.7,
+            "humidity": 68.8,
+            "co2": 1315.0,
+            "light": 0.0
+          },
+          {
+            "sample_time": "2026-10-26 23:00:00",
+            "source_type": "SIMULATED",
+            "temperature": 18.9,
+            "humidity": 67.3,
+            "co2": 1338.0,
+            "light": 37.0
+          },
+          {
+            "sample_time": "2026-10-26 23:30:00",
+            "source_type": "SIMULATED",
+            "temperature": 19.0,
+            "humidity": 68.7,
+            "co2": 1335.0,
+            "light": 194.0
+          },
+          {
+            "sample_time": "2026-10-27 00:00:00",
+            "source_type": "SIMULATED",
+            "temperature": 18.6,
+            "humidity": 69.6,
+            "co2": 1364.0,
+            "light": 0.0
+          },
+          {
+            "sample_time": "2026-10-27 00:30:00",
+            "source_type": "SIMULATED",
+            "temperature": 18.3,
+            "humidity": 70.2,
+            "co2": 1381.0,
+            "light": 0.0
+          },
+          {
+            "sample_time": "2026-10-27 01:00:00",
+            "source_type": "SIMULATED",
+            "temperature": 18.0,
+            "humidity": 70.1,
+            "co2": 1390.0,
+            "light": 102.0
+          },
+          {
+            "sample_time": "2026-10-27 01:30:00",
+            "source_type": "SIMULATED",
+            "temperature": 17.7,
+            "humidity": 72.8,
+            "co2": 1395.0,
+            "light": 145.0
+          },
+          {
+            "sample_time": "2026-10-27 02:00:00",
+            "source_type": "SIMULATED",
+            "temperature": 17.2,
+            "humidity": 71.2,
+            "co2": 1388.0,
+            "light": 0.0
+          },
+          {
+            "sample_time": "2026-10-27 02:30:00",
+            "source_type": "SIMULATED",
+            "temperature": 17.5,
+            "humidity": 72.8,
+            "co2": 1384.0,
+            "light": 0.0
+          },
+          {
+            "sample_time": "2026-10-27 03:00:00",
+            "source_type": "SIMULATED",
+            "temperature": 17.6,
+            "humidity": 72.5,
+            "co2": 1402.0,
+            "light": 0.0
+          },
+          {
+            "sample_time": "2026-10-27 03:30:00",
+            "source_type": "SIMULATED",
+            "temperature": 18.1,
+            "humidity": 70.9,
+            "co2": 1395.0,
+            "light": 0.0
+          },
+          {
+            "sample_time": "2026-10-27 04:00:00",
+            "source_type": "SIMULATED",
+            "temperature": 18.2,
+            "humidity": 69.3,
+            "co2": 1355.0,
+            "light": 209.0
+          },
+          {
+            "sample_time": "2026-10-27 04:30:00",
+            "source_type": "SIMULATED",
+            "temperature": 18.6,
+            "humidity": 70.0,
+            "co2": 1353.0,
+            "light": 58.0
+          },
+          {
+            "sample_time": "2026-10-27 05:00:00",
+            "source_type": "SIMULATED",
+            "temperature": 18.7,
+            "humidity": 69.6,
+            "co2": 1319.0,
+            "light": 0.0
+          },
+          {
+            "sample_time": "2026-10-27 05:30:00",
+            "source_type": "SIMULATED",
+            "temperature": 19.7,
+            "humidity": 66.5,
+            "co2": 1310.0,
+            "light": 0.0
+          },
+          {
+            "sample_time": "2026-10-27 06:00:00",
+            "source_type": "SIMULATED",
+            "temperature": 20.0,
+            "humidity": 67.9,
+            "co2": 1270.0,
+            "light": 0.0
+          },
+          {
+            "sample_time": "2026-10-27 06:30:00",
+            "source_type": "SIMULATED",
+            "temperature": 21.2,
+            "humidity": 64.1,
+            "co2": 1256.0,
+            "light": 2616.0
+          },
+          {
+            "sample_time": "2026-10-27 07:00:00",
+            "source_type": "SIMULATED",
+            "temperature": 21.3,
+            "humidity": 63.7,
+            "co2": 1205.0,
+            "light": 7997.0
+          },
+          {
+            "sample_time": "2026-10-27 07:30:00",
+            "source_type": "SIMULATED",
+            "temperature": 21.9,
+            "humidity": 61.8,
+            "co2": 1191.0,
+            "light": 14047.0
+          },
+          {
+            "sample_time": "2026-10-27 08:00:00",
+            "source_type": "SIMULATED",
+            "temperature": 22.9,
+            "humidity": 61.0,
+            "co2": 1137.0,
+            "light": 21358.0
+          },
+          {
+            "sample_time": "2026-10-27 08:30:00",
+            "source_type": "SIMULATED",
+            "temperature": 23.7,
+            "humidity": 61.5,
+            "co2": 1117.0,
+            "light": 28665.0
+          },
+          {
+            "sample_time": "2026-10-27 09:00:00",
+            "source_type": "SIMULATED",
+            "temperature": 24.4,
+            "humidity": 58.4,
+            "co2": 1085.0,
+            "light": 35943.0
+          },
+          {
+            "sample_time": "2026-10-27 09:30:00",
+            "source_type": "SIMULATED",
+            "temperature": 24.7,
+            "humidity": 59.2,
+            "co2": 1065.0,
+            "light": 42411.0
+          },
+          {
+            "sample_time": "2026-10-27 10:00:00",
+            "source_type": "SIMULATED",
+            "temperature": 25.7,
+            "humidity": 58.6,
+            "co2": 1012.0,
+            "light": 48343.0
+          },
+          {
+            "sample_time": "2026-10-27 10:30:00",
+            "source_type": "SIMULATED",
+            "temperature": 26.3,
+            "humidity": 56.8,
+            "co2": 998.0,
+            "light": 53527.0
+          },
+          {
+            "sample_time": "2026-10-27 11:00:00",
+            "source_type": "SIMULATED",
+            "temperature": 26.5,
+            "humidity": 54.0,
+            "co2": 976.0,
+            "light": 56699.0
+          },
+          {
+            "sample_time": "2026-10-27 11:30:00",
+            "source_type": "SIMULATED",
+            "temperature": 27.2,
+            "humidity": 54.9,
+            "co2": 953.0,
+            "light": 59127.0
+          },
+          {
+            "sample_time": "2026-10-27 12:00:00",
+            "source_type": "SIMULATED",
+            "temperature": 28.2,
+            "humidity": 53.9,
+            "co2": 932.0,
+            "light": 60063.0
+          },
+          {
+            "sample_time": "2026-10-27 12:30:00",
+            "source_type": "SIMULATED",
+            "temperature": 27.8,
+            "humidity": 53.8,
+            "co2": 930.0,
+            "light": 59322.0
+          }
+        ],
+        "status": "ok",
+        "error": null,
+        "called_at": "2026-10-30T01:49:23+08:00"
+      },
+      {
+        "seq": 5,
+        "step": "tool_results",
+        "tool": "b02_stats",
+        "marker": "SIMULATED",
+        "arguments": {
+          "start": "2026-10-27 10:00:00",
+          "end": "2026-10-27 12:30:00"
+        },
+        "result": {
+          "window": {
+            "start": "2026-10-27 10:00:00",
+            "end": "2026-10-27 12:30:00"
+          },
+          "count": 6,
+          "first": {
+            "sample_time": "2026-10-27 10:00:00",
+            "source_type": "SIMULATED",
+            "temperature": 25.7,
+            "humidity": 58.6,
+            "co2": 1012.0,
+            "light": 48343.0
+          },
+          "last": {
+            "sample_time": "2026-10-27 12:30:00",
+            "source_type": "SIMULATED",
+            "temperature": 27.8,
+            "humidity": 53.8,
+            "co2": 930.0,
+            "light": 59322.0
+          },
+          "parameters": {
+            "temperature": {
+              "count": 6,
+              "min": 25.7,
+              "max": 28.2,
+              "mean": 26.95,
+              "std": 0.9523654760647301,
+              "slope_per_hour": 0.9657142857142859
+            },
+            "humidity": {
+              "count": 6,
+              "min": 53.8,
+              "max": 58.6,
+              "mean": 55.33333333333333,
+              "std": 1.9592515577808454,
+              "slope_per_hour": -1.8171428571428583
+            },
+            "co2": {
+              "count": 6,
+              "min": 930.0,
+              "max": 1012.0,
+              "mean": 966.8333333333334,
+              "std": 34.225234355175225,
+              "slope_per_hour": -36.05714285714286
+            },
+            "light": {
+              "count": 6,
+              "min": 48343.0,
+              "max": 60063.0,
+              "mean": 56180.166666666664,
+              "std": 4524.6215495515935,
+              "slope_per_hour": 4396.057142857143
+            }
+          }
+        },
+        "status": "ok",
+        "error": null,
+        "called_at": "2026-10-30T01:49:23+08:00"
+      },
+      {
+        "seq": 6,
+        "step": "tool_results",
+        "tool": "b03_weather",
+        "marker": "PUBLIC",
+        "arguments": {
+          "location": "北京",
+          "run_id": "run_20261030_014923_e2a04e",
+          "analysis_time": "2026-10-27 12:30:00",
+          "timeout": null
+        },
+        "result": {
+          "provider": "open-meteo",
+          "retrieved_at": "2026-10-30T01:49:23+08:00",
+          "query": {
+            "method": "GET",
+            "url": "https://api.open-meteo.com/v1/forecast",
+            "params": {
+              "latitude": 39.9042,
+              "longitude": 116.4074,
+              "hourly": "temperature_2m,relative_humidity_2m,precipitation_probability,cloud_cover,shortwave_radiation",
+              "timezone": "Asia/Shanghai"
+            }
+          },
+          "status": "success",
+          "error": null,
+          "location": "北京(39.9042,116.4074)",
+          "analysis_time": "2026-10-27T12:30:00+08:00",
+          "forecast_time": "2026-10-30T00:00:00+08:00",
+          "temperature": {
+            "value": 8.0,
+            "unit": "℃"
+          },
+          "humidity": {
+            "value": 74.0,
+            "unit": "%RH"
+          },
+          "precipitation_probability": {
+            "value": 0.0,
+            "unit": "%"
+          },
+          "cloud_cover": {
+            "value": 0.0,
+            "unit": "%"
+          },
+          "shortwave_radiation": {
+            "value": 0.0,
+            "unit": "W/m²"
+          }
+        },
+        "status": "ok",
+        "error": null,
+        "called_at": "2026-10-30T01:49:23+08:00"
+      },
+      {
+        "seq": 7,
+        "step": "tool_results",
+        "tool": "b04_knowledge",
+        "marker": "SIMULATED",
+        "arguments": {
+          "query": "大棚空气湿度多少合适",
+          "k": 5
+        },
+        "result": {
+          "query": "大棚空气湿度多少合适",
+          "retrieved_at": "2026-10-30T01:49:24+08:00",
+          "k": 5,
+          "threshold": 0.17,
+          "status": "ok",
+          "insufficient": false,
+          "message": null,
+          "top_chunks": [
+            {
+              "rank": 1,
+              "chunk_id": "s2_c001",
+              "source_id": "s2",
+              "score": 0.3228,
+              "text": "# 大棚湿度与 CO₂ 管理\n\n摘要:设施栽培中空气湿度与 CO₂ 浓度相互制约,共同影响番茄的光合作用、蒸腾与发病风险。湿度过高易诱发病害,过低影响授粉;CO₂ 浓度直接影响光合速率与产量。\n\n## 适宜空气湿度\n\n番茄大棚内适宜的相对湿度范围为 45~85 %RH。白天光照充足、通风良好时,湿度可适当偏低;夜间与阴雨天湿度易升高,应注意控制。湿度的平稳比单一数值更重要,剧烈波动容易诱发裂果与生理障碍。",
+              "char_range": [
+                0,
+                204
+              ],
+              "citation": {
+                "source_id": "s2",
+                "title": "大棚湿度与 CO₂ 管理",
+                "chunk_id": "s2_c001",
+                "char_range": [
+                  0,
+                  204
+                ],
+                "seq": 1
+              }
+            },
+            {
+              "rank": 2,
+              "chunk_id": "s2_c003",
+              "source_id": "s2",
+              "score": 0.1285,
+              "text": "调控措施:及时通风排湿、控制浇水频次与水量、采用膜下滴灌减少地表蒸发、必要时使用除湿设备。早晨揭帘后应先通风排湿,再进入正常管理。\n\n## 低湿危害与调控\n\n当相对湿度低于 45 %RH 时,花粉易失活、柱头干枯,影响授粉与坐果率。调控措施:向地面或走道喷雾增湿,避免在高温时段进行大通风,浇水后适当闭棚利用蒸发提高湿度。\n\n## CO₂ 适宜浓度\n\n番茄大棚内 CO₂ 的适宜浓度范围为 800~1500 ppm。",
+              "char_range": [
+                261,
+                469
+              ],
+              "citation": {
+                "source_id": "s2",
+                "title": "大棚湿度与 CO₂ 管理",
+                "chunk_id": "s2_c003",
+                "char_range": [
+                  261,
+                  469
+                ],
+                "seq": 3
+              }
+            },
+            {
+              "rank": 3,
+              "chunk_id": "s2_c002",
+              "source_id": "s2",
+              "score": 0.1071,
+              "text": "夜间与阴雨天湿度易升高,应注意控制。湿度的平稳比单一数值更重要,剧烈波动容易诱发裂果与生理障碍。\n\n## 高湿危害与调控\n\n当相对湿度高于 85 %RH 时,叶片容易结露,灰霉病、晚疫病等病害发生风险显著升高。调控措施:及时通风排湿、控制浇水频次与水量、采用膜下滴灌减少地表蒸发、必要时使用除湿设备。早晨揭帘后应先通风排湿,再进入正常管理。\n\n## 低湿危害与调控\n",
+              "char_range": [
+                156,
+                339
+              ],
+              "citation": {
+                "source_id": "s2",
+                "title": "大棚湿度与 CO₂ 管理",
+                "chunk_id": "s2_c002",
+                "char_range": [
+                  156,
+                  339
+                ],
+                "seq": 2
+              }
+            },
+            {
+              "rank": 4,
+              "chunk_id": "s2_c004",
+              "source_id": "s2",
+              "score": 0.0903,
+              "text": "## CO₂ 适宜浓度\n\n番茄大棚内 CO₂ 的适宜浓度范围为 800~1500 ppm。在这一范围内,光合速率随 CO₂ 浓度升高而提高,产量潜力得到发挥。密闭棚室在日出后 CO₂ 浓度会因光合消耗而快速下降,须注意补充。\n\n## CO₂ 不足与补充\n\n当 CO₂ 浓度低于 800 ppm 时,光合速率下降,植株生长与产量受限。补充措施:白天适时通风引入新鲜空气;",
+              "char_range": [
+                424,
+                608
+              ],
+              "citation": {
+                "source_id": "s2",
+                "title": "大棚湿度与 CO₂ 管理",
+                "chunk_id": "s2_c004",
+                "char_range": [
+                  424,
+                  608
+                ],
+                "seq": 4
+              }
+            },
+            {
+              "rank": 5,
+              "chunk_id": "s2_c005",
+              "source_id": "s2",
+              "score": 0.0841,
+              "text": "当 CO₂ 浓度低于 800 ppm 时,光合速率下降,植株生长与产量受限。补充措施:白天适时通风引入新鲜空气;使用 CO₂ 气肥、秸秆生物反应堆或燃烧式增施设备;增施时间宜选择晴天上午,阴雨天停止施放。\n\n## CO₂ 偏高与调控\n\n当 CO₂ 浓度高于 1500 ppm 时,说明棚内通风不足或增施过量,气孔开度减小、蒸腾与光合受到抑制。调控措施:及时打开通风口换气,检查并关停增施设备,待浓度回落到适宜区间后再恢复管理。",
+              "char_range": [
+                552,
+                765
+              ],
+              "citation": {
+                "source_id": "s2",
+                "title": "大棚湿度与 CO₂ 管理",
+                "chunk_id": "s2_c005",
+                "char_range": [
+                  552,
+                  765
+                ],
+                "seq": 5
+              }
+            }
+          ]
+        },
+        "status": "ok",
+        "error": null,
+        "called_at": "2026-10-30T01:49:24+08:00"
+      },
+      {
+        "seq": 8,
+        "step": "tool_results",
+        "tool": "b06_predict",
+        "marker": "MODEL_OUTPUT",
+        "arguments": {
+          "sample_time": "2026-10-27 12:30:00"
+        },
+        "result": {
+          "prediction": "WATCH",
+          "probability": {
+            "NORMAL": 0.42,
+            "WATCH": 0.58
+          },
+          "model_version": "B06-ML-v3",
+          "MODEL_OUTPUT": "B06_ML",
+          "generated_at": "2026-10-30T01:49:24+08:00",
+          "window": {
+            "start": "2026-10-27 10:00:00",
+            "end": "2026-10-27 12:30:00",
+            "points": 6
+          },
+          "features": {
+            "temperature_current": 27.8,
+            "temperature_mean": 26.95,
+            "temperature_std": 0.952365,
+            "temperature_min": 25.7,
+            "temperature_max": 28.2,
+            "temperature_delta": 2.1,
+            "humidity_current": 53.8,
+            "humidity_mean": 55.333333,
+            "humidity_std": 1.959252,
+            "humidity_min": 53.8,
+            "humidity_max": 58.6,
+            "humidity_delta": -4.8,
+            "co2_current": 930.0,
+            "co2_mean": 966.833333,
+            "co2_std": 34.225234,
+            "co2_min": 930.0,
+            "co2_max": 1012.0,
+            "co2_delta": -82.0,
+            "light_current": 59322.0,
+            "light_mean": 56180.166667,
+            "light_std": 4524.62155,
+            "light_min": 48343.0,
+            "light_max": 60063.0,
+            "light_delta": 10979.0,
+            "hour_sin": -0.130526,
+            "hour_cos": -0.991445
+          },
+          "label_source": "DERIVED_LABEL: 规则派生(阈值表 b03_rules.json R1~R8),源=environment_samples 原始参数值,非 sim_scenario",
+          "status": "ok",
+          "error": null
+        },
+        "status": "ok",
+        "error": null,
+        "called_at": "2026-10-30T01:49:24+08:00"
+      }
+    ],
+    "evidence_records": [
+      {
+        "seq": 1,
+        "evidence_id": "EV01",
+        "source": "b02_memory",
+        "source_marker": "SIMULATED",
+        "tool": "b02_current",
+        "summary": "当前环境状态(库内最新样本,仅上下文): 2026-10-29 01:00:00 温度17.4℃/湿度70.4%RH/CO₂1402.0ppm/光照29.0lux",
+        "status": "ok",
+        "timestamp": "2026-10-30T01:49:24+08:00",
+        "detail": {
+          "sample_time": "2026-10-29 01:00:00",
+          "source_type": "SIMULATED",
+          "temperature": 17.4,
+          "humidity": 70.4,
+          "co2": 1402.0,
+          "light": 29.0
+        }
+      },
+      {
+        "seq": 2,
+        "evidence_id": "EV02",
+        "source": "b02_memory",
+        "source_marker": "SIMULATED",
+        "tool": "b02_anchor",
+        "summary": "场景锚点样本 2026-10-27 12:30:00: 温度27.8℃/湿度53.8%RH/CO₂930.0ppm/光照59322.0lux,source_type=SIMULATED",
+        "status": "ok",
+        "timestamp": "2026-10-30T01:49:24+08:00",
+        "detail": {
+          "sample_time": "2026-10-27 12:30:00",
+          "source_type": "SIMULATED",
+          "temperature": 27.8,
+          "humidity": 53.8,
+          "co2": 930.0,
+          "light": 59322.0
+        }
+      },
+      {
+        "seq": 3,
+        "evidence_id": "EV03",
+        "source": "b01_cli",
+        "source_marker": "SIMULATED",
+        "tool": "b01_raw",
+        "summary": "B01 原始采集记录已存档 evidence/raw/run_20261030_014923_e2a04e.json(collect_time=2026-10-27T12:30:00+08:00,source_type=SIMULATED)",
+        "status": "ok",
+        "timestamp": "2026-10-30T01:49:24+08:00",
+        "detail": {
+          "path": "evidence/raw/run_20261030_014923_e2a04e.json",
+          "saved": true,
+          "collect_time": "2026-10-27T12:30:00+08:00",
+          "source_type": "SIMULATED",
+          "valid_ranges": {
+            "temperature": {
+              "min": 5.0,
+              "max": 40.0,
+              "unit": "℃"
+            },
+            "humidity": {
+              "min": 30.0,
+              "max": 90.0,
+              "unit": "%RH"
+            },
+            "co2": {
+              "min": 300.0,
+              "max": 2000.0,
+              "unit": "ppm"
+            },
+            "light": {
+              "min": 0.0,
+              "max": 100000.0,
+              "unit": "lux"
+            }
+          }
+        }
+      },
+      {
+        "seq": 4,
+        "evidence_id": "EV04",
+        "source": "b02_memory",
+        "source_marker": "SIMULATED",
+        "tool": "b02_history",
+        "summary": "历史窗口 2026-10-26 12:30:00 ~ 2026-10-27 12:30:00 共 49 个样本(源=environment_samples,30 分钟网格)",
+        "status": "ok",
+        "timestamp": "2026-10-30T01:49:24+08:00",
+        "detail": {
+          "start": "2026-10-26 12:30:00",
+          "end": "2026-10-27 12:30:00",
+          "count": 49,
+          "first": {
+            "sample_time": "2026-10-26 12:30:00",
+            "source_type": "SIMULATED",
+            "temperature": 28.1,
+            "humidity": 52.5,
+            "co2": 912.0,
+            "light": 8183.0
+          },
+          "last": {
+            "sample_time": "2026-10-27 12:30:00",
+            "source_type": "SIMULATED",
+            "temperature": 27.8,
+            "humidity": 53.8,
+            "co2": 930.0,
+            "light": 59322.0
+          }
+        }
+      },
+      {
+        "seq": 5,
+        "evidence_id": "EV05",
+        "source": "b02_memory",
+        "source_marker": "SIMULATED",
+        "tool": "b02_stats",
+        "summary": "趋势窗口 2026-10-27 10:00:00 ~ 2026-10-27 12:30:00 共 6 点;斜率(每小时): 温度+0.97/湿度-1.82/CO₂浓度-36.06/光照+4396.06",
+        "status": "ok",
+        "timestamp": "2026-10-30T01:49:24+08:00",
+        "detail": {
+          "window": {
+            "start": "2026-10-27 10:00:00",
+            "end": "2026-10-27 12:30:00"
+          },
+          "count": 6,
+          "parameters": {
+            "temperature": {
+              "count": 6,
+              "min": 25.7,
+              "max": 28.2,
+              "mean": 26.95,
+              "std": 0.9523654760647301,
+              "slope_per_hour": 0.9657142857142859
+            },
+            "humidity": {
+              "count": 6,
+              "min": 53.8,
+              "max": 58.6,
+              "mean": 55.33333333333333,
+              "std": 1.9592515577808454,
+              "slope_per_hour": -1.8171428571428583
+            },
+            "co2": {
+              "count": 6,
+              "min": 930.0,
+              "max": 1012.0,
+              "mean": 966.8333333333334,
+              "std": 34.225234355175225,
+              "slope_per_hour": -36.05714285714286
+            },
+            "light": {
+              "count": 6,
+              "min": 48343.0,
+              "max": 60063.0,
+              "mean": 56180.166666666664,
+              "std": 4524.6215495515935,
+              "slope_per_hour": 4396.057142857143
+            }
+          }
+        }
+      },
+      {
+        "seq": 6,
+        "evidence_id": "EV06",
+        "source": "b03_weather",
+        "source_marker": "PUBLIC",
+        "tool": "b03_weather",
+        "summary": "北京(39.9042,116.4074) 天气预报: forecast_time=2026-10-30T00:00:00+08:00,温度8.0℃/湿度74.0%RH/降水概率0.0%",
+        "status": "ok",
+        "timestamp": "2026-10-30T01:49:24+08:00",
+        "detail": {
+          "provider": "open-meteo",
+          "forecast_time": "2026-10-30T00:00:00+08:00",
+          "analysis_time": "2026-10-27T12:30:00+08:00",
+          "location": "北京(39.9042,116.4074)",
+          "temperature": {
+            "value": 8.0,
+            "unit": "℃"
+          },
+          "humidity": {
+            "value": 74.0,
+            "unit": "%RH"
+          },
+          "precipitation_probability": {
+            "value": 0.0,
+            "unit": "%"
+          },
+          "cloud_cover": {
+            "value": 0.0,
+            "unit": "%"
+          },
+          "shortwave_radiation": {
+            "value": 0.0,
+            "unit": "W/m²"
+          }
+        }
+      },
+      {
+        "seq": 7,
+        "evidence_id": "EV07",
+        "source": "b04_rag",
+        "source_marker": "SIMULATED",
+        "tool": "b04_knowledge",
+        "summary": "知识检索命中 Top-1 s2_c001(得分 0.3228): # 大棚湿度与 CO₂ 管理\n\n摘要:设施栽培中空气湿度与 CO₂ 浓度相互制约,共同影响番茄的光合作用、蒸腾与发病风险…",
+        "status": "ok",
+        "timestamp": "2026-10-30T01:49:24+08:00",
+        "detail": {
+          "query": "大棚空气湿度多少合适",
+          "threshold": 0.17,
+          "top1": {
+            "chunk_id": "s2_c001",
+            "score": 0.3228,
+            "source_id": "s2",
+            "citation": {
+              "source_id": "s2",
+              "title": "大棚湿度与 CO₂ 管理",
+              "chunk_id": "s2_c001",
+              "char_range": [
+                0,
+                204
+              ],
+              "seq": 1
+            }
+          },
+          "note": "知识库为课程自编模拟资料(5 份 source),检索结果仅作建议参考"
+        }
+      },
+      {
+        "seq": 8,
+        "evidence_id": "EV08",
+        "source": "b06_ml",
+        "source_marker": "MODEL_OUTPUT",
+        "tool": "b06_predict",
+        "summary": "B06 预测 next_window_attention=WATCH(P(WATCH)=0.58,模型 B06-ML-v3)",
+        "status": "ok",
+        "timestamp": "2026-10-30T01:49:24+08:00",
+        "detail": {
+          "prediction": "WATCH",
+          "probability": {
+            "NORMAL": 0.42,
+            "WATCH": 0.58
+          },
+          "model_version": "B06-ML-v3",
+          "window": {
+            "start": "2026-10-27 10:00:00",
+            "end": "2026-10-27 12:30:00",
+            "points": 6
+          },
+          "MODEL_OUTPUT": "B06_ML",
+          "label_source": "DERIVED_LABEL: 规则派生(阈值表 b03_rules.json R1~R8),源=environment_samples 原始参数值,非 sim_scenario"
+        }
+      }
+    ],
+    "structured_judgment": {
+      "run_id": "run_20261030_014923_e2a04e",
+      "scenario_id": "S2",
+      "scenario_name": "渐进漂移",
+      "judged_at": "2026-10-30T01:49:24+08:00",
+      "anchor_sample_time": "2026-10-27 12:30:00",
+      "conclusion": "需要关注",
+      "attention_level": "attention",
+      "trust_level": "中",
+      "per_param": [
+        {
+          "parameter": "temperature",
+          "name": "温度",
+          "unit": "℃",
+          "value": 27.8,
+          "band": [
+            15.0,
+            30.0
+          ],
+          "verdict": "适宜",
+          "matched_rules": [],
+          "rule_names": [],
+          "advice": [],
+          "note": null
+        },
+        {
+          "parameter": "humidity",
+          "name": "湿度",
+          "unit": "%RH",
+          "value": 53.8,
+          "band": [
+            45.0,
+            85.0
+          ],
+          "verdict": "适宜",
+          "matched_rules": [],
+          "rule_names": [],
+          "advice": [],
+          "note": null
+        },
+        {
+          "parameter": "co2",
+          "name": "CO₂浓度",
+          "unit": "ppm",
+          "value": 930.0,
+          "band": [
+            800.0,
+            1500.0
+          ],
+          "verdict": "适宜",
+          "matched_rules": [],
+          "rule_names": [],
+          "advice": [],
+          "note": null
+        },
+        {
+          "parameter": "light",
+          "name": "光照",
+          "unit": "lux",
+          "value": 59322.0,
+          "band": [
+            10000.0,
+            70000.0
+          ],
+          "verdict": "适宜",
+          "matched_rules": [],
+          "rule_names": [],
+          "advice": [],
+          "note": null
+        }
+      ],
+      "matched_rules": [],
+      "trend_findings": [
+        {
+          "parameter": "temperature",
+          "name": "温度",
+          "slope_per_hour": 0.9657,
+          "anchor_value": 27.8,
+          "clause1_extrapolation": false,
+          "clause2_magnitude": true,
+          "alert": true,
+          "reason": "条款② |斜率| 0.97/小时 ≥ 幅值阈值 0.5"
+        },
+        {
+          "parameter": "humidity",
+          "name": "湿度",
+          "slope_per_hour": -1.8171,
+          "anchor_value": 53.8,
+          "clause1_extrapolation": false,
+          "clause2_magnitude": true,
+          "alert": true,
+          "reason": "条款② |斜率| 1.82/小时 ≥ 幅值阈值 1.0"
+        },
+        {
+          "parameter": "co2",
+          "name": "CO₂浓度",
+          "slope_per_hour": -36.0571,
+          "anchor_value": 930.0,
+          "clause1_extrapolation": false,
+          "clause2_magnitude": true,
+          "alert": true,
+          "reason": "条款② |斜率| 36.06/小时 ≥ 幅值阈值 25.0"
+        },
+        {
+          "parameter": "light",
+          "name": "光照",
+          "slope_per_hour": 4396.0571,
+          "anchor_value": 59322.0,
+          "clause1_extrapolation": false,
+          "clause2_magnitude": true,
+          "alert": true,
+          "reason": "条款② |斜率| 4396.06/小时 ≥ 幅值阈值 2000.0"
+        }
+      ],
+      "source_findings": [
+        {
+          "source": "b03_rules",
+          "marker": "DERIVED_LABEL",
+          "finding": "规则判定: 无违规",
+          "detail": "4 参数逐项比对适宜带(阈值表 b03_rules.json R1~R8)"
+        },
+        {
+          "source": "b02_trend",
+          "marker": "DERIVED_LABEL",
+          "finding": "趋势预警: 温度(条款② |斜率| 0.97/小时 ≥ 幅值阈值 0.5)、湿度(条款② |斜率| 1.82/小时 ≥ 幅值阈值 1.0)、CO₂浓度(条款② |斜率| 36.06/小时 ≥ 幅值阈值 25.0)、光照(条款② |斜率| 4396.06/小时 ≥ 幅值阈值 2000.0)",
+          "detail": "趋势窗口 2.5 小时;双条款:外推 2 小时 + 幅值阈值"
+        },
+        {
+          "source": "b06_predict",
+          "marker": "MODEL_OUTPUT",
+          "finding": "模型预测 WATCH(P(WATCH)=0.58,B06-ML-v3)",
+          "detail": "输入窗口 3 小时(6 点)预测未来 1~2 小时 next_window_attention"
+        },
+        {
+          "source": "b03_weather",
+          "marker": "PUBLIC",
+          "finding": "天气证据可用: forecast_time=2026-10-30T00:00:00+08:00",
+          "detail": "provider=open-meteo,location=北京(39.9042,116.4074)"
+        },
+        {
+          "source": "b04_knowledge",
+          "marker": "SIMULATED",
+          "finding": "知识检索命中: s2_c001",
+          "detail": "查询: 大棚空气湿度多少合适(课程自编模拟资料)"
+        }
+      ],
+      "degraded_reasons": [
+        "健康来源分歧: 规则判定无违规 vs MODEL_OUTPUT WATCH(P=0.58),按保守原则升级为需要关注,trust 降至中",
+        "规则未报警,但模型预警/趋势信号提示风险(结论=需要关注)"
+      ],
+      "capability_boundary_notes": [
+        "真实传感器不可用:环境数据均为课程模拟(source_type=SIMULATED),本系统不声称真实监测。",
+        "不可处理事项:长期天气预报(>1 天)、跨域农业问题、真实设备控制——系统只输出判断与解释,不执行任何控制动作。",
+        "知识库证据为课程自编模拟资料(5 份 source),检索结果仅作管理建议参考,不构成专业农艺结论。"
+      ],
+      "rule_engine": {
+        "rules_file": "b03_rules.json",
+        "bands": {
+          "temperature": [
+            15.0,
+            30.0
+          ],
+          "humidity": [
+            45.0,
+            85.0
+          ],
+          "co2": [
+            800.0,
+            1500.0
+          ],
+          "light": [
+            10000.0,
+            70000.0
+          ]
+        },
+        "daylight_range": [
+          6,
+          18
+        ],
+        "trend_config": {
+          "trend_hours": 2.5,
+          "slope_alert_thresholds": {
+            "temperature": 0.5,
+            "humidity": 1.0,
+            "co2": 25.0,
+            "light": 2000.0
+          },
+          "extrapolation_hours": 2
+        },
+        "rules_version": "1.0"
+      }
+    },
+    "explanation": {
+      "status": "omitted",
+      "text": null,
+      "note": "no_api_key: 未配置 DEEPSEEK_API_KEY / ANTHROPIC_AUTH_TOKEN,跳过 LLM 解释(结构化判断不受影响)"
+    },
+    "raw_record_saved": {
+      "path": "evidence/raw/run_20261030_014923_e2a04e.json",
+      "ok": true,
+      "collect_time": "2026-10-27T12:30:00+08:00",
+      "source_type": "SIMULATED"
+    }
+  },
+  "summary": {
+    "conclusion": "需要关注",
+    "attention_level": "attention",
+    "trust_level": "中",
+    "matched_rules": [],
+    "degraded_reasons": [
+      "健康来源分歧: 规则判定无违规 vs MODEL_OUTPUT WATCH(P=0.58),按保守原则升级为需要关注,trust 降至中",
+      "规则未报警,但模型预警/趋势信号提示风险(结论=需要关注)"
+    ]
+  }
+}

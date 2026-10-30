@@ -1,0 +1,44 @@
+{
+  "run_id": "run_missing_weather_002",
+  "config": {
+    "scenario_id": "S1",
+    "name": "实验·missing_weather(天气证据缺失)",
+    "description": "创新点3 缺失组:锚点全适宜,但天气数据源配置关闭——系统自动缩小判断边界:历史变化可描述,依赖天气的远期推断必须暂停;LLM 不得出现任何天气断言,trace 中无 b03_weather 调用。",
+    "anchor_sample_time": "2026-10-28 12:00:00",
+    "history_hours": 24,
+    "trend_hours": 24,
+    "location": "北京",
+    "knowledge_query": "番茄适宜生长温度是多少",
+    "degrade": {
+      "weather": null,
+      "knowledge": null
+    },
+    "llm_explain": true,
+    "experiment_type": "missing_weather",
+    "sources": {
+      "history": true,
+      "weather": "off",
+      "knowledge": true,
+      "prediction": true
+    },
+    "expected": {
+      "conclusion": "正常",
+      "attention_level": "normal",
+      "trust": "高",
+      "note": "天气数据源关闭(边界说明须标注);LLM 不得出现任何天气断言;trace 中无 b03_weather 调用(disabled 记录替代)"
+    }
+  },
+  "actuals": {
+    "conclusion": "正常",
+    "attention_level": "normal",
+    "trust_level": "高",
+    "matched_rules": [],
+    "degraded_reasons": []
+  },
+  "expected": {
+    "conclusion": "正常",
+    "attention_level": "normal",
+    "trust": "高",
+    "note": "天气数据源关闭(边界说明须标注);LLM 不得出现任何天气断言;trace 中无 b03_weather 调用(disabled 记录替代)"
+  }
+}

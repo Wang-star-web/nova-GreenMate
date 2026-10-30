@@ -1,0 +1,20 @@
+{
+  "scenario_id": "S2",
+  "name": "实验·current_only(仅当前值)",
+  "description": "创新点1 组1:只传入当前 temperature/humidity/co2/light,不加载历史、不加载 B06 预测——系统只能看到瞬时读数,无法区分「稳定 27.8℃」vs「升温到 27.8℃」;天气与知识保持开启(隔离变量)。",
+  "anchor_sample_time": "2026-10-27 12:30:00",
+  "history_hours": 3,
+  "trend_hours": 3,
+  "location": "北京",
+  "knowledge_query": "大棚空气湿度多少合适",
+  "degrade": {"weather": null, "knowledge": null},
+  "llm_explain": true,
+  "experiment_type": "current_only",
+  "sources": {"history": false, "weather": "real", "knowledge": true, "prediction": false},
+  "expected": {
+    "conclusion": "正常",
+    "attention_level": "normal",
+    "trust": "高",
+    "note": "仅锚点当前值判断(27.8℃ 在适宜带);视图2 空态(history=false);边界说明标注历史与预测关闭"
+  }
+}

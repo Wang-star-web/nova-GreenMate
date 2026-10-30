@@ -1,0 +1,20 @@
+{
+  "scenario_id": "S2",
+  "name": "实验·with_history_prediction(当前+3h历史+B06预测)",
+  "description": "创新点1 组3:当前值 + 3h 历史 + B06 短时预测全开——在历史趋势之上叠加下一窗口推演(B06 WATCH),系统输出 需要关注/attention/中(S2 基线行为)。",
+  "anchor_sample_time": "2026-10-27 12:30:00",
+  "history_hours": 3,
+  "trend_hours": 3,
+  "location": "北京",
+  "knowledge_query": "大棚空气湿度多少合适",
+  "degrade": {"weather": null, "knowledge": null},
+  "llm_explain": true,
+  "experiment_type": "with_history_prediction",
+  "sources": {"history": true, "weather": "real", "knowledge": true, "prediction": true},
+  "expected": {
+    "conclusion": "需要关注",
+    "attention_level": "attention",
+    "trust": "中",
+    "note": "S2 基线行为:趋势条款② + 模型 WATCH(规则 vs 模型健康分歧 → trust 中)"
+  }
+}

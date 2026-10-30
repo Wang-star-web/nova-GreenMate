@@ -1,0 +1,42 @@
+{
+  "provider": "open-meteo",
+  "retrieved_at": "2026-10-30T01:04:08+08:00",
+  "query": {
+    "method": "GET",
+    "url": "https://api.open-meteo.com/v1/forecast",
+    "params": {
+      "latitude": 39.9042,
+      "longitude": 116.4074,
+      "hourly": "temperature_2m,relative_humidity_2m,precipitation_probability,cloud_cover,shortwave_radiation",
+      "timezone": "Asia/Shanghai"
+    }
+  },
+  "status": "error",
+  "error": {
+    "error_type": "network_timeout",
+    "message": "读取超时(服务器 0.0001 秒内未返回结果)"
+  },
+  "location": "北京(39.9042,116.4074)",
+  "analysis_time": "2026-10-28T12:00:00+08:00",
+  "forecast_time": null,
+  "temperature": {
+    "value": null,
+    "unit": "℃"
+  },
+  "humidity": {
+    "value": null,
+    "unit": "%RH"
+  },
+  "precipitation_probability": {
+    "value": null,
+    "unit": "%"
+  },
+  "cloud_cover": {
+    "value": null,
+    "unit": "%"
+  },
+  "shortwave_radiation": {
+    "value": null,
+    "unit": "W/m²"
+  }
+}

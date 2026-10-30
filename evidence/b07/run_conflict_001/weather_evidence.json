@@ -1,0 +1,40 @@
+{
+  "provider": "experiment_injection",
+  "retrieved_at": "2026-10-30T02:21:07+08:00",
+  "query": {
+    "method": "INJECTION",
+    "url": "testdata/experiments/conflict.json",
+    "params": {
+      "simulated": true,
+      "forecast_hours": 2
+    }
+  },
+  "status": "success",
+  "error": null,
+  "location": "北京",
+  "analysis_time": "2026-10-27T12:30:00+08:00",
+  "forecast_time": "2026-10-27T14:30:00+08:00",
+  "temperature": {
+    "value": 18.0,
+    "unit": "℃"
+  },
+  "humidity": {
+    "value": 88.0,
+    "unit": "%RH"
+  },
+  "precipitation_probability": {
+    "value": 80.0,
+    "unit": "%"
+  },
+  "cloud_cover": {
+    "value": 90.0,
+    "unit": "%"
+  },
+  "shortwave_radiation": {
+    "value": 250.0,
+    "unit": "W/m²"
+  },
+  "source_marker": "SIMULATED",
+  "simulated": true,
+  "note": "SIMULATED 实验注入:绝不冒充 PUBLIC;forecast_time=锚点+2h(14:30,>analysis 12:30 满足 B03 同款强制校验)"
+}

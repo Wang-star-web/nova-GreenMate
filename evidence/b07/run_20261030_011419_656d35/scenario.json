@@ -1,0 +1,37 @@
+{
+  "run_id": "run_20261030_011419_656d35",
+  "config": {
+    "scenario_id": "S1",
+    "name": "稳态基线",
+    "description": "锚点样本四项参数全部位于适宜带,模型与规则一致判定正常,全链路证据健康——系统应输出 正常/normal/高。",
+    "anchor_sample_time": "2026-10-28 12:00:00",
+    "history_hours": 24,
+    "trend_hours": 24,
+    "location": "北京",
+    "knowledge_query": "番茄适宜生长温度是多少",
+    "degrade": {
+      "weather": null,
+      "knowledge": null
+    },
+    "llm_explain": true,
+    "expected": {
+      "conclusion": "正常",
+      "attention_level": "normal",
+      "trust": "高",
+      "note": "规则无违规 + 模型 NORMAL + 趋势平稳 + 天气/知识证据健康,多源一致"
+    }
+  },
+  "actuals": {
+    "conclusion": "正常",
+    "attention_level": "normal",
+    "trust_level": "高",
+    "matched_rules": [],
+    "degraded_reasons": []
+  },
+  "expected": {
+    "conclusion": "正常",
+    "attention_level": "normal",
+    "trust": "高",
+    "note": "规则无违规 + 模型 NORMAL + 趋势平稳 + 天气/知识证据健康,多源一致"
+  }
+}

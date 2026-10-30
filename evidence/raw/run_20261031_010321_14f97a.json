@@ -1,0 +1,45 @@
+{
+  "run_id": "run_20261031_010321_14f97a",
+  "collect_time": "2026-10-28T12:00:00+08:00",
+  "source_type": "SIMULATED",
+  "data": {
+    "temperature": {
+      "value": 27.6,
+      "unit": "℃"
+    },
+    "humidity": {
+      "value": 54.0,
+      "unit": "%RH"
+    },
+    "co2": {
+      "value": 923.0,
+      "unit": "ppm"
+    },
+    "light": {
+      "value": 59910.0,
+      "unit": "lux"
+    }
+  },
+  "valid_ranges": {
+    "temperature": {
+      "min": 5.0,
+      "max": 40.0,
+      "unit": "℃"
+    },
+    "humidity": {
+      "min": 30.0,
+      "max": 90.0,
+      "unit": "%RH"
+    },
+    "co2": {
+      "min": 300.0,
+      "max": 2000.0,
+      "unit": "ppm"
+    },
+    "light": {
+      "min": 0.0,
+      "max": 100000.0,
+      "unit": "lux"
+    }
+  }
+}

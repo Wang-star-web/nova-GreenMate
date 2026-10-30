@@ -1,0 +1,20 @@
+{
+  "scenario_id": "S1",
+  "name": "实验·agree(四类证据一致)",
+  "description": "创新点3 对照组:锚点全适宜、规则无违规、模型 NORMAL、24h 趋势平稳、天气与知识证据健康——历史/天气/知识/预测四类证据一致支持 正常/normal/高,LLM 应输出平实解释。",
+  "anchor_sample_time": "2026-10-28 12:00:00",
+  "history_hours": 24,
+  "trend_hours": 24,
+  "location": "北京",
+  "knowledge_query": "番茄适宜生长温度是多少",
+  "degrade": {"weather": null, "knowledge": null},
+  "llm_explain": true,
+  "experiment_type": "agree",
+  "sources": {"history": true, "weather": "real", "knowledge": true, "prediction": true},
+  "expected": {
+    "conclusion": "正常",
+    "attention_level": "normal",
+    "trust": "高",
+    "note": "注意:实测 S1 锚点 3h 趋势窗口四参数超阈值(温度 24.3→27.6℃,+1.1℃/h),会翻车变「需要关注」;故本实验沿用 S1 原 24h 窗口(实测平稳),不可改为 3h"
+  }
+}

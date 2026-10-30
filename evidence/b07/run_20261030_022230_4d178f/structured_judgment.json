@@ -1,0 +1,240 @@
+{
+  "run_id": "run_20261030_022230_4d178f",
+  "scenario_id": "S3",
+  "scenario_name": "外部扰动",
+  "judged_at": "2026-10-30T02:22:32+08:00",
+  "anchor_sample_time": "2026-10-27 13:30:00",
+  "conclusion": "需要预警",
+  "attention_level": "warning",
+  "trust_level": "高",
+  "experiment_type": null,
+  "per_param": [
+    {
+      "parameter": "temperature",
+      "name": "温度",
+      "unit": "℃",
+      "value": 32.9,
+      "band": [
+        15.0,
+        30.0
+      ],
+      "verdict": "偏高",
+      "matched_rules": [
+        "R1"
+      ],
+      "rule_names": [
+        "高温预警"
+      ],
+      "advice": [
+        "开启侧窗与顶窗通风,必要时启动湿帘风机降温。"
+      ],
+      "note": null
+    },
+    {
+      "parameter": "humidity",
+      "name": "湿度",
+      "unit": "%RH",
+      "value": 87.0,
+      "band": [
+        45.0,
+        85.0
+      ],
+      "verdict": "偏高",
+      "matched_rules": [
+        "R3"
+      ],
+      "rule_names": [
+        "高湿病害风险"
+      ],
+      "advice": [
+        "加强通风排湿,控制浇水,必要时开启除湿设备。"
+      ],
+      "note": null
+    },
+    {
+      "parameter": "co2",
+      "name": "CO₂浓度",
+      "unit": "ppm",
+      "value": 900.0,
+      "band": [
+        800.0,
+        1500.0
+      ],
+      "verdict": "适宜",
+      "matched_rules": [],
+      "rule_names": [],
+      "advice": [],
+      "note": null
+    },
+    {
+      "parameter": "light",
+      "name": "光照",
+      "unit": "lux",
+      "value": 8254.0,
+      "band": [
+        10000.0,
+        70000.0
+      ],
+      "verdict": "偏低",
+      "matched_rules": [
+        "R7"
+      ],
+      "rule_names": [
+        "光照不足"
+      ],
+      "advice": [
+        "清洁棚膜提高透光率,阴雨天开启补光灯。"
+      ],
+      "note": null
+    }
+  ],
+  "matched_rules": [
+    {
+      "id": "R1",
+      "name": "高温预警",
+      "indicator": "temperature",
+      "verdict": "偏高",
+      "description": "气温超过 30 ℃ 会加速叶片蒸腾与呼吸消耗,抑制番茄坐果与果实着色。",
+      "advice": "开启侧窗与顶窗通风,必要时启动湿帘风机降温。"
+    },
+    {
+      "id": "R3",
+      "name": "高湿病害风险",
+      "indicator": "humidity",
+      "verdict": "偏高",
+      "description": "相对湿度高于 85 %RH 时叶片易结露,灰霉病、晚疫病发生风险升高。",
+      "advice": "加强通风排湿,控制浇水,必要时开启除湿设备。"
+    },
+    {
+      "id": "R7",
+      "name": "光照不足",
+      "indicator": "light",
+      "verdict": "偏低",
+      "description": "光照低于 10000 lux 时光合作用不足,植株易徒长,开花坐果受影响。",
+      "advice": "清洁棚膜提高透光率,阴雨天开启补光灯。"
+    }
+  ],
+  "trend_findings": [
+    {
+      "parameter": "temperature",
+      "name": "温度",
+      "slope_per_hour": 2.7657,
+      "anchor_value": 32.9,
+      "clause1_extrapolation": true,
+      "clause2_magnitude": true,
+      "alert": true,
+      "reason": "条款① 2 小时外推值 38.4 超出适宜带 15~30;条款② |斜率| 2.77/小时 ≥ 幅值阈值 0.5"
+    },
+    {
+      "parameter": "humidity",
+      "name": "湿度",
+      "slope_per_hour": 15.0114,
+      "anchor_value": 87.0,
+      "clause1_extrapolation": true,
+      "clause2_magnitude": true,
+      "alert": true,
+      "reason": "条款① 2 小时外推值 117.0 超出适宜带 45~85;条款② |斜率| 15.01/小时 ≥ 幅值阈值 1.0"
+    },
+    {
+      "parameter": "co2",
+      "name": "CO₂浓度",
+      "slope_per_hour": -30.9143,
+      "anchor_value": 900.0,
+      "clause1_extrapolation": false,
+      "clause2_magnitude": true,
+      "alert": true,
+      "reason": "条款② |斜率| 30.91/小时 ≥ 幅值阈值 25.0"
+    },
+    {
+      "parameter": "light",
+      "name": "光照",
+      "slope_per_hour": -22653.2,
+      "anchor_value": 8254.0,
+      "clause1_extrapolation": true,
+      "clause2_magnitude": true,
+      "alert": true,
+      "reason": "条款① 2 小时外推值 -37052.4 超出适宜带 10000~70000;条款② |斜率| 22653.20/小时 ≥ 幅值阈值 2000.0"
+    }
+  ],
+  "source_findings": [
+    {
+      "source": "b03_rules",
+      "marker": "DERIVED_LABEL",
+      "finding": "规则判定: 命中 R1、R3、R7",
+      "detail": "4 参数逐项比对适宜带(阈值表 b03_rules.json R1~R8)"
+    },
+    {
+      "source": "b02_trend",
+      "marker": "DERIVED_LABEL",
+      "finding": "趋势预警: 温度(条款① 2 小时外推值 38.4 超出适宜带 15~30;条款② |斜率| 2.77/小时 ≥ 幅值阈值 0.5)、湿度(条款① 2 小时外推值 117.0 超出适宜带 45~85;条款② |斜率| 15.01/小时 ≥ 幅值阈值 1.0)、CO₂浓度(条款② |斜率| 30.91/小时 ≥ 幅值阈值 25.0)、光照(条款① 2 小时外推值 -37052.4 超出适宜带 10000~70000;条款② |斜率| 22653.20/小时 ≥ 幅值阈值 2000.0)",
+      "detail": "趋势窗口 2.5 小时;双条款:外推 2 小时 + 幅值阈值"
+    },
+    {
+      "source": "b06_predict",
+      "marker": "MODEL_OUTPUT",
+      "finding": "模型预测 WATCH(P(WATCH)=0.765,B06-ML-v3)",
+      "detail": "输入窗口 3 小时(6 点)预测未来 1~2 小时 next_window_attention"
+    },
+    {
+      "source": "b03_weather",
+      "marker": "PUBLIC",
+      "finding": "天气证据可用: forecast_time=2026-10-30T00:00:00+08:00",
+      "detail": "provider=open-meteo,location=北京(39.9042,116.4074)"
+    },
+    {
+      "source": "b04_knowledge",
+      "marker": "SIMULATED",
+      "finding": "知识检索命中: s5_c003",
+      "detail": "查询: 番茄灰霉病怎么防治(课程自编模拟资料)"
+    }
+  ],
+  "source_conflicts": [],
+  "evidence_completeness": {
+    "available": 4,
+    "expected": 4,
+    "disabled": [],
+    "note": "四类证据(历史/天气/知识/预测)中当前可用 4/4;配置关闭的来源不计入缺失,判断边界已相应收窄"
+  },
+  "degraded_reasons": [],
+  "capability_boundary_notes": [
+    "真实传感器不可用:环境数据均为课程模拟(source_type=SIMULATED),本系统不声称真实监测。",
+    "不可处理事项:长期天气预报(>1 天)、跨域农业问题、真实设备控制——系统只输出判断与解释,不执行任何控制动作。",
+    "知识库证据为课程自编模拟资料(5 份 source),检索结果仅作管理建议参考,不构成专业农艺结论。"
+  ],
+  "rule_engine": {
+    "rules_file": "b03_rules.json",
+    "bands": {
+      "temperature": [
+        15.0,
+        30.0
+      ],
+      "humidity": [
+        45.0,
+        85.0
+      ],
+      "co2": [
+        800.0,
+        1500.0
+      ],
+      "light": [
+        10000.0,
+        70000.0
+      ]
+    },
+    "daylight_range": [
+      6,
+      18
+    ],
+    "trend_config": {
+      "trend_hours": 2.5,
+      "slope_alert_thresholds": {
+        "temperature": 0.5,
+        "humidity": 1.0,
+        "co2": 25.0,
+        "light": 2000.0
+      },
+      "extrapolation_hours": 2
+    },
+    "rules_version": "1.0"
+  }
+}

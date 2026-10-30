@@ -1,0 +1,197 @@
+{
+  "run_id": "run_20261030_022218_3ca425",
+  "scenario_id": "S1",
+  "scenario_name": "稳态基线",
+  "judged_at": "2026-10-30T02:22:20+08:00",
+  "anchor_sample_time": "2026-10-28 12:00:00",
+  "conclusion": "正常",
+  "attention_level": "normal",
+  "trust_level": "高",
+  "experiment_type": null,
+  "per_param": [
+    {
+      "parameter": "temperature",
+      "name": "温度",
+      "unit": "℃",
+      "value": 27.6,
+      "band": [
+        15.0,
+        30.0
+      ],
+      "verdict": "适宜",
+      "matched_rules": [],
+      "rule_names": [],
+      "advice": [],
+      "note": null
+    },
+    {
+      "parameter": "humidity",
+      "name": "湿度",
+      "unit": "%RH",
+      "value": 54.0,
+      "band": [
+        45.0,
+        85.0
+      ],
+      "verdict": "适宜",
+      "matched_rules": [],
+      "rule_names": [],
+      "advice": [],
+      "note": null
+    },
+    {
+      "parameter": "co2",
+      "name": "CO₂浓度",
+      "unit": "ppm",
+      "value": 923.0,
+      "band": [
+        800.0,
+        1500.0
+      ],
+      "verdict": "适宜",
+      "matched_rules": [],
+      "rule_names": [],
+      "advice": [],
+      "note": null
+    },
+    {
+      "parameter": "light",
+      "name": "光照",
+      "unit": "lux",
+      "value": 59910.0,
+      "band": [
+        10000.0,
+        70000.0
+      ],
+      "verdict": "适宜",
+      "matched_rules": [],
+      "rule_names": [],
+      "advice": [],
+      "note": null
+    }
+  ],
+  "matched_rules": [],
+  "trend_findings": [
+    {
+      "parameter": "temperature",
+      "name": "温度",
+      "slope_per_hour": -0.3721,
+      "anchor_value": 27.6,
+      "clause1_extrapolation": false,
+      "clause2_magnitude": false,
+      "alert": false,
+      "reason": null
+    },
+    {
+      "parameter": "humidity",
+      "name": "湿度",
+      "slope_per_hour": -0.7846,
+      "anchor_value": 54.0,
+      "clause1_extrapolation": false,
+      "clause2_magnitude": false,
+      "alert": false,
+      "reason": null
+    },
+    {
+      "parameter": "co2",
+      "name": "CO₂浓度",
+      "slope_per_hour": 9.3431,
+      "anchor_value": 923.0,
+      "clause1_extrapolation": false,
+      "clause2_magnitude": false,
+      "alert": false,
+      "reason": null
+    },
+    {
+      "parameter": "light",
+      "name": "光照",
+      "slope_per_hour": 947.5796,
+      "anchor_value": 59910.0,
+      "clause1_extrapolation": false,
+      "clause2_magnitude": false,
+      "alert": false,
+      "reason": null
+    }
+  ],
+  "source_findings": [
+    {
+      "source": "b03_rules",
+      "marker": "DERIVED_LABEL",
+      "finding": "规则判定: 无违规",
+      "detail": "4 参数逐项比对适宜带(阈值表 b03_rules.json R1~R8)"
+    },
+    {
+      "source": "b02_trend",
+      "marker": "DERIVED_LABEL",
+      "finding": "趋势: 无预警",
+      "detail": "趋势窗口 24 小时;双条款:外推 2 小时 + 幅值阈值"
+    },
+    {
+      "source": "b06_predict",
+      "marker": "MODEL_OUTPUT",
+      "finding": "模型预测 NORMAL(P(WATCH)=0.5,B06-ML-v3)",
+      "detail": "输入窗口 3 小时(6 点)预测未来 1~2 小时 next_window_attention"
+    },
+    {
+      "source": "b03_weather",
+      "marker": "PUBLIC",
+      "finding": "天气证据可用: forecast_time=2026-10-30T00:00:00+08:00",
+      "detail": "provider=open-meteo,location=北京(39.9042,116.4074)"
+    },
+    {
+      "source": "b04_knowledge",
+      "marker": "SIMULATED",
+      "finding": "知识检索命中: s1_c001",
+      "detail": "查询: 番茄适宜生长温度是多少(课程自编模拟资料)"
+    }
+  ],
+  "source_conflicts": [],
+  "evidence_completeness": {
+    "available": 4,
+    "expected": 4,
+    "disabled": [],
+    "note": "四类证据(历史/天气/知识/预测)中当前可用 4/4;配置关闭的来源不计入缺失,判断边界已相应收窄"
+  },
+  "degraded_reasons": [],
+  "capability_boundary_notes": [
+    "真实传感器不可用:环境数据均为课程模拟(source_type=SIMULATED),本系统不声称真实监测。",
+    "不可处理事项:长期天气预报(>1 天)、跨域农业问题、真实设备控制——系统只输出判断与解释,不执行任何控制动作。",
+    "知识库证据为课程自编模拟资料(5 份 source),检索结果仅作管理建议参考,不构成专业农艺结论。"
+  ],
+  "rule_engine": {
+    "rules_file": "b03_rules.json",
+    "bands": {
+      "temperature": [
+        15.0,
+        30.0
+      ],
+      "humidity": [
+        45.0,
+        85.0
+      ],
+      "co2": [
+        800.0,
+        1500.0
+      ],
+      "light": [
+        10000.0,
+        70000.0
+      ]
+    },
+    "daylight_range": [
+      6,
+      18
+    ],
+    "trend_config": {
+      "trend_hours": 24,
+      "slope_alert_thresholds": {
+        "temperature": 0.5,
+        "humidity": 1.0,
+        "co2": 25.0,
+        "light": 2000.0
+      },
+      "extrapolation_hours": 2
+    },
+    "rules_version": "1.0"
+  }
+}

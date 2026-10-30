@@ -1,0 +1,41 @@
+{
+  "run_id": "run_20261030_010019_4193a2",
+  "config": {
+    "scenario_id": "S3",
+    "name": "外部扰动",
+    "description": "扰动片段高峰期:高温+高湿+弱光同时超标,命中 R1/R3/R7,模型 WATCH,规则与模型一致——系统应输出 需要预警/warning/高。",
+    "anchor_sample_time": "2026-10-27 13:30:00",
+    "history_hours": 24,
+    "trend_hours": 2.5,
+    "location": "北京",
+    "knowledge_query": "番茄灰霉病怎么防治",
+    "degrade": {
+      "weather": null,
+      "knowledge": null
+    },
+    "llm_explain": true,
+    "expected": {
+      "conclusion": "需要预警",
+      "attention_level": "warning",
+      "trust": "高",
+      "note": "规则命中 R1+R3+R7 与模型 WATCH 一致,来源一致"
+    }
+  },
+  "actuals": {
+    "conclusion": "需要预警",
+    "attention_level": "warning",
+    "trust_level": "高",
+    "matched_rules": [
+      "R1",
+      "R3",
+      "R7"
+    ],
+    "degraded_reasons": []
+  },
+  "expected": {
+    "conclusion": "需要预警",
+    "attention_level": "warning",
+    "trust": "高",
+    "note": "规则命中 R1+R3+R7 与模型 WATCH 一致,来源一致"
+  }
+}

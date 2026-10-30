@@ -1,0 +1,465 @@
+{
+  "run_id": "run_20261030_014926_4aa093",
+  "scenario_id": "S4",
+  "generated_at": "2026-10-30T01:49:27+08:00",
+  "raw": {
+    "status": "ok",
+    "path": "evidence/raw/run_20261030_014926_4aa093.json",
+    "record": {
+      "run_id": "run_20261030_014926_4aa093",
+      "collect_time": "2026-10-28T09:00:00+08:00",
+      "source_type": "SIMULATED",
+      "data": {
+        "temperature": {
+          "value": 24.3,
+          "unit": "℃"
+        },
+        "humidity": {
+          "value": 60.2,
+          "unit": "%RH"
+        },
+        "co2": {
+          "value": 1085.0,
+          "unit": "ppm"
+        },
+        "light": {
+          "value": 35480.0,
+          "unit": "lux"
+        }
+      },
+      "valid_ranges": {
+        "temperature": {
+          "min": 5.0,
+          "max": 40.0,
+          "unit": "℃"
+        },
+        "humidity": {
+          "min": 30.0,
+          "max": 90.0,
+          "unit": "%RH"
+        },
+        "co2": {
+          "min": 300.0,
+          "max": 2000.0,
+          "unit": "ppm"
+        },
+        "light": {
+          "min": 0.0,
+          "max": 100000.0,
+          "unit": "lux"
+        }
+      }
+    }
+  },
+  "parsed": {
+    "status": "ok",
+    "source": "b02_memory environment_samples",
+    "anchor": {
+      "sample_time": "2026-10-28 09:00:00",
+      "source_type": "SIMULATED",
+      "temperature": 24.3,
+      "humidity": 60.2,
+      "co2": 1085.0,
+      "light": 35480.0
+    },
+    "history_count": 49,
+    "history": [
+      {
+        "sample_time": "2026-10-27 09:00:00",
+        "source_type": "SIMULATED",
+        "temperature": 24.4,
+        "humidity": 58.4,
+        "co2": 1085.0,
+        "light": 35943.0
+      },
+      {
+        "sample_time": "2026-10-27 09:30:00",
+        "source_type": "SIMULATED",
+        "temperature": 24.7,
+        "humidity": 59.2,
+        "co2": 1065.0,
+        "light": 42411.0
+      },
+      {
+        "sample_time": "2026-10-27 10:00:00",
+        "source_type": "SIMULATED",
+        "temperature": 25.7,
+        "humidity": 58.6,
+        "co2": 1012.0,
+        "light": 48343.0
+      },
+      {
+        "sample_time": "2026-10-27 10:30:00",
+        "source_type": "SIMULATED",
+        "temperature": 26.3,
+        "humidity": 56.8,
+        "co2": 998.0,
+        "light": 53527.0
+      },
+      {
+        "sample_time": "2026-10-27 11:00:00",
+        "source_type": "SIMULATED",
+        "temperature": 26.5,
+        "humidity": 54.0,
+        "co2": 976.0,
+        "light": 56699.0
+      },
+      {
+        "sample_time": "2026-10-27 11:30:00",
+        "source_type": "SIMULATED",
+        "temperature": 27.2,
+        "humidity": 54.9,
+        "co2": 953.0,
+        "light": 59127.0
+      },
+      {
+        "sample_time": "2026-10-27 12:00:00",
+        "source_type": "SIMULATED",
+        "temperature": 28.2,
+        "humidity": 53.9,
+        "co2": 932.0,
+        "light": 60063.0
+      },
+      {
+        "sample_time": "2026-10-27 12:30:00",
+        "source_type": "SIMULATED",
+        "temperature": 27.8,
+        "humidity": 53.8,
+        "co2": 930.0,
+        "light": 59322.0
+      },
+      {
+        "sample_time": "2026-10-27 13:00:00",
+        "source_type": "SIMULATED",
+        "temperature": 32.8,
+        "humidity": 87.5,
+        "co2": 900.0,
+        "light": 7972.0
+      },
+      {
+        "sample_time": "2026-10-27 13:30:00",
+        "source_type": "SIMULATED",
+        "temperature": 32.9,
+        "humidity": 87.0,
+        "co2": 900.0,
+        "light": 8254.0
+      },
+      {
+        "sample_time": "2026-10-27 14:00:00",
+        "source_type": "SIMULATED",
+        "temperature": 33.2,
+        "humidity": 88.9,
+        "co2": 888.0,
+        "light": 8034.0
+      },
+      {
+        "sample_time": "2026-10-27 14:30:00",
+        "source_type": "SIMULATED",
+        "temperature": 32.9,
+        "humidity": 88.5,
+        "co2": 897.0,
+        "light": 8150.0
+      },
+      {
+        "sample_time": "2026-10-27 15:00:00",
+        "source_type": "SIMULATED",
+        "temperature": 32.9,
+        "humidity": 88.2,
+        "co2": 923.0,
+        "light": 7828.0
+      },
+      {
+        "sample_time": "2026-10-27 15:30:00",
+        "source_type": "SIMULATED",
+        "temperature": 32.9,
+        "humidity": 88.8,
+        "co2": 907.0,
+        "light": 8044.0
+      },
+      {
+        "sample_time": "2026-10-27 16:00:00",
+        "source_type": "SIMULATED",
+        "temperature": 33.1,
+        "humidity": 88.4,
+        "co2": 948.0,
+        "light": 7716.0
+      },
+      {
+        "sample_time": "2026-10-27 16:30:00",
+        "source_type": "SIMULATED",
+        "temperature": 33.2,
+        "humidity": 87.4,
+        "co2": 945.0,
+        "light": 7904.0
+      },
+      {
+        "sample_time": "2026-10-27 17:00:00",
+        "source_type": "SIMULATED",
+        "temperature": 32.7,
+        "humidity": 88.4,
+        "co2": 975.0,
+        "light": 7718.0
+      },
+      {
+        "sample_time": "2026-10-27 17:30:00",
+        "source_type": "SIMULATED",
+        "temperature": 26.5,
+        "humidity": 55.4,
+        "co2": 995.0,
+        "light": 2734.0
+      },
+      {
+        "sample_time": "2026-10-27 18:00:00",
+        "source_type": "SIMULATED",
+        "temperature": 25.6,
+        "humidity": 57.9,
+        "co2": 1033.0,
+        "light": 41.0
+      },
+      {
+        "sample_time": "2026-10-27 18:30:00",
+        "source_type": "SIMULATED",
+        "temperature": 24.8,
+        "humidity": 57.0,
+        "co2": 1044.0,
+        "light": 71.0
+      },
+      {
+        "sample_time": "2026-10-27 19:00:00",
+        "source_type": "SIMULATED",
+        "temperature": 24.6,
+        "humidity": 58.9,
+        "co2": 1090.0,
+        "light": 0.0
+      },
+      {
+        "sample_time": "2026-10-27 19:30:00",
+        "source_type": "SIMULATED",
+        "temperature": 23.7,
+        "humidity": 60.1,
+        "co2": 1125.0,
+        "light": 0.0
+      },
+      {
+        "sample_time": "2026-10-27 20:00:00",
+        "source_type": "SIMULATED",
+        "temperature": 22.9,
+        "humidity": 61.3,
+        "co2": 1155.0,
+        "light": 0.0
+      },
+      {
+        "sample_time": "2026-10-27 20:30:00",
+        "source_type": "SIMULATED",
+        "temperature": 22.4,
+        "humidity": 61.9,
+        "co2": 1179.0,
+        "light": 60.0
+      },
+      {
+        "sample_time": "2026-10-27 21:00:00",
+        "source_type": "SIMULATED",
+        "temperature": 21.2,
+        "humidity": 63.9,
+        "co2": 1206.0,
+        "light": 0.0
+      },
+      {
+        "sample_time": "2026-10-27 21:30:00",
+        "source_type": "SIMULATED",
+        "temperature": 20.7,
+        "humidity": 65.1,
+        "co2": 1231.0,
+        "light": 148.0
+      },
+      {
+        "sample_time": "2026-10-27 22:00:00",
+        "source_type": "SIMULATED",
+        "temperature": 20.0,
+        "humidity": 66.4,
+        "co2": 1281.0,
+        "light": 0.0
+      },
+      {
+        "sample_time": "2026-10-27 22:30:00",
+        "source_type": "SIMULATED",
+        "temperature": 19.9,
+        "humidity": 68.7,
+        "co2": 1289.0,
+        "light": 217.0
+      },
+      {
+        "sample_time": "2026-10-27 23:00:00",
+        "source_type": "SIMULATED",
+        "temperature": 18.7,
+        "humidity": 67.3,
+        "co2": 1339.0,
+        "light": 217.0
+      },
+      {
+        "sample_time": "2026-10-27 23:30:00",
+        "source_type": "SIMULATED",
+        "temperature": 18.7,
+        "humidity": 69.8,
+        "co2": 1355.0,
+        "light": 0.0
+      },
+      {
+        "sample_time": "2026-10-28 00:00:00",
+        "source_type": "SIMULATED",
+        "temperature": 17.9,
+        "humidity": 68.8,
+        "co2": 1361.0,
+        "light": 181.0
+      },
+      {
+        "sample_time": "2026-10-28 00:30:00",
+        "source_type": "SIMULATED",
+        "temperature": 18.0,
+        "humidity": 71.8,
+        "co2": 1394.0,
+        "light": 0.0
+      },
+      {
+        "sample_time": "2026-10-28 01:00:00",
+        "source_type": "SIMULATED",
+        "temperature": 18.0,
+        "humidity": 70.4,
+        "co2": 1394.0,
+        "light": 14.0
+      },
+      {
+        "sample_time": "2026-10-28 01:30:00",
+        "source_type": "SIMULATED",
+        "temperature": 17.5,
+        "humidity": 70.8,
+        "co2": 1393.0,
+        "light": 0.0
+      },
+      {
+        "sample_time": "2026-10-28 02:00:00",
+        "source_type": "SIMULATED",
+        "temperature": 17.2,
+        "humidity": 71.5,
+        "co2": 1388.0,
+        "light": 6.0
+      },
+      {
+        "sample_time": "2026-10-28 02:30:00",
+        "source_type": "SIMULATED",
+        "temperature": 17.9,
+        "humidity": 71.0,
+        "co2": 1405.0,
+        "light": 191.0
+      },
+      {
+        "sample_time": "2026-10-28 03:00:00",
+        "source_type": "SIMULATED",
+        "temperature": 17.9,
+        "humidity": 70.4,
+        "co2": 1381.0,
+        "light": 0.0
+      },
+      {
+        "sample_time": "2026-10-28 03:30:00",
+        "source_type": "SIMULATED",
+        "temperature": 18.0,
+        "humidity": 71.6,
+        "co2": 1386.0,
+        "light": 0.0
+      },
+      {
+        "sample_time": "2026-10-28 04:00:00",
+        "source_type": "SIMULATED",
+        "temperature": 18.5,
+        "humidity": 70.2,
+        "co2": 1374.0,
+        "light": 156.0
+      },
+      {
+        "sample_time": "2026-10-28 04:30:00",
+        "source_type": "SIMULATED",
+        "temperature": 18.6,
+        "humidity": 70.8,
+        "co2": 1350.0,
+        "light": 81.0
+      },
+      {
+        "sample_time": "2026-10-28 05:00:00",
+        "source_type": "SIMULATED",
+        "temperature": 19.2,
+        "humidity": 69.8,
+        "co2": 1331.0,
+        "light": 0.0
+      },
+      {
+        "sample_time": "2026-10-28 05:30:00",
+        "source_type": "SIMULATED",
+        "temperature": 19.3,
+        "humidity": 67.6,
+        "co2": 1296.0,
+        "light": 0.0
+      },
+      {
+        "sample_time": "2026-10-28 06:00:00",
+        "source_type": "SIMULATED",
+        "temperature": 19.9,
+        "humidity": 66.8,
+        "co2": 1269.0,
+        "light": 0.0
+      },
+      {
+        "sample_time": "2026-10-28 06:30:00",
+        "source_type": "SIMULATED",
+        "temperature": 20.5,
+        "humidity": 66.6,
+        "co2": 1233.0,
+        "light": 3048.0
+      },
+      {
+        "sample_time": "2026-10-28 07:00:00",
+        "source_type": "SIMULATED",
+        "temperature": 21.9,
+        "humidity": 64.8,
+        "co2": 1215.0,
+        "light": 7878.0
+      },
+      {
+        "sample_time": "2026-10-28 07:30:00",
+        "source_type": "SIMULATED",
+        "temperature": 22.3,
+        "humidity": 64.1,
+        "co2": 1195.0,
+        "light": 14174.0
+      },
+      {
+        "sample_time": "2026-10-28 08:00:00",
+        "source_type": "SIMULATED",
+        "temperature": 23.2,
+        "humidity": 62.5,
+        "co2": 1145.0,
+        "light": 21199.0
+      },
+      {
+        "sample_time": "2026-10-28 08:30:00",
+        "source_type": "SIMULATED",
+        "temperature": 23.4,
+        "humidity": 59.4,
+        "co2": 1105.0,
+        "light": 28738.0
+      },
+      {
+        "sample_time": "2026-10-28 09:00:00",
+        "source_type": "SIMULATED",
+        "temperature": 24.3,
+        "humidity": 60.2,
+        "co2": 1085.0,
+        "light": 35480.0
+      }
+    ],
+    "grid_step_minutes": 30
+  },
+  "rule": null,
+  "ml": null,
+  "final": null
+}

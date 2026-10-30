@@ -1,0 +1,30 @@
+{
+  "scenario_id": "S2",
+  "name": "实验·conflict(历史升温 vs 天气降温)",
+  "description": "创新点3 冲突组:近 3 小时历史持续升温 24.7→27.8℃(已发生事实),实验注入天气证据(SIMULATED,provider=experiment_injection)预报未来 2 小时降温至 18℃(未来外部条件),B06 预测 WATCH——LLM 必须保留分歧、禁用绝对化结论词。",
+  "anchor_sample_time": "2026-10-27 12:30:00",
+  "history_hours": 3,
+  "trend_hours": 3,
+  "location": "北京",
+  "knowledge_query": "大棚空气湿度多少合适",
+  "degrade": {"weather": null, "knowledge": null},
+  "llm_explain": true,
+  "experiment_type": "conflict",
+  "sources": {"history": true, "weather": "injected_cooling", "knowledge": true, "prediction": true},
+  "injected_weather": {
+    "provider": "experiment_injection",
+    "forecast_hours": 2,
+    "temperature": 18.0,
+    "humidity": 88.0,
+    "precipitation_probability": 80.0,
+    "cloud_cover": 90.0,
+    "shortwave_radiation": 250.0,
+    "note": "SIMULATED 实验注入:绝不冒充 PUBLIC;forecast_time=锚点+2h(14:30,>analysis 12:30 满足 B03 同款强制校验)"
+  },
+  "expected": {
+    "conclusion": "需要关注",
+    "attention_level": "attention",
+    "trust": "中",
+    "note": "规则 vs 模型分歧(S2 基线)+ 历史升温 vs 天气降温来源分歧;degraded_reasons 须含「分歧」;LLM 禁强确定词"
+  }
+}

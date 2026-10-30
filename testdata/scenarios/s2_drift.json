@@ -1,0 +1,18 @@
+{
+  "scenario_id": "S2",
+  "name": "渐进漂移",
+  "description": "锚点时刻参数仍处于适宜带,但过去 2.5 小时持续漂移(温度上升、湿度下降、光照上升),B06 模型已提前预警——规则与模型分歧,系统应输出 需要关注/attention/中。",
+  "anchor_sample_time": "2026-10-27 12:30:00",
+  "history_hours": 24,
+  "trend_hours": 2.5,
+  "location": "北京",
+  "knowledge_query": "大棚空气湿度多少合适",
+  "degrade": {"weather": null, "knowledge": null},
+  "llm_explain": true,
+  "expected": {
+    "conclusion": "需要关注",
+    "attention_level": "attention",
+    "trust": "中",
+    "note": "规则无违规,但趋势四参数超幅值阈值 + 模型 WATCH(规则与模型健康分歧,保守升级)"
+  }
+}

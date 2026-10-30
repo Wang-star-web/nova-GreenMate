@@ -1,0 +1,40 @@
+{
+  "run_id": "run_20261030_011753_9aa50d",
+  "config": {
+    "scenario_id": "S5",
+    "name": "证据退化",
+    "description": "锚点样本健康,但外部天气证据强制超时失败、知识库查询未覆盖问题——证据退化场景,系统应输出 正常/normal/低 并逐条标注【证据缺失】。",
+    "anchor_sample_time": "2026-10-28 12:00:00",
+    "history_hours": 24,
+    "trend_hours": 24,
+    "location": "北京",
+    "knowledge_query": "量子计算是什么",
+    "degrade": {
+      "weather": "timeout",
+      "knowledge": "uncovered"
+    },
+    "llm_explain": true,
+    "expected": {
+      "conclusion": "正常",
+      "attention_level": "normal",
+      "trust": "低",
+      "note": "规则/模型一致正常,但天气与知识两路证据缺失,结论降级为仅棚内证据并如实标注"
+    }
+  },
+  "actuals": {
+    "conclusion": "正常",
+    "attention_level": "normal",
+    "trust_level": "低",
+    "matched_rules": [],
+    "degraded_reasons": [
+      "PUBLIC b03_weather 证据缺失: network_timeout: 读取超时(服务器 0.0001 秒内未返回结果)",
+      "SIMULATED b04_knowledge 证据不足: 【资料不足/无法确认】检索最高得分 0.0743 低于阈值 0.1700,知识库未覆盖该问题,依据边界约束不作回答。"
+    ]
+  },
+  "expected": {
+    "conclusion": "正常",
+    "attention_level": "normal",
+    "trust": "低",
+    "note": "规则/模型一致正常,但天气与知识两路证据缺失,结论降级为仅棚内证据并如实标注"
+  }
+}

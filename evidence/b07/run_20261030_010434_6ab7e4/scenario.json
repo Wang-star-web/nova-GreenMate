@@ -1,0 +1,40 @@
+{
+  "run_id": "run_20261030_010434_6ab7e4",
+  "config": {
+    "scenario_id": "S4",
+    "name": "多源证据分歧",
+    "description": "锚点时刻参数全部适宜、规则无报警,但 B06 模型基于黎明弱光模式预警 WATCH——多源证据分歧场景,系统应输出 需要关注/attention/中。",
+    "anchor_sample_time": "2026-10-28 09:00:00",
+    "history_hours": 24,
+    "trend_hours": 24,
+    "location": "北京",
+    "knowledge_query": "光照不足怎么办",
+    "degrade": {
+      "weather": null,
+      "knowledge": null
+    },
+    "llm_explain": true,
+    "expected": {
+      "conclusion": "需要关注",
+      "attention_level": "attention",
+      "trust": "中",
+      "note": "规则 NORMAL vs 模型 WATCH(P=0.84)健康来源分歧,保守升级、信任降中(24h 趋势窗口含 10-27 扰动尾迹,温度斜率可能同步触发趋势条款②——结论仍由规则/模型分歧驱动)"
+    }
+  },
+  "actuals": {
+    "conclusion": "需要关注",
+    "attention_level": "attention",
+    "trust_level": "中",
+    "matched_rules": [],
+    "degraded_reasons": [
+      "健康来源分歧: 规则判定无违规 vs MODEL_OUTPUT WATCH(P=0.84),按保守原则升级为需要关注,trust 降至中",
+      "规则未报警,但模型预警/趋势信号提示风险(结论=需要关注)"
+    ]
+  },
+  "expected": {
+    "conclusion": "需要关注",
+    "attention_level": "attention",
+    "trust": "中",
+    "note": "规则 NORMAL vs 模型 WATCH(P=0.84)健康来源分歧,保守升级、信任降中(24h 趋势窗口含 10-27 扰动尾迹,温度斜率可能同步触发趋势条款②——结论仍由规则/模型分歧驱动)"
+  }
+}
