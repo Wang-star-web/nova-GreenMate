@@ -38,7 +38,7 @@ git clone https://github.com/Wang-star-web/nova-GreenMate.git
 cd nova-GreenMate
 py -m pip install pandas scikit-learn joblib requests   # 依赖仅 4 个第三方包
 copy .env.example .env        # 可选:填入 DEEPSEEK_API_KEY 启用 LLM 功能
-py b02_memory.py generate     # 生成 7 天模拟时序数据(约 1 分钟)
+py b02_memory.py generate     # 生成 7 天模拟时序数据(本机实测 0.88 秒)
 py b07_main.py run S1         # 跑通完整链路:8 次工具调用 → 证据 → 判断 → 报告
 py b09_portal.py serve        # 一键起三服务:门户 8300 + B01 8123 + B02 8223
 ```
@@ -99,20 +99,24 @@ copy .env.example .env      # Windows;Linux/macOS 用 cp .env.example .env
 | 机器 | Windows 11 Home 10.0.26100;Python 3.12.10 |
 | 是否首次 | 本机已安装过本项目依赖(如实说明);10 分钟实测记录见参赛包 `03_复现指南/10分钟实测记录.md` |
 | 测试日期 | 2026-10-31 |
-| 总耗时 | 路线 B 全部步骤 < 3 分钟(计时明细见参赛包实测记录;数据库生成约 1 分钟,其余命令秒级) |
+| 总耗时 | 核心步骤合计 18.4 秒(逐步骤计时见参赛包实测记录;首次 pip 安装视网络而定,本机已安装未计入) |
 
 > 完整步骤计时表(含卡点与失败修复)见参赛包 `03_复现指南/10分钟实测记录.md`,本节与之一致。
 
 ## 7. 验收清单(跑起来该看到什么)
 
-- [ ] 数据生成 → `py b02_memory.py generate`,期望:终端输出 336 点生成摘要;`py b02_memory.py check` 输出 `通过 10 / 10`
-- [ ] 完整链路 → `py b07_main.py run S1`,期望:输出 `结论=正常 关注级=normal 信任=高 降级=0`,生成 `report/run_*_report.html`
-- [ ] 四视图报告 → 打开 `report/run_*_report.html`,期望:状态总览/状态演化/证据空间/场景回放对比四视图,证据表含 类型/来源标记/自报时间/支持-限制 关系
-- [ ] 数字孪生 → `py b09_portal.py serve` 后打开 http://127.0.0.1:8300/,期望:3D 大棚孪生(太阳/雾/风机动画);打开 http://127.0.0.1:8123/ 切换「状态 B」,期望:孪生出现红太阳/浓雾/暗光/关注脉冲环
-- [ ] 异常/降级场景 → 无 Key 且断网执行 `py b07_main.py run S1`,期望:LLM `omitted(no_api_key)`、天气 `network_timeout`【证据缺失】、信任降「低」,流程不崩溃
-- [ ] 可复现实验 → `py b07_main.py exp-all`,期望:6 组实验按 `run_<type>_001` 命名落盘;`py b07_main.py check-all` 输出 6 行 0 FAIL
-- [ ] 契约校验 → `py b08_verify.py --json-path evidence/b07/<run_id>/run_result.json`,期望:`2 OK / 3 本轮预期缺失`,两次运行 sha256 一致
-- [ ] 数据留下记录 → `py b01_cli.py web` 提交采集后,期望:`evidence/raw/run_*.json` 生成且页面历史列表出现该条
+| 验收项 | 操作 | 期望 | 截图文件 |
+|---|---|---|---|
+| 数据生成 | `py b02_memory.py generate` + `check` | 终端输出 336 点生成摘要;`通过 10 / 10` | `docs/screenshots/01-generate-check.png` |
+| 完整链路 | `py b07_main.py run S1` | 输出 `结论=正常 关注级=normal 信任=高 降级=0`,生成 `report/run_*_report.html` | `docs/screenshots/02-run-s1.png` |
+| 四视图报告 | 打开 `report/run_*_report.html` | 四视图齐全;证据表含 类型/来源标记/自报时间/支持-限制 | `docs/screenshots/03-report-views.png` |
+| 数字孪生 | `py b09_portal.py serve` 后打开 8300 门户与 8123 状态 B | 3D 孪生动画;切换 B 后红太阳/浓雾/暗光/关注脉冲环 | `docs/screenshots/04-twin.png` |
+| 异常/降级 | 无 Key 且断网执行 `py b07_main.py run S1` | LLM `omitted(no_api_key)`、天气 `network_timeout`【证据缺失】、信任降「低」,不崩溃 | `docs/screenshots/05-degrade.png` |
+| 可复现实验 | `py b07_main.py exp-all` + `check-all` | 6 组 `run_<type>_001` 落盘;check-all 输出 6 行 0 FAIL | `docs/screenshots/06-exp-all.png` |
+| 契约校验 | `py b08_verify.py --json-path …` | `2 OK / 3 本轮预期缺失`,两次运行 sha256 一致 | `docs/screenshots/07-b08-verify.png` |
+| 数据留痕 | `py b01_cli.py web` 提交采集 | `evidence/raw/run_*.json` 生成且页面历史出现该条 | `docs/screenshots/08-collect.png` |
+
+> 截图目录 `docs/screenshots/` 由本人在交稿前按上表逐项拍摄并提交(文件名固定)。
 
 ## 8. 排错 FAQ
 
