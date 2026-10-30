@@ -36,7 +36,7 @@
 ```bash
 git clone https://github.com/Wang-star-web/nova-GreenMate.git
 cd nova-GreenMate
-py -m pip install pandas scikit-learn joblib requests   # 依赖仅 4 个第三方包
+py -m pip install -r requirements.txt   # 依赖仅 4 个第三方包,版本已锁定(实测)
 copy .env.example .env        # 可选:填入 DEEPSEEK_API_KEY 启用 LLM 功能
 py b02_memory.py generate     # 生成 7 天模拟时序数据(本机实测 0.88 秒)
 py b07_main.py run S1         # 跑通完整链路:8 次工具调用 → 证据 → 判断 → 报告
@@ -50,7 +50,7 @@ py b09_portal.py serve        # 一键起三服务:门户 8300 + B01 8123 + B02 
 ```bash
 git clone https://github.com/Wang-star-web/nova-GreenMate.git
 cd nova-GreenMate
-py -m pip install pandas scikit-learn joblib requests
+py -m pip install -r requirements.txt
 py b02_memory.py generate
 py b02_memory.py check                          # 质量检查 10/10
 py b07_main.py run S1                           # 天气断网时如实降级
@@ -72,7 +72,7 @@ py b09_portal.py serve --portal-only            # 只起门户(或直接双击 w
 | requests | 2.x | `py -c "import requests; print(requests.__version__)"` | 2.34.2 |
 | 浏览器 | Chrome/Edge 较新版本(CSS `:has()` 与 3D 变换) | — | Chrome 系 |
 
-依赖清单:安装命令见上(`requirements.txt` 仅记录 requests,其余三包按上表版本实测;无 package-lock 类文件,Python 项目不适用)。
+依赖清单:见 `requirements.txt`(requests/pandas/scikit-learn/joblib 四包,版本按本机实测锁定;安装命令 `py -m pip install -r requirements.txt`;无 package-lock 类文件,Python 项目不适用)。
 
 ## 5. 环境变量
 
