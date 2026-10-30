@@ -1,5 +1,16 @@
+# ---- 密钥与敏感文件(传智杯规范红线:绝不允许进入仓库) ----
+.env
+.env.local
+*.key
+*.pem
+
+# ---- Python ----
 __pycache__/
 *.pyc
-logs/
 .venv/
-*.env
+
+# ---- 运行时产物 ----
+logs/
+
+# ---- 数据库/模型/大文件(由生成命令重建:py b02_memory.py generate) ----
+*.db
