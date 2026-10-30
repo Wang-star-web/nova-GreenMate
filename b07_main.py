@@ -30,7 +30,7 @@
   py b07_main.py selftest                 # 校验函数负向自测(零 LLM、零网络)
   py b07_main.py --help                   # 查看用法说明
 
-  每个 run 落盘 evidence/b07/<run_id>/run_result.json(B08 契约校验输入)。
+  每个 run 落盘 证据/b07/<run_id>/run_result.json(B08 契约校验输入)。
   实验 run 使用可读 run_id:run_{type}_{seq:03d}(如 run_agree_001)。
   全部视图与对比只读取已保存 run_id 的存档数据,禁止重新调用 API/LLM。
 
@@ -61,10 +61,10 @@ from b06_ml import BANDS, DAYLIGHT_RANGE
 
 # ---------------- 配置 ----------------
 BASE_DIR = Path(__file__).resolve().parent
-SCENARIOS_DIR = BASE_DIR / "testdata" / "scenarios"
-EXPERIMENTS_DIR = BASE_DIR / "testdata" / "experiments"
-EVIDENCE_B07_DIR = BASE_DIR / "evidence" / "b07"
-LOG_DIR = BASE_DIR / "logs"
+SCENARIOS_DIR = BASE_DIR / "测试配置" / "scenarios"
+EXPERIMENTS_DIR = BASE_DIR / "测试配置" / "experiments"
+EVIDENCE_B07_DIR = BASE_DIR / "证据" / "b07"
+LOG_DIR = BASE_DIR / "日志"
 B07_LOG = LOG_DIR / "b07_main.log"
 RULES_FILE = BASE_DIR / "b03_rules.json"
 
@@ -136,7 +136,7 @@ def _now_iso():
 
 
 def _log_b07(text):
-    """一行日志到 logs/b07_main.log 并镜像控制台;绝不写入其他模块的日志文件。"""
+    """一行日志到 日志/b07_main.log 并镜像控制台;绝不写入其他模块的日志文件。"""
     setup_console()
     line = "[%s] %s" % (datetime.now().strftime("%Y-%m-%d %H:%M:%S"), text)
     try:
@@ -161,7 +161,7 @@ def _save_json(path, obj):
 
 # ---------------- 场景载入 ----------------
 def load_scenario(sid):
-    """载入 testdata/scenarios/<sid>.json 或 testdata/experiments/exp_<sid>.json
+    """载入 测试配置/scenarios/<sid>.json 或 测试配置/experiments/exp_<sid>.json
     (scenarios 目录优先);支持 'S1'/'exp_agree' 或文件名 stem。
     失败返回 {"error": ...}(诚实降级,不崩溃)。"""
     search_dirs = [d for d in (SCENARIOS_DIR, EXPERIMENTS_DIR) if d.exists()]
@@ -211,7 +211,7 @@ def load_rules():
 def b07_tool_call(seq, tool, marker, fn, arguments):
     """B07 自己的工具调度:真实执行 Python 函数,永不抛异常,每次调用必写日志。
     错误分类与 B05 同源:bad_arguments / value_error / tool_exception。
-    (不用 b05.dispatch_tool:它会写 logs/b05_agent.log——那是 B05 自己的
+    (不用 b05.dispatch_tool:它会写 日志/b05_agent.log——那是 B05 自己的
     执行证据,failtest 按行增量计数——且无 marker 字段、不覆盖 B06。)"""
     rec = {"seq": seq, "step": "tool_results", "tool": tool, "marker": marker,
            "arguments": arguments, "result": None, "status": "error", "error": None,
@@ -270,7 +270,7 @@ def inject_cooling_weather(cfg, anchor_text):
     """实验注入降温天气证据(案例A 第二遍 run_conflict 专用)。
     构造与 b03 成功证据同形状的 dict,自报身份 provider=experiment_injection、
     source_marker=SIMULATED、query.method=INJECTION——绝不冒充 PUBLIC 真实天气,
-    绝不写入 evidence/b03/(B03"绝不伪造成功"原则零触碰)。
+    绝不写入 证据/b03/(B03"绝不伪造成功"原则零触碰)。
     forecast_time=锚点+forecast_hours,强制 > analysis_time(沿用 b03 同款校验)。"""
     inj = cfg.get("injected_weather") or {}
     anchor_dt = datetime.strptime(anchor_text, "%Y-%m-%d %H:%M:%S")
@@ -286,7 +286,7 @@ def inject_cooling_weather(cfg, anchor_text):
         "provider": inj.get("provider", "experiment_injection"),
         "retrieved_at": _now_iso(),
         "query": {"method": "INJECTION",
-                  "url": "testdata/experiments/%s.json" % (cfg.get("experiment_type") or "exp"),
+                  "url": "测试配置/experiments/%s.json" % (cfg.get("experiment_type") or "exp"),
                   "params": {"simulated": True, "forecast_hours": inj.get("forecast_hours", 2)}},
         "status": "success",
         "error": None,
@@ -305,7 +305,7 @@ def inject_cooling_weather(cfg, anchor_text):
 
 
 def _next_exp_seq(etype):
-    """实验 run 序号:扫描 evidence/b07/ 同类型目录最大值 +1;目录已存在则继续 +1(防覆盖)。"""
+    """实验 run 序号:扫描 证据/b07/ 同类型目录最大值 +1;目录已存在则继续 +1(防覆盖)。"""
     seq = 0
     if EVIDENCE_B07_DIR.exists():
         for sub in EVIDENCE_B07_DIR.iterdir():
@@ -381,14 +381,14 @@ def build_evidence_records(tool_results, cfg, run_id, anchor_text):
     if tr:
         args = tr.get("arguments") or {}
         record = args.get("record") or {}
-        detail = {"path": "evidence/raw/%s.json" % run_id, "saved": ok,
+        detail = {"path": "证据/raw/%s.json" % run_id, "saved": ok,
                   "collect_time": record.get("collect_time"),
                   "source_type": record.get("source_type"),
                   "valid_ranges": record.get("valid_ranges")}
         records.append(_ev_rec(seq, "EV%02d" % seq, "b01_cli", "SIMULATED", "b01_raw",
-                               ("B01 原始采集记录已存档 evidence/raw/%s.json(collect_time=%s,source_type=SIMULATED)"
+                               ("B01 原始采集记录已存档 证据/raw/%s.json(collect_time=%s,source_type=SIMULATED)"
                                 % (run_id, record.get("collect_time", "—"))) if ok
-                               else "B01 原始记录保存失败(evidence/raw/%s.json)" % run_id,
+                               else "B01 原始记录保存失败(证据/raw/%s.json)" % run_id,
                                "ok" if ok else "error", detail, evidence_type="raw",
                                evidence_time=record.get("collect_time") or anchor_text))
     else:
@@ -1229,7 +1229,7 @@ def run_scenario(sid, run_id=None):
         run_id = b01_cli.gen_run_id()
     run_dir = EVIDENCE_B07_DIR / run_id
     if run_dir.exists():
-        _log_b07("[场景] ⚠ evidence/b07/%s 已存在,覆盖重跑" % run_id)
+        _log_b07("[场景] ⚠ 证据/b07/%s 已存在,覆盖重跑" % run_id)
 
     anchor_text = cfg["anchor_sample_time"]
     anchor_dt = datetime.strptime(anchor_text, "%Y-%m-%d %H:%M:%S")
@@ -1355,7 +1355,7 @@ def run_scenario(sid, run_id=None):
         ",".join("%s:%s" % (i["check"], i["result"]) for i in llm_validation["items"])))
 
     # ---- ⑦ 产物落盘 + HTML 报告 ----
-    raw_saved = {"path": "evidence/raw/%s.json" % run_id,
+    raw_saved = {"path": "证据/raw/%s.json" % run_id,
                  "ok": bool(anchor_rows and by_tool.get("b01_raw", {}).get("result") is True),
                  "collect_time": anchor_dt.astimezone().isoformat(timespec="seconds"),
                  "source_type": "SIMULATED"}
@@ -1406,7 +1406,7 @@ def run_scenario(sid, run_id=None):
         "generated_at": _now_iso(),
         "data_source_config": {"experiment_type": cfg.get("experiment_type"), "sources": sources},
         "raw": {"status": "ok" if raw_ok else "missing",
-                "path": "evidence/raw/%s.json" % run_id,
+                "path": "证据/raw/%s.json" % run_id,
                 "record": raw_record_loaded},
         "parsed": {"status": "ok" if anchor_rows else "missing",
                    "source": "b02_memory environment_samples",
@@ -1417,7 +1417,7 @@ def run_scenario(sid, run_id=None):
         "rule": None, "ml": None, "final": None,
     }
     _save_json(run_dir / "run_result.json", run_result)
-    # 注入天气证据单独落盘副本(不写 evidence/b03/,B03 实证目录零污染)
+    # 注入天气证据单独落盘副本(不写 证据/b03/,B03 实证目录零污染)
     if sources["weather"] == "injected_cooling":
         injected_ev = by_tool.get("b03_weather", {}).get("result")
         if isinstance(injected_ev, dict):
@@ -1425,8 +1425,8 @@ def run_scenario(sid, run_id=None):
 
     b07_report.render_report(run_dir, run_id)
 
-    report_path = "report/%s_report.html" % run_id
-    _log_b07("[完成] run_id=%s scenario=%s report=%s run_result=evidence/b07/%s/run_result.json"
+    report_path = "报告/%s_report.html" % run_id
+    _log_b07("[完成] run_id=%s scenario=%s report=%s run_result=证据/b07/%s/run_result.json"
              % (run_id, cfg["scenario_id"], report_path, run_id))
     return {"run_id": run_id, "scenario_id": cfg["scenario_id"], "name": cfg["name"],
             "conclusion": judgment["conclusion"], "attention_level": judgment["attention_level"],
@@ -1515,7 +1515,7 @@ def cmd_list():
     if not rows:
         print("暂无历史运行记录,请先执行 py b07_main.py run S1")
         return
-    print("\n================ 历史运行列表(evidence/b07,按时间倒序) ================")
+    print("\n================ 历史运行列表(证据/b07,按时间倒序) ================")
     print("%-14s %-6s %-12s %-8s %-8s %-4s %-12s %s" % (
         "run_id", "场景", "名称", "结论", "关注级", "信任", "实验类型", "判断时间"))
     for r in rows:
@@ -1660,7 +1660,7 @@ def _check_one(run_id):
     # [3/4] 视图一致性(同一 run_id,四次视图读同一存档,不产生新 LLM 回答)
     try:
         import hashlib as _hl
-        report_path = BASE_DIR / "report" / ("%s_report.html" % run_id)
+        report_path = BASE_DIR / "报告" / ("%s_report.html" % run_id)
         b07_report.render_report(run_dir, run_id)
         h1 = _hl.sha256(report_path.read_bytes()).hexdigest()
         b07_report.render_report(run_dir, run_id)
@@ -1823,11 +1823,11 @@ def print_usage():
     print("""GreenMate B07 系统组装模块 — 用法
   py b07_main.py run S1 [--run-id run_x]   # 单场景;默认自动生成新 run_id
   py b07_main.py run-all                   # 依次跑通 S1~S5,最后输出对比表
-  py b07_main.py report <run_id>           # 从 evidence/b07/<run_id>/ 重新生成 HTML 报告
+  py b07_main.py report <run_id>           # 从 证据/b07/<run_id>/ 重新生成 HTML 报告
   py b07_main.py list                      # 列出全部历史运行与结论
   py b07_main.py --help                    # 本说明
 
-案例A 第二遍·可复现实验框架(配置位于 testdata/experiments/):
+案例A 第二遍·可复现实验框架(配置位于 测试配置/experiments/):
   py b07_main.py exp <type>                # 一键生成实验 run(run_<type>_<seq> 可读命名)
                                            # type: agree | conflict | missing_weather
                                            #       current_only | with_history | with_history_prediction
@@ -1837,15 +1837,15 @@ def print_usage():
   py b07_main.py check-all                 # 校验全部实验 run + 汇总表
   py b07_main.py selftest                  # 校验函数负向自测(11 项,零 LLM 零网络)
 
-五大场景(配置位于 testdata/scenarios/):
+五大场景(配置位于 测试配置/scenarios/):
   S1 稳态基线   S2 渐进漂移   S3 外部扰动   S4 多源证据分歧   S5 证据退化
 说明:
   · 四个视图与全部对比只读取已保存 run_id 的存档数据,禁止重新调用 API/LLM。
   · run-all/exp-all 含真实天气 HTTP 调用(约 1~3 秒/次);断网时如实降级,不伪造成功。
   · LLM 解释为可选:B07_LLM_BASE_URL / B07_LLM_MODEL / B07_LLM_TIMEOUT;
     API Key 读 DEEPSEEK_API_KEY → ANTHROPIC_AUTH_TOKEN;无 Key 时标记 omitted。
-  · 全程日志: logs/b07_main.log;产物: evidence/b07/<run_id>/(含 run_result.json,
-    B08 契约校验输入)+ report/<run_id>_report.html""")
+  · 全程日志: 日志/b07_main.log;产物: 证据/b07/<run_id>/(含 run_result.json,
+    B08 契约校验输入)+ 报告/<run_id>_report.html""")
 
 
 def main():

@@ -46,13 +46,13 @@ from sklearn.metrics import (accuracy_score, classification_report, confusion_ma
 
 # ---------------- 配置 ----------------
 BASE_DIR = Path(__file__).resolve().parent
-DB_PATH = BASE_DIR / "data" / "environment.db"     # B02 数据(只读输入,绝不写入)
-MODEL_DIR = BASE_DIR / "models" / "b06"
+DB_PATH = BASE_DIR / "数据" / "environment.db"     # B02 数据(只读输入,绝不写入)
+MODEL_DIR = BASE_DIR / "模型" / "b06"
 MODEL_PATH = MODEL_DIR / "model.joblib"
 FEATURE_LIST_PATH = MODEL_DIR / "feature_list.json"
 CONFIG_PATH = MODEL_DIR / "config.json"
-EVIDENCE_DIR = BASE_DIR / "evidence" / "b06"
-LOG_DIR = BASE_DIR / "logs"
+EVIDENCE_DIR = BASE_DIR / "证据" / "b06"
+LOG_DIR = BASE_DIR / "日志"
 ML_LOG = LOG_DIR / "b06_ml.log"
 
 PARAMS = ("temperature", "humidity", "co2", "light")
@@ -101,7 +101,7 @@ def _now_iso():
 
 
 def _log_ml(text):
-    """一行日志到 logs/b06_ml.log 并镜像控制台;库级路径自带 UTF-8 兜底。"""
+    """一行日志到 日志/b06_ml.log 并镜像控制台;库级路径自带 UTF-8 兜底。"""
     setup_console()
     line = "[%s] %s" % (datetime.now().strftime("%Y-%m-%d %H:%M:%S"), text)
     try:
@@ -393,7 +393,7 @@ def predict_next_attention(sample_time=None):
     df = load_db_df()
     if df is None:
         ev["error"] = {"code": "db_unavailable",
-                       "message": "B02 数据库不可用(缺失或不可读): data/environment.db"}
+                       "message": "B02 数据库不可用(缺失或不可读): 数据/environment.db"}
         return ev
     if sample_time is None:
         target = df["t"].max()
@@ -556,8 +556,8 @@ def cmd_train():
     _log_ml("[训练] version=%s acc=%.4f macro_f1=%.4f watch_recall=%.4f 判定=%s" % (
         version, model_metrics["accuracy"], model_metrics["macro_f1"],
         model_metrics["watch_recall"], "通过" if verdict_pass else "未通过"))
-    print("✓ 模型已保存: models/b06/model.joblib + feature_list.json + config.json")
-    print("✓ 训练报告已保存: evidence/b06/train_report.json 与 error_analysis.json")
+    print("✓ 模型已保存: 模型/b06/model.joblib + feature_list.json + config.json")
+    print("✓ 训练报告已保存: 证据/b06/train_report.json 与 error_analysis.json")
 
 
 def cmd_eval():
@@ -621,7 +621,7 @@ def cmd_predict(args):
         print("  ⚠ status=error code=%s | %s" % (err.get("code"), err.get("message")))
     filename = "prediction_%s.json" % datetime.now().strftime("%Y%m%d_%H%M%S")
     _save_json(EVIDENCE_DIR / filename, ev)
-    print("✓ 证据已保存: evidence/b06/%s" % filename)
+    print("✓ 证据已保存: 证据/b06/%s" % filename)
     _log_ml("[推理] sample_time=%s prediction=%s status=%s" % (
         sample_time or "(最新)", ev["prediction"], ev["status"]))
 
@@ -658,7 +658,7 @@ def print_usage():
     print("依赖: pandas / scikit-learn / joblib(如未安装: py -m pip install pandas scikit-learn)")
     print("公开接口(供 B07 复用): predict_next_attention(sample_time=None) -> 证据 dict")
     print("  含 prediction / probability / model_version / MODEL_OUTPUT=%s 标记 / label_source" % MODEL_OUTPUT)
-    print("数据: 只读复用 B02 data/environment.db(mode=ro,不改动原始数据)")
+    print("数据: 只读复用 B02 数据/environment.db(mode=ro,不改动原始数据)")
     print("标签: %s" % LABEL_SOURCE)
 
 

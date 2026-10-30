@@ -6,18 +6,18 @@
 =====================================================================
 
 【任务目标】
-  把项目内全部网页入口整合到一个首页(web/index.html):
+  把项目内全部网页入口整合到一个首页(门户页面/index.html):
   · B01 智能采集 Web(8123:采集表单 / LLM 问答 / A-B 验证 / 历史记录)
   · B02 数据记忆可视化 Web(8223:SQL 查询 + Chart.js 时序曲线)
   · B07 全部 HTML 报告(S1~S5 场景报告 + 6 组实验报告,file:// 直开)
   · B03/B04/B05/B06/B08 无网页模块:功能说明 + 终端命令卡片
   首页静态自包含(仅本地相对路径,零运行时网络依赖);报告列表由本脚本
-  扫描 evidence/b07/ 存档生成,新 run 后重新执行即可刷新。
+  扫描 证据/b07/ 存档生成,新 run 后重新执行即可刷新。
 
 【运行方式】
-  py b09_portal.py              # (重新)生成整合首页 web/index.html
+  py b09_portal.py              # (重新)生成整合首页 门户页面/index.html
   py b09_portal.py serve        # 一键同起三服务:门户 8300 + B01 8123 + B02 8223
-                                # (B01/B02 已在运行则跳过;portal 同时可访问 report/ 与 b02_assets/)
+                                # (B01/B02 已在运行则跳过;portal 同时可访问 报告/ 与 前端资源/)
   py b09_portal.py serve --portal-only   # 只起门户,不带 B01/B02
   py b09_portal.py serve --port 8300     # 自定义门户端口
   py b09_portal.py --help       # 查看用法说明
@@ -40,10 +40,10 @@ from pathlib import Path
 
 # ---------------- 配置 ----------------
 BASE_DIR = Path(__file__).resolve().parent
-WEB_DIR = BASE_DIR / "web"
-REPORT_DIR = BASE_DIR / "report"
-EVIDENCE_B07_DIR = BASE_DIR / "evidence" / "b07"
-ASSETS_DIR = BASE_DIR / "b02_assets"
+WEB_DIR = BASE_DIR / "门户页面"
+REPORT_DIR = BASE_DIR / "报告"
+EVIDENCE_B07_DIR = BASE_DIR / "证据" / "b07"
+ASSETS_DIR = BASE_DIR / "前端资源"
 PORTAL_FILE = WEB_DIR / "index.html"
 
 B01_URL = "http://127.0.0.1:8123"
@@ -75,7 +75,7 @@ def _esc(text):
 
 # ---------------- 报告扫描(只读存档)----------------
 def scan_reports():
-    """扫描 evidence/b07/*,返回:
+    """扫描 证据/b07/*,返回:
     scenarios: {scenario_id: [runs desc]}(仅无实验类型的场景 run)
     experiments: {experiment_type: [runs desc]}
     recent: 全部 run 按 run_id 倒序前 10。"""
@@ -107,7 +107,7 @@ def scan_reports():
 
 
 def _report_link(run_id, label):
-    return ('<a class="rep-link" href="../report/%s_report.html" target="_blank">%s</a>'
+    return ('<a class="rep-link" href="../报告/%s_report.html" target="_blank">%s</a>'
             % (_esc(run_id), _esc(label)))
 
 
@@ -358,7 +358,7 @@ a { color: var(--accent); }
   <div class="hero">
     <div>
       <h1>🌱 GreenMate 番茄大棚<br>环境监测系统 · 整合门户</h1>
-      <p class="sub">B01~S5 全部网页与功能统一入口 · 数字孪生 · 报告列表扫描 evidence/b07/ 存档(只读,生成于 {{GENERATED_AT}})</p>
+      <p class="sub">B01~S5 全部网页与功能统一入口 · 数字孪生 · 报告列表扫描 证据/b07/ 存档(只读,生成于 {{GENERATED_AT}})</p>
       <span class="cmd">py b09_portal.py serve</span>
       <span class="cmd">py b01_cli.py web</span>
       <span class="cmd">py b02_memory.py web</span>
@@ -508,7 +508,7 @@ a { color: var(--accent); }
       <div class="cli-card">
         <h4>✅ B08 契约校验</h4>
         <div class="note">run_result.json 五项校验 + sha256</div>
-        <span class="cmd">py b08_verify.py --json-path evidence/b07/&lt;run_id&gt;/run_result.json</span>
+        <span class="cmd">py b08_verify.py --json-path 证据/b07/&lt;run_id&gt;/run_result.json</span>
       </div>
     </div>
   </div>
@@ -527,7 +527,7 @@ a { color: var(--accent); }
         <span class="chain-badge">B08 契约校验</span><span class="chain-arrow">→</span>
         <span class="chain-badge hl">B09 整合门户</span>
       </div>
-      <div class="note" style="margin-top:10px;">常用命令:<span class="cmd">py b07_main.py run S1..S5</span><span class="cmd">py b07_main.py exp-all</span><span class="cmd">py b07_main.py trace run_conflict_001 "需要关注"</span><span class="cmd">py b07_main.py check-all</span><span class="cmd">py b07_main.py list</span>完整说明见 docs/ 与 README.md。</div>
+      <div class="note" style="margin-top:10px;">常用命令:<span class="cmd">py b07_main.py run S1..S5</span><span class="cmd">py b07_main.py exp-all</span><span class="cmd">py b07_main.py trace run_conflict_001 "需要关注"</span><span class="cmd">py b07_main.py check-all</span><span class="cmd">py b07_main.py list</span>完整说明见 文档/ 与 README.md。</div>
     </div>
   </div>
 
@@ -539,7 +539,7 @@ a { color: var(--accent); }
 
 
 def build_portal():
-    """生成 web/index.html(首页 + 全部功能入口)。返回是否成功。"""
+    """生成 门户页面/index.html(首页 + 全部功能入口)。返回是否成功。"""
     report_sections = _report_sections()
     generated_at = datetime.now().astimezone().isoformat(timespec="seconds")
     page = _PORTAL_TEMPLATE.replace("{{REPORT_SECTIONS}}", report_sections)
@@ -563,7 +563,7 @@ _CONTENT_TYPES = {".html": "text/html; charset=utf-8", ".js": "application/javas
 
 
 class _PortalHandler(BaseHTTPRequestHandler):
-    """路径映射:/ → web/index.html;/report/* → report/;/b02_assets/* → b02_assets/。只读静态服务。"""
+    """路径映射:/ → 门户页面/index.html;/报告/* → 报告/;/前端资源/* → 前端资源/。只读静态服务。"""
 
     def _send_file(self, path):
         try:
@@ -583,9 +583,9 @@ class _PortalHandler(BaseHTTPRequestHandler):
         url = self.path.split("?", 1)[0]
         if url in ("/", "/index.html"):
             self._send_file(PORTAL_FILE)
-        elif url.startswith("/report/") and ".." not in url:
+        elif url.startswith("/报告/") and ".." not in url:
             self._send_file(BASE_DIR / url.lstrip("/"))
-        elif url.startswith("/b02_assets/") and ".." not in url:
+        elif url.startswith("/前端资源/") and ".." not in url:
             self._send_file(BASE_DIR / url.lstrip("/"))
         else:
             self.send_error(404, "path not served")   # 错误消息只用 ASCII(latin-1 编码边界)
@@ -644,7 +644,7 @@ def serve(port, with_children=True):
 
 def print_usage():
     print("""GreenMate B09 整合门户 — 用法
-  py b09_portal.py              # (重新)生成整合首页 web/index.html(含最新报告列表)
+  py b09_portal.py              # (重新)生成整合首页 门户页面/index.html(含最新报告列表)
   py b09_portal.py serve        # 一键同起三服务:门户 8300 + B01 8123 + B02 8223
                                 # (B01/B02 已在运行则跳过;iframe 即刻显示内容)
   py b09_portal.py serve --portal-only   # 只起门户,不带 B01/B02
@@ -653,7 +653,7 @@ def print_usage():
 
 首页内容:
   · 3D 数字孪生大棚 hero + B01(8123)/B02(8223)服务卡(iframe 预览,一键托管)
-  · 报告中心:S1~S5 场景报告 + 6 组实验报告 + 最近运行(全部来自 evidence/b07/ 存档,只读)
+  · 报告中心:S1~S5 场景报告 + 6 组实验报告 + 最近运行(全部来自 证据/b07/ 存档,只读)
   · B03/B04/B05/B06/B08 无网页模块:功能图标卡 + 终端命令
 新 run 生成后重新执行 py b09_portal.py 即可刷新报告列表。""")
 

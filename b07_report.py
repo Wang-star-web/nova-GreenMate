@@ -12,7 +12,7 @@
   ② 状态演化   4 参数时序折线图(锚点竖虚线)+ 窗口统计表
   ③ 证据空间   证据记录表 + 工具结果表 + 结构化判断 JSON
   ④ 场景回放对比 本场景配置与实际/预期对比 + 全部历史运行对比表
-  Chart.js 经相对路径 ../b02_assets/chart.umd.js 离线加载(file:// 可用),
+  Chart.js 经相对路径 ../前端资源/chart.umd.js 离线加载(file:// 可用),
   缺失时降级为横幅提示,表格与文本照常渲染。
 
 【运行方式】
@@ -29,8 +29,8 @@ from pathlib import Path
 
 # ---------------- 配置 ----------------
 BASE_DIR = Path(__file__).resolve().parent
-REPORT_DIR = BASE_DIR / "report"
-EVIDENCE_B07_DIR = BASE_DIR / "evidence" / "b07"
+REPORT_DIR = BASE_DIR / "报告"
+EVIDENCE_B07_DIR = BASE_DIR / "证据" / "b07"
 
 PARAM_KEYS = ("temperature", "humidity", "co2", "light")
 PARAM_NAMES = {"temperature": "温度", "humidity": "湿度", "co2": "CO₂浓度", "light": "光照"}
@@ -281,7 +281,7 @@ def _events_table(events_data, history_rows):
 
 
 def _experiment_comparison(run_id):
-    """视图4 实验并排对比:渲染时扫描 evidence/b07/*/scenario.json,按 experiment_type 分组。
+    """视图4 实验并排对比:渲染时扫描 证据/b07/*/scenario.json,按 experiment_type 分组。
     只读其他 run 的存档数据,零 API/LLM。"""
     by_type = {}
     if EVIDENCE_B07_DIR.exists():
@@ -387,7 +387,7 @@ def _evolution_charts():
             % (_esc(PARAM_NAMES[key]), _esc(PARAM_UNITS[key]), _esc(key))
         )
     return ('<div class="chart-missing" id="chart-missing" hidden>⚠ Chart.js 未能加载'
-            '(../b02_assets/chart.umd.js 缺失或无法读取),折线图不可用,下方统计表仍可查看。</div>'
+            '(../前端资源/chart.umd.js 缺失或无法读取),折线图不可用,下方统计表仍可查看。</div>'
             '<div class="charts-grid">%s</div>') % "".join(cards)
 
 
@@ -526,7 +526,7 @@ def _replay_card(scenario_cfg, actuals, expected, run_id):
 
 
 def _comparison_table(run_id):
-    """全部历史运行对比(渲染时扫描 evidence/b07/*/structured_judgment.json)。"""
+    """全部历史运行对比(渲染时扫描 证据/b07/*/structured_judgment.json)。"""
     rows = []
     if EVIDENCE_B07_DIR.exists():
         for sub in EVIDENCE_B07_DIR.iterdir():
@@ -540,7 +540,7 @@ def _comparison_table(run_id):
     rows.sort(key=lambda r: r["run_id"], reverse=True)
     if not rows:
         return ('<div class="card"><h4>历史运行对比</h4>'
-                '<div class="muted">暂无其他运行记录(evidence/b07/ 为空)。执行 py b07_main.py run-all 后本表将展示 S1~S5 全部回放结果。</div></div>')
+                '<div class="muted">暂无其他运行记录(证据/b07/ 为空)。执行 py b07_main.py run-all 后本表将展示 S1~S5 全部回放结果。</div></div>')
     body = []
     for r in rows:
         cur = ' class="current-row"' if r["run_id"] == run_id else ""
@@ -705,7 +705,7 @@ footer { color:var(--muted); font-size:12px; margin-top:24px; text-align:center;
 
   <footer>GreenMate B07 系统组装模块 · 证据标记:SIMULATED / PUBLIC / DERIVED_LABEL / MODEL_OUTPUT · 业务顺序:工具结果 → 证据记录 → 结构化判断 → LLM 解释</footer>
 </main>
-<script src="../b02_assets/chart.umd.js"></script>
+<script src="../前端资源/chart.umd.js"></script>
 <script>
 const REPORT = {{REPORT_JSON}};
 
@@ -866,7 +866,7 @@ makeCharts();
 
 # ---------------- 渲染入口 ----------------
 def render_report(run_dir, run_id):
-    """读取 evidence/b07/{run_id}/ 的产物,渲染 report/{run_id}_report.html。
+    """读取 证据/b07/{run_id}/ 的产物,渲染 报告/{run_id}_report.html。
     缺失关键文件时友好报错,不崩溃;返回是否成功。"""
     trace = _read_json(run_dir / "trace.json")
     if trace is None:
@@ -962,7 +962,7 @@ def render_report(run_dir, run_id):
 
 def print_usage():
     print("用法: py b07_report.py <run_id>")
-    print("  从 evidence/b07/<run_id>/ 重新生成 report/<run_id>_report.html(同输入字节一致)")
+    print("  从 证据/b07/<run_id>/ 重新生成 报告/<run_id>_report.html(同输入字节一致)")
 
 
 def main():

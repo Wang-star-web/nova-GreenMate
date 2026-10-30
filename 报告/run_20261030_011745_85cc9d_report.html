@@ -1,0 +1,519 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>GreenMate B07 报告 run_20261030_011745_85cc9d / S4</title>
+<style>
+:root {
+  --page:#f9f9f7; --panel:#ffffff; --text:#22252a; --muted:#6b7280; --line:#e2e3e0;
+  --accent:#2a78d6; --ok:#2e9e5b; --warn:#d97a1e; --bad:#c0392b;
+  --series:#2a78d6; --grid:#ececea;
+  --chip-sim:#5b8def; --chip-pub:#2e9e5b; --chip-der:#8e6fd6; --chip-model:#d97a1e;
+  --banner-normal-bg:#e9f6ee; --banner-normal-bd:#b8e2c6;
+  --banner-attention-bg:#fdf3e7; --banner-attention-bd:#f0d3ae;
+  --banner-warning-bg:#fdecea; --banner-warning-bd:#f0b8b0;
+}
+[data-theme="dark"] {
+  --page:#17181b; --panel:#1f2126; --text:#e8e9eb; --muted:#9aa0a8; --line:#33363d;
+  --accent:#5a9ae6; --ok:#4caf74; --warn:#e09a45; --bad:#e06c62;
+  --series:#5a9ae6; --grid:#2a2d33;
+  --chip-sim:#4a6fc2; --chip-pub:#3b8c5a; --chip-der:#7a63b8; --chip-model:#b56a20;
+  --banner-normal-bg:#15301f; --banner-normal-bd:#2c5a3c;
+  --banner-attention-bg:#33260f; --banner-attention-bd:#6b521f;
+  --banner-warning-bg:#331715; --banner-warning-bd:#6b2f2a;
+}
+* { box-sizing: border-box; }
+body { margin:0; font-family:"Segoe UI","Microsoft YaHei",system-ui,sans-serif; background:var(--page); color:var(--text); }
+header { padding:16px 24px; border-bottom:1px solid var(--line); background:var(--panel);
+         display:flex; flex-wrap:wrap; gap:10px; align-items:center; }
+header h1 { font-size:19px; margin:0; }
+.meta { color:var(--muted); font-size:13px; }
+.spacer { flex:1; }
+button { cursor:pointer; font-family:inherit; }
+#themeBtn { border:1px solid var(--line); background:var(--panel); color:var(--text);
+            border-radius:6px; padding:6px 12px; font-size:13px; }
+main { max-width:1200px; margin:0 auto; padding:18px 24px 60px; }
+.tabs { display:flex; gap:8px; margin:16px 0 18px; flex-wrap:wrap; }
+.tab-btn { border:1px solid var(--line); background:var(--panel); color:var(--muted);
+           padding:8px 16px; border-radius:8px; font-size:14px; }
+.tab-btn.active { background:var(--accent); color:#fff; border-color:var(--accent); }
+.view { display:none; }
+.view.active { display:block; }
+.banner { border-radius:10px; padding:16px 18px; display:flex; gap:16px; align-items:center;
+          flex-wrap:wrap; margin-bottom:16px; border:1px solid; }
+.banner.normal { background:var(--banner-normal-bg); border-color:var(--banner-normal-bd); }
+.banner.attention { background:var(--banner-attention-bg); border-color:var(--banner-attention-bd); }
+.banner.warning { background:var(--banner-warning-bg); border-color:var(--banner-warning-bd); }
+.banner-title { font-size:20px; font-weight:700; }
+.banner-sub { color:var(--muted); font-size:14px; }
+.trust-badge { border:1px solid var(--line); background:var(--panel); border-radius:999px;
+               padding:4px 14px; font-size:14px; font-weight:600; }
+.marker-row { margin-bottom:16px; }
+.chip { display:inline-block; border-radius:999px; padding:3px 10px; font-size:12px;
+        margin-right:6px; color:#fff; }
+.chip.sim { background:var(--chip-sim); } .chip.pub { background:var(--chip-pub); }
+.chip.der { background:var(--chip-der); } .chip.model { background:var(--chip-model); }
+.grid4 { display:grid; grid-template-columns:repeat(auto-fit, minmax(230px, 1fr)); gap:12px; }
+.card { background:var(--panel); border:1px solid var(--line); border-radius:10px;
+        padding:14px 16px; margin-bottom:14px; }
+.card h4 { margin:0 0 10px; font-size:14px; color:var(--muted); font-weight:600; }
+.card .value { font-size:26px; font-weight:700; }
+.card .unit { font-size:13px; color:var(--muted); margin-left:4px; font-weight:400; }
+.band { color:var(--muted); font-size:12px; margin:2px 0 8px; }
+.status { display:inline-block; border-radius:6px; padding:2px 8px; font-size:12px; font-weight:600; }
+.status.ok { background:rgba(46,158,91,.15); color:var(--ok); }
+.status.error { background:rgba(192,57,43,.15); color:var(--bad); }
+.status.insufficient { background:rgba(217,122,30,.15); color:var(--warn); }
+.status.disabled { background:rgba(107,114,128,.15); color:var(--muted); }
+.src-chip { display:inline-block; border-radius:999px; padding:3px 12px; font-size:12px;
+            margin:2px 6px 2px 0; border:1px solid var(--line); background:var(--page); }
+.src-chip.on { border-color:var(--ok); color:var(--ok); }
+.src-chip.off { border-color:var(--muted); color:var(--muted); text-decoration:line-through; }
+.src-chip.inject { border-color:var(--chip-der); color:var(--chip-der); }
+.raw-vs-grid { display:grid; grid-template-columns:1fr 1fr; gap:14px; }
+.raw-vs-col h5 { margin:0 0 8px; font-size:13px; color:var(--muted); font-weight:600; }
+@media (max-width:760px) { .raw-vs-grid { grid-template-columns:1fr; } }
+.muted { color:var(--muted); }
+.ok-text { color:var(--ok); } .bad-text { color:var(--bad); }
+.small { font-size:12px; margin-top:6px; }
+.advice, .degraded { margin:8px 0 0; padding-left:20px; font-size:13px; line-height:1.7; }
+.explain-text { white-space:pre-wrap; line-height:1.8; font-size:14px; }
+.charts-grid { display:grid; grid-template-columns:repeat(auto-fit, minmax(340px, 1fr)); gap:12px; }
+.chart-wrap { position:relative; height:190px; }
+.chart-missing { border:1px dashed var(--warn); color:var(--warn); border-radius:8px;
+                 padding:10px 14px; margin-bottom:14px; font-size:13px; }
+.tbl { width:100%; border-collapse:collapse; font-size:13px; }
+.tbl th, .tbl td { border:1px solid var(--line); padding:7px 10px; text-align:left; vertical-align:top; }
+.tbl th { background:var(--page); color:var(--muted); font-weight:600; }
+.tbl .summary { max-width:420px; }
+.current-row { background:rgba(42,120,214,.08); }
+.mono { font-family:Consolas,"Courier New",monospace; font-size:12px; }
+.json-pre { background:var(--page); border:1px solid var(--line); border-radius:8px;
+            padding:12px; overflow:auto; max-height:480px; font-size:12px; line-height:1.5;
+            font-family:Consolas,"Courier New",monospace; white-space:pre; }
+.cmd { background:var(--page); border:1px solid var(--line); border-radius:8px; padding:10px 12px;
+       font-family:Consolas,"Courier New",monospace; font-size:13px; }
+footer { color:var(--muted); font-size:12px; margin-top:24px; text-align:center; }
+</style>
+</head>
+<body>
+<header>
+  <h1>🌱 GreenMate 系统报告 <span class="meta">S4 多源证据分歧</span></h1>
+  <span class="meta">run_id: run_20261030_011745_85cc9d · 生成于 2026-10-30T01:17:53+08:00</span>
+  <span class="spacer"></span>
+  <button id="themeBtn">🌙 深色</button>
+</header>
+<main>
+  <nav class="tabs">
+    <button class="tab-btn active" data-view="overview">① 状态总览</button>
+    <button class="tab-btn" data-view="evolution">② 状态演化</button>
+    <button class="tab-btn" data-view="evidence">③ 证据空间</button>
+    <button class="tab-btn" data-view="replay">④ 场景回放对比</button>
+  </nav>
+
+  <section class="view active" id="view-overview">
+    <div class="banner attention"><span class="banner-title">系统结论:需要关注</span><span class="banner-sub">关注级:需要关注</span><span class="trust-badge">可信度:中</span></div>
+    <div class="marker-row"><span class="chip sim" title="证据来源标记">SIMULATED ×6</span><span class="chip pub" title="证据来源标记">PUBLIC ×1</span><span class="chip der" title="证据来源标记">DERIVED_LABEL ×2</span><span class="chip model" title="证据来源标记">MODEL_OUTPUT ×1</span></div>
+    <div class="card"><h4>数据源配置(输入开关,存档回显)</h4><div><span class="src-chip on">历史:开</span><span class="src-chip on">天气:真实 API</span><span class="src-chip on">知识:开</span><span class="src-chip on">预测:开</span></div><div class="muted small">experiment_type: 无(标准场景)</div></div>
+    <div class="card"><h4>证据完整度</h4><div class="value">—<span class="unit">/ 4 类证据可用</span></div><div class="muted small">四类证据:历史(已发生)/ 天气(未来外部条件)/ 知识(静态规则)/ 预测(短时推演);配置关闭的来源: 无</div><div class="muted small"></div></div>
+    <div class="card"><h4>原始数值 vs 系统理解(区分「30℃ 读数」与「稳定/漂移」状态)</h4><div class="raw-vs-grid"><div class="raw-vs-col"><h5>原始观测数值(存档)</h5><table class="tbl"><tr><th>参数</th><th>存档原始数值</th><th>来源</th></tr><tr><td>温度</td><td class="mono">24.3 ℃</td><td>SIMULATED</td></tr><tr><td>湿度</td><td class="mono">60.2 %RH</td><td>SIMULATED</td></tr><tr><td>CO₂浓度</td><td class="mono">1085.0 ppm</td><td>SIMULATED</td></tr><tr><td>光照</td><td class="mono">35480.0 lux</td><td>SIMULATED</td></tr></table><div class="muted small">sample_time: 2026-10-28 09:00:00(仅展示存档值,不重新采集)</div></div><div class="raw-vs-col"><h5>系统结构化理解</h5><table class="tbl"><tr><th>当前环境状态</th><td>需要关注</td></tr><tr><th>关注等级</th><td>attention(需要关注)</td></tr><tr><th>近期趋势(已发生)</th><td>温度:条款② |斜率| 0.50/小时 ≥ 幅值阈值 0.5</td></tr><tr><th>下一窗口预测(未来1~2h)</th><td>模型预测 WATCH(P(WATCH)=0.84,B06-ML-v3)</td></tr><tr><th>证据完整度</th><td>— / 4</td></tr></table></div></div></div>
+    <div class="grid4"><div class="card param-card"><h4>温度</h4><div class="value">24.3<span class="unit">℃</span></div><div class="band">适宜带:15.0 ~ 30.0 ℃</div><div><span class="status ok">适宜</span></div></div><div class="card param-card"><h4>湿度</h4><div class="value">60.2<span class="unit">%RH</span></div><div class="band">适宜带:45.0 ~ 85.0 %RH</div><div><span class="status ok">适宜</span></div></div><div class="card param-card"><h4>CO₂浓度</h4><div class="value">1085.0<span class="unit">ppm</span></div><div class="band">适宜带:800.0 ~ 1500.0 ppm</div><div><span class="status ok">适宜</span></div></div><div class="card param-card"><h4>光照</h4><div class="value">35480.0<span class="unit">lux</span></div><div class="band">适宜带:10000.0 ~ 70000.0 lux</div><div><span class="status ok">适宜</span></div></div></div>
+    <div class="spacer"></div>
+    <div class="card"><h4>LLM 自然语言解释(仅解释,不改变结构化判断)</h4><div class="explain-text">结论：本次判断为“需要关注”（attention 级别），可信度“中”。该结论由结构化判断权威给出，以下仅作解释，不作更改。
+
+依据逐条如下：
+
+1. 规则判定（来源 b03_rules，标记 DERIVED_LABEL）：4 个参数逐项比对适宜带（阈值表 b03_rules.json R1~R8），结论为“无违规”。锚点样本各参数值均在带内：温度 24.3℃（带 15.0~30.0）、湿度 60.2%RH（带 45.0~85.0）、CO₂ 1085.0ppm（带 800.0~1500.0）、光照 35480.0lux（带 10000.0~70000.0），逐项判定均为“适宜”。
+
+2. 趋势预警（来源 b02_trend，标记 DERIVED_LABEL）：温度触发条款②，斜率 -0.5016/小时，绝对值 ≥ 幅值阈值 0.5，alert=true；其余参数未触发（湿度 -0.0756、CO₂ +17.9682、光照 -1378.4333，均未达各自阈值）。趋势窗口为 24 小时，共 49 点（证据 seq=5，来源 b02_memory，标记 SIMULATED）。
+
+3. 模型预测（来源 b06_predict，标记 MODEL_OUTPUT）：B06-ML-v3 输出 WATCH，P(WATCH)=0.84，预测未来 1~2 小时 next_window_attention，输入窗口 3 小时（6 点）（证据 seq=8，来源 b06_ml，标记 MODEL_OUTPUT）。
+
+4. 天气证据（来源 b03_weather，标记 PUBLIC）：证据可用，forecast_time=2026-10-30T00:00:00+08:00，provider=open-meteo，地点北京（39.9042,116.4074）；预报温度 8.0℃、湿度 74.0%RH、降水概率 0.0%（证据 seq=6）。
+
+5. 知识检索（来源 b04_knowledge，标记 SIMULATED）：命中 s3_c001，查询“光照不足怎么办”，属课程自编模拟资料（证据 seq=7，来源 b04_rag，标记 SIMULATED，得分 0.3317）。
+
+6. 上下文样本（来源 b02_memory，标记 SIMULATED）：场景锚点样本为 2026-10-28 09:00:00（证据 seq=2）；库内最新样本为 2026-10-29 01:00:00，温度 17.4℃/湿度 70.4%RH/CO₂ 1402.0ppm/光照 29.0lux（证据 seq=1），仅作上下文，不改变上述判断。
+
+边界与降级事项：
+
+- 降级原因：健康来源存在分歧——规则判定无违规，而 MODEL_OUTPUT 给出 WATCH（P=0.84），按保守原则升级为“需要关注”，trust 降至“中”；同时规则未报警，但模型预警/趋势信号提示风险，故结论为“需要关注”。
+- 真实传感器不可用：环境数据均为课程模拟（source_type=SIMULATED），系统不声称真实监测。
+- 不可处理事项：长期天气预报（&gt;1 天）、跨域农业问题、真实设备控制；系统只输出判断与解释，不执行任何控制动作。
+- 知识库证据为课程自编模拟资料（5 份 source），检索结果仅作管理建议参考，不构成专业农艺结论。</div></div>
+    <div class="card"><h4>降级与分歧事项(2 项)</h4><ul class="degraded"><li>健康来源分歧: 规则判定无违规 vs MODEL_OUTPUT WATCH(P=0.84),按保守原则升级为需要关注,trust 降至中</li><li>规则未报警,但模型预警/趋势信号提示风险(结论=需要关注)</li></ul></div>
+    <div class="card"><h4>能力边界说明</h4><ul class="degraded"><li>真实传感器不可用:环境数据均为课程模拟(source_type=SIMULATED),本系统不声称真实监测。</li><li>不可处理事项:长期天气预报(&gt;1 天)、跨域农业问题、真实设备控制——系统只输出判断与解释,不执行任何控制动作。</li><li>知识库证据为课程自编模拟资料(5 份 source),检索结果仅作管理建议参考,不构成专业农艺结论。</li></ul></div>
+  </section>
+
+  <section class="view" id="view-evolution">
+    <div class="chart-missing" id="chart-missing" hidden>⚠ Chart.js 未能加载(../前端资源/chart.umd.js 缺失或无法读取),折线图不可用,下方统计表仍可查看。</div><div class="charts-grid"><div class="card chart-card"><h4>温度 (℃)</h4><div class="chart-wrap"><canvas id="chart-temperature"></canvas></div></div><div class="card chart-card"><h4>湿度 (%RH)</h4><div class="chart-wrap"><canvas id="chart-humidity"></canvas></div></div><div class="card chart-card"><h4>CO₂浓度 (ppm)</h4><div class="chart-wrap"><canvas id="chart-co2"></canvas></div></div><div class="card chart-card"><h4>光照 (lux)</h4><div class="chart-wrap"><canvas id="chart-light"></canvas></div></div></div>
+    <div class="card"><h4>关键事件标注(状态如何形成)</h4><div class="muted">本 run 无关键事件标注(历史平稳且无模型/天气/关注级事件)。</div></div>
+    <div class="card"><h4>窗口统计(趋势窗口 2026-10-27 09:00:00 ~ 2026-10-28 09:00:00,共 49 点;锚点 2026-10-28 09:00:00)</h4><table class="tbl"><tr><th>参数</th><th>count</th><th>min</th><th>max</th><th>mean</th><th>std</th><th>斜率(/小时)</th></tr><tr><td>温度 (℃)</td><td>49.0</td><td>17.2</td><td>33.2</td><td>23.9</td><td>5.3</td><td>-0.502</td></tr><tr><td>湿度 (%RH)</td><td>49.0</td><td>53.8</td><td>88.9</td><td>68.3</td><td>10.9</td><td>-0.076</td></tr><tr><td>CO₂浓度 (ppm)</td><td>49.0</td><td>888.0</td><td>1405.0</td><td>1148.1</td><td>177.3</td><td>17.968</td></tr><tr><td>光照 (lux)</td><td>49.0</td><td>0.0</td><td>60063.0</td><td>12279.4</td><td>19432.6</td><td>-1378.433</td></tr></table><div class="muted small">首样本:2026-10-27 09:00:00 / 末样本:2026-10-28 09:00:00(末样本即锚点时刻样本)</div></div>
+  </section>
+
+  <section class="view" id="view-evidence">
+    <div class="card"><h4>证据记录(8 条)——每份证据自报身份:类型/来源/获取时间/可用性/支持·限制结论</h4><table class="tbl"><tr><th>seq</th><th>evidence_id</th><th>类型</th><th>来源</th><th>标记</th><th>自报时间</th><th>摘要</th><th>状态</th><th>关系</th></tr><tr><td>1</td><td>EV01</td><td>—</td><td>b02_memory</td><td>SIMULATED</td><td class="mono">—</td><td class="summary">当前环境状态(库内最新样本,仅上下文): 2026-10-29 01:00:00 温度17.4℃/湿度70.4%RH/CO₂1402.0ppm/光照29.0lux</td><td><span class="status ok">OK</span></td><td class="muted">—</td></tr><tr><td>2</td><td>EV02</td><td>—</td><td>b02_memory</td><td>SIMULATED</td><td class="mono">—</td><td class="summary">场景锚点样本 2026-10-28 09:00:00: 温度24.3℃/湿度60.2%RH/CO₂1085.0ppm/光照35480.0lux,source_type=SIMULATED</td><td><span class="status ok">OK</span></td><td class="muted">—</td></tr><tr><td>3</td><td>EV03</td><td>—</td><td>b01_cli</td><td>SIMULATED</td><td class="mono">—</td><td class="summary">B01 原始采集记录已存档 evidence/raw/run_20261030_011745_85cc9d.json(collect_time=2026-10-28T09:00:00+08:00,source_type=SIMULATED)</td><td><span class="status ok">OK</span></td><td class="muted">—</td></tr><tr><td>4</td><td>EV04</td><td>—</td><td>b02_memory</td><td>SIMULATED</td><td class="mono">—</td><td class="summary">历史窗口 2026-10-27 09:00:00 ~ 2026-10-28 09:00:00 共 49 个样本(源=environment_samples,30 分钟网格)</td><td><span class="status ok">OK</span></td><td class="muted">—</td></tr><tr><td>5</td><td>EV05</td><td>—</td><td>b02_memory</td><td>SIMULATED</td><td class="mono">—</td><td class="summary">趋势窗口 2026-10-27 09:00:00 ~ 2026-10-28 09:00:00 共 49 点;斜率(每小时): 温度-0.50/湿度-0.08/CO₂浓度+17.97/光照-1378.43</td><td><span class="status ok">OK</span></td><td class="muted">—</td></tr><tr><td>6</td><td>EV06</td><td>—</td><td>b03_weather</td><td>PUBLIC</td><td class="mono">—</td><td class="summary">北京(39.9042,116.4074) 天气预报: forecast_time=2026-10-30T00:00:00+08:00,温度8.0℃/湿度74.0%RH/降水概率0.0%</td><td><span class="status ok">OK</span></td><td class="muted">—</td></tr><tr><td>7</td><td>EV07</td><td>—</td><td>b04_rag</td><td>SIMULATED</td><td class="mono">—</td><td class="summary">知识检索命中 Top-1 s3_c001(得分 0.3317): # 番茄光照管理
+
+摘要:番茄为喜光作物,光照强度与光照时长直接影响光合产物积累、植株形态与果实品质。设施栽培中既要防止…</td><td><span class="status ok">OK</span></td><td class="muted">—</td></tr><tr><td>8</td><td>EV08</td><td>—</td><td>b06_ml</td><td>MODEL_OUTPUT</td><td class="mono">—</td><td class="summary">B06 预测 next_window_attention=WATCH(P(WATCH)=0.84,模型 B06-ML-v3)</td><td><span class="status ok">OK</span></td><td class="muted">—</td></tr></table></div>
+    <div class="card"><h4>工具结果(8 次调用,原始执行证据)</h4><table class="tbl"><tr><th>seq</th><th>工具</th><th>标记</th><th>参数</th><th>状态</th><th>嵌套状态</th></tr><tr><td>1</td><td>b02_current</td><td>SIMULATED</td><td class="summary mono">{}</td><td><span class="status ok">OK</span></td><td class="muted">—</td></tr><tr><td>2</td><td>b02_anchor</td><td>SIMULATED</td><td class="summary mono">{&quot;start&quot;: &quot;2026-10-28 09:00:00&quot;, &quot;end&quot;: &quot;2026-10-28 09:00:00&quot;}</td><td><span class="status ok">OK</span></td><td class="muted">—</td></tr><tr><td>3</td><td>b01_raw</td><td>SIMULATED</td><td class="summary mono">{&quot;record&quot;: {&quot;run_id&quot;: &quot;run_20261030_011745_85cc9d&quot;, &quot;collect_time&quot;: &quot;2026-10-28T09:00:00+08:00&quot;, &quot;source_type&quot;…</td><td><span class="status ok">OK</span></td><td class="muted">—</td></tr><tr><td>4</td><td>b02_history</td><td>SIMULATED</td><td class="summary mono">{&quot;start&quot;: &quot;2026-10-27 09:00:00&quot;, &quot;end&quot;: &quot;2026-10-28 09:00:00&quot;}</td><td><span class="status ok">OK</span></td><td class="muted">—</td></tr><tr><td>5</td><td>b02_stats</td><td>SIMULATED</td><td class="summary mono">{&quot;start&quot;: &quot;2026-10-27 09:00:00&quot;, &quot;end&quot;: &quot;2026-10-28 09:00:00&quot;}</td><td><span class="status ok">OK</span></td><td class="muted">—</td></tr><tr><td>6</td><td>b03_weather</td><td>PUBLIC</td><td class="summary mono">{&quot;location&quot;: &quot;北京&quot;, &quot;run_id&quot;: &quot;run_20261030_011745_85cc9d&quot;, &quot;analysis_time&quot;: &quot;2026-10-28 09:00:00&quot;, &quot;timeout&quot;: …</td><td><span class="status ok">OK</span></td><td class="muted">success</td></tr><tr><td>7</td><td>b04_knowledge</td><td>SIMULATED</td><td class="summary mono">{&quot;query&quot;: &quot;光照不足怎么办&quot;, &quot;k&quot;: 5}</td><td><span class="status ok">OK</span></td><td class="muted">ok</td></tr><tr><td>8</td><td>b06_predict</td><td>MODEL_OUTPUT</td><td class="summary mono">{&quot;sample_time&quot;: &quot;2026-10-28 09:00:00&quot;}</td><td><span class="status ok">OK</span></td><td class="muted">ok</td></tr></table></div>
+    <div class="card"><h4>structured_judgment.json(可保存、可对比的结构化判断)</h4><pre class="json-pre">{
+  &quot;run_id&quot;: &quot;run_20261030_011745_85cc9d&quot;,
+  &quot;scenario_id&quot;: &quot;S4&quot;,
+  &quot;scenario_name&quot;: &quot;多源证据分歧&quot;,
+  &quot;judged_at&quot;: &quot;2026-10-30T01:17:50+08:00&quot;,
+  &quot;anchor_sample_time&quot;: &quot;2026-10-28 09:00:00&quot;,
+  &quot;conclusion&quot;: &quot;需要关注&quot;,
+  &quot;attention_level&quot;: &quot;attention&quot;,
+  &quot;trust_level&quot;: &quot;中&quot;,
+  &quot;per_param&quot;: [
+    {
+      &quot;parameter&quot;: &quot;temperature&quot;,
+      &quot;name&quot;: &quot;温度&quot;,
+      &quot;unit&quot;: &quot;℃&quot;,
+      &quot;value&quot;: 24.3,
+      &quot;band&quot;: [
+        15.0,
+        30.0
+      ],
+      &quot;verdict&quot;: &quot;适宜&quot;,
+      &quot;matched_rules&quot;: [],
+      &quot;rule_names&quot;: [],
+      &quot;advice&quot;: [],
+      &quot;note&quot;: null
+    },
+    {
+      &quot;parameter&quot;: &quot;humidity&quot;,
+      &quot;name&quot;: &quot;湿度&quot;,
+      &quot;unit&quot;: &quot;%RH&quot;,
+      &quot;value&quot;: 60.2,
+      &quot;band&quot;: [
+        45.0,
+        85.0
+      ],
+      &quot;verdict&quot;: &quot;适宜&quot;,
+      &quot;matched_rules&quot;: [],
+      &quot;rule_names&quot;: [],
+      &quot;advice&quot;: [],
+      &quot;note&quot;: null
+    },
+    {
+      &quot;parameter&quot;: &quot;co2&quot;,
+      &quot;name&quot;: &quot;CO₂浓度&quot;,
+      &quot;unit&quot;: &quot;ppm&quot;,
+      &quot;value&quot;: 1085.0,
+      &quot;band&quot;: [
+        800.0,
+        1500.0
+      ],
+      &quot;verdict&quot;: &quot;适宜&quot;,
+      &quot;matched_rules&quot;: [],
+      &quot;rule_names&quot;: [],
+      &quot;advice&quot;: [],
+      &quot;note&quot;: null
+    },
+    {
+      &quot;parameter&quot;: &quot;light&quot;,
+      &quot;name&quot;: &quot;光照&quot;,
+      &quot;unit&quot;: &quot;lux&quot;,
+      &quot;value&quot;: 35480.0,
+      &quot;band&quot;: [
+        10000.0,
+        70000.0
+      ],
+      &quot;verdict&quot;: &quot;适宜&quot;,
+      &quot;matched_rules&quot;: [],
+      &quot;rule_names&quot;: [],
+      &quot;advice&quot;: [],
+      &quot;note&quot;: null
+    }
+  ],
+  &quot;matched_rules&quot;: [],
+  &quot;trend_findings&quot;: [
+    {
+      &quot;parameter&quot;: &quot;temperature&quot;,
+      &quot;name&quot;: &quot;温度&quot;,
+      &quot;slope_per_hour&quot;: -0.5016,
+      &quot;anchor_value&quot;: 24.3,
+      &quot;clause1_extrapolation&quot;: false,
+      &quot;clause2_magnitude&quot;: true,
+      &quot;alert&quot;: true,
+      &quot;reason&quot;: &quot;条款② |斜率| 0.50/小时 ≥ 幅值阈值 0.5&quot;
+    },
+    {
+      &quot;parameter&quot;: &quot;humidity&quot;,
+      &quot;name&quot;: &quot;湿度&quot;,
+      &quot;slope_per_hour&quot;: -0.0756,
+      &quot;anchor_value&quot;: 60.2,
+      &quot;clause1_extrapolation&quot;: false,
+      &quot;clause2_magnitude&quot;: false,
+      &quot;alert&quot;: false,
+      &quot;reason&quot;: null
+    },
+    {
+      &quot;parameter&quot;: &quot;co2&quot;,
+      &quot;name&quot;: &quot;CO₂浓度&quot;,
+      &quot;slope_per_hour&quot;: 17.9682,
+      &quot;anchor_value&quot;: 1085.0,
+      &quot;clause1_extrapolation&quot;: false,
+      &quot;clause2_magnitude&quot;: false,
+      &quot;alert&quot;: false,
+      &quot;reason&quot;: null
+    },
+    {
+      &quot;parameter&quot;: &quot;light&quot;,
+      &quot;name&quot;: &quot;光照&quot;,
+      &quot;slope_per_hour&quot;: -1378.4333,
+      &quot;anchor_value&quot;: 35480.0,
+      &quot;clause1_extrapolation&quot;: false,
+      &quot;clause2_magnitude&quot;: false,
+      &quot;alert&quot;: false,
+      &quot;reason&quot;: null
+    }
+  ],
+  &quot;source_findings&quot;: [
+    {
+      &quot;source&quot;: &quot;b03_rules&quot;,
+      &quot;marker&quot;: &quot;DERIVED_LABEL&quot;,
+      &quot;finding&quot;: &quot;规则判定: 无违规&quot;,
+      &quot;detail&quot;: &quot;4 参数逐项比对适宜带(阈值表 b03_rules.json R1~R8)&quot;
+    },
+    {
+      &quot;source&quot;: &quot;b02_trend&quot;,
+      &quot;marker&quot;: &quot;DERIVED_LABEL&quot;,
+      &quot;finding&quot;: &quot;趋势预警: 温度(条款② |斜率| 0.50/小时 ≥ 幅值阈值 0.5)&quot;,
+      &quot;detail&quot;: &quot;趋势窗口 24 小时;双条款:外推 2 小时 + 幅值阈值&quot;
+    },
+    {
+      &quot;source&quot;: &quot;b06_predict&quot;,
+      &quot;marker&quot;: &quot;MODEL_OUTPUT&quot;,
+      &quot;finding&quot;: &quot;模型预测 WATCH(P(WATCH)=0.84,B06-ML-v3)&quot;,
+      &quot;detail&quot;: &quot;输入窗口 3 小时(6 点)预测未来 1~2 小时 next_window_attention&quot;
+    },
+    {
+      &quot;source&quot;: &quot;b03_weather&quot;,
+      &quot;marker&quot;: &quot;PUBLIC&quot;,
+      &quot;finding&quot;: &quot;天气证据可用: forecast_time=2026-10-30T00:00:00+08:00&quot;,
+      &quot;detail&quot;: &quot;provider=open-meteo,location=北京(39.9042,116.4074)&quot;
+    },
+    {
+      &quot;source&quot;: &quot;b04_knowledge&quot;,
+      &quot;marker&quot;: &quot;SIMULATED&quot;,
+      &quot;finding&quot;: &quot;知识检索命中: s3_c001&quot;,
+      &quot;detail&quot;: &quot;查询: 光照不足怎么办(课程自编模拟资料)&quot;
+    }
+  ],
+  &quot;degraded_reasons&quot;: [
+    &quot;健康来源分歧: 规则判定无违规 vs MODEL_OUTPUT WATCH(P=0.84),按保守原则升级为需要关注,trust 降至中&quot;,
+    &quot;规则未报警,但模型预警/趋势信号提示风险(结论=需要关注)&quot;
+  ],
+  &quot;capability_boundary_notes&quot;: [
+    &quot;真实传感器不可用:环境数据均为课程模拟(source_type=SIMULATED),本系统不声称真实监测。&quot;,
+    &quot;不可处理事项:长期天气预报(&gt;1 天)、跨域农业问题、真实设备控制——系统只输出判断与解释,不执行任何控制动作。&quot;,
+    &quot;知识库证据为课程自编模拟资料(5 份 source),检索结果仅作管理建议参考,不构成专业农艺结论。&quot;
+  ],
+  &quot;rule_engine&quot;: {
+    &quot;rules_file&quot;: &quot;b03_rules.json&quot;,
+    &quot;bands&quot;: {
+      &quot;temperature&quot;: [
+        15.0,
+        30.0
+      ],
+      &quot;humidity&quot;: [
+        45.0,
+        85.0
+      ],
+      &quot;co2&quot;: [
+        800.0,
+        1500.0
+      ],
+      &quot;light&quot;: [
+        10000.0,
+        70000.0
+      ]
+    },
+    &quot;daylight_range&quot;: [
+      6,
+      18
+    ],
+    &quot;trend_config&quot;: {
+      &quot;trend_hours&quot;: 24,
+      &quot;slope_alert_thresholds&quot;: {
+        &quot;temperature&quot;: 0.5,
+        &quot;humidity&quot;: 1.0,
+        &quot;co2&quot;: 25.0,
+        &quot;light&quot;: 2000.0
+      },
+      &quot;extrapolation_hours&quot;: 2
+    },
+    &quot;rules_version&quot;: &quot;1.0&quot;
+  }
+}</pre></div>
+  </section>
+
+  <section class="view" id="view-replay">
+    <div class="card"><h4>本场景配置(回放输入)</h4><table class="tbl"><tr><th>项</th><th>值</th></tr><tr><td>scenario_id</td><td>S4</td></tr><tr><td>名称</td><td>多源证据分歧</td></tr><tr><td>描述</td><td class="summary">锚点时刻参数全部适宜、规则无报警,但 B06 模型基于黎明弱光模式预警 WATCH——多源证据分歧场景,系统应输出 需要关注/attention/中。</td></tr><tr><td>锚点样本</td><td>2026-10-28 09:00:00</td></tr><tr><td>历史窗口 / 趋势窗口</td><td>24 h / 24 h</td></tr><tr><td>天气地点</td><td>北京</td></tr><tr><td>知识查询</td><td>光照不足怎么办</td></tr><tr><td>降级配置</td><td>weather=None / knowledge=None</td></tr><tr><td>LLM 解释</td><td>True</td></tr><tr><td>experiment_type</td><td>无(标准场景)</td></tr><tr><td>数据源开关</td><td>history=开 / weather=real / knowledge=开 / prediction=开</td></tr></table></div><div class="card"><h4>实际 vs 预期(expected 字段供 B08 下一轮验证)</h4><table class="tbl"><tr><th>项</th><th>预期</th><th>实际</th><th></th></tr><tr><td>结论</td><td>需要关注</td><td>需要关注</td><td class="ok-text">✓</td></tr><tr><td>关注级</td><td>attention</td><td>attention</td><td class="ok-text">✓</td></tr><tr><td>可信度</td><td>中</td><td>—</td><td class="bad-text">✗</td></tr></table><div class="muted small">预期说明:规则 NORMAL vs 模型 WATCH(P=0.84)健康来源分歧,保守升级、信任降中(24h 趋势窗口含 10-27 扰动尾迹,温度斜率可能同步触发趋势条款②——结论仍由规则/模型分歧驱动)</div></div><div class="card"><h4>场景回放机制</h4><div>每次重跑使用<b>新的 run_id</b>,完整链路按同一配置重新执行并落盘,右侧对比表即历史回放结果。重新执行本场景:</div><pre class="cmd">py b07_main.py run S4</pre></div>
+    <div class="card"><h4>创新点3 证据分歧/缺失(并排对比)</h4><table class="tbl"><tr><th>实验</th><th>run_id</th><th>结论</th><th>关注级</th><th>信任</th><th>降级</th><th>完整度</th><th>LLM 校验</th></tr><tr><td>agree</td><td class="mono">run_agree_002</td><td>正常</td><td>normal</td><td>高</td><td>0</td><td>4/4</td><td>SKIP(LLM 未生成,文本类校验跳过;结构校验见各检查项)</td></tr><tr><td>conflict</td><td class="mono">run_conflict_002</td><td>需要关注</td><td>attention</td><td>中</td><td>3</td><td>4/4</td><td>SKIP(LLM 未生成,文本类校验跳过;结构校验见各检查项)</td></tr><tr><td>missing_weather</td><td class="mono">run_missing_weather_002</td><td>正常</td><td>normal</td><td>高</td><td>0</td><td>3/4</td><td>SKIP(LLM 未生成,文本类校验跳过;结构校验见各检查项)</td></tr></table><div class="muted small">对比数据只读取各 run_id 的存档文件,不重新调用任何 API/LLM。</div></div><div class="card"><h4>创新点1 连续时间认知(拿掉→恢复→比较)</h4><table class="tbl"><tr><th>实验</th><th>run_id</th><th>结论</th><th>关注级</th><th>信任</th><th>降级</th><th>完整度</th><th>LLM 校验</th></tr><tr><td>current_only</td><td class="mono">run_current_only_002</td><td>正常</td><td>normal</td><td>高</td><td>0</td><td>2/4</td><td>SKIP(LLM 未生成,文本类校验跳过;结构校验见各检查项)</td></tr><tr><td>with_history</td><td class="mono">run_with_history_002</td><td>需要关注</td><td>attention</td><td>高</td><td>1</td><td>3/4</td><td>SKIP(LLM 未生成,文本类校验跳过;结构校验见各检查项)</td></tr><tr><td>with_history_prediction</td><td class="mono">run_with_history_prediction_002</td><td>需要关注</td><td>attention</td><td>中</td><td>2</td><td>4/4</td><td>SKIP(LLM 未生成,文本类校验跳过;结构校验见各检查项)</td></tr></table><div class="muted small">对比数据只读取各 run_id 的存档文件,不重新调用任何 API/LLM。</div></div>
+    <div class="card"><h4>B05 工具调用回放(输入/返回/成功与否,存档逐条可查)</h4><table class="tbl"><tr><th>seq</th><th>调用时间</th><th>工具</th><th>标记</th><th>参数</th><th>状态</th><th>嵌套状态</th></tr><tr><td>1</td><td class="mono">2026-10-30T01:17:45+08:00</td><td>b02_current</td><td>SIMULATED</td><td class="summary mono">{}</td><td><span class="status ok">OK</span></td><td class="muted">—</td></tr><tr><td>2</td><td class="mono">2026-10-30T01:17:45+08:00</td><td>b02_anchor</td><td>SIMULATED</td><td class="summary mono">{&quot;start&quot;: &quot;2026-10-28 09:00:00&quot;, &quot;end&quot;: &quot;2026-10-28 09:00:00&quot;}</td><td><span class="status ok">OK</span></td><td class="muted">—</td></tr><tr><td>3</td><td class="mono">2026-10-30T01:17:45+08:00</td><td>b01_raw</td><td>SIMULATED</td><td class="summary mono">{&quot;record&quot;: {&quot;run_id&quot;: &quot;run_20261030_011745_85cc9d&quot;, &quot;collect_time&quot;: &quot;2026-10-28T…</td><td><span class="status ok">OK</span></td><td class="muted">—</td></tr><tr><td>4</td><td class="mono">2026-10-30T01:17:45+08:00</td><td>b02_history</td><td>SIMULATED</td><td class="summary mono">{&quot;start&quot;: &quot;2026-10-27 09:00:00&quot;, &quot;end&quot;: &quot;2026-10-28 09:00:00&quot;}</td><td><span class="status ok">OK</span></td><td class="muted">—</td></tr><tr><td>5</td><td class="mono">2026-10-30T01:17:45+08:00</td><td>b02_stats</td><td>SIMULATED</td><td class="summary mono">{&quot;start&quot;: &quot;2026-10-27 09:00:00&quot;, &quot;end&quot;: &quot;2026-10-28 09:00:00&quot;}</td><td><span class="status ok">OK</span></td><td class="muted">—</td></tr><tr><td>6</td><td class="mono">2026-10-30T01:17:45+08:00</td><td>b03_weather</td><td>PUBLIC</td><td class="summary mono">{&quot;location&quot;: &quot;北京&quot;, &quot;run_id&quot;: &quot;run_20261030_011745_85cc9d&quot;, &quot;analysis_time&quot;: &quot;202…</td><td><span class="status ok">OK</span></td><td class="muted">success</td></tr><tr><td>7</td><td class="mono">2026-10-30T01:17:49+08:00</td><td>b04_knowledge</td><td>SIMULATED</td><td class="summary mono">{&quot;query&quot;: &quot;光照不足怎么办&quot;, &quot;k&quot;: 5}</td><td><span class="status ok">OK</span></td><td class="muted">ok</td></tr><tr><td>8</td><td class="mono">2026-10-30T01:17:49+08:00</td><td>b06_predict</td><td>MODEL_OUTPUT</td><td class="summary mono">{&quot;sample_time&quot;: &quot;2026-10-28 09:00:00&quot;}</td><td><span class="status ok">OK</span></td><td class="muted">ok</td></tr></table><div class="muted small">B07 自持薄包装调度;真实执行证据,与报告表述可交叉校验。</div></div>
+    
+    <div class="card"><h4>历史运行对比(43 次)</h4><table class="tbl"><tr><th>run_id</th><th>场景</th><th>名称</th><th>结论</th><th>可信度</th><th>判断时间</th></tr><tr><td>run_with_history_prediction_002</td><td>S2</td><td>实验·with_history_prediction(当前+3h历史+B06预测)</td><td>需要关注</td><td>中</td><td>2026-10-30T10:56:21+08:00</td></tr><tr><td>run_with_history_prediction_001</td><td>S2</td><td>实验·with_history_prediction(当前+3h历史+B06预测)</td><td>需要关注</td><td>中</td><td>2026-10-30T02:21:11+08:00</td></tr><tr><td>run_with_history_002</td><td>S2</td><td>实验·with_history(当前+3h历史)</td><td>需要关注</td><td>高</td><td>2026-10-30T10:56:20+08:00</td></tr><tr><td>run_with_history_001</td><td>S2</td><td>实验·with_history(当前+3h历史)</td><td>需要关注</td><td>高</td><td>2026-10-30T02:21:10+08:00</td></tr><tr><td>run_missing_weather_002</td><td>S1</td><td>实验·missing_weather(天气证据缺失)</td><td>正常</td><td>高</td><td>2026-10-30T10:56:17+08:00</td></tr><tr><td>run_missing_weather_001</td><td>S1</td><td>实验·missing_weather(天气证据缺失)</td><td>正常</td><td>高</td><td>2026-10-30T02:21:07+08:00</td></tr><tr><td>run_current_only_002</td><td>S2</td><td>实验·current_only(仅当前值)</td><td>正常</td><td>高</td><td>2026-10-30T10:56:19+08:00</td></tr><tr><td>run_current_only_001</td><td>S2</td><td>实验·current_only(仅当前值)</td><td>正常</td><td>高</td><td>2026-10-30T02:21:09+08:00</td></tr><tr><td>run_conflict_002</td><td>S2</td><td>实验·conflict(历史升温 vs 天气降温)</td><td>需要关注</td><td>中</td><td>2026-10-30T10:56:17+08:00</td></tr><tr><td>run_conflict_001</td><td>S2</td><td>实验·conflict(历史升温 vs 天气降温)</td><td>需要关注</td><td>中</td><td>2026-10-30T02:21:07+08:00</td></tr><tr><td>run_agree_002</td><td>S1</td><td>实验·agree(四类证据一致)</td><td>正常</td><td>高</td><td>2026-10-30T10:56:16+08:00</td></tr><tr><td>run_agree_001</td><td>S1</td><td>实验·agree(四类证据一致)</td><td>正常</td><td>高</td><td>2026-10-30T02:21:07+08:00</td></tr><tr><td>run_20261031_010328_088f90</td><td>S2</td><td>渐进漂移</td><td>需要关注</td><td>中</td><td>2026-10-31T01:03:29+08:00</td></tr><tr><td>run_20261031_010321_14f97a</td><td>S1</td><td>稳态基线</td><td>正常</td><td>低</td><td>2026-10-31T01:03:24+08:00</td></tr><tr><td>run_20261030_022242_c8640e</td><td>S5</td><td>证据退化</td><td>正常</td><td>低</td><td>2026-10-30T02:22:42+08:00</td></tr><tr><td>run_20261030_022236_d697fb</td><td>S4</td><td>多源证据分歧</td><td>需要关注</td><td>中</td><td>2026-10-30T02:22:37+08:00</td></tr><tr><td>run_20261030_022230_4d178f</td><td>S3</td><td>外部扰动</td><td>需要预警</td><td>高</td><td>2026-10-30T02:22:32+08:00</td></tr><tr><td>run_20261030_022224_d49bdd</td><td>S2</td><td>渐进漂移</td><td>需要关注</td><td>中</td><td>2026-10-30T02:22:26+08:00</td></tr><tr><td>run_20261030_022218_3ca425</td><td>S1</td><td>稳态基线</td><td>正常</td><td>高</td><td>2026-10-30T02:22:20+08:00</td></tr><tr><td>run_20261030_014927_53e252</td><td>S5</td><td>证据退化</td><td>正常</td><td>低</td><td>2026-10-30T01:49:28+08:00</td></tr><tr><td>run_20261030_014926_4aa093</td><td>S4</td><td>多源证据分歧</td><td>需要关注</td><td>中</td><td>2026-10-30T01:49:27+08:00</td></tr><tr><td>run_20261030_014924_cc3a9e</td><td>S3</td><td>外部扰动</td><td>需要预警</td><td>高</td><td>2026-10-30T01:49:26+08:00</td></tr><tr><td>run_20261030_014923_e2a04e</td><td>S2</td><td>渐进漂移</td><td>需要关注</td><td>中</td><td>2026-10-30T01:49:24+08:00</td></tr><tr><td>run_20261030_014921_2e97e7</td><td>S1</td><td>稳态基线</td><td>正常</td><td>高</td><td>2026-10-30T01:49:23+08:00</td></tr><tr><td>run_20261030_014752_59f5a7</td><td>S1</td><td>稳态基线</td><td>正常</td><td>高</td><td>2026-10-30T01:47:54+08:00</td></tr><tr><td>run_20261030_011753_9aa50d</td><td>S5</td><td>证据退化</td><td>正常</td><td>低</td><td>2026-10-30T01:17:54+08:00</td></tr><tr class="current-row"><td>run_20261030_011745_85cc9d ←本次</td><td>S4</td><td>多源证据分歧</td><td>需要关注</td><td>中</td><td>2026-10-30T01:17:50+08:00</td></tr><tr><td>run_20261030_011738_7d6eaf</td><td>S3</td><td>外部扰动</td><td>需要预警</td><td>高</td><td>2026-10-30T01:17:41+08:00</td></tr><tr><td>run_20261030_011732_c913c5</td><td>S2</td><td>渐进漂移</td><td>需要关注</td><td>中</td><td>2026-10-30T01:17:34+08:00</td></tr><tr><td>run_20261030_011727_1db747</td><td>S1</td><td>稳态基线</td><td>正常</td><td>高</td><td>2026-10-30T01:17:29+08:00</td></tr><tr><td>run_20261030_011419_656d35</td><td>S1</td><td>稳态基线</td><td>正常</td><td>高</td><td>2026-10-30T01:14:23+08:00</td></tr><tr><td>run_20261030_010434_6ab7e4</td><td>S4</td><td>多源证据分歧</td><td>需要关注</td><td>中</td><td>2026-10-30T01:04:35+08:00</td></tr><tr><td>run_20261030_010408_91b891</td><td>S5</td><td>证据退化</td><td>正常</td><td>低</td><td>2026-10-30T01:04:09+08:00</td></tr><tr><td>run_20261030_010224_aa89c1</td><td>S5</td><td>证据退化</td><td>正常</td><td>低</td><td>2026-10-30T01:02:24+08:00</td></tr><tr><td>run_20261030_010222_9b0f27</td><td>S4</td><td>多源证据分歧</td><td>需要关注</td><td>中</td><td>2026-10-30T01:02:24+08:00</td></tr><tr><td>run_20261030_010220_2ec660</td><td>S3</td><td>外部扰动</td><td>需要预警</td><td>高</td><td>2026-10-30T01:02:22+08:00</td></tr><tr><td>run_20261030_010217_89b7d5</td><td>S2</td><td>渐进漂移</td><td>需要关注</td><td>中</td><td>2026-10-30T01:02:20+08:00</td></tr><tr><td>run_20261030_010215_c8a199</td><td>S1</td><td>稳态基线</td><td>正常</td><td>高</td><td>2026-10-30T01:02:17+08:00</td></tr><tr><td>run_20261030_010032_50c48a</td><td>S5</td><td>证据退化</td><td>正常</td><td>低</td><td>2026-10-30T01:00:33+08:00</td></tr><tr><td>run_20261030_010026_93a983</td><td>S4</td><td>多源证据分歧</td><td>需要关注</td><td>中</td><td>2026-10-30T01:00:28+08:00</td></tr><tr><td>run_20261030_010019_4193a2</td><td>S3</td><td>外部扰动</td><td>需要预警</td><td>高</td><td>2026-10-30T01:00:21+08:00</td></tr><tr><td>run_20261030_010013_92226b</td><td>S2</td><td>渐进漂移</td><td>需要关注</td><td>中</td><td>2026-10-30T01:00:15+08:00</td></tr><tr><td>run_20261030_010000_7d115b</td><td>S1</td><td>稳态基线</td><td>正常</td><td>高</td><td>2026-10-30T01:00:02+08:00</td></tr></table></div>
+  </section>
+
+  <footer>GreenMate B07 系统组装模块 · 证据标记:SIMULATED / PUBLIC / DERIVED_LABEL / MODEL_OUTPUT · 业务顺序:工具结果 → 证据记录 → 结构化判断 → LLM 解释</footer>
+</main>
+<script src="../前端资源/chart.umd.js"></script>
+<script>
+const REPORT = {"run_id": "run_20261030_011745_85cc9d", "generated_at": "2026-10-30T01:17:53+08:00", "scenario": {"scenario_id": "S4", "name": "多源证据分歧", "description": "锚点时刻参数全部适宜、规则无报警,但 B06 模型基于黎明弱光模式预警 WATCH——多源证据分歧场景,系统应输出 需要关注/attention/中。", "anchor_sample_time": "2026-10-28 09:00:00", "history_hours": 24, "trend_hours": 24, "location": "北京", "knowledge_query": "光照不足怎么办", "degrade": {"weather": null, "knowledge": null}, "llm_explain": true, "expected": {"conclusion": "需要关注", "attention_level": "attention", "trust": "中", "note": "规则 NORMAL vs 模型 WATCH(P=0.84)健康来源分歧,保守升级、信任降中(24h 趋势窗口含 10-27 扰动尾迹,温度斜率可能同步触发趋势条款②——结论仍由规则/模型分歧驱动)"}}, "judgment": {"run_id": "run_20261030_011745_85cc9d", "scenario_id": "S4", "scenario_name": "多源证据分歧", "judged_at": "2026-10-30T01:17:50+08:00", "anchor_sample_time": "2026-10-28 09:00:00", "conclusion": "需要关注", "attention_level": "attention", "trust_level": "中", "per_param": [{"parameter": "temperature", "name": "温度", "unit": "℃", "value": 24.3, "band": [15.0, 30.0], "verdict": "适宜", "matched_rules": [], "rule_names": [], "advice": [], "note": null}, {"parameter": "humidity", "name": "湿度", "unit": "%RH", "value": 60.2, "band": [45.0, 85.0], "verdict": "适宜", "matched_rules": [], "rule_names": [], "advice": [], "note": null}, {"parameter": "co2", "name": "CO₂浓度", "unit": "ppm", "value": 1085.0, "band": [800.0, 1500.0], "verdict": "适宜", "matched_rules": [], "rule_names": [], "advice": [], "note": null}, {"parameter": "light", "name": "光照", "unit": "lux", "value": 35480.0, "band": [10000.0, 70000.0], "verdict": "适宜", "matched_rules": [], "rule_names": [], "advice": [], "note": null}], "matched_rules": [], "trend_findings": [{"parameter": "temperature", "name": "温度", "slope_per_hour": -0.5016, "anchor_value": 24.3, "clause1_extrapolation": false, "clause2_magnitude": true, "alert": true, "reason": "条款② |斜率| 0.50/小时 ≥ 幅值阈值 0.5"}, {"parameter": "humidity", "name": "湿度", "slope_per_hour": -0.0756, "anchor_value": 60.2, "clause1_extrapolation": false, "clause2_magnitude": false, "alert": false, "reason": null}, {"parameter": "co2", "name": "CO₂浓度", "slope_per_hour": 17.9682, "anchor_value": 1085.0, "clause1_extrapolation": false, "clause2_magnitude": false, "alert": false, "reason": null}, {"parameter": "light", "name": "光照", "slope_per_hour": -1378.4333, "anchor_value": 35480.0, "clause1_extrapolation": false, "clause2_magnitude": false, "alert": false, "reason": null}], "source_findings": [{"source": "b03_rules", "marker": "DERIVED_LABEL", "finding": "规则判定: 无违规", "detail": "4 参数逐项比对适宜带(阈值表 b03_rules.json R1~R8)"}, {"source": "b02_trend", "marker": "DERIVED_LABEL", "finding": "趋势预警: 温度(条款② |斜率| 0.50/小时 ≥ 幅值阈值 0.5)", "detail": "趋势窗口 24 小时;双条款:外推 2 小时 + 幅值阈值"}, {"source": "b06_predict", "marker": "MODEL_OUTPUT", "finding": "模型预测 WATCH(P(WATCH)=0.84,B06-ML-v3)", "detail": "输入窗口 3 小时(6 点)预测未来 1~2 小时 next_window_attention"}, {"source": "b03_weather", "marker": "PUBLIC", "finding": "天气证据可用: forecast_time=2026-10-30T00:00:00+08:00", "detail": "provider=open-meteo,location=北京(39.9042,116.4074)"}, {"source": "b04_knowledge", "marker": "SIMULATED", "finding": "知识检索命中: s3_c001", "detail": "查询: 光照不足怎么办(课程自编模拟资料)"}], "degraded_reasons": ["健康来源分歧: 规则判定无违规 vs MODEL_OUTPUT WATCH(P=0.84),按保守原则升级为需要关注,trust 降至中", "规则未报警,但模型预警/趋势信号提示风险(结论=需要关注)"], "capability_boundary_notes": ["真实传感器不可用:环境数据均为课程模拟(source_type=SIMULATED),本系统不声称真实监测。", "不可处理事项:长期天气预报(>1 天)、跨域农业问题、真实设备控制——系统只输出判断与解释,不执行任何控制动作。", "知识库证据为课程自编模拟资料(5 份 source),检索结果仅作管理建议参考,不构成专业农艺结论。"], "rule_engine": {"rules_file": "b03_rules.json", "bands": {"temperature": [15.0, 30.0], "humidity": [45.0, 85.0], "co2": [800.0, 1500.0], "light": [10000.0, 70000.0]}, "daylight_range": [6, 18], "trend_config": {"trend_hours": 24, "slope_alert_thresholds": {"temperature": 0.5, "humidity": 1.0, "co2": 25.0, "light": 2000.0}, "extrapolation_hours": 2}, "rules_version": "1.0"}}, "explanation": {"status": "success", "text": "结论：本次判断为“需要关注”（attention 级别），可信度“中”。该结论由结构化判断权威给出，以下仅作解释，不作更改。\n\n依据逐条如下：\n\n1. 规则判定（来源 b03_rules，标记 DERIVED_LABEL）：4 个参数逐项比对适宜带（阈值表 b03_rules.json R1~R8），结论为“无违规”。锚点样本各参数值均在带内：温度 24.3℃（带 15.0~30.0）、湿度 60.2%RH（带 45.0~85.0）、CO₂ 1085.0ppm（带 800.0~1500.0）、光照 35480.0lux（带 10000.0~70000.0），逐项判定均为“适宜”。\n\n2. 趋势预警（来源 b02_trend，标记 DERIVED_LABEL）：温度触发条款②，斜率 -0.5016/小时，绝对值 ≥ 幅值阈值 0.5，alert=true；其余参数未触发（湿度 -0.0756、CO₂ +17.9682、光照 -1378.4333，均未达各自阈值）。趋势窗口为 24 小时，共 49 点（证据 seq=5，来源 b02_memory，标记 SIMULATED）。\n\n3. 模型预测（来源 b06_predict，标记 MODEL_OUTPUT）：B06-ML-v3 输出 WATCH，P(WATCH)=0.84，预测未来 1~2 小时 next_window_attention，输入窗口 3 小时（6 点）（证据 seq=8，来源 b06_ml，标记 MODEL_OUTPUT）。\n\n4. 天气证据（来源 b03_weather，标记 PUBLIC）：证据可用，forecast_time=2026-10-30T00:00:00+08:00，provider=open-meteo，地点北京（39.9042,116.4074）；预报温度 8.0℃、湿度 74.0%RH、降水概率 0.0%（证据 seq=6）。\n\n5. 知识检索（来源 b04_knowledge，标记 SIMULATED）：命中 s3_c001，查询“光照不足怎么办”，属课程自编模拟资料（证据 seq=7，来源 b04_rag，标记 SIMULATED，得分 0.3317）。\n\n6. 上下文样本（来源 b02_memory，标记 SIMULATED）：场景锚点样本为 2026-10-28 09:00:00（证据 seq=2）；库内最新样本为 2026-10-29 01:00:00，温度 17.4℃/湿度 70.4%RH/CO₂ 1402.0ppm/光照 29.0lux（证据 seq=1），仅作上下文，不改变上述判断。\n\n边界与降级事项：\n\n- 降级原因：健康来源存在分歧——规则判定无违规，而 MODEL_OUTPUT 给出 WATCH（P=0.84），按保守原则升级为“需要关注”，trust 降至“中”；同时规则未报警，但模型预警/趋势信号提示风险，故结论为“需要关注”。\n- 真实传感器不可用：环境数据均为课程模拟（source_type=SIMULATED），系统不声称真实监测。\n- 不可处理事项：长期天气预报（>1 天）、跨域农业问题、真实设备控制；系统只输出判断与解释，不执行任何控制动作。\n- 知识库证据为课程自编模拟资料（5 份 source），检索结果仅作管理建议参考，不构成专业农艺结论。", "note": null}, "evidence_records": [{"seq": 1, "evidence_id": "EV01", "source": "b02_memory", "source_marker": "SIMULATED", "tool": "b02_current", "summary": "当前环境状态(库内最新样本,仅上下文): 2026-10-29 01:00:00 温度17.4℃/湿度70.4%RH/CO₂1402.0ppm/光照29.0lux", "status": "ok", "timestamp": "2026-10-30T01:17:50+08:00", "detail": {"sample_time": "2026-10-29 01:00:00", "source_type": "SIMULATED", "temperature": 17.4, "humidity": 70.4, "co2": 1402.0, "light": 29.0}}, {"seq": 2, "evidence_id": "EV02", "source": "b02_memory", "source_marker": "SIMULATED", "tool": "b02_anchor", "summary": "场景锚点样本 2026-10-28 09:00:00: 温度24.3℃/湿度60.2%RH/CO₂1085.0ppm/光照35480.0lux,source_type=SIMULATED", "status": "ok", "timestamp": "2026-10-30T01:17:50+08:00", "detail": {"sample_time": "2026-10-28 09:00:00", "source_type": "SIMULATED", "temperature": 24.3, "humidity": 60.2, "co2": 1085.0, "light": 35480.0}}, {"seq": 3, "evidence_id": "EV03", "source": "b01_cli", "source_marker": "SIMULATED", "tool": "b01_raw", "summary": "B01 原始采集记录已存档 evidence/raw/run_20261030_011745_85cc9d.json(collect_time=2026-10-28T09:00:00+08:00,source_type=SIMULATED)", "status": "ok", "timestamp": "2026-10-30T01:17:50+08:00", "detail": {"path": "evidence/raw/run_20261030_011745_85cc9d.json", "saved": true, "collect_time": "2026-10-28T09:00:00+08:00", "source_type": "SIMULATED", "valid_ranges": {"temperature": {"min": 5.0, "max": 40.0, "unit": "℃"}, "humidity": {"min": 30.0, "max": 90.0, "unit": "%RH"}, "co2": {"min": 300.0, "max": 2000.0, "unit": "ppm"}, "light": {"min": 0.0, "max": 100000.0, "unit": "lux"}}}}, {"seq": 4, "evidence_id": "EV04", "source": "b02_memory", "source_marker": "SIMULATED", "tool": "b02_history", "summary": "历史窗口 2026-10-27 09:00:00 ~ 2026-10-28 09:00:00 共 49 个样本(源=environment_samples,30 分钟网格)", "status": "ok", "timestamp": "2026-10-30T01:17:50+08:00", "detail": {"start": "2026-10-27 09:00:00", "end": "2026-10-28 09:00:00", "count": 49, "first": {"sample_time": "2026-10-27 09:00:00", "source_type": "SIMULATED", "temperature": 24.4, "humidity": 58.4, "co2": 1085.0, "light": 35943.0}, "last": {"sample_time": "2026-10-28 09:00:00", "source_type": "SIMULATED", "temperature": 24.3, "humidity": 60.2, "co2": 1085.0, "light": 35480.0}}}, {"seq": 5, "evidence_id": "EV05", "source": "b02_memory", "source_marker": "SIMULATED", "tool": "b02_stats", "summary": "趋势窗口 2026-10-27 09:00:00 ~ 2026-10-28 09:00:00 共 49 点;斜率(每小时): 温度-0.50/湿度-0.08/CO₂浓度+17.97/光照-1378.43", "status": "ok", "timestamp": "2026-10-30T01:17:50+08:00", "detail": {"window": {"start": "2026-10-27 09:00:00", "end": "2026-10-28 09:00:00"}, "count": 49, "parameters": {"temperature": {"count": 49, "min": 17.2, "max": 33.2, "mean": 23.889795918367348, "std": 5.3040175377553505, "slope_per_hour": -0.5015714285714286}, "humidity": {"count": 49, "min": 53.8, "max": 88.9, "mean": 68.27551020408163, "std": 10.911701108829705, "slope_per_hour": -0.0756122448979593}, "co2": {"count": 49, "min": 888.0, "max": 1405.0, "mean": 1148.0816326530612, "std": 177.32230973741642, "slope_per_hour": 17.96816326530612}, "light": {"count": 49, "min": 0.0, "max": 60063.0, "mean": 12279.367346938776, "std": 19432.643918260623, "slope_per_hour": -1378.4332653061224}}}}, {"seq": 6, "evidence_id": "EV06", "source": "b03_weather", "source_marker": "PUBLIC", "tool": "b03_weather", "summary": "北京(39.9042,116.4074) 天气预报: forecast_time=2026-10-30T00:00:00+08:00,温度8.0℃/湿度74.0%RH/降水概率0.0%", "status": "ok", "timestamp": "2026-10-30T01:17:50+08:00", "detail": {"provider": "open-meteo", "forecast_time": "2026-10-30T00:00:00+08:00", "analysis_time": "2026-10-28T09:00:00+08:00", "location": "北京(39.9042,116.4074)", "temperature": {"value": 8.0, "unit": "℃"}, "humidity": {"value": 74.0, "unit": "%RH"}, "precipitation_probability": {"value": 0.0, "unit": "%"}, "cloud_cover": {"value": 0.0, "unit": "%"}, "shortwave_radiation": {"value": 0.0, "unit": "W/m²"}}}, {"seq": 7, "evidence_id": "EV07", "source": "b04_rag", "source_marker": "SIMULATED", "tool": "b04_knowledge", "summary": "知识检索命中 Top-1 s3_c001(得分 0.3317): # 番茄光照管理\n\n摘要:番茄为喜光作物,光照强度与光照时长直接影响光合产物积累、植株形态与果实品质。设施栽培中既要防止…", "status": "ok", "timestamp": "2026-10-30T01:17:50+08:00", "detail": {"query": "光照不足怎么办", "threshold": 0.17, "top1": {"chunk_id": "s3_c001", "score": 0.3317, "source_id": "s3", "citation": {"source_id": "s3", "title": "番茄光照管理", "chunk_id": "s3_c001", "char_range": [0, 195], "seq": 1}}, "note": "知识库为课程自编模拟资料(5 份 source),检索结果仅作建议参考"}}, {"seq": 8, "evidence_id": "EV08", "source": "b06_ml", "source_marker": "MODEL_OUTPUT", "tool": "b06_predict", "summary": "B06 预测 next_window_attention=WATCH(P(WATCH)=0.84,模型 B06-ML-v3)", "status": "ok", "timestamp": "2026-10-30T01:17:50+08:00", "detail": {"prediction": "WATCH", "probability": {"NORMAL": 0.16, "WATCH": 0.84}, "model_version": "B06-ML-v3", "window": {"start": "2026-10-28 06:30:00", "end": "2026-10-28 09:00:00", "points": 6}, "MODEL_OUTPUT": "B06_ML", "label_source": "DERIVED_LABEL: 规则派生(阈值表 b03_rules.json R1~R8),源=environment_samples 原始参数值,非 sim_scenario"}}], "tool_results": [{"seq": 1, "step": "tool_results", "tool": "b02_current", "marker": "SIMULATED", "arguments": {}, "result": {"sample_time": "2026-10-29 01:00:00", "source_type": "SIMULATED", "temperature": 17.4, "humidity": 70.4, "co2": 1402.0, "light": 29.0}, "status": "ok", "error": null, "called_at": "2026-10-30T01:17:45+08:00"}, {"seq": 2, "step": "tool_results", "tool": "b02_anchor", "marker": "SIMULATED", "arguments": {"start": "2026-10-28 09:00:00", "end": "2026-10-28 09:00:00"}, "result": [{"sample_time": "2026-10-28 09:00:00", "source_type": "SIMULATED", "temperature": 24.3, "humidity": 60.2, "co2": 1085.0, "light": 35480.0}], "status": "ok", "error": null, "called_at": "2026-10-30T01:17:45+08:00"}, {"seq": 3, "step": "tool_results", "tool": "b01_raw", "marker": "SIMULATED", "arguments": {"record": {"run_id": "run_20261030_011745_85cc9d", "collect_time": "2026-10-28T09:00:00+08:00", "source_type": "SIMULATED", "data": {"temperature": {"value": 24.3, "unit": "℃"}, "humidity": {"value": 60.2, "unit": "%RH"}, "co2": {"value": 1085.0, "unit": "ppm"}, "light": {"value": 35480.0, "unit": "lux"}}, "valid_ranges": {"temperature": {"min": 5.0, "max": 40.0, "unit": "℃"}, "humidity": {"min": 30.0, "max": 90.0, "unit": "%RH"}, "co2": {"min": 300.0, "max": 2000.0, "unit": "ppm"}, "light": {"min": 0.0, "max": 100000.0, "unit": "lux"}}}}, "result": true, "status": "ok", "error": null, "called_at": "2026-10-30T01:17:45+08:00"}, {"seq": 4, "step": "tool_results", "tool": "b02_history", "marker": "SIMULATED", "arguments": {"start": "2026-10-27 09:00:00", "end": "2026-10-28 09:00:00"}, "result": [{"sample_time": "2026-10-27 09:00:00", "source_type": "SIMULATED", "temperature": 24.4, "humidity": 58.4, "co2": 1085.0, "light": 35943.0}, {"sample_time": "2026-10-27 09:30:00", "source_type": "SIMULATED", "temperature": 24.7, "humidity": 59.2, "co2": 1065.0, "light": 42411.0}, {"sample_time": "2026-10-27 10:00:00", "source_type": "SIMULATED", "temperature": 25.7, "humidity": 58.6, "co2": 1012.0, "light": 48343.0}, {"sample_time": "2026-10-27 10:30:00", "source_type": "SIMULATED", "temperature": 26.3, "humidity": 56.8, "co2": 998.0, "light": 53527.0}, {"sample_time": "2026-10-27 11:00:00", "source_type": "SIMULATED", "temperature": 26.5, "humidity": 54.0, "co2": 976.0, "light": 56699.0}, {"sample_time": "2026-10-27 11:30:00", "source_type": "SIMULATED", "temperature": 27.2, "humidity": 54.9, "co2": 953.0, "light": 59127.0}, {"sample_time": "2026-10-27 12:00:00", "source_type": "SIMULATED", "temperature": 28.2, "humidity": 53.9, "co2": 932.0, "light": 60063.0}, {"sample_time": "2026-10-27 12:30:00", "source_type": "SIMULATED", "temperature": 27.8, "humidity": 53.8, "co2": 930.0, "light": 59322.0}, {"sample_time": "2026-10-27 13:00:00", "source_type": "SIMULATED", "temperature": 32.8, "humidity": 87.5, "co2": 900.0, "light": 7972.0}, {"sample_time": "2026-10-27 13:30:00", "source_type": "SIMULATED", "temperature": 32.9, "humidity": 87.0, "co2": 900.0, "light": 8254.0}, {"sample_time": "2026-10-27 14:00:00", "source_type": "SIMULATED", "temperature": 33.2, "humidity": 88.9, "co2": 888.0, "light": 8034.0}, {"sample_time": "2026-10-27 14:30:00", "source_type": "SIMULATED", "temperature": 32.9, "humidity": 88.5, "co2": 897.0, "light": 8150.0}, {"sample_time": "2026-10-27 15:00:00", "source_type": "SIMULATED", "temperature": 32.9, "humidity": 88.2, "co2": 923.0, "light": 7828.0}, {"sample_time": "2026-10-27 15:30:00", "source_type": "SIMULATED", "temperature": 32.9, "humidity": 88.8, "co2": 907.0, "light": 8044.0}, {"sample_time": "2026-10-27 16:00:00", "source_type": "SIMULATED", "temperature": 33.1, "humidity": 88.4, "co2": 948.0, "light": 7716.0}, {"sample_time": "2026-10-27 16:30:00", "source_type": "SIMULATED", "temperature": 33.2, "humidity": 87.4, "co2": 945.0, "light": 7904.0}, {"sample_time": "2026-10-27 17:00:00", "source_type": "SIMULATED", "temperature": 32.7, "humidity": 88.4, "co2": 975.0, "light": 7718.0}, {"sample_time": "2026-10-27 17:30:00", "source_type": "SIMULATED", "temperature": 26.5, "humidity": 55.4, "co2": 995.0, "light": 2734.0}, {"sample_time": "2026-10-27 18:00:00", "source_type": "SIMULATED", "temperature": 25.6, "humidity": 57.9, "co2": 1033.0, "light": 41.0}, {"sample_time": "2026-10-27 18:30:00", "source_type": "SIMULATED", "temperature": 24.8, "humidity": 57.0, "co2": 1044.0, "light": 71.0}, {"sample_time": "2026-10-27 19:00:00", "source_type": "SIMULATED", "temperature": 24.6, "humidity": 58.9, "co2": 1090.0, "light": 0.0}, {"sample_time": "2026-10-27 19:30:00", "source_type": "SIMULATED", "temperature": 23.7, "humidity": 60.1, "co2": 1125.0, "light": 0.0}, {"sample_time": "2026-10-27 20:00:00", "source_type": "SIMULATED", "temperature": 22.9, "humidity": 61.3, "co2": 1155.0, "light": 0.0}, {"sample_time": "2026-10-27 20:30:00", "source_type": "SIMULATED", "temperature": 22.4, "humidity": 61.9, "co2": 1179.0, "light": 60.0}, {"sample_time": "2026-10-27 21:00:00", "source_type": "SIMULATED", "temperature": 21.2, "humidity": 63.9, "co2": 1206.0, "light": 0.0}, {"sample_time": "2026-10-27 21:30:00", "source_type": "SIMULATED", "temperature": 20.7, "humidity": 65.1, "co2": 1231.0, "light": 148.0}, {"sample_time": "2026-10-27 22:00:00", "source_type": "SIMULATED", "temperature": 20.0, "humidity": 66.4, "co2": 1281.0, "light": 0.0}, {"sample_time": "2026-10-27 22:30:00", "source_type": "SIMULATED", "temperature": 19.9, "humidity": 68.7, "co2": 1289.0, "light": 217.0}, {"sample_time": "2026-10-27 23:00:00", "source_type": "SIMULATED", "temperature": 18.7, "humidity": 67.3, "co2": 1339.0, "light": 217.0}, {"sample_time": "2026-10-27 23:30:00", "source_type": "SIMULATED", "temperature": 18.7, "humidity": 69.8, "co2": 1355.0, "light": 0.0}, {"sample_time": "2026-10-28 00:00:00", "source_type": "SIMULATED", "temperature": 17.9, "humidity": 68.8, "co2": 1361.0, "light": 181.0}, {"sample_time": "2026-10-28 00:30:00", "source_type": "SIMULATED", "temperature": 18.0, "humidity": 71.8, "co2": 1394.0, "light": 0.0}, {"sample_time": "2026-10-28 01:00:00", "source_type": "SIMULATED", "temperature": 18.0, "humidity": 70.4, "co2": 1394.0, "light": 14.0}, {"sample_time": "2026-10-28 01:30:00", "source_type": "SIMULATED", "temperature": 17.5, "humidity": 70.8, "co2": 1393.0, "light": 0.0}, {"sample_time": "2026-10-28 02:00:00", "source_type": "SIMULATED", "temperature": 17.2, "humidity": 71.5, "co2": 1388.0, "light": 6.0}, {"sample_time": "2026-10-28 02:30:00", "source_type": "SIMULATED", "temperature": 17.9, "humidity": 71.0, "co2": 1405.0, "light": 191.0}, {"sample_time": "2026-10-28 03:00:00", "source_type": "SIMULATED", "temperature": 17.9, "humidity": 70.4, "co2": 1381.0, "light": 0.0}, {"sample_time": "2026-10-28 03:30:00", "source_type": "SIMULATED", "temperature": 18.0, "humidity": 71.6, "co2": 1386.0, "light": 0.0}, {"sample_time": "2026-10-28 04:00:00", "source_type": "SIMULATED", "temperature": 18.5, "humidity": 70.2, "co2": 1374.0, "light": 156.0}, {"sample_time": "2026-10-28 04:30:00", "source_type": "SIMULATED", "temperature": 18.6, "humidity": 70.8, "co2": 1350.0, "light": 81.0}, {"sample_time": "2026-10-28 05:00:00", "source_type": "SIMULATED", "temperature": 19.2, "humidity": 69.8, "co2": 1331.0, "light": 0.0}, {"sample_time": "2026-10-28 05:30:00", "source_type": "SIMULATED", "temperature": 19.3, "humidity": 67.6, "co2": 1296.0, "light": 0.0}, {"sample_time": "2026-10-28 06:00:00", "source_type": "SIMULATED", "temperature": 19.9, "humidity": 66.8, "co2": 1269.0, "light": 0.0}, {"sample_time": "2026-10-28 06:30:00", "source_type": "SIMULATED", "temperature": 20.5, "humidity": 66.6, "co2": 1233.0, "light": 3048.0}, {"sample_time": "2026-10-28 07:00:00", "source_type": "SIMULATED", "temperature": 21.9, "humidity": 64.8, "co2": 1215.0, "light": 7878.0}, {"sample_time": "2026-10-28 07:30:00", "source_type": "SIMULATED", "temperature": 22.3, "humidity": 64.1, "co2": 1195.0, "light": 14174.0}, {"sample_time": "2026-10-28 08:00:00", "source_type": "SIMULATED", "temperature": 23.2, "humidity": 62.5, "co2": 1145.0, "light": 21199.0}, {"sample_time": "2026-10-28 08:30:00", "source_type": "SIMULATED", "temperature": 23.4, "humidity": 59.4, "co2": 1105.0, "light": 28738.0}, {"sample_time": "2026-10-28 09:00:00", "source_type": "SIMULATED", "temperature": 24.3, "humidity": 60.2, "co2": 1085.0, "light": 35480.0}], "status": "ok", "error": null, "called_at": "2026-10-30T01:17:45+08:00"}, {"seq": 5, "step": "tool_results", "tool": "b02_stats", "marker": "SIMULATED", "arguments": {"start": "2026-10-27 09:00:00", "end": "2026-10-28 09:00:00"}, "result": {"window": {"start": "2026-10-27 09:00:00", "end": "2026-10-28 09:00:00"}, "count": 49, "first": {"sample_time": "2026-10-27 09:00:00", "source_type": "SIMULATED", "temperature": 24.4, "humidity": 58.4, "co2": 1085.0, "light": 35943.0}, "last": {"sample_time": "2026-10-28 09:00:00", "source_type": "SIMULATED", "temperature": 24.3, "humidity": 60.2, "co2": 1085.0, "light": 35480.0}, "parameters": {"temperature": {"count": 49, "min": 17.2, "max": 33.2, "mean": 23.889795918367348, "std": 5.3040175377553505, "slope_per_hour": -0.5015714285714286}, "humidity": {"count": 49, "min": 53.8, "max": 88.9, "mean": 68.27551020408163, "std": 10.911701108829705, "slope_per_hour": -0.0756122448979593}, "co2": {"count": 49, "min": 888.0, "max": 1405.0, "mean": 1148.0816326530612, "std": 177.32230973741642, "slope_per_hour": 17.96816326530612}, "light": {"count": 49, "min": 0.0, "max": 60063.0, "mean": 12279.367346938776, "std": 19432.643918260623, "slope_per_hour": -1378.4332653061224}}}, "status": "ok", "error": null, "called_at": "2026-10-30T01:17:45+08:00"}, {"seq": 6, "step": "tool_results", "tool": "b03_weather", "marker": "PUBLIC", "arguments": {"location": "北京", "run_id": "run_20261030_011745_85cc9d", "analysis_time": "2026-10-28 09:00:00", "timeout": null}, "result": {"provider": "open-meteo", "retrieved_at": "2026-10-30T01:17:45+08:00", "query": {"method": "GET", "url": "https://api.open-meteo.com/v1/forecast", "params": {"latitude": 39.9042, "longitude": 116.4074, "hourly": "temperature_2m,relative_humidity_2m,precipitation_probability,cloud_cover,shortwave_radiation", "timezone": "Asia/Shanghai"}}, "status": "success", "error": null, "location": "北京(39.9042,116.4074)", "analysis_time": "2026-10-28T09:00:00+08:00", "forecast_time": "2026-10-30T00:00:00+08:00", "temperature": {"value": 8.0, "unit": "℃"}, "humidity": {"value": 74.0, "unit": "%RH"}, "precipitation_probability": {"value": 0.0, "unit": "%"}, "cloud_cover": {"value": 0.0, "unit": "%"}, "shortwave_radiation": {"value": 0.0, "unit": "W/m²"}}, "status": "ok", "error": null, "called_at": "2026-10-30T01:17:45+08:00"}, {"seq": 7, "step": "tool_results", "tool": "b04_knowledge", "marker": "SIMULATED", "arguments": {"query": "光照不足怎么办", "k": 5}, "result": {"query": "光照不足怎么办", "retrieved_at": "2026-10-30T01:17:49+08:00", "k": 5, "threshold": 0.17, "status": "ok", "insufficient": false, "message": null, "top_chunks": [{"rank": 1, "chunk_id": "s3_c001", "source_id": "s3", "score": 0.3317, "text": "# 番茄光照管理\n\n摘要:番茄为喜光作物,光照强度与光照时长直接影响光合产物积累、植株形态与果实品质。设施栽培中既要防止光照不足引起的徒长与减产,也要防止强光灼伤。\n\n## 适宜光照强度\n\n番茄的适宜光照强度范围为 10000~70000 lux。光补偿点约为 3000 lux,低于该强度时呼吸消耗大于光合积累;光饱和点约为 70000 lux,超过该强度后光合速率不再随光照增强而提高。", "char_range": [0, 195], "citation": {"source_id": "s3", "title": "番茄光照管理", "chunk_id": "s3_c001", "char_range": [0, 195], "seq": 1}}, {"rank": 2, "chunk_id": "s3_c004", "source_id": "s3", "score": 0.3039, "text": "调控措施:覆盖遮阳网减弱午后强光、喷施遮光剂、保证水分供应防止植株萎蔫;转色期注意避免果实长时间暴露于直射强光。\n\n## 光照时长管理\n\n番茄每天需要 8~14 小时的光照时长。冬春季节日照不足时应人工补光,将光照时长补足至 12 小时左右;夏季日照过强过长时,通过遮阳控制光强,光照时长无需人为干预。补光宜在早晚进行,避开正午用电高峰。\n", "char_range": [400, 570], "citation": {"source_id": "s3", "title": "番茄光照管理", "chunk_id": "s3_c004", "char_range": [400, 570], "seq": 4}}, {"rank": 3, "chunk_id": "s3_c002", "source_id": "s3", "score": 0.2803, "text": "光补偿点约为 3000 lux,低于该强度时呼吸消耗大于光合积累;光饱和点约为 70000 lux,超过该强度后光合速率不再随光照增强而提高。冬春弱光季节,应优先保证透光率。\n\n## 光照不足的危害与调控\n\n当光照强度低于 10000 lux 时,光合作用不足,植株易徒长、节间拉长、坐果率与果实品质下降。调控措施:定期清洁棚膜提高透光率、及时整枝打杈改善冠层通透性、阴雨天开启补光灯补光;", "char_range": [124, 319], "citation": {"source_id": "s3", "title": "番茄光照管理", "chunk_id": "s3_c002", "char_range": [124, 319], "seq": 2}}, {"rank": 4, "chunk_id": "s3_c003", "source_id": "s3", "score": 0.1203, "text": "调控措施:定期清洁棚膜提高透光率、及时整枝打杈改善冠层通透性、阴雨天开启补光灯补光;有条件时选用透光性好的新膜或转光膜。\n\n## 强光危害与调控\n\n当光照强度高于 70000 lux 时,叶片与果实易被灼伤,出现日灼果,果面形成白色或黄褐色斑块。调控措施:覆盖遮阳网减弱午后强光、喷施遮光剂、保证水分供应防止植株萎蔫;转色期注意避免果实长时间暴露于直射强光。\n", "char_range": [277, 457], "citation": {"source_id": "s3", "title": "番茄光照管理", "chunk_id": "s3_c003", "char_range": [277, 457], "seq": 3}}, {"rank": 5, "chunk_id": "s2_c001", "source_id": "s2", "score": 0.0643, "text": "# 大棚湿度与 CO₂ 管理\n\n摘要:设施栽培中空气湿度与 CO₂ 浓度相互制约,共同影响番茄的光合作用、蒸腾与发病风险。湿度过高易诱发病害,过低影响授粉;CO₂ 浓度直接影响光合速率与产量。\n\n## 适宜空气湿度\n\n番茄大棚内适宜的相对湿度范围为 45~85 %RH。白天光照充足、通风良好时,湿度可适当偏低;夜间与阴雨天湿度易升高,应注意控制。湿度的平稳比单一数值更重要,剧烈波动容易诱发裂果与生理障碍。", "char_range": [0, 204], "citation": {"source_id": "s2", "title": "大棚湿度与 CO₂ 管理", "chunk_id": "s2_c001", "char_range": [0, 204], "seq": 1}}]}, "status": "ok", "error": null, "called_at": "2026-10-30T01:17:49+08:00"}, {"seq": 8, "step": "tool_results", "tool": "b06_predict", "marker": "MODEL_OUTPUT", "arguments": {"sample_time": "2026-10-28 09:00:00"}, "result": {"prediction": "WATCH", "probability": {"NORMAL": 0.16, "WATCH": 0.84}, "model_version": "B06-ML-v3", "MODEL_OUTPUT": "B06_ML", "generated_at": "2026-10-30T01:17:49+08:00", "window": {"start": "2026-10-28 06:30:00", "end": "2026-10-28 09:00:00", "points": 6}, "features": {"temperature_current": 24.3, "temperature_mean": 22.6, "temperature_std": 1.332666, "temperature_min": 20.5, "temperature_max": 24.3, "temperature_delta": 3.8, "humidity_current": 60.2, "humidity_mean": 62.933333, "humidity_std": 2.772484, "humidity_min": 59.4, "humidity_max": 66.6, "humidity_delta": -6.4, "co2_current": 1085.0, "co2_mean": 1163.0, "co2_std": 60.663004, "co2_min": 1085.0, "co2_max": 1233.0, "co2_delta": -148.0, "light_current": 35480.0, "light_mean": 18419.5, "light_std": 12415.218303, "light_min": 3048.0, "light_max": 35480.0, "light_delta": 32432.0, "hour_sin": 0.707107, "hour_cos": -0.707107}, "label_source": "DERIVED_LABEL: 规则派生(阈值表 b03_rules.json R1~R8),源=environment_samples 原始参数值,非 sim_scenario", "status": "ok", "error": null}, "status": "ok", "error": null, "called_at": "2026-10-30T01:17:49+08:00"}], "history": [{"sample_time": "2026-10-27 09:00:00", "source_type": "SIMULATED", "temperature": 24.4, "humidity": 58.4, "co2": 1085.0, "light": 35943.0}, {"sample_time": "2026-10-27 09:30:00", "source_type": "SIMULATED", "temperature": 24.7, "humidity": 59.2, "co2": 1065.0, "light": 42411.0}, {"sample_time": "2026-10-27 10:00:00", "source_type": "SIMULATED", "temperature": 25.7, "humidity": 58.6, "co2": 1012.0, "light": 48343.0}, {"sample_time": "2026-10-27 10:30:00", "source_type": "SIMULATED", "temperature": 26.3, "humidity": 56.8, "co2": 998.0, "light": 53527.0}, {"sample_time": "2026-10-27 11:00:00", "source_type": "SIMULATED", "temperature": 26.5, "humidity": 54.0, "co2": 976.0, "light": 56699.0}, {"sample_time": "2026-10-27 11:30:00", "source_type": "SIMULATED", "temperature": 27.2, "humidity": 54.9, "co2": 953.0, "light": 59127.0}, {"sample_time": "2026-10-27 12:00:00", "source_type": "SIMULATED", "temperature": 28.2, "humidity": 53.9, "co2": 932.0, "light": 60063.0}, {"sample_time": "2026-10-27 12:30:00", "source_type": "SIMULATED", "temperature": 27.8, "humidity": 53.8, "co2": 930.0, "light": 59322.0}, {"sample_time": "2026-10-27 13:00:00", "source_type": "SIMULATED", "temperature": 32.8, "humidity": 87.5, "co2": 900.0, "light": 7972.0}, {"sample_time": "2026-10-27 13:30:00", "source_type": "SIMULATED", "temperature": 32.9, "humidity": 87.0, "co2": 900.0, "light": 8254.0}, {"sample_time": "2026-10-27 14:00:00", "source_type": "SIMULATED", "temperature": 33.2, "humidity": 88.9, "co2": 888.0, "light": 8034.0}, {"sample_time": "2026-10-27 14:30:00", "source_type": "SIMULATED", "temperature": 32.9, "humidity": 88.5, "co2": 897.0, "light": 8150.0}, {"sample_time": "2026-10-27 15:00:00", "source_type": "SIMULATED", "temperature": 32.9, "humidity": 88.2, "co2": 923.0, "light": 7828.0}, {"sample_time": "2026-10-27 15:30:00", "source_type": "SIMULATED", "temperature": 32.9, "humidity": 88.8, "co2": 907.0, "light": 8044.0}, {"sample_time": "2026-10-27 16:00:00", "source_type": "SIMULATED", "temperature": 33.1, "humidity": 88.4, "co2": 948.0, "light": 7716.0}, {"sample_time": "2026-10-27 16:30:00", "source_type": "SIMULATED", "temperature": 33.2, "humidity": 87.4, "co2": 945.0, "light": 7904.0}, {"sample_time": "2026-10-27 17:00:00", "source_type": "SIMULATED", "temperature": 32.7, "humidity": 88.4, "co2": 975.0, "light": 7718.0}, {"sample_time": "2026-10-27 17:30:00", "source_type": "SIMULATED", "temperature": 26.5, "humidity": 55.4, "co2": 995.0, "light": 2734.0}, {"sample_time": "2026-10-27 18:00:00", "source_type": "SIMULATED", "temperature": 25.6, "humidity": 57.9, "co2": 1033.0, "light": 41.0}, {"sample_time": "2026-10-27 18:30:00", "source_type": "SIMULATED", "temperature": 24.8, "humidity": 57.0, "co2": 1044.0, "light": 71.0}, {"sample_time": "2026-10-27 19:00:00", "source_type": "SIMULATED", "temperature": 24.6, "humidity": 58.9, "co2": 1090.0, "light": 0.0}, {"sample_time": "2026-10-27 19:30:00", "source_type": "SIMULATED", "temperature": 23.7, "humidity": 60.1, "co2": 1125.0, "light": 0.0}, {"sample_time": "2026-10-27 20:00:00", "source_type": "SIMULATED", "temperature": 22.9, "humidity": 61.3, "co2": 1155.0, "light": 0.0}, {"sample_time": "2026-10-27 20:30:00", "source_type": "SIMULATED", "temperature": 22.4, "humidity": 61.9, "co2": 1179.0, "light": 60.0}, {"sample_time": "2026-10-27 21:00:00", "source_type": "SIMULATED", "temperature": 21.2, "humidity": 63.9, "co2": 1206.0, "light": 0.0}, {"sample_time": "2026-10-27 21:30:00", "source_type": "SIMULATED", "temperature": 20.7, "humidity": 65.1, "co2": 1231.0, "light": 148.0}, {"sample_time": "2026-10-27 22:00:00", "source_type": "SIMULATED", "temperature": 20.0, "humidity": 66.4, "co2": 1281.0, "light": 0.0}, {"sample_time": "2026-10-27 22:30:00", "source_type": "SIMULATED", "temperature": 19.9, "humidity": 68.7, "co2": 1289.0, "light": 217.0}, {"sample_time": "2026-10-27 23:00:00", "source_type": "SIMULATED", "temperature": 18.7, "humidity": 67.3, "co2": 1339.0, "light": 217.0}, {"sample_time": "2026-10-27 23:30:00", "source_type": "SIMULATED", "temperature": 18.7, "humidity": 69.8, "co2": 1355.0, "light": 0.0}, {"sample_time": "2026-10-28 00:00:00", "source_type": "SIMULATED", "temperature": 17.9, "humidity": 68.8, "co2": 1361.0, "light": 181.0}, {"sample_time": "2026-10-28 00:30:00", "source_type": "SIMULATED", "temperature": 18.0, "humidity": 71.8, "co2": 1394.0, "light": 0.0}, {"sample_time": "2026-10-28 01:00:00", "source_type": "SIMULATED", "temperature": 18.0, "humidity": 70.4, "co2": 1394.0, "light": 14.0}, {"sample_time": "2026-10-28 01:30:00", "source_type": "SIMULATED", "temperature": 17.5, "humidity": 70.8, "co2": 1393.0, "light": 0.0}, {"sample_time": "2026-10-28 02:00:00", "source_type": "SIMULATED", "temperature": 17.2, "humidity": 71.5, "co2": 1388.0, "light": 6.0}, {"sample_time": "2026-10-28 02:30:00", "source_type": "SIMULATED", "temperature": 17.9, "humidity": 71.0, "co2": 1405.0, "light": 191.0}, {"sample_time": "2026-10-28 03:00:00", "source_type": "SIMULATED", "temperature": 17.9, "humidity": 70.4, "co2": 1381.0, "light": 0.0}, {"sample_time": "2026-10-28 03:30:00", "source_type": "SIMULATED", "temperature": 18.0, "humidity": 71.6, "co2": 1386.0, "light": 0.0}, {"sample_time": "2026-10-28 04:00:00", "source_type": "SIMULATED", "temperature": 18.5, "humidity": 70.2, "co2": 1374.0, "light": 156.0}, {"sample_time": "2026-10-28 04:30:00", "source_type": "SIMULATED", "temperature": 18.6, "humidity": 70.8, "co2": 1350.0, "light": 81.0}, {"sample_time": "2026-10-28 05:00:00", "source_type": "SIMULATED", "temperature": 19.2, "humidity": 69.8, "co2": 1331.0, "light": 0.0}, {"sample_time": "2026-10-28 05:30:00", "source_type": "SIMULATED", "temperature": 19.3, "humidity": 67.6, "co2": 1296.0, "light": 0.0}, {"sample_time": "2026-10-28 06:00:00", "source_type": "SIMULATED", "temperature": 19.9, "humidity": 66.8, "co2": 1269.0, "light": 0.0}, {"sample_time": "2026-10-28 06:30:00", "source_type": "SIMULATED", "temperature": 20.5, "humidity": 66.6, "co2": 1233.0, "light": 3048.0}, {"sample_time": "2026-10-28 07:00:00", "source_type": "SIMULATED", "temperature": 21.9, "humidity": 64.8, "co2": 1215.0, "light": 7878.0}, {"sample_time": "2026-10-28 07:30:00", "source_type": "SIMULATED", "temperature": 22.3, "humidity": 64.1, "co2": 1195.0, "light": 14174.0}, {"sample_time": "2026-10-28 08:00:00", "source_type": "SIMULATED", "temperature": 23.2, "humidity": 62.5, "co2": 1145.0, "light": 21199.0}, {"sample_time": "2026-10-28 08:30:00", "source_type": "SIMULATED", "temperature": 23.4, "humidity": 59.4, "co2": 1105.0, "light": 28738.0}, {"sample_time": "2026-10-28 09:00:00", "source_type": "SIMULATED", "temperature": 24.3, "humidity": 60.2, "co2": 1085.0, "light": 35480.0}], "stats": {"window": {"start": "2026-10-27 09:00:00", "end": "2026-10-28 09:00:00"}, "count": 49, "first": {"sample_time": "2026-10-27 09:00:00", "source_type": "SIMULATED", "temperature": 24.4, "humidity": 58.4, "co2": 1085.0, "light": 35943.0}, "last": {"sample_time": "2026-10-28 09:00:00", "source_type": "SIMULATED", "temperature": 24.3, "humidity": 60.2, "co2": 1085.0, "light": 35480.0}, "parameters": {"temperature": {"count": 49, "min": 17.2, "max": 33.2, "mean": 23.889795918367348, "std": 5.3040175377553505, "slope_per_hour": -0.5015714285714286}, "humidity": {"count": 49, "min": 53.8, "max": 88.9, "mean": 68.27551020408163, "std": 10.911701108829705, "slope_per_hour": -0.0756122448979593}, "co2": {"count": 49, "min": 888.0, "max": 1405.0, "mean": 1148.0816326530612, "std": 177.32230973741642, "slope_per_hour": 17.96816326530612}, "light": {"count": 49, "min": 0.0, "max": 60063.0, "mean": 12279.367346938776, "std": 19432.643918260623, "slope_per_hour": -1378.4332653061224}}}, "data_source_config": {}, "events": {}, "llm_validation": {}, "raw_record_saved": {"path": "evidence/raw/run_20261030_011745_85cc9d.json", "ok": true, "collect_time": "2026-10-28T09:00:00+08:00", "source_type": "SIMULATED"}};
+
+// ---- 锚点竖虚线插件(自注册,按 x 像素绘制,不受 y 轴范围影响)----
+if (typeof Chart !== 'undefined') {
+  const anchorLine = {
+    id: 'anchorLine',
+    afterDatasetsDraw(chart) {
+      const opts = (chart.options.plugins || {}).anchorLine;
+      if (!opts || !opts.anchorLabel) return;
+      const idx = chart.data.labels.indexOf(opts.anchorLabel);
+      if (idx < 0) return;
+      const x = chart.scales.x.getPixelForValue(idx);
+      if (x < chart.chartArea.left || x > chart.chartArea.right) return;
+      const ctx = chart.ctx;
+      ctx.save();
+      ctx.setLineDash([6, 4]);
+      ctx.strokeStyle = cssVar('--bad');
+      ctx.lineWidth = 1.5;
+      ctx.beginPath();
+      ctx.moveTo(x, chart.chartArea.top);
+      ctx.lineTo(x, chart.chartArea.bottom);
+      ctx.stroke();
+      ctx.restore();
+    }
+  };
+  Chart.register(anchorLine);
+  // 关键事件竖线插件(案例A 第三遍 视图2):按 parameter 过滤到对应参数图,
+  // 事件标签在 chartArea 顶部纵向堆叠防重叠;索引不存在(事件时刻不在窗口内)→ 跳过。
+  const eventLines = {
+    id: 'eventLines',
+    afterDatasetsDraw(chart) {
+      const opts = (chart.options.plugins || {}).eventLines;
+      const events = (opts && opts.events) || [];
+      const colorMap = {
+        trend_start: cssVar('--warn'),
+        model_watch: cssVar('--chip-der'),
+        weather: cssVar('--chip-pub'),
+        weather_missing: cssVar('--bad'),
+        attention_raised: cssVar('--bad'),
+        rule_hit: cssVar('--bad')
+      };
+      let stack = 0;
+      events.forEach(function (e) {
+        if (e.parameter !== null && e.parameter !== opts.paramKey) return;
+        const idx = chart.data.labels.indexOf(e.sample_time);
+        if (idx < 0) return;
+        const x = chart.scales.x.getPixelForValue(idx);
+        if (x < chart.chartArea.left || x > chart.chartArea.right) return;
+        const ctx = chart.ctx;
+        ctx.save();
+        ctx.setLineDash([3, 3]);
+        ctx.strokeStyle = colorMap[e.type] || cssVar('--muted');
+        ctx.lineWidth = 1.2;
+        ctx.beginPath();
+        ctx.moveTo(x, chart.chartArea.top);
+        ctx.lineTo(x, chart.chartArea.bottom);
+        ctx.stroke();
+        // 顶点圆点 + 顶部堆叠标签
+        ctx.fillStyle = colorMap[e.type] || cssVar('--muted');
+        ctx.beginPath();
+        ctx.arc(x, chart.chartArea.top + 3, 2.5, 0, Math.PI * 2);
+        ctx.fill();
+        ctx.font = '10px "Segoe UI","Microsoft YaHei",sans-serif';
+        ctx.textAlign = 'left';
+        ctx.textBaseline = 'top';
+        const label = (e.type === 'trend_start' ? e.label : (e.label || ''));
+        ctx.fillText(label, x + 5, chart.chartArea.top + 2 + stack * 13);
+        stack += 1;
+        ctx.restore();
+      });
+    }
+  };
+  Chart.register(eventLines);
+}
+
+function cssVar(name) {
+  return getComputedStyle(document.documentElement).getPropertyValue(name).trim();
+}
+
+const charts = [];
+function makeCharts() {
+  const rows = (REPORT.history || []);
+  if (typeof Chart === 'undefined') {
+    document.getElementById('chart-missing').hidden = false;
+    return;
+  }
+  if (!rows.length) return;
+  const labels = rows.map(r => r.sample_time);
+  const anchorLabel = (REPORT.judgment || {}).anchor_sample_time;
+  const events = (REPORT.events && REPORT.events.events) || [];
+  const params = [['temperature','温度 (℃)'],['humidity','湿度 (%RH)'],['co2','CO₂浓度 (ppm)'],['light','光照 (lux)']];
+  params.forEach(function (item) {
+    const key = item[0], title = item[1];
+    const el = document.getElementById('chart-' + key);
+    if (!el) return;
+    const color = cssVar('--series'), grid = cssVar('--grid'), tick = cssVar('--muted');
+    charts.push(new Chart(el, {
+      type: 'line',
+      data: {
+        labels: labels,
+        datasets: [{
+          label: title, data: rows.map(r => r[key]),
+          borderColor: color, backgroundColor: color + '22',
+          pointRadius: 0, borderWidth: 2, tension: 0.25, fill: false
+        }]
+      },
+      options: {
+        responsive: true, maintainAspectRatio: false, animation: false,
+        interaction: { mode: 'index', intersect: false },
+        plugins: {
+          legend: { display: false },
+          anchorLine: { anchorLabel: anchorLabel },
+          eventLines: { events: events, paramKey: key },
+          tooltip: { callbacks: { title: function (items) { return items[0].label; } } }
+        },
+        scales: {
+          x: { ticks: { color: tick, maxRotation: 0, autoSkip: true, maxTicksLimit: 8 }, grid: { color: grid } },
+          y: { ticks: { color: tick }, grid: { color: grid } }
+        }
+      }
+    }));
+  });
+}
+
+function destroyCharts() { charts.forEach(function (c) { c.destroy(); }); charts.length = 0; }
+
+function applyTheme() {
+  const dark = document.documentElement.getAttribute('data-theme') === 'dark';
+  document.getElementById('themeBtn').textContent = dark ? '☀ 浅色' : '🌙 深色';
+  destroyCharts();
+  makeCharts();
+}
+
+function showView(name) {
+  document.querySelectorAll('.tab-btn').forEach(function (b) {
+    b.classList.toggle('active', b.dataset.view === name);
+  });
+  document.querySelectorAll('.view').forEach(function (v) {
+    v.classList.toggle('active', v.id === 'view-' + name);
+  });
+}
+
+document.getElementById('themeBtn').addEventListener('click', function () {
+  const root = document.documentElement;
+  root.setAttribute('data-theme', root.getAttribute('data-theme') === 'dark' ? 'light' : 'dark');
+  applyTheme();
+});
+document.querySelectorAll('.tab-btn').forEach(function (b) {
+  b.addEventListener('click', function () { showView(b.dataset.view); });
+});
+makeCharts();
+</script>
+</body>
+</html>

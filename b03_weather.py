@@ -41,8 +41,8 @@ from pathlib import Path
 
 # ---------------- 配置 ----------------
 BASE_DIR = Path(__file__).resolve().parent
-EVIDENCE_DIR = BASE_DIR / "evidence" / "b03"      # 天气证据产物目录(运行时自动创建)
-LOG_DIR = BASE_DIR / "logs"
+EVIDENCE_DIR = BASE_DIR / "证据" / "b03"      # 天气证据产物目录(运行时自动创建)
+LOG_DIR = BASE_DIR / "日志"
 WEATHER_LOG = LOG_DIR / "b03_weather.log"         # 每次调用两行日志([请求]/[成功]或[失败])
 
 # 全部可被环境变量覆盖,代码中零硬编码 API Key(b01 同款约定)
@@ -375,7 +375,7 @@ def get_weather_forecast(location=None, provider=None, run_id=None, analysis_tim
     · location: 内置城市(北京/上海/广州)或 "lat,lng";None -> 环境变量 B03_LOCATION
     · provider: "open-meteo"(默认)| "qweather"(需 B03_QWEATHER_API_KEY 有效)
     · analysis_time: None -> 现在;可传 datetime 或 ISO 字符串(B07 可传 run 的 collect_time)
-    · run_id 合法时保存 evidence/b03/{run_id}_weather.json;库调用不落盘
+    · run_id 合法时保存 证据/b03/{run_id}_weather.json;库调用不落盘
     恒返回统一 weather_evidence;成功路径只有一条——解析真实 API 返回,
     且强制校验 forecast_time > analysis_time(违反即 bad_response,绝不伪造成功)。"""
     location = location or B03_LOCATION
@@ -472,7 +472,7 @@ def validate_weather_evidence(ev):
 
 
 def save_weather_evidence(ev, filename):
-    """证据落盘 evidence/b03/{filename}(自动建目录,UTF-8);失败仅友好提示。"""
+    """证据落盘 证据/b03/{filename}(自动建目录,UTF-8);失败仅友好提示。"""
     try:
         EVIDENCE_DIR.mkdir(parents=True, exist_ok=True)
         with open(EVIDENCE_DIR / filename, "w", encoding="utf-8") as f:
@@ -582,7 +582,7 @@ def cmd_forecast(args):
                               horizon_hours=horizon, timeout=timeout)
     _print_evidence(ev)
     if run_id and RUN_ID_RE.match(str(run_id)):
-        print("✓ 证据已保存: evidence/b03/%s_weather.json" % run_id)
+        print("✓ 证据已保存: 证据/b03/%s_weather.json" % run_id)
         return
     if run_id:
         print("⚠ run-id 格式非法(%s),改按时间戳文件名保存" % run_id)
@@ -590,7 +590,7 @@ def cmd_forecast(args):
     name_part = location if location in LOCATIONS else str(location).strip().replace(",", "_")
     filename = "weather_%s_%s.json" % (name_part, datetime.now().strftime("%Y%m%d_%H%M%S"))
     if save_weather_evidence(ev, filename):
-        print("✓ 证据已保存: evidence/b03/%s" % filename)
+        print("✓ 证据已保存: 证据/b03/%s" % filename)
 
 
 def cmd_abtest(args):
@@ -647,7 +647,7 @@ def cmd_abtest(args):
         "reasons": reasons,
     }
     save_weather_evidence(summary, "abtest_summary.json")
-    print("✓ 证据已保存: evidence/b03/abtest_%s.json / abtest_%s.json / abtest_summary.json" % (city_a, city_b))
+    print("✓ 证据已保存: 证据/b03/abtest_%s.json / abtest_%s.json / abtest_summary.json" % (city_a, city_b))
 
 
 def cmd_failtest():
@@ -685,7 +685,7 @@ def cmd_failtest():
         ok_real = bool((ev.get("error") or {}).get("message", "").strip())
         ok = ok_type and ok_nulls and ok_real
         passed += 1 if ok else 0
-        print("  [%d/3] %s %s | status=%s error_type=%s | 数值字段全 null: %s | 已保存 evidence/b03/%s"
+        print("  [%d/3] %s %s | status=%s error_type=%s | 数值字段全 null: %s | 已保存 证据/b03/%s"
               % (i, name, "✓" if ok else "⚠", ev.get("status"), (ev.get("error") or {}).get("error_type"),
                  "是" if ok_nulls else "否", filename))
         print("       接口真实返回: %s" % (ev.get("error") or {}).get("message", "")[:160])
@@ -707,7 +707,7 @@ def print_usage():
     print("          B03_QWEATHER_API_KEY(可选,QWeather 成功路径需要)/ B03_LOCATION")
     print("公开接口: get_weather_forecast(location) -> weather_evidence,供 B07 在 run_id 流程中按需调用")
     print("API 文档: Open-Meteo https://open-meteo.com/en/docs")
-    print("          QWeather  https://dev.qweather.com/docs/api/weather/weather-daily-forecast/")
+    print("          QWeather  https://dev.qweather.com/文档/api/weather/weather-daily-forecast/")
 
 
 def main():

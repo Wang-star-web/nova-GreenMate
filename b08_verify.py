@@ -12,7 +12,7 @@
   (稳定性校验:重复运行同一文件,哈希与清单一致即可确认结果稳定可复现)。
 
 【运行方式】
-  python b08_verify.py --json-path evidence/b07/<run_id>/run_result.json
+  python b08_verify.py --json-path 证据/b07/<run_id>/run_result.json
   python b08_verify.py --json-path=<路径>        # 等号形态等价
   python b08_verify.py                           # 不带参数:打印用法并列出可用文件
   python b08_verify.py --help                    # 查看用法说明
@@ -39,7 +39,7 @@ from pathlib import Path
 
 # ---------------- 配置 ----------------
 BASE_DIR = Path(__file__).resolve().parent
-EVIDENCE_B07_DIR = BASE_DIR / "evidence" / "b07"
+EVIDENCE_B07_DIR = BASE_DIR / "证据" / "b07"
 
 PARAM_KEYS = ("temperature", "humidity", "co2", "light")
 # 预期缺失豁免名单:(键名, 清单显示名)——本轮 B07 未生成这三类模块输出
@@ -208,8 +208,8 @@ def check_raw(raw, top_run_id):
     path = raw.get("path")
     if not isinstance(path, str) or not path:
         return "bad", "raw.path 缺失或非字符串", _sha_digest(raw)
-    if top_run_id and path != "evidence/raw/%s.json" % top_run_id:
-        notes.append("raw.path(%s)与约定路径 evidence/raw/%s.json 不一致(仅提示)" % (path, top_run_id))
+    if top_run_id and path != "证据/raw/%s.json" % top_run_id:
+        notes.append("raw.path(%s)与约定路径 证据/raw/%s.json 不一致(仅提示)" % (path, top_run_id))
 
     # 附注(不计状态):盘上 raw 文件存在性 + 与嵌入 record 一致性
     disk_path = BASE_DIR / path if not Path(path).is_absolute() else Path(path)
@@ -390,7 +390,7 @@ def print_report(path_text, obj, data, rows, header_notes):
 
 
 def scan_available():
-    """扫描 evidence/b07/*/run_result.json,按 run_id 倒序返回路径列表。"""
+    """扫描 证据/b07/*/run_result.json,按 run_id 倒序返回路径列表。"""
     paths = []
     if EVIDENCE_B07_DIR.exists():
         for p in sorted(EVIDENCE_B07_DIR.glob("*/run_result.json"), reverse=True):
@@ -429,7 +429,7 @@ def main():
         if args["path"] is None:
             print_usage()
             paths = scan_available()
-            print("\n可用的 run_result.json 文件(evidence/b07/,按 run_id 倒序):")
+            print("\n可用的 run_result.json 文件(证据/b07/,按 run_id 倒序):")
             if not paths:
                 print("  (暂无——旧 run 无 run_result.json 时需重跑 B07 生成,"
                       "如 py b07_main.py run S1)")

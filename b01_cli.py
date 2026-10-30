@@ -7,7 +7,7 @@
 
 【任务目标】
   采集番茄大棚 4 项环境参数(温度、湿度、CO₂浓度、光照),逐项校验合法性,
-  每次采集自动生成唯一 run_id,原始数据保存到 evidence/raw/{run_id}.json,
+  每次采集自动生成唯一 run_id,原始数据保存到 证据/raw/{run_id}.json,
   供后续模块(如 B02 分析)读取。
   B01 只负责交互输入与原始数据保存,不实现任何数据分析。
 
@@ -42,7 +42,7 @@ from urllib.parse import urlparse
 
 # ---------------- 配置 ----------------
 BASE_DIR = Path(__file__).resolve().parent   # 脚本所在目录,数据路径不受启动位置影响
-RAW_DIR = BASE_DIR / "evidence" / "raw"      # 原始数据保存目录(运行时自动创建)
+RAW_DIR = BASE_DIR / "证据" / "raw"      # 原始数据保存目录(运行时自动创建)
 
 # 4 项环境参数的采集规格:一次定义,驱动输入提示、范围校验与 JSON 输出
 PARAM_SPECS = [
@@ -65,7 +65,7 @@ try:
     B01_WEB_PORT = int(os.environ.get("B01_WEB_PORT", "8123"))
 except ValueError:
     B01_WEB_PORT = 8123
-LOG_DIR = BASE_DIR / "logs"                      # B01 补全运行日志目录(运行时自动创建)
+LOG_DIR = BASE_DIR / "日志"                      # B01 补全运行日志目录(运行时自动创建)
 LLM_LOG = LOG_DIR / "b01_llm.log"
 
 # A/B 验证: 两套环境状态,只切换状态、固定提问(全项目唯一,永不改动)。
@@ -165,7 +165,7 @@ def collect_one_run():
 
 
 def save_record(record):
-    """保存原始数据到 evidence/raw/{run_id}.json(自动创建目录,UTF-8);
+    """保存原始数据到 证据/raw/{run_id}.json(自动创建目录,UTF-8);
     保存失败仅友好提示,程序不崩溃。"""
     try:
         RAW_DIR.mkdir(parents=True, exist_ok=True)
@@ -312,7 +312,7 @@ def ask_llm(state, question):
 
 
 def log_llm(text):
-    """追加一行时间戳日志到 logs/b01_llm.log(自动建目录),并镜像到控制台。"""
+    """追加一行时间戳日志到 日志/b01_llm.log(自动建目录),并镜像到控制台。"""
     line = "[%s] %s" % (datetime.now().strftime("%Y-%m-%d %H:%M:%S"), text)
     try:
         LOG_DIR.mkdir(parents=True, exist_ok=True)
@@ -604,7 +604,7 @@ table.history { width: 100%; border-collapse: collapse; font-size: 13px; }
   <div id="degrade-banner" class="hidden"></div>
   <div class="panel" id="collect-panel">
     <h2>新建采集(与命令行同规则,服务端校验)</h2>
-    <p class="sub">合法范围与 CLI 采集一致;提交成功后自动保存到 evidence/raw/ 并刷新历史列表。</p>
+    <p class="sub">合法范围与 CLI 采集一致;提交成功后自动保存到 证据/raw/ 并刷新历史列表。</p>
     __COLLECT_FORM__
     <button type="button" id="btn-collect" class="primary">提交采集</button>
     <div id="collect-box" class="empty hidden"></div>
@@ -849,7 +849,7 @@ def llm_status():
 
 
 def read_recent_history(limit=HISTORY_WEB_LIMIT):
-    """读取 evidence/raw 下最近 limit 条 run_*.json(文件名倒序 = 时间倒序,与 show_history 一致)。
+    """读取 证据/raw 下最近 limit 条 run_*.json(文件名倒序 = 时间倒序,与 show_history 一致)。
     返回 (records, skipped): 单条文件损坏/缺字段仅计数跳过,不崩溃;
     条目为 {run_id, collect_time, source_type, temperature, humidity, co2, light},
     数值缺失为 None(页面显示 "—"),早期记录可能无 source_type(显示 "—")。"""
@@ -980,7 +980,7 @@ class B01RequestHandler(BaseHTTPRequestHandler):
                         break
                 if saved_path is None:
                     _json_response(self, 500, {"status": "error", "error_type": "save_failed",
-                                               "message": "原始数据保存失败(evidence/raw 目录不可写?),本次采集未保存"})
+                                               "message": "原始数据保存失败(证据/raw 目录不可写?),本次采集未保存"})
                     return
                 log_llm("[采集] run_id=%s 温度=%g 湿度=%g co2=%g 光照=%g"
                         % (record["run_id"], values["temperature"], values["humidity"],
@@ -1062,7 +1062,7 @@ def _normalize(text):
 
 def run_abtest():
     """A/B 验证: 两套环境状态、只切换状态、固定提问,校验 LLM 回答是否跟随状态变化。
-    退出码恒为 0,判定结果与完整回答见控制台与 logs/b01_llm.log。"""
+    退出码恒为 0,判定结果与完整回答见控制台与 日志/b01_llm.log。"""
     setup_console()
     print("================ B01 A/B 验证 ================")
     print("固定提问: %s" % FIXED_QUESTION)
@@ -1100,11 +1100,11 @@ def run_abtest():
             print("观察(仅供参考,不计入判定): 回答 B 未出现异常相关关键词")
     else:
         print("FAIL — 两状态回答内容一致,LLM 未跟随状态变化")
-    print("完整回答见 logs/b01_llm.log")
+    print("完整回答见 日志/b01_llm.log")
 
 
 def show_history():
-    """查看历史 run_id 列表:读取 evidence/raw 下 run_*.json 文件名,按时间倒序展示。"""
+    """查看历史 run_id 列表:读取 证据/raw 下 run_*.json 文件名,按时间倒序展示。"""
     files = sorted(RAW_DIR.glob("run_*.json"), reverse=True)  # 时间戳定宽,字典序即时间序
     if not files:
         print("\n暂无历史采集记录,请先选择菜单 ① 新建采集。")

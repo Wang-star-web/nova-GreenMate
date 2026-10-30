@@ -1,0 +1,286 @@
+{
+  "run_id": "run_20261031_021147_497999",
+  "generated_at": "2026-10-31T02:11:50+08:00",
+  "evidence_records": [
+    {
+      "seq": 1,
+      "evidence_id": "EV01",
+      "source": "b02_memory",
+      "source_marker": "SIMULATED",
+      "tool": "b02_current",
+      "summary": "当前环境状态(库内最新样本,仅上下文): 2026-10-29 01:00:00 温度17.4℃/湿度70.4%RH/CO₂1402.0ppm/光照29.0lux",
+      "status": "ok",
+      "timestamp": "2026-10-31T02:11:50+08:00",
+      "evidence_type": "current",
+      "evidence_time": "2026-10-29 01:00:00",
+      "relation": "支持",
+      "relation_reason": "锚点当前事实支撑「正常」结论",
+      "detail": {
+        "sample_time": "2026-10-29 01:00:00",
+        "source_type": "SIMULATED",
+        "temperature": 17.4,
+        "humidity": 70.4,
+        "co2": 1402.0,
+        "light": 29.0
+      }
+    },
+    {
+      "seq": 2,
+      "evidence_id": "EV02",
+      "source": "b02_memory",
+      "source_marker": "SIMULATED",
+      "tool": "b02_anchor",
+      "summary": "场景锚点样本 2026-10-28 12:00:00: 温度27.6℃/湿度54.0%RH/CO₂923.0ppm/光照59910.0lux,source_type=SIMULATED",
+      "status": "ok",
+      "timestamp": "2026-10-31T02:11:50+08:00",
+      "evidence_type": "current",
+      "evidence_time": "2026-10-28 12:00:00",
+      "relation": "支持",
+      "relation_reason": "锚点当前事实支撑「正常」结论",
+      "detail": {
+        "sample_time": "2026-10-28 12:00:00",
+        "source_type": "SIMULATED",
+        "temperature": 27.6,
+        "humidity": 54.0,
+        "co2": 923.0,
+        "light": 59910.0
+      }
+    },
+    {
+      "seq": 3,
+      "evidence_id": "EV03",
+      "source": "b01_cli",
+      "source_marker": "SIMULATED",
+      "tool": "b01_raw",
+      "summary": "B01 原始采集记录已存档 证据/raw/run_20261031_021147_497999.json(collect_time=2026-10-28T12:00:00+08:00,source_type=SIMULATED)",
+      "status": "ok",
+      "timestamp": "2026-10-31T02:11:50+08:00",
+      "evidence_type": "raw",
+      "evidence_time": "2026-10-28T12:00:00+08:00",
+      "relation": "支持",
+      "relation_reason": "锚点当前事实支撑「正常」结论",
+      "detail": {
+        "path": "证据/raw/run_20261031_021147_497999.json",
+        "saved": true,
+        "collect_time": "2026-10-28T12:00:00+08:00",
+        "source_type": "SIMULATED",
+        "valid_ranges": {
+          "temperature": {
+            "min": 5.0,
+            "max": 40.0,
+            "unit": "℃"
+          },
+          "humidity": {
+            "min": 30.0,
+            "max": 90.0,
+            "unit": "%RH"
+          },
+          "co2": {
+            "min": 300.0,
+            "max": 2000.0,
+            "unit": "ppm"
+          },
+          "light": {
+            "min": 0.0,
+            "max": 100000.0,
+            "unit": "lux"
+          }
+        }
+      }
+    },
+    {
+      "seq": 4,
+      "evidence_id": "EV04",
+      "source": "b02_memory",
+      "source_marker": "SIMULATED",
+      "tool": "b02_history",
+      "summary": "历史窗口 2026-10-27 12:00:00 ~ 2026-10-28 12:00:00 共 49 个样本(源=environment_samples,30 分钟网格,已发生事实)",
+      "status": "ok",
+      "timestamp": "2026-10-31T02:11:50+08:00",
+      "evidence_type": "history",
+      "evidence_time": "2026-10-27 12:00:00~2026-10-28 12:00:00",
+      "relation": "支持",
+      "relation_reason": "历史窗口(已发生事实)支撑「正常」结论",
+      "detail": {
+        "start": "2026-10-27 12:00:00",
+        "end": "2026-10-28 12:00:00",
+        "count": 49,
+        "first": {
+          "sample_time": "2026-10-27 12:00:00",
+          "source_type": "SIMULATED",
+          "temperature": 28.2,
+          "humidity": 53.9,
+          "co2": 932.0,
+          "light": 60063.0
+        },
+        "last": {
+          "sample_time": "2026-10-28 12:00:00",
+          "source_type": "SIMULATED",
+          "temperature": 27.6,
+          "humidity": 54.0,
+          "co2": 923.0,
+          "light": 59910.0
+        }
+      }
+    },
+    {
+      "seq": 5,
+      "evidence_id": "EV05",
+      "source": "b02_memory",
+      "source_marker": "SIMULATED",
+      "tool": "b02_stats",
+      "summary": "趋势窗口 2026-10-27 12:00:00 ~ 2026-10-28 12:00:00 共 49 点;斜率(每小时,已发生): 温度-0.37/湿度-0.78/CO₂浓度+9.34/光照+947.58",
+      "status": "ok",
+      "timestamp": "2026-10-31T02:11:50+08:00",
+      "evidence_type": "trend",
+      "evidence_time": "2026-10-27 12:00:00~2026-10-28 12:00:00",
+      "relation": "支持",
+      "relation_reason": "趋势平稳支撑「正常」结论",
+      "detail": {
+        "window": {
+          "start": "2026-10-27 12:00:00",
+          "end": "2026-10-28 12:00:00"
+        },
+        "count": 49,
+        "parameters": {
+          "temperature": {
+            "count": 49,
+            "min": 17.2,
+            "max": 33.2,
+            "mean": 23.959183673469386,
+            "std": 5.332522791299433,
+            "slope_per_hour": -0.37206122448979595
+          },
+          "humidity": {
+            "count": 49,
+            "min": 53.8,
+            "max": 88.9,
+            "mean": 68.12653061224489,
+            "std": 11.067384053872821,
+            "slope_per_hour": -0.7846122448979592
+          },
+          "co2": {
+            "count": 49,
+            "min": 888.0,
+            "max": 1405.0,
+            "mean": 1145.1020408163265,
+            "std": 179.6136182775357,
+            "slope_per_hour": 9.343061224489796
+          },
+          "light": {
+            "count": 49,
+            "min": 0.0,
+            "max": 60063.0,
+            "mean": 12773.836734693878,
+            "std": 20335.49391083947,
+            "slope_per_hour": 947.5795918367347
+          }
+        }
+      }
+    },
+    {
+      "seq": 6,
+      "evidence_id": "EV06",
+      "source": "b03_weather",
+      "source_marker": "PUBLIC",
+      "tool": "b03_weather",
+      "summary": "北京(39.9042,116.4074) 天气预报: forecast_time=2026-10-31T00:00:00+08:00,温度8.1℃/湿度40.0%RH/降水概率0.0%",
+      "status": "ok",
+      "timestamp": "2026-10-31T02:11:50+08:00",
+      "evidence_type": "weather",
+      "evidence_time": "2026-10-31T00:00:00+08:00",
+      "relation": "中性",
+      "relation_reason": "外部天气为未来外部条件,不直接决定棚内当前判断",
+      "detail": {
+        "provider": "open-meteo",
+        "forecast_time": "2026-10-31T00:00:00+08:00",
+        "analysis_time": "2026-10-28T12:00:00+08:00",
+        "location": "北京(39.9042,116.4074)",
+        "temperature": {
+          "value": 8.1,
+          "unit": "℃"
+        },
+        "humidity": {
+          "value": 40.0,
+          "unit": "%RH"
+        },
+        "precipitation_probability": {
+          "value": 0.0,
+          "unit": "%"
+        },
+        "cloud_cover": {
+          "value": 0.0,
+          "unit": "%"
+        },
+        "shortwave_radiation": {
+          "value": 0.0,
+          "unit": "W/m²"
+        },
+        "simulated": false
+      }
+    },
+    {
+      "seq": 7,
+      "evidence_id": "EV07",
+      "source": "b04_rag",
+      "source_marker": "SIMULATED",
+      "tool": "b04_knowledge",
+      "summary": "知识检索命中 Top-1 s1_c001(得分 0.3366): # 番茄大棚温度管理\n\n摘要:温度是影响番茄生长发育最核心的环境因子之一。番茄为喜温性蔬菜,设施栽培中应将气温稳定控制在…",
+      "status": "ok",
+      "timestamp": "2026-10-31T02:11:50+08:00",
+      "evidence_type": "knowledge",
+      "evidence_time": "2026-10-31T02:11:50+08:00",
+      "relation": "中性",
+      "relation_reason": "静态规则建议,不直接决定当前结论",
+      "detail": {
+        "query": "番茄适宜生长温度是多少",
+        "threshold": 0.17,
+        "top1": {
+          "chunk_id": "s1_c001",
+          "score": 0.3366,
+          "source_id": "s1",
+          "citation": {
+            "source_id": "s1",
+            "title": "番茄大棚温度管理",
+            "chunk_id": "s1_c001",
+            "char_range": [
+              0,
+              182
+            ],
+            "seq": 1
+          }
+        },
+        "note": "知识库为课程自编模拟资料(5 份 source),检索结果仅作建议参考"
+      }
+    },
+    {
+      "seq": 8,
+      "evidence_id": "EV08",
+      "source": "b06_ml",
+      "source_marker": "MODEL_OUTPUT",
+      "tool": "b06_predict",
+      "summary": "B06 预测 next_window_attention=NORMAL(P(WATCH)=0.5,模型 B06-ML-v3,未来 1~2h 窗口短时推演)",
+      "status": "ok",
+      "timestamp": "2026-10-31T02:11:50+08:00",
+      "evidence_type": "prediction",
+      "evidence_time": "2026-10-28 12:00:00",
+      "relation": "支持",
+      "relation_reason": "模型预测 NORMAL 支撑「正常」结论",
+      "detail": {
+        "prediction": "NORMAL",
+        "probability": {
+          "NORMAL": 0.5,
+          "WATCH": 0.5
+        },
+        "model_version": "B06-ML-v3",
+        "window": {
+          "start": "2026-10-28 09:30:00",
+          "end": "2026-10-28 12:00:00",
+          "points": 6
+        },
+        "MODEL_OUTPUT": "B06_ML",
+        "label_source": "DERIVED_LABEL: 规则派生(阈值表 b03_rules.json R1~R8),源=environment_samples 原始参数值,非 sim_scenario"
+      }
+    }
+  ]
+}

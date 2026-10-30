@@ -43,7 +43,7 @@ py b07_main.py run S1         # 跑通完整链路:8 次工具调用 → 证据 
 py b09_portal.py serve        # 一键起三服务:门户 8300 + B01 8123 + B02 8223
 ```
 
-期望结果:终端输出 `✓ S1 稳态基线 → 结论=正常 关注级=normal 信任=高 降级=0`,并生成 `report/run_*.html`;浏览器打开 http://127.0.0.1:8300/ 看到整合首页(数字孪生 + 报告列表)。
+期望结果:终端输出 `✓ S1 稳态基线 → 结论=正常 关注级=normal 信任=高 降级=0`,并生成 `报告/run_*.html`;浏览器打开 http://127.0.0.1:8300/ 看到整合首页(数字孪生 + 报告列表)。
 
 ### 路线 B:最小可跑模式(无密钥 / 无外网)
 
@@ -55,8 +55,8 @@ py b02_memory.py generate
 py b02_memory.py check                          # 质量检查 10/10
 py b07_main.py run S1                           # 天气断网时如实降级
 py b07_main.py selftest                         # 校验函数自测,零 LLM 零网络
-py b08_verify.py --json-path evidence/b07/<最新run_id>/run_result.json
-py b09_portal.py serve --portal-only            # 只起门户(或直接双击 web/index.html)
+py b08_verify.py --json-path 证据/b07/<最新run_id>/run_result.json
+py b09_portal.py serve --portal-only            # 只起门户(或直接双击 门户页面/index.html)
 ```
 
 降级后的能力:LLM 解释显示 `[解释] status=omitted reason=no_api_key`(结构化判断不受影响);天气证据显示 `network_timeout` 并标注【证据缺失】、信任降级为「低」;其余全部功能(时序、检索、预测、判断、报告、门户)照常。**不会白屏、不会崩溃。**
@@ -107,16 +107,16 @@ copy .env.example .env      # Windows;Linux/macOS 用 cp .env.example .env
 
 | 验收项 | 操作 | 期望 | 截图文件 |
 |---|---|---|---|
-| 数据生成 | `py b02_memory.py generate` + `check` | 终端输出 336 点生成摘要;`通过 10 / 10` | `docs/screenshots/01-generate-check.png` |
-| 完整链路 | `py b07_main.py run S1` | 输出 `结论=正常 关注级=normal 信任=高 降级=0`,生成 `report/run_*_report.html` | `docs/screenshots/02-run-s1.png` |
-| 四视图报告 | 打开 `report/run_*_report.html` | 四视图齐全;证据表含 类型/来源标记/自报时间/支持-限制 | `docs/screenshots/03-report-views.png` |
-| 数字孪生 | `py b09_portal.py serve` 后打开 8300 门户与 8123 状态 B | 3D 孪生动画;切换 B 后红太阳/浓雾/暗光/关注脉冲环 | `docs/screenshots/04-twin.png` |
-| 异常/降级 | 无 Key 且断网执行 `py b07_main.py run S1` | LLM `omitted(no_api_key)`、天气 `network_timeout`【证据缺失】、信任降「低」,不崩溃 | `docs/screenshots/05-degrade.png` |
-| 可复现实验 | `py b07_main.py exp-all` + `check-all` | 6 组 `run_<type>_001` 落盘;check-all 输出 6 行 0 FAIL | `docs/screenshots/06-exp-all.png` |
-| 契约校验 | `py b08_verify.py --json-path …` | `2 OK / 3 本轮预期缺失`,两次运行 sha256 一致 | `docs/screenshots/07-b08-verify.png` |
-| 数据留痕 | `py b01_cli.py web` 提交采集 | `evidence/raw/run_*.json` 生成且页面历史出现该条 | `docs/screenshots/08-collect.png` |
+| 数据生成 | `py b02_memory.py generate` + `check` | 终端输出 336 点生成摘要;`通过 10 / 10` | `文档/screenshots/01-generate-check.png` |
+| 完整链路 | `py b07_main.py run S1` | 输出 `结论=正常 关注级=normal 信任=高 降级=0`,生成 `报告/run_*_report.html` | `文档/screenshots/02-run-s1.png` |
+| 四视图报告 | 打开 `报告/run_*_report.html` | 四视图齐全;证据表含 类型/来源标记/自报时间/支持-限制 | `文档/screenshots/03-report-views.png` |
+| 数字孪生 | `py b09_portal.py serve` 后打开 8300 门户与 8123 状态 B | 3D 孪生动画;切换 B 后红太阳/浓雾/暗光/关注脉冲环 | `文档/screenshots/04-twin.png` |
+| 异常/降级 | 无 Key 且断网执行 `py b07_main.py run S1` | LLM `omitted(no_api_key)`、天气 `network_timeout`【证据缺失】、信任降「低」,不崩溃 | `文档/screenshots/05-degrade.png` |
+| 可复现实验 | `py b07_main.py exp-all` + `check-all` | 6 组 `run_<type>_001` 落盘;check-all 输出 6 行 0 FAIL | `文档/screenshots/06-exp-all.png` |
+| 契约校验 | `py b08_verify.py --json-path …` | `2 OK / 3 本轮预期缺失`,两次运行 sha256 一致 | `文档/screenshots/07-b08-verify.png` |
+| 数据留痕 | `py b01_cli.py web` 提交采集 | `证据/raw/run_*.json` 生成且页面历史出现该条 | `文档/screenshots/08-collect.png` |
 
-> 截图目录 `docs/screenshots/` 由本人在交稿前按上表逐项拍摄并提交(文件名固定)。
+> 截图目录 `文档/screenshots/` 由本人在交稿前按上表逐项拍摄并提交(文件名固定)。
 
 ## 8. 排错 FAQ
 
@@ -141,8 +141,8 @@ copy .env.example .env      # Windows;Linux/macOS 用 cp .env.example .env
 - 解决:显式设置 `DEEPSEEK_API_KEY` 使用自己的密钥;验证脚本可用 `DEEPSEEK_API_KEY= ANTHROPIC_AUTH_TOKEN=` 前缀走无 Key 降级路径。
 
 **Q:门户 404 或图表脚本 404?**
-- 原因:门户静态服务只映射 `/`、`/report/*`、`/b02_assets/*` 三类路径;错误消息曾含中文导致 latin-1 编码异常(已改为 ASCII)。
-- 解决:确认访问路径在上述映射内;图表资产必须保留 `b02_assets/chart.umd.js`。
+- 原因:门户静态服务只映射 `/`、`/报告/*`、`/前端资源/*` 三类路径;错误消息曾含中文导致 latin-1 编码异常(已改为 ASCII)。
+- 解决:确认访问路径在上述映射内;图表资产必须保留 `前端资源/chart.umd.js`。
 
 ## 9. AI 协同说明
 
@@ -158,12 +158,12 @@ copy .env.example .env      # Windows;Linux/macOS 用 cp .env.example .env
 ```
 nova-GreenMate/
 ├── b01_cli.py ~ b09_portal.py   # 九个模块:采集/记忆/天气/RAG/智能体/预测/组装/校验/门户
-├── docs/                        # 各模块说明文档 + b07_pass23(实验框架)+ req/(参赛规范原文)
+├── 文档/                        # 各模块说明文档 + b07_pass23(实验框架)+ req/(参赛规范原文)
 ├── data/                        # environment.db(SQLite,由 py b02_memory.py generate 生成)
-├── evidence/                    # 运行证据:raw/各模块证据/b07 实验存档
-├── report/                      # 四视图 HTML 报告
+├── 证据/                    # 运行证据:raw/各模块证据/b07 实验存档
+├── 报告/                      # 四视图 HTML 报告
 ├── models/                      # B06 模型(joblib + 特征列表 + 配置)
-├── testdata/                    # S1~S5 场景与 6 组实验预设(JSON)
+├── 测试配置/                    # S1~S5 场景与 6 组实验预设(JSON)
 ├── web/                         # 整合门户首页(由 py b09_portal.py 生成)
 ├── .env.example                 # 环境变量模板(全部可选)
 └── requirements.txt             # 依赖清单
@@ -181,4 +181,4 @@ nova-GreenMate/
 
 ---
 
-**模块技术细节**:B01 说明见 `b01_cli.py` 头部注释;其余模块文档见 [docs/](docs/)(b02_schema / b03_README / b04_rag / b05_agent / b06_ml / b07_main / b07_pass23 / b08_verify)。参赛规范原文见 [docs/req/](docs/req/)。
+**模块技术细节**:B01 说明见 `b01_cli.py` 头部注释;其余模块文档见 [文档/](文档/)(b02_schema / b03_README / b04_rag / b05_agent / b06_ml / b07_main / b07_pass23 / b08_verify)。参赛规范原文见 [文档/req/](文档/req/)。

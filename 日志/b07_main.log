@@ -1,0 +1,1032 @@
+[2026-10-30 00:59:32] [场景] run_id=run_20261030_005932_b2425b scenario=S1 name=稳态基线 anchor=2026-10-28 12:00:00
+[2026-10-30 00:59:32] [工具] seq=1 tool=b02_current marker=SIMULATED status=ok
+[2026-10-30 00:59:32] [工具] seq=2 tool=b02_anchor marker=SIMULATED status=ok
+[2026-10-30 00:59:32] [工具] seq=3 tool=b01_raw marker=SIMULATED status=ok
+[2026-10-30 00:59:32] [工具] seq=4 tool=b02_history marker=SIMULATED status=ok
+[2026-10-30 00:59:32] [工具] seq=5 tool=b02_stats marker=SIMULATED status=ok
+[2026-10-30 00:59:33] [工具] seq=6 tool=b03_weather marker=PUBLIC status=ok [nested=success]
+[2026-10-30 00:59:33] [工具] seq=7 tool=b04_knowledge marker=SIMULATED status=ok [nested=ok]
+[2026-10-30 00:59:33] [工具] seq=8 tool=b06_predict marker=MODEL_OUTPUT status=ok [nested=ok]
+[2026-10-30 01:00:00] [场景] run_id=run_20261030_010000_7d115b scenario=S1 name=稳态基线 anchor=2026-10-28 12:00:00
+[2026-10-30 01:00:00] [工具] seq=1 tool=b02_current marker=SIMULATED status=ok
+[2026-10-30 01:00:00] [工具] seq=2 tool=b02_anchor marker=SIMULATED status=ok
+[2026-10-30 01:00:00] [工具] seq=3 tool=b01_raw marker=SIMULATED status=ok
+[2026-10-30 01:00:00] [工具] seq=4 tool=b02_history marker=SIMULATED status=ok
+[2026-10-30 01:00:00] [工具] seq=5 tool=b02_stats marker=SIMULATED status=ok
+[2026-10-30 01:00:02] [工具] seq=6 tool=b03_weather marker=PUBLIC status=ok [nested=success]
+[2026-10-30 01:00:02] [工具] seq=7 tool=b04_knowledge marker=SIMULATED status=ok [nested=ok]
+[2026-10-30 01:00:02] [工具] seq=8 tool=b06_predict marker=MODEL_OUTPUT status=ok [nested=ok]
+[2026-10-30 01:00:02] [证据] seq=1 evidence_id=EV01 source=b02_memory marker=SIMULATED status=ok
+[2026-10-30 01:00:02] [证据] seq=2 evidence_id=EV02 source=b02_memory marker=SIMULATED status=ok
+[2026-10-30 01:00:02] [证据] seq=3 evidence_id=EV03 source=b01_cli marker=SIMULATED status=ok
+[2026-10-30 01:00:02] [证据] seq=4 evidence_id=EV04 source=b02_memory marker=SIMULATED status=ok
+[2026-10-30 01:00:02] [证据] seq=5 evidence_id=EV05 source=b02_memory marker=SIMULATED status=ok
+[2026-10-30 01:00:02] [证据] seq=6 evidence_id=EV06 source=b03_weather marker=PUBLIC status=ok
+[2026-10-30 01:00:02] [证据] seq=7 evidence_id=EV07 source=b04_rag marker=SIMULATED status=ok
+[2026-10-30 01:00:02] [证据] seq=8 evidence_id=EV08 source=b06_ml marker=MODEL_OUTPUT status=ok
+[2026-10-30 01:00:02] [判断] conclusion=正常 attention_level=normal trust=高 matched_rules=无 degraded=0
+[2026-10-30 01:00:02] [解释] status=omitted reason=no_api_key: 未配置 DEEPSEEK_API_KEY / ANTHROPIC_AUTH_TOKEN,跳过 LLM 解释(结构化判断不受影响)
+[2026-10-30 01:00:02] [完成] run_id=run_20261030_010000_7d115b scenario=S1 report=report/run_20261030_010000_7d115b_report.html
+[2026-10-30 01:00:13] [场景] run_id=run_20261030_010013_92226b scenario=S2 name=渐进漂移 anchor=2026-10-27 12:30:00
+[2026-10-30 01:00:13] [工具] seq=1 tool=b02_current marker=SIMULATED status=ok
+[2026-10-30 01:00:13] [工具] seq=2 tool=b02_anchor marker=SIMULATED status=ok
+[2026-10-30 01:00:13] [工具] seq=3 tool=b01_raw marker=SIMULATED status=ok
+[2026-10-30 01:00:13] [工具] seq=4 tool=b02_history marker=SIMULATED status=ok
+[2026-10-30 01:00:13] [工具] seq=5 tool=b02_stats marker=SIMULATED status=ok
+[2026-10-30 01:00:15] [工具] seq=6 tool=b03_weather marker=PUBLIC status=ok [nested=success]
+[2026-10-30 01:00:15] [工具] seq=7 tool=b04_knowledge marker=SIMULATED status=ok [nested=ok]
+[2026-10-30 01:00:15] [工具] seq=8 tool=b06_predict marker=MODEL_OUTPUT status=ok [nested=ok]
+[2026-10-30 01:00:15] [证据] seq=1 evidence_id=EV01 source=b02_memory marker=SIMULATED status=ok
+[2026-10-30 01:00:15] [证据] seq=2 evidence_id=EV02 source=b02_memory marker=SIMULATED status=ok
+[2026-10-30 01:00:15] [证据] seq=3 evidence_id=EV03 source=b01_cli marker=SIMULATED status=ok
+[2026-10-30 01:00:15] [证据] seq=4 evidence_id=EV04 source=b02_memory marker=SIMULATED status=ok
+[2026-10-30 01:00:15] [证据] seq=5 evidence_id=EV05 source=b02_memory marker=SIMULATED status=ok
+[2026-10-30 01:00:15] [证据] seq=6 evidence_id=EV06 source=b03_weather marker=PUBLIC status=ok
+[2026-10-30 01:00:15] [证据] seq=7 evidence_id=EV07 source=b04_rag marker=SIMULATED status=ok
+[2026-10-30 01:00:15] [证据] seq=8 evidence_id=EV08 source=b06_ml marker=MODEL_OUTPUT status=ok
+[2026-10-30 01:00:15] [判断] conclusion=需要关注 attention_level=attention trust=中 matched_rules=无 degraded=2
+[2026-10-30 01:00:15] [解释] status=omitted reason=no_api_key: 未配置 DEEPSEEK_API_KEY / ANTHROPIC_AUTH_TOKEN,跳过 LLM 解释(结构化判断不受影响)
+[2026-10-30 01:00:15] [完成] run_id=run_20261030_010013_92226b scenario=S2 report=report/run_20261030_010013_92226b_report.html
+[2026-10-30 01:00:19] [场景] run_id=run_20261030_010019_4193a2 scenario=S3 name=外部扰动 anchor=2026-10-27 13:30:00
+[2026-10-30 01:00:19] [工具] seq=1 tool=b02_current marker=SIMULATED status=ok
+[2026-10-30 01:00:19] [工具] seq=2 tool=b02_anchor marker=SIMULATED status=ok
+[2026-10-30 01:00:19] [工具] seq=3 tool=b01_raw marker=SIMULATED status=ok
+[2026-10-30 01:00:19] [工具] seq=4 tool=b02_history marker=SIMULATED status=ok
+[2026-10-30 01:00:19] [工具] seq=5 tool=b02_stats marker=SIMULATED status=ok
+[2026-10-30 01:00:21] [工具] seq=6 tool=b03_weather marker=PUBLIC status=ok [nested=success]
+[2026-10-30 01:00:21] [工具] seq=7 tool=b04_knowledge marker=SIMULATED status=ok [nested=ok]
+[2026-10-30 01:00:21] [工具] seq=8 tool=b06_predict marker=MODEL_OUTPUT status=ok [nested=ok]
+[2026-10-30 01:00:21] [证据] seq=1 evidence_id=EV01 source=b02_memory marker=SIMULATED status=ok
+[2026-10-30 01:00:21] [证据] seq=2 evidence_id=EV02 source=b02_memory marker=SIMULATED status=ok
+[2026-10-30 01:00:21] [证据] seq=3 evidence_id=EV03 source=b01_cli marker=SIMULATED status=ok
+[2026-10-30 01:00:21] [证据] seq=4 evidence_id=EV04 source=b02_memory marker=SIMULATED status=ok
+[2026-10-30 01:00:21] [证据] seq=5 evidence_id=EV05 source=b02_memory marker=SIMULATED status=ok
+[2026-10-30 01:00:21] [证据] seq=6 evidence_id=EV06 source=b03_weather marker=PUBLIC status=ok
+[2026-10-30 01:00:21] [证据] seq=7 evidence_id=EV07 source=b04_rag marker=SIMULATED status=ok
+[2026-10-30 01:00:21] [证据] seq=8 evidence_id=EV08 source=b06_ml marker=MODEL_OUTPUT status=ok
+[2026-10-30 01:00:21] [判断] conclusion=需要预警 attention_level=warning trust=高 matched_rules=R1,R3,R7 degraded=0
+[2026-10-30 01:00:21] [解释] status=omitted reason=no_api_key: 未配置 DEEPSEEK_API_KEY / ANTHROPIC_AUTH_TOKEN,跳过 LLM 解释(结构化判断不受影响)
+[2026-10-30 01:00:22] [完成] run_id=run_20261030_010019_4193a2 scenario=S3 report=report/run_20261030_010019_4193a2_report.html
+[2026-10-30 01:00:26] [场景] run_id=run_20261030_010026_93a983 scenario=S4 name=多源证据分歧 anchor=2026-10-28 09:00:00
+[2026-10-30 01:00:26] [工具] seq=1 tool=b02_current marker=SIMULATED status=ok
+[2026-10-30 01:00:26] [工具] seq=2 tool=b02_anchor marker=SIMULATED status=ok
+[2026-10-30 01:00:26] [工具] seq=3 tool=b01_raw marker=SIMULATED status=ok
+[2026-10-30 01:00:26] [工具] seq=4 tool=b02_history marker=SIMULATED status=ok
+[2026-10-30 01:00:26] [工具] seq=5 tool=b02_stats marker=SIMULATED status=ok
+[2026-10-30 01:00:28] [工具] seq=6 tool=b03_weather marker=PUBLIC status=ok [nested=success]
+[2026-10-30 01:00:28] [工具] seq=7 tool=b04_knowledge marker=SIMULATED status=ok [nested=ok]
+[2026-10-30 01:00:28] [工具] seq=8 tool=b06_predict marker=MODEL_OUTPUT status=ok [nested=ok]
+[2026-10-30 01:00:28] [证据] seq=1 evidence_id=EV01 source=b02_memory marker=SIMULATED status=ok
+[2026-10-30 01:00:28] [证据] seq=2 evidence_id=EV02 source=b02_memory marker=SIMULATED status=ok
+[2026-10-30 01:00:28] [证据] seq=3 evidence_id=EV03 source=b01_cli marker=SIMULATED status=ok
+[2026-10-30 01:00:28] [证据] seq=4 evidence_id=EV04 source=b02_memory marker=SIMULATED status=ok
+[2026-10-30 01:00:28] [证据] seq=5 evidence_id=EV05 source=b02_memory marker=SIMULATED status=ok
+[2026-10-30 01:00:28] [证据] seq=6 evidence_id=EV06 source=b03_weather marker=PUBLIC status=ok
+[2026-10-30 01:00:28] [证据] seq=7 evidence_id=EV07 source=b04_rag marker=SIMULATED status=ok
+[2026-10-30 01:00:28] [证据] seq=8 evidence_id=EV08 source=b06_ml marker=MODEL_OUTPUT status=ok
+[2026-10-30 01:00:28] [判断] conclusion=需要关注 attention_level=attention trust=中 matched_rules=无 degraded=2
+[2026-10-30 01:00:28] [解释] status=omitted reason=no_api_key: 未配置 DEEPSEEK_API_KEY / ANTHROPIC_AUTH_TOKEN,跳过 LLM 解释(结构化判断不受影响)
+[2026-10-30 01:00:28] [完成] run_id=run_20261030_010026_93a983 scenario=S4 report=report/run_20261030_010026_93a983_report.html
+[2026-10-30 01:00:32] [场景] run_id=run_20261030_010032_50c48a scenario=S5 name=证据退化 anchor=2026-10-28 12:00:00
+[2026-10-30 01:00:32] [工具] seq=1 tool=b02_current marker=SIMULATED status=ok
+[2026-10-30 01:00:32] [工具] seq=2 tool=b02_anchor marker=SIMULATED status=ok
+[2026-10-30 01:00:32] [工具] seq=3 tool=b01_raw marker=SIMULATED status=ok
+[2026-10-30 01:00:32] [工具] seq=4 tool=b02_history marker=SIMULATED status=ok
+[2026-10-30 01:00:32] [工具] seq=5 tool=b02_stats marker=SIMULATED status=ok
+[2026-10-30 01:00:32] [工具] seq=6 tool=b03_weather marker=PUBLIC status=ok [nested=error]
+[2026-10-30 01:00:32] [工具] seq=7 tool=b04_knowledge marker=SIMULATED status=ok [nested=insufficient]
+[2026-10-30 01:00:33] [工具] seq=8 tool=b06_predict marker=MODEL_OUTPUT status=ok [nested=ok]
+[2026-10-30 01:00:33] [证据] seq=1 evidence_id=EV01 source=b02_memory marker=SIMULATED status=ok
+[2026-10-30 01:00:33] [证据] seq=2 evidence_id=EV02 source=b02_memory marker=SIMULATED status=ok
+[2026-10-30 01:00:33] [证据] seq=3 evidence_id=EV03 source=b01_cli marker=SIMULATED status=ok
+[2026-10-30 01:00:33] [证据] seq=4 evidence_id=EV04 source=b02_memory marker=SIMULATED status=ok
+[2026-10-30 01:00:33] [证据] seq=5 evidence_id=EV05 source=b02_memory marker=SIMULATED status=ok
+[2026-10-30 01:00:33] [证据] seq=6 evidence_id=EV06 source=b03_weather marker=PUBLIC status=error
+[2026-10-30 01:00:33] [证据] seq=7 evidence_id=EV07 source=b04_rag marker=SIMULATED status=insufficient
+[2026-10-30 01:00:33] [证据] seq=8 evidence_id=EV08 source=b06_ml marker=MODEL_OUTPUT status=ok
+[2026-10-30 01:00:33] [判断] conclusion=正常 attention_level=normal trust=低 matched_rules=无 degraded=2
+[2026-10-30 01:00:33] [解释] status=omitted reason=no_api_key: 未配置 DEEPSEEK_API_KEY / ANTHROPIC_AUTH_TOKEN,跳过 LLM 解释(结构化判断不受影响)
+[2026-10-30 01:00:33] [完成] run_id=run_20261030_010032_50c48a scenario=S5 report=report/run_20261030_010032_50c48a_report.html
+[2026-10-30 01:02:15] [场景] run_id=run_20261030_010215_c8a199 scenario=S1 name=稳态基线 anchor=2026-10-28 12:00:00
+[2026-10-30 01:02:15] [工具] seq=1 tool=b02_current marker=SIMULATED status=ok
+[2026-10-30 01:02:15] [工具] seq=2 tool=b02_anchor marker=SIMULATED status=ok
+[2026-10-30 01:02:15] [工具] seq=3 tool=b01_raw marker=SIMULATED status=ok
+[2026-10-30 01:02:15] [工具] seq=4 tool=b02_history marker=SIMULATED status=ok
+[2026-10-30 01:02:15] [工具] seq=5 tool=b02_stats marker=SIMULATED status=ok
+[2026-10-30 01:02:17] [工具] seq=6 tool=b03_weather marker=PUBLIC status=ok [nested=success]
+[2026-10-30 01:02:17] [工具] seq=7 tool=b04_knowledge marker=SIMULATED status=ok [nested=ok]
+[2026-10-30 01:02:17] [工具] seq=8 tool=b06_predict marker=MODEL_OUTPUT status=ok [nested=ok]
+[2026-10-30 01:02:17] [证据] seq=1 evidence_id=EV01 source=b02_memory marker=SIMULATED status=ok
+[2026-10-30 01:02:17] [证据] seq=2 evidence_id=EV02 source=b02_memory marker=SIMULATED status=ok
+[2026-10-30 01:02:17] [证据] seq=3 evidence_id=EV03 source=b01_cli marker=SIMULATED status=ok
+[2026-10-30 01:02:17] [证据] seq=4 evidence_id=EV04 source=b02_memory marker=SIMULATED status=ok
+[2026-10-30 01:02:17] [证据] seq=5 evidence_id=EV05 source=b02_memory marker=SIMULATED status=ok
+[2026-10-30 01:02:17] [证据] seq=6 evidence_id=EV06 source=b03_weather marker=PUBLIC status=ok
+[2026-10-30 01:02:17] [证据] seq=7 evidence_id=EV07 source=b04_rag marker=SIMULATED status=ok
+[2026-10-30 01:02:17] [证据] seq=8 evidence_id=EV08 source=b06_ml marker=MODEL_OUTPUT status=ok
+[2026-10-30 01:02:17] [判断] conclusion=正常 attention_level=normal trust=高 matched_rules=无 degraded=0
+[2026-10-30 01:02:17] [解释] status=omitted reason=no_api_key: 未配置 DEEPSEEK_API_KEY / ANTHROPIC_AUTH_TOKEN,跳过 LLM 解释(结构化判断不受影响)
+[2026-10-30 01:02:17] [完成] run_id=run_20261030_010215_c8a199 scenario=S1 report=report/run_20261030_010215_c8a199_report.html
+[2026-10-30 01:02:17] [场景] run_id=run_20261030_010217_89b7d5 scenario=S2 name=渐进漂移 anchor=2026-10-27 12:30:00
+[2026-10-30 01:02:18] [工具] seq=1 tool=b02_current marker=SIMULATED status=ok
+[2026-10-30 01:02:18] [工具] seq=2 tool=b02_anchor marker=SIMULATED status=ok
+[2026-10-30 01:02:18] [工具] seq=3 tool=b01_raw marker=SIMULATED status=ok
+[2026-10-30 01:02:18] [工具] seq=4 tool=b02_history marker=SIMULATED status=ok
+[2026-10-30 01:02:18] [工具] seq=5 tool=b02_stats marker=SIMULATED status=ok
+[2026-10-30 01:02:20] [工具] seq=6 tool=b03_weather marker=PUBLIC status=ok [nested=success]
+[2026-10-30 01:02:20] [工具] seq=7 tool=b04_knowledge marker=SIMULATED status=ok [nested=ok]
+[2026-10-30 01:02:20] [工具] seq=8 tool=b06_predict marker=MODEL_OUTPUT status=ok [nested=ok]
+[2026-10-30 01:02:20] [证据] seq=1 evidence_id=EV01 source=b02_memory marker=SIMULATED status=ok
+[2026-10-30 01:02:20] [证据] seq=2 evidence_id=EV02 source=b02_memory marker=SIMULATED status=ok
+[2026-10-30 01:02:20] [证据] seq=3 evidence_id=EV03 source=b01_cli marker=SIMULATED status=ok
+[2026-10-30 01:02:20] [证据] seq=4 evidence_id=EV04 source=b02_memory marker=SIMULATED status=ok
+[2026-10-30 01:02:20] [证据] seq=5 evidence_id=EV05 source=b02_memory marker=SIMULATED status=ok
+[2026-10-30 01:02:20] [证据] seq=6 evidence_id=EV06 source=b03_weather marker=PUBLIC status=ok
+[2026-10-30 01:02:20] [证据] seq=7 evidence_id=EV07 source=b04_rag marker=SIMULATED status=ok
+[2026-10-30 01:02:20] [证据] seq=8 evidence_id=EV08 source=b06_ml marker=MODEL_OUTPUT status=ok
+[2026-10-30 01:02:20] [判断] conclusion=需要关注 attention_level=attention trust=中 matched_rules=无 degraded=2
+[2026-10-30 01:02:20] [解释] status=omitted reason=no_api_key: 未配置 DEEPSEEK_API_KEY / ANTHROPIC_AUTH_TOKEN,跳过 LLM 解释(结构化判断不受影响)
+[2026-10-30 01:02:20] [完成] run_id=run_20261030_010217_89b7d5 scenario=S2 report=report/run_20261030_010217_89b7d5_report.html
+[2026-10-30 01:02:20] [场景] run_id=run_20261030_010220_2ec660 scenario=S3 name=外部扰动 anchor=2026-10-27 13:30:00
+[2026-10-30 01:02:20] [工具] seq=1 tool=b02_current marker=SIMULATED status=ok
+[2026-10-30 01:02:20] [工具] seq=2 tool=b02_anchor marker=SIMULATED status=ok
+[2026-10-30 01:02:20] [工具] seq=3 tool=b01_raw marker=SIMULATED status=ok
+[2026-10-30 01:02:20] [工具] seq=4 tool=b02_history marker=SIMULATED status=ok
+[2026-10-30 01:02:20] [工具] seq=5 tool=b02_stats marker=SIMULATED status=ok
+[2026-10-30 01:02:22] [工具] seq=6 tool=b03_weather marker=PUBLIC status=ok [nested=success]
+[2026-10-30 01:02:22] [工具] seq=7 tool=b04_knowledge marker=SIMULATED status=ok [nested=ok]
+[2026-10-30 01:02:22] [工具] seq=8 tool=b06_predict marker=MODEL_OUTPUT status=ok [nested=ok]
+[2026-10-30 01:02:22] [证据] seq=1 evidence_id=EV01 source=b02_memory marker=SIMULATED status=ok
+[2026-10-30 01:02:22] [证据] seq=2 evidence_id=EV02 source=b02_memory marker=SIMULATED status=ok
+[2026-10-30 01:02:22] [证据] seq=3 evidence_id=EV03 source=b01_cli marker=SIMULATED status=ok
+[2026-10-30 01:02:22] [证据] seq=4 evidence_id=EV04 source=b02_memory marker=SIMULATED status=ok
+[2026-10-30 01:02:22] [证据] seq=5 evidence_id=EV05 source=b02_memory marker=SIMULATED status=ok
+[2026-10-30 01:02:22] [证据] seq=6 evidence_id=EV06 source=b03_weather marker=PUBLIC status=ok
+[2026-10-30 01:02:22] [证据] seq=7 evidence_id=EV07 source=b04_rag marker=SIMULATED status=ok
+[2026-10-30 01:02:22] [证据] seq=8 evidence_id=EV08 source=b06_ml marker=MODEL_OUTPUT status=ok
+[2026-10-30 01:02:22] [判断] conclusion=需要预警 attention_level=warning trust=高 matched_rules=R1,R3,R7 degraded=0
+[2026-10-30 01:02:22] [解释] status=omitted reason=no_api_key: 未配置 DEEPSEEK_API_KEY / ANTHROPIC_AUTH_TOKEN,跳过 LLM 解释(结构化判断不受影响)
+[2026-10-30 01:02:22] [完成] run_id=run_20261030_010220_2ec660 scenario=S3 report=report/run_20261030_010220_2ec660_report.html
+[2026-10-30 01:02:22] [场景] run_id=run_20261030_010222_9b0f27 scenario=S4 name=多源证据分歧 anchor=2026-10-28 09:00:00
+[2026-10-30 01:02:22] [工具] seq=1 tool=b02_current marker=SIMULATED status=ok
+[2026-10-30 01:02:22] [工具] seq=2 tool=b02_anchor marker=SIMULATED status=ok
+[2026-10-30 01:02:22] [工具] seq=3 tool=b01_raw marker=SIMULATED status=ok
+[2026-10-30 01:02:22] [工具] seq=4 tool=b02_history marker=SIMULATED status=ok
+[2026-10-30 01:02:22] [工具] seq=5 tool=b02_stats marker=SIMULATED status=ok
+[2026-10-30 01:02:23] [工具] seq=6 tool=b03_weather marker=PUBLIC status=ok [nested=success]
+[2026-10-30 01:02:23] [工具] seq=7 tool=b04_knowledge marker=SIMULATED status=ok [nested=ok]
+[2026-10-30 01:02:23] [工具] seq=8 tool=b06_predict marker=MODEL_OUTPUT status=ok [nested=ok]
+[2026-10-30 01:02:23] [证据] seq=1 evidence_id=EV01 source=b02_memory marker=SIMULATED status=ok
+[2026-10-30 01:02:23] [证据] seq=2 evidence_id=EV02 source=b02_memory marker=SIMULATED status=ok
+[2026-10-30 01:02:23] [证据] seq=3 evidence_id=EV03 source=b01_cli marker=SIMULATED status=ok
+[2026-10-30 01:02:23] [证据] seq=4 evidence_id=EV04 source=b02_memory marker=SIMULATED status=ok
+[2026-10-30 01:02:23] [证据] seq=5 evidence_id=EV05 source=b02_memory marker=SIMULATED status=ok
+[2026-10-30 01:02:23] [证据] seq=6 evidence_id=EV06 source=b03_weather marker=PUBLIC status=ok
+[2026-10-30 01:02:23] [证据] seq=7 evidence_id=EV07 source=b04_rag marker=SIMULATED status=ok
+[2026-10-30 01:02:24] [证据] seq=8 evidence_id=EV08 source=b06_ml marker=MODEL_OUTPUT status=ok
+[2026-10-30 01:02:24] [判断] conclusion=需要关注 attention_level=attention trust=中 matched_rules=无 degraded=2
+[2026-10-30 01:02:24] [解释] status=omitted reason=no_api_key: 未配置 DEEPSEEK_API_KEY / ANTHROPIC_AUTH_TOKEN,跳过 LLM 解释(结构化判断不受影响)
+[2026-10-30 01:02:24] [完成] run_id=run_20261030_010222_9b0f27 scenario=S4 report=report/run_20261030_010222_9b0f27_report.html
+[2026-10-30 01:02:24] [场景] run_id=run_20261030_010224_aa89c1 scenario=S5 name=证据退化 anchor=2026-10-28 12:00:00
+[2026-10-30 01:02:24] [工具] seq=1 tool=b02_current marker=SIMULATED status=ok
+[2026-10-30 01:02:24] [工具] seq=2 tool=b02_anchor marker=SIMULATED status=ok
+[2026-10-30 01:02:24] [工具] seq=3 tool=b01_raw marker=SIMULATED status=ok
+[2026-10-30 01:02:24] [工具] seq=4 tool=b02_history marker=SIMULATED status=ok
+[2026-10-30 01:02:24] [工具] seq=5 tool=b02_stats marker=SIMULATED status=ok
+[2026-10-30 01:02:24] [工具] seq=6 tool=b03_weather marker=PUBLIC status=ok [nested=error]
+[2026-10-30 01:02:24] [工具] seq=7 tool=b04_knowledge marker=SIMULATED status=ok [nested=insufficient]
+[2026-10-30 01:02:24] [工具] seq=8 tool=b06_predict marker=MODEL_OUTPUT status=ok [nested=ok]
+[2026-10-30 01:02:24] [证据] seq=1 evidence_id=EV01 source=b02_memory marker=SIMULATED status=ok
+[2026-10-30 01:02:24] [证据] seq=2 evidence_id=EV02 source=b02_memory marker=SIMULATED status=ok
+[2026-10-30 01:02:24] [证据] seq=3 evidence_id=EV03 source=b01_cli marker=SIMULATED status=ok
+[2026-10-30 01:02:24] [证据] seq=4 evidence_id=EV04 source=b02_memory marker=SIMULATED status=ok
+[2026-10-30 01:02:24] [证据] seq=5 evidence_id=EV05 source=b02_memory marker=SIMULATED status=ok
+[2026-10-30 01:02:24] [证据] seq=6 evidence_id=EV06 source=b03_weather marker=PUBLIC status=error
+[2026-10-30 01:02:24] [证据] seq=7 evidence_id=EV07 source=b04_rag marker=SIMULATED status=insufficient
+[2026-10-30 01:02:24] [证据] seq=8 evidence_id=EV08 source=b06_ml marker=MODEL_OUTPUT status=ok
+[2026-10-30 01:02:24] [判断] conclusion=正常 attention_level=normal trust=低 matched_rules=无 degraded=2
+[2026-10-30 01:02:24] [解释] status=omitted reason=no_api_key: 未配置 DEEPSEEK_API_KEY / ANTHROPIC_AUTH_TOKEN,跳过 LLM 解释(结构化判断不受影响)
+[2026-10-30 01:02:24] [完成] run_id=run_20261030_010224_aa89c1 scenario=S5 report=report/run_20261030_010224_aa89c1_report.html
+[2026-10-30 01:04:08] [场景] run_id=run_20261030_010408_91b891 scenario=S5 name=证据退化 anchor=2026-10-28 12:00:00
+[2026-10-30 01:04:08] [工具] seq=1 tool=b02_current marker=SIMULATED status=ok
+[2026-10-30 01:04:08] [工具] seq=2 tool=b02_anchor marker=SIMULATED status=ok
+[2026-10-30 01:04:08] [工具] seq=3 tool=b01_raw marker=SIMULATED status=ok
+[2026-10-30 01:04:08] [工具] seq=4 tool=b02_history marker=SIMULATED status=ok
+[2026-10-30 01:04:08] [工具] seq=5 tool=b02_stats marker=SIMULATED status=ok
+[2026-10-30 01:04:09] [工具] seq=6 tool=b03_weather marker=PUBLIC status=ok [nested=error]
+[2026-10-30 01:04:09] [工具] seq=7 tool=b04_knowledge marker=SIMULATED status=ok [nested=insufficient]
+[2026-10-30 01:04:09] [工具] seq=8 tool=b06_predict marker=MODEL_OUTPUT status=ok [nested=ok]
+[2026-10-30 01:04:09] [证据] seq=1 evidence_id=EV01 source=b02_memory marker=SIMULATED status=ok
+[2026-10-30 01:04:09] [证据] seq=2 evidence_id=EV02 source=b02_memory marker=SIMULATED status=ok
+[2026-10-30 01:04:09] [证据] seq=3 evidence_id=EV03 source=b01_cli marker=SIMULATED status=ok
+[2026-10-30 01:04:09] [证据] seq=4 evidence_id=EV04 source=b02_memory marker=SIMULATED status=ok
+[2026-10-30 01:04:09] [证据] seq=5 evidence_id=EV05 source=b02_memory marker=SIMULATED status=ok
+[2026-10-30 01:04:09] [证据] seq=6 evidence_id=EV06 source=b03_weather marker=PUBLIC status=error
+[2026-10-30 01:04:09] [证据] seq=7 evidence_id=EV07 source=b04_rag marker=SIMULATED status=insufficient
+[2026-10-30 01:04:09] [证据] seq=8 evidence_id=EV08 source=b06_ml marker=MODEL_OUTPUT status=ok
+[2026-10-30 01:04:09] [判断] conclusion=正常 attention_level=normal trust=低 matched_rules=无 degraded=2
+[2026-10-30 01:04:09] [解释] status=omitted reason=no_api_key: 未配置 DEEPSEEK_API_KEY / ANTHROPIC_AUTH_TOKEN,跳过 LLM 解释(结构化判断不受影响)
+[2026-10-30 01:04:09] [完成] run_id=run_20261030_010408_91b891 scenario=S5 report=report/run_20261030_010408_91b891_report.html
+[2026-10-30 01:04:34] [场景] run_id=run_20261030_010434_6ab7e4 scenario=S4 name=多源证据分歧 anchor=2026-10-28 09:00:00
+[2026-10-30 01:04:34] [工具] seq=1 tool=b02_current marker=SIMULATED status=ok
+[2026-10-30 01:04:34] [工具] seq=2 tool=b02_anchor marker=SIMULATED status=ok
+[2026-10-30 01:04:34] [工具] seq=3 tool=b01_raw marker=SIMULATED status=ok
+[2026-10-30 01:04:34] [工具] seq=4 tool=b02_history marker=SIMULATED status=ok
+[2026-10-30 01:04:34] [工具] seq=5 tool=b02_stats marker=SIMULATED status=ok
+[2026-10-30 01:04:35] [工具] seq=6 tool=b03_weather marker=PUBLIC status=ok [nested=success]
+[2026-10-30 01:04:35] [工具] seq=7 tool=b04_knowledge marker=SIMULATED status=ok [nested=ok]
+[2026-10-30 01:04:35] [工具] seq=8 tool=b06_predict marker=MODEL_OUTPUT status=ok [nested=ok]
+[2026-10-30 01:04:35] [证据] seq=1 evidence_id=EV01 source=b02_memory marker=SIMULATED status=ok
+[2026-10-30 01:04:35] [证据] seq=2 evidence_id=EV02 source=b02_memory marker=SIMULATED status=ok
+[2026-10-30 01:04:35] [证据] seq=3 evidence_id=EV03 source=b01_cli marker=SIMULATED status=ok
+[2026-10-30 01:04:35] [证据] seq=4 evidence_id=EV04 source=b02_memory marker=SIMULATED status=ok
+[2026-10-30 01:04:35] [证据] seq=5 evidence_id=EV05 source=b02_memory marker=SIMULATED status=ok
+[2026-10-30 01:04:35] [证据] seq=6 evidence_id=EV06 source=b03_weather marker=PUBLIC status=ok
+[2026-10-30 01:04:35] [证据] seq=7 evidence_id=EV07 source=b04_rag marker=SIMULATED status=ok
+[2026-10-30 01:04:35] [证据] seq=8 evidence_id=EV08 source=b06_ml marker=MODEL_OUTPUT status=ok
+[2026-10-30 01:04:35] [判断] conclusion=需要关注 attention_level=attention trust=中 matched_rules=无 degraded=2
+[2026-10-30 01:04:35] [解释] status=omitted reason=no_api_key: 未配置 DEEPSEEK_API_KEY / ANTHROPIC_AUTH_TOKEN,跳过 LLM 解释(结构化判断不受影响)
+[2026-10-30 01:04:35] [完成] run_id=run_20261030_010434_6ab7e4 scenario=S4 report=report/run_20261030_010434_6ab7e4_report.html
+[2026-10-30 01:14:19] [场景] run_id=run_20261030_011419_656d35 scenario=S1 name=稳态基线 anchor=2026-10-28 12:00:00
+[2026-10-30 01:14:19] [工具] seq=1 tool=b02_current marker=SIMULATED status=ok
+[2026-10-30 01:14:19] [工具] seq=2 tool=b02_anchor marker=SIMULATED status=ok
+[2026-10-30 01:14:19] [工具] seq=3 tool=b01_raw marker=SIMULATED status=ok
+[2026-10-30 01:14:19] [工具] seq=4 tool=b02_history marker=SIMULATED status=ok
+[2026-10-30 01:14:19] [工具] seq=5 tool=b02_stats marker=SIMULATED status=ok
+[2026-10-30 01:14:22] [工具] seq=6 tool=b03_weather marker=PUBLIC status=ok [nested=success]
+[2026-10-30 01:14:23] [工具] seq=7 tool=b04_knowledge marker=SIMULATED status=ok [nested=ok]
+[2026-10-30 01:14:23] [工具] seq=8 tool=b06_predict marker=MODEL_OUTPUT status=ok [nested=ok]
+[2026-10-30 01:14:23] [证据] seq=1 evidence_id=EV01 source=b02_memory marker=SIMULATED status=ok
+[2026-10-30 01:14:23] [证据] seq=2 evidence_id=EV02 source=b02_memory marker=SIMULATED status=ok
+[2026-10-30 01:14:23] [证据] seq=3 evidence_id=EV03 source=b01_cli marker=SIMULATED status=ok
+[2026-10-30 01:14:23] [证据] seq=4 evidence_id=EV04 source=b02_memory marker=SIMULATED status=ok
+[2026-10-30 01:14:23] [证据] seq=5 evidence_id=EV05 source=b02_memory marker=SIMULATED status=ok
+[2026-10-30 01:14:23] [证据] seq=6 evidence_id=EV06 source=b03_weather marker=PUBLIC status=ok
+[2026-10-30 01:14:23] [证据] seq=7 evidence_id=EV07 source=b04_rag marker=SIMULATED status=ok
+[2026-10-30 01:14:23] [证据] seq=8 evidence_id=EV08 source=b06_ml marker=MODEL_OUTPUT status=ok
+[2026-10-30 01:14:23] [判断] conclusion=正常 attention_level=normal trust=高 matched_rules=无 degraded=0
+[2026-10-30 01:14:27] [解释] status=success chars=1358
+[2026-10-30 01:14:27] [完成] run_id=run_20261030_011419_656d35 scenario=S1 report=report/run_20261030_011419_656d35_report.html
+[2026-10-30 01:17:27] [场景] run_id=run_20261030_011727_1db747 scenario=S1 name=稳态基线 anchor=2026-10-28 12:00:00
+[2026-10-30 01:17:27] [工具] seq=1 tool=b02_current marker=SIMULATED status=ok
+[2026-10-30 01:17:27] [工具] seq=2 tool=b02_anchor marker=SIMULATED status=ok
+[2026-10-30 01:17:27] [工具] seq=3 tool=b01_raw marker=SIMULATED status=ok
+[2026-10-30 01:17:27] [工具] seq=4 tool=b02_history marker=SIMULATED status=ok
+[2026-10-30 01:17:27] [工具] seq=5 tool=b02_stats marker=SIMULATED status=ok
+[2026-10-30 01:17:28] [工具] seq=6 tool=b03_weather marker=PUBLIC status=ok [nested=success]
+[2026-10-30 01:17:28] [工具] seq=7 tool=b04_knowledge marker=SIMULATED status=ok [nested=ok]
+[2026-10-30 01:17:29] [工具] seq=8 tool=b06_predict marker=MODEL_OUTPUT status=ok [nested=ok]
+[2026-10-30 01:17:29] [证据] seq=1 evidence_id=EV01 source=b02_memory marker=SIMULATED status=ok
+[2026-10-30 01:17:29] [证据] seq=2 evidence_id=EV02 source=b02_memory marker=SIMULATED status=ok
+[2026-10-30 01:17:29] [证据] seq=3 evidence_id=EV03 source=b01_cli marker=SIMULATED status=ok
+[2026-10-30 01:17:29] [证据] seq=4 evidence_id=EV04 source=b02_memory marker=SIMULATED status=ok
+[2026-10-30 01:17:29] [证据] seq=5 evidence_id=EV05 source=b02_memory marker=SIMULATED status=ok
+[2026-10-30 01:17:29] [证据] seq=6 evidence_id=EV06 source=b03_weather marker=PUBLIC status=ok
+[2026-10-30 01:17:29] [证据] seq=7 evidence_id=EV07 source=b04_rag marker=SIMULATED status=ok
+[2026-10-30 01:17:29] [证据] seq=8 evidence_id=EV08 source=b06_ml marker=MODEL_OUTPUT status=ok
+[2026-10-30 01:17:29] [判断] conclusion=正常 attention_level=normal trust=高 matched_rules=无 degraded=0
+[2026-10-30 01:17:32] [解释] status=success chars=1292
+[2026-10-30 01:17:32] [完成] run_id=run_20261030_011727_1db747 scenario=S1 report=report/run_20261030_011727_1db747_report.html
+[2026-10-30 01:17:32] [场景] run_id=run_20261030_011732_c913c5 scenario=S2 name=渐进漂移 anchor=2026-10-27 12:30:00
+[2026-10-30 01:17:32] [工具] seq=1 tool=b02_current marker=SIMULATED status=ok
+[2026-10-30 01:17:32] [工具] seq=2 tool=b02_anchor marker=SIMULATED status=ok
+[2026-10-30 01:17:32] [工具] seq=3 tool=b01_raw marker=SIMULATED status=ok
+[2026-10-30 01:17:32] [工具] seq=4 tool=b02_history marker=SIMULATED status=ok
+[2026-10-30 01:17:32] [工具] seq=5 tool=b02_stats marker=SIMULATED status=ok
+[2026-10-30 01:17:34] [工具] seq=6 tool=b03_weather marker=PUBLIC status=ok [nested=success]
+[2026-10-30 01:17:34] [工具] seq=7 tool=b04_knowledge marker=SIMULATED status=ok [nested=ok]
+[2026-10-30 01:17:34] [工具] seq=8 tool=b06_predict marker=MODEL_OUTPUT status=ok [nested=ok]
+[2026-10-30 01:17:34] [证据] seq=1 evidence_id=EV01 source=b02_memory marker=SIMULATED status=ok
+[2026-10-30 01:17:34] [证据] seq=2 evidence_id=EV02 source=b02_memory marker=SIMULATED status=ok
+[2026-10-30 01:17:34] [证据] seq=3 evidence_id=EV03 source=b01_cli marker=SIMULATED status=ok
+[2026-10-30 01:17:34] [证据] seq=4 evidence_id=EV04 source=b02_memory marker=SIMULATED status=ok
+[2026-10-30 01:17:34] [证据] seq=5 evidence_id=EV05 source=b02_memory marker=SIMULATED status=ok
+[2026-10-30 01:17:34] [证据] seq=6 evidence_id=EV06 source=b03_weather marker=PUBLIC status=ok
+[2026-10-30 01:17:34] [证据] seq=7 evidence_id=EV07 source=b04_rag marker=SIMULATED status=ok
+[2026-10-30 01:17:34] [证据] seq=8 evidence_id=EV08 source=b06_ml marker=MODEL_OUTPUT status=ok
+[2026-10-30 01:17:34] [判断] conclusion=需要关注 attention_level=attention trust=中 matched_rules=无 degraded=2
+[2026-10-30 01:17:38] [解释] status=success chars=1327
+[2026-10-30 01:17:38] [完成] run_id=run_20261030_011732_c913c5 scenario=S2 report=report/run_20261030_011732_c913c5_report.html
+[2026-10-30 01:17:38] [场景] run_id=run_20261030_011738_7d6eaf scenario=S3 name=外部扰动 anchor=2026-10-27 13:30:00
+[2026-10-30 01:17:38] [工具] seq=1 tool=b02_current marker=SIMULATED status=ok
+[2026-10-30 01:17:38] [工具] seq=2 tool=b02_anchor marker=SIMULATED status=ok
+[2026-10-30 01:17:38] [工具] seq=3 tool=b01_raw marker=SIMULATED status=ok
+[2026-10-30 01:17:38] [工具] seq=4 tool=b02_history marker=SIMULATED status=ok
+[2026-10-30 01:17:38] [工具] seq=5 tool=b02_stats marker=SIMULATED status=ok
+[2026-10-30 01:17:41] [工具] seq=6 tool=b03_weather marker=PUBLIC status=ok [nested=success]
+[2026-10-30 01:17:41] [工具] seq=7 tool=b04_knowledge marker=SIMULATED status=ok [nested=ok]
+[2026-10-30 01:17:41] [工具] seq=8 tool=b06_predict marker=MODEL_OUTPUT status=ok [nested=ok]
+[2026-10-30 01:17:41] [证据] seq=1 evidence_id=EV01 source=b02_memory marker=SIMULATED status=ok
+[2026-10-30 01:17:41] [证据] seq=2 evidence_id=EV02 source=b02_memory marker=SIMULATED status=ok
+[2026-10-30 01:17:41] [证据] seq=3 evidence_id=EV03 source=b01_cli marker=SIMULATED status=ok
+[2026-10-30 01:17:41] [证据] seq=4 evidence_id=EV04 source=b02_memory marker=SIMULATED status=ok
+[2026-10-30 01:17:41] [证据] seq=5 evidence_id=EV05 source=b02_memory marker=SIMULATED status=ok
+[2026-10-30 01:17:41] [证据] seq=6 evidence_id=EV06 source=b03_weather marker=PUBLIC status=ok
+[2026-10-30 01:17:41] [证据] seq=7 evidence_id=EV07 source=b04_rag marker=SIMULATED status=ok
+[2026-10-30 01:17:41] [证据] seq=8 evidence_id=EV08 source=b06_ml marker=MODEL_OUTPUT status=ok
+[2026-10-30 01:17:41] [判断] conclusion=需要预警 attention_level=warning trust=高 matched_rules=R1,R3,R7 degraded=0
+[2026-10-30 01:17:45] [解释] status=success chars=1657
+[2026-10-30 01:17:45] [完成] run_id=run_20261030_011738_7d6eaf scenario=S3 report=report/run_20261030_011738_7d6eaf_report.html
+[2026-10-30 01:17:45] [场景] run_id=run_20261030_011745_85cc9d scenario=S4 name=多源证据分歧 anchor=2026-10-28 09:00:00
+[2026-10-30 01:17:45] [工具] seq=1 tool=b02_current marker=SIMULATED status=ok
+[2026-10-30 01:17:45] [工具] seq=2 tool=b02_anchor marker=SIMULATED status=ok
+[2026-10-30 01:17:45] [工具] seq=3 tool=b01_raw marker=SIMULATED status=ok
+[2026-10-30 01:17:45] [工具] seq=4 tool=b02_history marker=SIMULATED status=ok
+[2026-10-30 01:17:45] [工具] seq=5 tool=b02_stats marker=SIMULATED status=ok
+[2026-10-30 01:17:49] [工具] seq=6 tool=b03_weather marker=PUBLIC status=ok [nested=success]
+[2026-10-30 01:17:49] [工具] seq=7 tool=b04_knowledge marker=SIMULATED status=ok [nested=ok]
+[2026-10-30 01:17:50] [工具] seq=8 tool=b06_predict marker=MODEL_OUTPUT status=ok [nested=ok]
+[2026-10-30 01:17:50] [证据] seq=1 evidence_id=EV01 source=b02_memory marker=SIMULATED status=ok
+[2026-10-30 01:17:50] [证据] seq=2 evidence_id=EV02 source=b02_memory marker=SIMULATED status=ok
+[2026-10-30 01:17:50] [证据] seq=3 evidence_id=EV03 source=b01_cli marker=SIMULATED status=ok
+[2026-10-30 01:17:50] [证据] seq=4 evidence_id=EV04 source=b02_memory marker=SIMULATED status=ok
+[2026-10-30 01:17:50] [证据] seq=5 evidence_id=EV05 source=b02_memory marker=SIMULATED status=ok
+[2026-10-30 01:17:50] [证据] seq=6 evidence_id=EV06 source=b03_weather marker=PUBLIC status=ok
+[2026-10-30 01:17:50] [证据] seq=7 evidence_id=EV07 source=b04_rag marker=SIMULATED status=ok
+[2026-10-30 01:17:50] [证据] seq=8 evidence_id=EV08 source=b06_ml marker=MODEL_OUTPUT status=ok
+[2026-10-30 01:17:50] [判断] conclusion=需要关注 attention_level=attention trust=中 matched_rules=无 degraded=2
+[2026-10-30 01:17:53] [解释] status=success chars=1407
+[2026-10-30 01:17:53] [完成] run_id=run_20261030_011745_85cc9d scenario=S4 report=report/run_20261030_011745_85cc9d_report.html
+[2026-10-30 01:17:53] [场景] run_id=run_20261030_011753_9aa50d scenario=S5 name=证据退化 anchor=2026-10-28 12:00:00
+[2026-10-30 01:17:53] [工具] seq=1 tool=b02_current marker=SIMULATED status=ok
+[2026-10-30 01:17:53] [工具] seq=2 tool=b02_anchor marker=SIMULATED status=ok
+[2026-10-30 01:17:53] [工具] seq=3 tool=b01_raw marker=SIMULATED status=ok
+[2026-10-30 01:17:53] [工具] seq=4 tool=b02_history marker=SIMULATED status=ok
+[2026-10-30 01:17:53] [工具] seq=5 tool=b02_stats marker=SIMULATED status=ok
+[2026-10-30 01:17:54] [工具] seq=6 tool=b03_weather marker=PUBLIC status=ok [nested=error]
+[2026-10-30 01:17:54] [工具] seq=7 tool=b04_knowledge marker=SIMULATED status=ok [nested=insufficient]
+[2026-10-30 01:17:54] [工具] seq=8 tool=b06_predict marker=MODEL_OUTPUT status=ok [nested=ok]
+[2026-10-30 01:17:54] [证据] seq=1 evidence_id=EV01 source=b02_memory marker=SIMULATED status=ok
+[2026-10-30 01:17:54] [证据] seq=2 evidence_id=EV02 source=b02_memory marker=SIMULATED status=ok
+[2026-10-30 01:17:54] [证据] seq=3 evidence_id=EV03 source=b01_cli marker=SIMULATED status=ok
+[2026-10-30 01:17:54] [证据] seq=4 evidence_id=EV04 source=b02_memory marker=SIMULATED status=ok
+[2026-10-30 01:17:54] [证据] seq=5 evidence_id=EV05 source=b02_memory marker=SIMULATED status=ok
+[2026-10-30 01:17:54] [证据] seq=6 evidence_id=EV06 source=b03_weather marker=PUBLIC status=error
+[2026-10-30 01:17:54] [证据] seq=7 evidence_id=EV07 source=b04_rag marker=SIMULATED status=insufficient
+[2026-10-30 01:17:54] [证据] seq=8 evidence_id=EV08 source=b06_ml marker=MODEL_OUTPUT status=ok
+[2026-10-30 01:17:54] [判断] conclusion=正常 attention_level=normal trust=低 matched_rules=无 degraded=2
+[2026-10-30 01:17:58] [解释] status=success chars=1248
+[2026-10-30 01:17:58] [完成] run_id=run_20261030_011753_9aa50d scenario=S5 report=report/run_20261030_011753_9aa50d_report.html
+[2026-10-30 01:47:52] [场景] run_id=run_20261030_014752_59f5a7 scenario=S1 name=稳态基线 anchor=2026-10-28 12:00:00
+[2026-10-30 01:47:52] [工具] seq=1 tool=b02_current marker=SIMULATED status=ok
+[2026-10-30 01:47:52] [工具] seq=2 tool=b02_anchor marker=SIMULATED status=ok
+[2026-10-30 01:47:52] [工具] seq=3 tool=b01_raw marker=SIMULATED status=ok
+[2026-10-30 01:47:52] [工具] seq=4 tool=b02_history marker=SIMULATED status=ok
+[2026-10-30 01:47:52] [工具] seq=5 tool=b02_stats marker=SIMULATED status=ok
+[2026-10-30 01:47:54] [工具] seq=6 tool=b03_weather marker=PUBLIC status=ok [nested=success]
+[2026-10-30 01:47:54] [工具] seq=7 tool=b04_knowledge marker=SIMULATED status=ok [nested=ok]
+[2026-10-30 01:47:54] [工具] seq=8 tool=b06_predict marker=MODEL_OUTPUT status=ok [nested=ok]
+[2026-10-30 01:47:54] [证据] seq=1 evidence_id=EV01 source=b02_memory marker=SIMULATED status=ok
+[2026-10-30 01:47:54] [证据] seq=2 evidence_id=EV02 source=b02_memory marker=SIMULATED status=ok
+[2026-10-30 01:47:54] [证据] seq=3 evidence_id=EV03 source=b01_cli marker=SIMULATED status=ok
+[2026-10-30 01:47:54] [证据] seq=4 evidence_id=EV04 source=b02_memory marker=SIMULATED status=ok
+[2026-10-30 01:47:54] [证据] seq=5 evidence_id=EV05 source=b02_memory marker=SIMULATED status=ok
+[2026-10-30 01:47:54] [证据] seq=6 evidence_id=EV06 source=b03_weather marker=PUBLIC status=ok
+[2026-10-30 01:47:54] [证据] seq=7 evidence_id=EV07 source=b04_rag marker=SIMULATED status=ok
+[2026-10-30 01:47:54] [证据] seq=8 evidence_id=EV08 source=b06_ml marker=MODEL_OUTPUT status=ok
+[2026-10-30 01:47:54] [判断] conclusion=正常 attention_level=normal trust=高 matched_rules=无 degraded=0
+[2026-10-30 01:47:54] [解释] status=omitted reason=no_api_key: 未配置 DEEPSEEK_API_KEY / ANTHROPIC_AUTH_TOKEN,跳过 LLM 解释(结构化判断不受影响)
+[2026-10-30 01:47:54] [完成] run_id=run_20261030_014752_59f5a7 scenario=S1 report=report/run_20261030_014752_59f5a7_report.html run_result=evidence/b07/run_20261030_014752_59f5a7/run_result.json
+[2026-10-30 01:49:21] [场景] run_id=run_20261030_014921_2e97e7 scenario=S1 name=稳态基线 anchor=2026-10-28 12:00:00
+[2026-10-30 01:49:21] [工具] seq=1 tool=b02_current marker=SIMULATED status=ok
+[2026-10-30 01:49:21] [工具] seq=2 tool=b02_anchor marker=SIMULATED status=ok
+[2026-10-30 01:49:21] [工具] seq=3 tool=b01_raw marker=SIMULATED status=ok
+[2026-10-30 01:49:21] [工具] seq=4 tool=b02_history marker=SIMULATED status=ok
+[2026-10-30 01:49:21] [工具] seq=5 tool=b02_stats marker=SIMULATED status=ok
+[2026-10-30 01:49:23] [工具] seq=6 tool=b03_weather marker=PUBLIC status=ok [nested=success]
+[2026-10-30 01:49:23] [工具] seq=7 tool=b04_knowledge marker=SIMULATED status=ok [nested=ok]
+[2026-10-30 01:49:23] [工具] seq=8 tool=b06_predict marker=MODEL_OUTPUT status=ok [nested=ok]
+[2026-10-30 01:49:23] [证据] seq=1 evidence_id=EV01 source=b02_memory marker=SIMULATED status=ok
+[2026-10-30 01:49:23] [证据] seq=2 evidence_id=EV02 source=b02_memory marker=SIMULATED status=ok
+[2026-10-30 01:49:23] [证据] seq=3 evidence_id=EV03 source=b01_cli marker=SIMULATED status=ok
+[2026-10-30 01:49:23] [证据] seq=4 evidence_id=EV04 source=b02_memory marker=SIMULATED status=ok
+[2026-10-30 01:49:23] [证据] seq=5 evidence_id=EV05 source=b02_memory marker=SIMULATED status=ok
+[2026-10-30 01:49:23] [证据] seq=6 evidence_id=EV06 source=b03_weather marker=PUBLIC status=ok
+[2026-10-30 01:49:23] [证据] seq=7 evidence_id=EV07 source=b04_rag marker=SIMULATED status=ok
+[2026-10-30 01:49:23] [证据] seq=8 evidence_id=EV08 source=b06_ml marker=MODEL_OUTPUT status=ok
+[2026-10-30 01:49:23] [判断] conclusion=正常 attention_level=normal trust=高 matched_rules=无 degraded=0
+[2026-10-30 01:49:23] [解释] status=omitted reason=no_api_key: 未配置 DEEPSEEK_API_KEY / ANTHROPIC_AUTH_TOKEN,跳过 LLM 解释(结构化判断不受影响)
+[2026-10-30 01:49:23] [完成] run_id=run_20261030_014921_2e97e7 scenario=S1 report=report/run_20261030_014921_2e97e7_report.html run_result=evidence/b07/run_20261030_014921_2e97e7/run_result.json
+[2026-10-30 01:49:23] [场景] run_id=run_20261030_014923_e2a04e scenario=S2 name=渐进漂移 anchor=2026-10-27 12:30:00
+[2026-10-30 01:49:23] [工具] seq=1 tool=b02_current marker=SIMULATED status=ok
+[2026-10-30 01:49:23] [工具] seq=2 tool=b02_anchor marker=SIMULATED status=ok
+[2026-10-30 01:49:23] [工具] seq=3 tool=b01_raw marker=SIMULATED status=ok
+[2026-10-30 01:49:23] [工具] seq=4 tool=b02_history marker=SIMULATED status=ok
+[2026-10-30 01:49:23] [工具] seq=5 tool=b02_stats marker=SIMULATED status=ok
+[2026-10-30 01:49:24] [工具] seq=6 tool=b03_weather marker=PUBLIC status=ok [nested=success]
+[2026-10-30 01:49:24] [工具] seq=7 tool=b04_knowledge marker=SIMULATED status=ok [nested=ok]
+[2026-10-30 01:49:24] [工具] seq=8 tool=b06_predict marker=MODEL_OUTPUT status=ok [nested=ok]
+[2026-10-30 01:49:24] [证据] seq=1 evidence_id=EV01 source=b02_memory marker=SIMULATED status=ok
+[2026-10-30 01:49:24] [证据] seq=2 evidence_id=EV02 source=b02_memory marker=SIMULATED status=ok
+[2026-10-30 01:49:24] [证据] seq=3 evidence_id=EV03 source=b01_cli marker=SIMULATED status=ok
+[2026-10-30 01:49:24] [证据] seq=4 evidence_id=EV04 source=b02_memory marker=SIMULATED status=ok
+[2026-10-30 01:49:24] [证据] seq=5 evidence_id=EV05 source=b02_memory marker=SIMULATED status=ok
+[2026-10-30 01:49:24] [证据] seq=6 evidence_id=EV06 source=b03_weather marker=PUBLIC status=ok
+[2026-10-30 01:49:24] [证据] seq=7 evidence_id=EV07 source=b04_rag marker=SIMULATED status=ok
+[2026-10-30 01:49:24] [证据] seq=8 evidence_id=EV08 source=b06_ml marker=MODEL_OUTPUT status=ok
+[2026-10-30 01:49:24] [判断] conclusion=需要关注 attention_level=attention trust=中 matched_rules=无 degraded=2
+[2026-10-30 01:49:24] [解释] status=omitted reason=no_api_key: 未配置 DEEPSEEK_API_KEY / ANTHROPIC_AUTH_TOKEN,跳过 LLM 解释(结构化判断不受影响)
+[2026-10-30 01:49:24] [完成] run_id=run_20261030_014923_e2a04e scenario=S2 report=report/run_20261030_014923_e2a04e_report.html run_result=evidence/b07/run_20261030_014923_e2a04e/run_result.json
+[2026-10-30 01:49:24] [场景] run_id=run_20261030_014924_cc3a9e scenario=S3 name=外部扰动 anchor=2026-10-27 13:30:00
+[2026-10-30 01:49:24] [工具] seq=1 tool=b02_current marker=SIMULATED status=ok
+[2026-10-30 01:49:24] [工具] seq=2 tool=b02_anchor marker=SIMULATED status=ok
+[2026-10-30 01:49:24] [工具] seq=3 tool=b01_raw marker=SIMULATED status=ok
+[2026-10-30 01:49:24] [工具] seq=4 tool=b02_history marker=SIMULATED status=ok
+[2026-10-30 01:49:24] [工具] seq=5 tool=b02_stats marker=SIMULATED status=ok
+[2026-10-30 01:49:26] [工具] seq=6 tool=b03_weather marker=PUBLIC status=ok [nested=success]
+[2026-10-30 01:49:26] [工具] seq=7 tool=b04_knowledge marker=SIMULATED status=ok [nested=ok]
+[2026-10-30 01:49:26] [工具] seq=8 tool=b06_predict marker=MODEL_OUTPUT status=ok [nested=ok]
+[2026-10-30 01:49:26] [证据] seq=1 evidence_id=EV01 source=b02_memory marker=SIMULATED status=ok
+[2026-10-30 01:49:26] [证据] seq=2 evidence_id=EV02 source=b02_memory marker=SIMULATED status=ok
+[2026-10-30 01:49:26] [证据] seq=3 evidence_id=EV03 source=b01_cli marker=SIMULATED status=ok
+[2026-10-30 01:49:26] [证据] seq=4 evidence_id=EV04 source=b02_memory marker=SIMULATED status=ok
+[2026-10-30 01:49:26] [证据] seq=5 evidence_id=EV05 source=b02_memory marker=SIMULATED status=ok
+[2026-10-30 01:49:26] [证据] seq=6 evidence_id=EV06 source=b03_weather marker=PUBLIC status=ok
+[2026-10-30 01:49:26] [证据] seq=7 evidence_id=EV07 source=b04_rag marker=SIMULATED status=ok
+[2026-10-30 01:49:26] [证据] seq=8 evidence_id=EV08 source=b06_ml marker=MODEL_OUTPUT status=ok
+[2026-10-30 01:49:26] [判断] conclusion=需要预警 attention_level=warning trust=高 matched_rules=R1,R3,R7 degraded=0
+[2026-10-30 01:49:26] [解释] status=omitted reason=no_api_key: 未配置 DEEPSEEK_API_KEY / ANTHROPIC_AUTH_TOKEN,跳过 LLM 解释(结构化判断不受影响)
+[2026-10-30 01:49:26] [完成] run_id=run_20261030_014924_cc3a9e scenario=S3 report=report/run_20261030_014924_cc3a9e_report.html run_result=evidence/b07/run_20261030_014924_cc3a9e/run_result.json
+[2026-10-30 01:49:26] [场景] run_id=run_20261030_014926_4aa093 scenario=S4 name=多源证据分歧 anchor=2026-10-28 09:00:00
+[2026-10-30 01:49:26] [工具] seq=1 tool=b02_current marker=SIMULATED status=ok
+[2026-10-30 01:49:26] [工具] seq=2 tool=b02_anchor marker=SIMULATED status=ok
+[2026-10-30 01:49:26] [工具] seq=3 tool=b01_raw marker=SIMULATED status=ok
+[2026-10-30 01:49:26] [工具] seq=4 tool=b02_history marker=SIMULATED status=ok
+[2026-10-30 01:49:26] [工具] seq=5 tool=b02_stats marker=SIMULATED status=ok
+[2026-10-30 01:49:27] [工具] seq=6 tool=b03_weather marker=PUBLIC status=ok [nested=success]
+[2026-10-30 01:49:27] [工具] seq=7 tool=b04_knowledge marker=SIMULATED status=ok [nested=ok]
+[2026-10-30 01:49:27] [工具] seq=8 tool=b06_predict marker=MODEL_OUTPUT status=ok [nested=ok]
+[2026-10-30 01:49:27] [证据] seq=1 evidence_id=EV01 source=b02_memory marker=SIMULATED status=ok
+[2026-10-30 01:49:27] [证据] seq=2 evidence_id=EV02 source=b02_memory marker=SIMULATED status=ok
+[2026-10-30 01:49:27] [证据] seq=3 evidence_id=EV03 source=b01_cli marker=SIMULATED status=ok
+[2026-10-30 01:49:27] [证据] seq=4 evidence_id=EV04 source=b02_memory marker=SIMULATED status=ok
+[2026-10-30 01:49:27] [证据] seq=5 evidence_id=EV05 source=b02_memory marker=SIMULATED status=ok
+[2026-10-30 01:49:27] [证据] seq=6 evidence_id=EV06 source=b03_weather marker=PUBLIC status=ok
+[2026-10-30 01:49:27] [证据] seq=7 evidence_id=EV07 source=b04_rag marker=SIMULATED status=ok
+[2026-10-30 01:49:27] [证据] seq=8 evidence_id=EV08 source=b06_ml marker=MODEL_OUTPUT status=ok
+[2026-10-30 01:49:27] [判断] conclusion=需要关注 attention_level=attention trust=中 matched_rules=无 degraded=2
+[2026-10-30 01:49:27] [解释] status=omitted reason=no_api_key: 未配置 DEEPSEEK_API_KEY / ANTHROPIC_AUTH_TOKEN,跳过 LLM 解释(结构化判断不受影响)
+[2026-10-30 01:49:27] [完成] run_id=run_20261030_014926_4aa093 scenario=S4 report=report/run_20261030_014926_4aa093_report.html run_result=evidence/b07/run_20261030_014926_4aa093/run_result.json
+[2026-10-30 01:49:27] [场景] run_id=run_20261030_014927_53e252 scenario=S5 name=证据退化 anchor=2026-10-28 12:00:00
+[2026-10-30 01:49:27] [工具] seq=1 tool=b02_current marker=SIMULATED status=ok
+[2026-10-30 01:49:27] [工具] seq=2 tool=b02_anchor marker=SIMULATED status=ok
+[2026-10-30 01:49:27] [工具] seq=3 tool=b01_raw marker=SIMULATED status=ok
+[2026-10-30 01:49:27] [工具] seq=4 tool=b02_history marker=SIMULATED status=ok
+[2026-10-30 01:49:27] [工具] seq=5 tool=b02_stats marker=SIMULATED status=ok
+[2026-10-30 01:49:27] [工具] seq=6 tool=b03_weather marker=PUBLIC status=ok [nested=error]
+[2026-10-30 01:49:27] [工具] seq=7 tool=b04_knowledge marker=SIMULATED status=ok [nested=insufficient]
+[2026-10-30 01:49:28] [工具] seq=8 tool=b06_predict marker=MODEL_OUTPUT status=ok [nested=ok]
+[2026-10-30 01:49:28] [证据] seq=1 evidence_id=EV01 source=b02_memory marker=SIMULATED status=ok
+[2026-10-30 01:49:28] [证据] seq=2 evidence_id=EV02 source=b02_memory marker=SIMULATED status=ok
+[2026-10-30 01:49:28] [证据] seq=3 evidence_id=EV03 source=b01_cli marker=SIMULATED status=ok
+[2026-10-30 01:49:28] [证据] seq=4 evidence_id=EV04 source=b02_memory marker=SIMULATED status=ok
+[2026-10-30 01:49:28] [证据] seq=5 evidence_id=EV05 source=b02_memory marker=SIMULATED status=ok
+[2026-10-30 01:49:28] [证据] seq=6 evidence_id=EV06 source=b03_weather marker=PUBLIC status=error
+[2026-10-30 01:49:28] [证据] seq=7 evidence_id=EV07 source=b04_rag marker=SIMULATED status=insufficient
+[2026-10-30 01:49:28] [证据] seq=8 evidence_id=EV08 source=b06_ml marker=MODEL_OUTPUT status=ok
+[2026-10-30 01:49:28] [判断] conclusion=正常 attention_level=normal trust=低 matched_rules=无 degraded=2
+[2026-10-30 01:49:28] [解释] status=omitted reason=no_api_key: 未配置 DEEPSEEK_API_KEY / ANTHROPIC_AUTH_TOKEN,跳过 LLM 解释(结构化判断不受影响)
+[2026-10-30 01:49:28] [完成] run_id=run_20261030_014927_53e252 scenario=S5 report=report/run_20261030_014927_53e252_report.html run_result=evidence/b07/run_20261030_014927_53e252/run_result.json
+[2026-10-30 02:19:55] [场景] run_id=run_agree_001 scenario=S1 name=实验·agree(四类证据一致) anchor=2026-10-28 12:00:00 experiment=agree sources=history:开/weather:real/knowledge:开/prediction:开
+[2026-10-30 02:19:55] [工具] seq=1 tool=b02_current marker=SIMULATED status=ok
+[2026-10-30 02:19:55] [工具] seq=2 tool=b02_anchor marker=SIMULATED status=ok
+[2026-10-30 02:19:55] [工具] seq=3 tool=b01_raw marker=SIMULATED status=ok
+[2026-10-30 02:19:55] [工具] seq=4 tool=b02_history marker=SIMULATED status=ok
+[2026-10-30 02:19:55] [工具] seq=5 tool=b02_stats marker=SIMULATED status=ok
+[2026-10-30 02:19:56] [工具] seq=6 tool=b03_weather marker=PUBLIC status=ok [nested=success]
+[2026-10-30 02:19:56] [工具] seq=7 tool=b04_knowledge marker=SIMULATED status=ok [nested=ok]
+[2026-10-30 02:19:56] [工具] seq=8 tool=b06_predict marker=MODEL_OUTPUT status=ok [nested=ok]
+[2026-10-30 02:19:56] [证据] seq=1 evidence_id=EV01 source=b02_memory marker=SIMULATED status=ok type=current
+[2026-10-30 02:19:56] [证据] seq=2 evidence_id=EV02 source=b02_memory marker=SIMULATED status=ok type=current
+[2026-10-30 02:19:56] [证据] seq=3 evidence_id=EV03 source=b01_cli marker=SIMULATED status=ok type=raw
+[2026-10-30 02:19:56] [证据] seq=4 evidence_id=EV04 source=b02_memory marker=SIMULATED status=ok type=history
+[2026-10-30 02:19:56] [证据] seq=5 evidence_id=EV05 source=b02_memory marker=SIMULATED status=ok type=trend
+[2026-10-30 02:19:56] [证据] seq=6 evidence_id=EV06 source=b03_weather marker=PUBLIC status=ok type=weather
+[2026-10-30 02:19:56] [证据] seq=7 evidence_id=EV07 source=b04_rag marker=SIMULATED status=ok type=knowledge
+[2026-10-30 02:19:56] [证据] seq=8 evidence_id=EV08 source=b06_ml marker=MODEL_OUTPUT status=ok type=prediction
+[2026-10-30 02:19:56] [判断] conclusion=正常 attention_level=normal trust=高 matched_rules=无 degraded=0 completeness=4/4
+[2026-10-30 02:19:56] [解释] status=omitted reason=no_api_key: 未配置 DEEPSEEK_API_KEY / ANTHROPIC_AUTH_TOKEN,跳过 LLM 解释(结构化判断不受影响)
+[2026-10-30 02:19:56] [校验] verdict=PASS strong_words=0 items=强确定词:skip,天气不编造:pass,工具调用校验:skip,关闭来源不编造:skip
+[2026-10-30 02:19:56] [完成] run_id=run_agree_001 scenario=S1 report=report/run_agree_001_report.html run_result=evidence/b07/run_agree_001/run_result.json
+[2026-10-30 02:20:07] [场景] run_id=run_conflict_001 scenario=S2 name=实验·conflict(历史升温 vs 天气降温) anchor=2026-10-27 12:30:00 experiment=conflict sources=history:开/weather:injected_cooling/knowledge:开/prediction:开
+[2026-10-30 02:20:07] [工具] seq=1 tool=b02_current marker=SIMULATED status=ok
+[2026-10-30 02:20:07] [工具] seq=2 tool=b02_anchor marker=SIMULATED status=ok
+[2026-10-30 02:20:07] [工具] seq=3 tool=b01_raw marker=SIMULATED status=ok
+[2026-10-30 02:20:07] [工具] seq=4 tool=b02_history marker=SIMULATED status=ok
+[2026-10-30 02:20:07] [工具] seq=5 tool=b02_stats marker=SIMULATED status=ok
+[2026-10-30 02:20:07] [工具] seq=6 tool=b03_weather marker=SIMULATED status=ok [nested=success]
+[2026-10-30 02:20:08] [工具] seq=7 tool=b04_knowledge marker=SIMULATED status=ok [nested=ok]
+[2026-10-30 02:20:08] [工具] seq=8 tool=b06_predict marker=MODEL_OUTPUT status=ok [nested=ok]
+[2026-10-30 02:20:08] [证据] seq=1 evidence_id=EV01 source=b02_memory marker=SIMULATED status=ok type=current
+[2026-10-30 02:20:08] [证据] seq=2 evidence_id=EV02 source=b02_memory marker=SIMULATED status=ok type=current
+[2026-10-30 02:20:08] [证据] seq=3 evidence_id=EV03 source=b01_cli marker=SIMULATED status=ok type=raw
+[2026-10-30 02:20:08] [证据] seq=4 evidence_id=EV04 source=b02_memory marker=SIMULATED status=ok type=history
+[2026-10-30 02:20:08] [证据] seq=5 evidence_id=EV05 source=b02_memory marker=SIMULATED status=ok type=trend
+[2026-10-30 02:20:08] [证据] seq=6 evidence_id=EV06 source=b03_weather marker=SIMULATED status=ok type=weather
+[2026-10-30 02:20:08] [证据] seq=7 evidence_id=EV07 source=b04_rag marker=SIMULATED status=ok type=knowledge
+[2026-10-30 02:20:08] [证据] seq=8 evidence_id=EV08 source=b06_ml marker=MODEL_OUTPUT status=ok type=prediction
+[2026-10-30 02:20:08] [判断] conclusion=需要关注 attention_level=attention trust=中 matched_rules=无 degraded=3 completeness=4/4
+[2026-10-30 02:20:08] [解释] status=omitted reason=no_api_key: 未配置 DEEPSEEK_API_KEY / ANTHROPIC_AUTH_TOKEN,跳过 LLM 解释(结构化判断不受影响)
+[2026-10-30 02:20:08] [校验] verdict=PASS strong_words=0 items=强确定词:skip,天气不编造:pass,工具调用校验:skip,关闭来源不编造:skip
+[2026-10-30 02:20:08] [完成] run_id=run_conflict_001 scenario=S2 report=report/run_conflict_001_report.html run_result=evidence/b07/run_conflict_001/run_result.json
+[2026-10-30 02:20:12] [场景] run_id=run_missing_weather_001 scenario=S1 name=实验·missing_weather(天气证据缺失) anchor=2026-10-28 12:00:00 experiment=missing_weather sources=history:开/weather:off/knowledge:开/prediction:开
+[2026-10-30 02:20:12] [工具] seq=1 tool=b02_current marker=SIMULATED status=ok
+[2026-10-30 02:20:12] [工具] seq=2 tool=b02_anchor marker=SIMULATED status=ok
+[2026-10-30 02:20:12] [工具] seq=3 tool=b01_raw marker=SIMULATED status=ok
+[2026-10-30 02:20:12] [工具] seq=4 tool=b02_history marker=SIMULATED status=ok
+[2026-10-30 02:20:12] [工具] seq=5 tool=b02_stats marker=SIMULATED status=ok
+[2026-10-30 02:20:12] [工具] seq=6 tool=b03_weather marker=PUBLIC status=disabled
+[2026-10-30 02:20:12] [工具] seq=7 tool=b04_knowledge marker=SIMULATED status=ok [nested=ok]
+[2026-10-30 02:20:12] [工具] seq=8 tool=b06_predict marker=MODEL_OUTPUT status=ok [nested=ok]
+[2026-10-30 02:20:12] [证据] seq=1 evidence_id=EV01 source=b02_memory marker=SIMULATED status=ok type=current
+[2026-10-30 02:20:12] [证据] seq=2 evidence_id=EV02 source=b02_memory marker=SIMULATED status=ok type=current
+[2026-10-30 02:20:12] [证据] seq=3 evidence_id=EV03 source=b01_cli marker=SIMULATED status=ok type=raw
+[2026-10-30 02:20:12] [证据] seq=4 evidence_id=EV04 source=b02_memory marker=SIMULATED status=ok type=history
+[2026-10-30 02:20:12] [证据] seq=5 evidence_id=EV05 source=b02_memory marker=SIMULATED status=ok type=trend
+[2026-10-30 02:20:12] [证据] seq=6 evidence_id=EV06 source=b03_weather marker=PUBLIC status=disabled type=weather
+[2026-10-30 02:20:12] [证据] seq=7 evidence_id=EV07 source=b04_rag marker=SIMULATED status=ok type=knowledge
+[2026-10-30 02:20:12] [证据] seq=8 evidence_id=EV08 source=b06_ml marker=MODEL_OUTPUT status=ok type=prediction
+[2026-10-30 02:20:12] [判断] conclusion=正常 attention_level=normal trust=高 matched_rules=无 degraded=0 completeness=3/4
+[2026-10-30 02:20:12] [解释] status=omitted reason=no_api_key: 未配置 DEEPSEEK_API_KEY / ANTHROPIC_AUTH_TOKEN,跳过 LLM 解释(结构化判断不受影响)
+[2026-10-30 02:20:12] [校验] verdict=PASS strong_words=0 items=强确定词:skip,天气不编造:pass,工具调用校验:skip,关闭来源不编造:skip
+[2026-10-30 02:20:12] [完成] run_id=run_missing_weather_001 scenario=S1 report=report/run_missing_weather_001_report.html run_result=evidence/b07/run_missing_weather_001/run_result.json
+[2026-10-30 02:20:16] [场景] run_id=run_current_only_001 scenario=S2 name=实验·current_only(仅当前值) anchor=2026-10-27 12:30:00 experiment=current_only sources=history:关/weather:real/knowledge:开/prediction:关
+[2026-10-30 02:20:16] [工具] seq=1 tool=b02_current marker=SIMULATED status=ok
+[2026-10-30 02:20:16] [工具] seq=2 tool=b02_anchor marker=SIMULATED status=ok
+[2026-10-30 02:20:16] [工具] seq=3 tool=b01_raw marker=SIMULATED status=ok
+[2026-10-30 02:20:16] [工具] seq=4/5 tool=b02_history/b02_stats marker=SIMULATED status=disabled
+[2026-10-30 02:20:18] [工具] seq=6 tool=b03_weather marker=PUBLIC status=ok [nested=success]
+[2026-10-30 02:20:18] [工具] seq=7 tool=b04_knowledge marker=SIMULATED status=ok [nested=ok]
+[2026-10-30 02:20:18] [工具] seq=8 tool=b06_predict marker=MODEL_OUTPUT status=disabled
+[2026-10-30 02:20:18] [证据] seq=1 evidence_id=EV01 source=b02_memory marker=SIMULATED status=ok type=current
+[2026-10-30 02:20:18] [证据] seq=2 evidence_id=EV02 source=b02_memory marker=SIMULATED status=ok type=current
+[2026-10-30 02:20:18] [证据] seq=3 evidence_id=EV03 source=b01_cli marker=SIMULATED status=ok type=raw
+[2026-10-30 02:20:18] [证据] seq=4 evidence_id=EV04 source=b02_memory marker=SIMULATED status=disabled type=history
+[2026-10-30 02:20:18] [证据] seq=5 evidence_id=EV05 source=b02_memory marker=SIMULATED status=disabled type=trend
+[2026-10-30 02:20:18] [证据] seq=6 evidence_id=EV06 source=b03_weather marker=PUBLIC status=ok type=weather
+[2026-10-30 02:20:18] [证据] seq=7 evidence_id=EV07 source=b04_rag marker=SIMULATED status=ok type=knowledge
+[2026-10-30 02:20:18] [证据] seq=8 evidence_id=EV08 source=b06_ml marker=MODEL_OUTPUT status=disabled type=prediction
+[2026-10-30 02:20:18] [判断] conclusion=正常 attention_level=normal trust=高 matched_rules=无 degraded=0 completeness=2/4
+[2026-10-30 02:20:18] [解释] status=omitted reason=no_api_key: 未配置 DEEPSEEK_API_KEY / ANTHROPIC_AUTH_TOKEN,跳过 LLM 解释(结构化判断不受影响)
+[2026-10-30 02:20:18] [校验] verdict=PASS strong_words=0 items=强确定词:skip,天气不编造:pass,工具调用校验:skip,关闭来源不编造:skip
+[2026-10-30 02:20:18] [完成] run_id=run_current_only_001 scenario=S2 report=report/run_current_only_001_report.html run_result=evidence/b07/run_current_only_001/run_result.json
+[2026-10-30 02:20:22] [场景] run_id=run_with_history_001 scenario=S2 name=实验·with_history(当前+3h历史) anchor=2026-10-27 12:30:00 experiment=with_history sources=history:开/weather:real/knowledge:开/prediction:关
+[2026-10-30 02:20:22] [工具] seq=1 tool=b02_current marker=SIMULATED status=ok
+[2026-10-30 02:20:22] [工具] seq=2 tool=b02_anchor marker=SIMULATED status=ok
+[2026-10-30 02:20:22] [工具] seq=3 tool=b01_raw marker=SIMULATED status=ok
+[2026-10-30 02:20:22] [工具] seq=4 tool=b02_history marker=SIMULATED status=ok
+[2026-10-30 02:20:22] [工具] seq=5 tool=b02_stats marker=SIMULATED status=ok
+[2026-10-30 02:20:23] [工具] seq=6 tool=b03_weather marker=PUBLIC status=ok [nested=success]
+[2026-10-30 02:20:23] [工具] seq=7 tool=b04_knowledge marker=SIMULATED status=ok [nested=ok]
+[2026-10-30 02:20:23] [工具] seq=8 tool=b06_predict marker=MODEL_OUTPUT status=disabled
+[2026-10-30 02:20:23] [证据] seq=1 evidence_id=EV01 source=b02_memory marker=SIMULATED status=ok type=current
+[2026-10-30 02:20:23] [证据] seq=2 evidence_id=EV02 source=b02_memory marker=SIMULATED status=ok type=current
+[2026-10-30 02:20:23] [证据] seq=3 evidence_id=EV03 source=b01_cli marker=SIMULATED status=ok type=raw
+[2026-10-30 02:20:23] [证据] seq=4 evidence_id=EV04 source=b02_memory marker=SIMULATED status=ok type=history
+[2026-10-30 02:20:23] [证据] seq=5 evidence_id=EV05 source=b02_memory marker=SIMULATED status=ok type=trend
+[2026-10-30 02:20:23] [证据] seq=6 evidence_id=EV06 source=b03_weather marker=PUBLIC status=ok type=weather
+[2026-10-30 02:20:23] [证据] seq=7 evidence_id=EV07 source=b04_rag marker=SIMULATED status=ok type=knowledge
+[2026-10-30 02:20:23] [证据] seq=8 evidence_id=EV08 source=b06_ml marker=MODEL_OUTPUT status=disabled type=prediction
+[2026-10-30 02:20:23] [判断] conclusion=需要关注 attention_level=attention trust=高 matched_rules=无 degraded=1 completeness=3/4
+[2026-10-30 02:20:23] [解释] status=omitted reason=no_api_key: 未配置 DEEPSEEK_API_KEY / ANTHROPIC_AUTH_TOKEN,跳过 LLM 解释(结构化判断不受影响)
+[2026-10-30 02:20:23] [校验] verdict=PASS strong_words=0 items=强确定词:skip,天气不编造:pass,工具调用校验:skip,关闭来源不编造:skip
+[2026-10-30 02:20:23] [完成] run_id=run_with_history_001 scenario=S2 report=report/run_with_history_001_report.html run_result=evidence/b07/run_with_history_001/run_result.json
+[2026-10-30 02:20:27] [场景] run_id=run_with_history_prediction_001 scenario=S2 name=实验·with_history_prediction(当前+3h历史+B06预测) anchor=2026-10-27 12:30:00 experiment=with_history_prediction sources=history:开/weather:real/knowledge:开/prediction:开
+[2026-10-30 02:20:27] [工具] seq=1 tool=b02_current marker=SIMULATED status=ok
+[2026-10-30 02:20:27] [工具] seq=2 tool=b02_anchor marker=SIMULATED status=ok
+[2026-10-30 02:20:27] [工具] seq=3 tool=b01_raw marker=SIMULATED status=ok
+[2026-10-30 02:20:27] [工具] seq=4 tool=b02_history marker=SIMULATED status=ok
+[2026-10-30 02:20:27] [工具] seq=5 tool=b02_stats marker=SIMULATED status=ok
+[2026-10-30 02:20:29] [工具] seq=6 tool=b03_weather marker=PUBLIC status=ok [nested=success]
+[2026-10-30 02:20:29] [工具] seq=7 tool=b04_knowledge marker=SIMULATED status=ok [nested=ok]
+[2026-10-30 02:20:29] [工具] seq=8 tool=b06_predict marker=MODEL_OUTPUT status=ok [nested=ok]
+[2026-10-30 02:20:29] [证据] seq=1 evidence_id=EV01 source=b02_memory marker=SIMULATED status=ok type=current
+[2026-10-30 02:20:29] [证据] seq=2 evidence_id=EV02 source=b02_memory marker=SIMULATED status=ok type=current
+[2026-10-30 02:20:29] [证据] seq=3 evidence_id=EV03 source=b01_cli marker=SIMULATED status=ok type=raw
+[2026-10-30 02:20:29] [证据] seq=4 evidence_id=EV04 source=b02_memory marker=SIMULATED status=ok type=history
+[2026-10-30 02:20:29] [证据] seq=5 evidence_id=EV05 source=b02_memory marker=SIMULATED status=ok type=trend
+[2026-10-30 02:20:29] [证据] seq=6 evidence_id=EV06 source=b03_weather marker=PUBLIC status=ok type=weather
+[2026-10-30 02:20:29] [证据] seq=7 evidence_id=EV07 source=b04_rag marker=SIMULATED status=ok type=knowledge
+[2026-10-30 02:20:29] [证据] seq=8 evidence_id=EV08 source=b06_ml marker=MODEL_OUTPUT status=ok type=prediction
+[2026-10-30 02:20:29] [判断] conclusion=需要关注 attention_level=attention trust=中 matched_rules=无 degraded=2 completeness=4/4
+[2026-10-30 02:20:29] [解释] status=omitted reason=no_api_key: 未配置 DEEPSEEK_API_KEY / ANTHROPIC_AUTH_TOKEN,跳过 LLM 解释(结构化判断不受影响)
+[2026-10-30 02:20:29] [校验] verdict=PASS strong_words=0 items=强确定词:skip,天气不编造:pass,工具调用校验:skip,关闭来源不编造:skip
+[2026-10-30 02:20:29] [完成] run_id=run_with_history_prediction_001 scenario=S2 report=report/run_with_history_prediction_001_report.html run_result=evidence/b07/run_with_history_prediction_001/run_result.json
+[2026-10-30 02:21:05] [场景] run_id=run_agree_001 scenario=S1 name=实验·agree(四类证据一致) anchor=2026-10-28 12:00:00 experiment=agree sources=history:开/weather:real/knowledge:开/prediction:开
+[2026-10-30 02:21:05] [工具] seq=1 tool=b02_current marker=SIMULATED status=ok
+[2026-10-30 02:21:05] [工具] seq=2 tool=b02_anchor marker=SIMULATED status=ok
+[2026-10-30 02:21:05] [工具] seq=3 tool=b01_raw marker=SIMULATED status=ok
+[2026-10-30 02:21:05] [工具] seq=4 tool=b02_history marker=SIMULATED status=ok
+[2026-10-30 02:21:05] [工具] seq=5 tool=b02_stats marker=SIMULATED status=ok
+[2026-10-30 02:21:07] [工具] seq=6 tool=b03_weather marker=PUBLIC status=ok [nested=success]
+[2026-10-30 02:21:07] [工具] seq=7 tool=b04_knowledge marker=SIMULATED status=ok [nested=ok]
+[2026-10-30 02:21:07] [工具] seq=8 tool=b06_predict marker=MODEL_OUTPUT status=ok [nested=ok]
+[2026-10-30 02:21:07] [证据] seq=1 evidence_id=EV01 source=b02_memory marker=SIMULATED status=ok type=current
+[2026-10-30 02:21:07] [证据] seq=2 evidence_id=EV02 source=b02_memory marker=SIMULATED status=ok type=current
+[2026-10-30 02:21:07] [证据] seq=3 evidence_id=EV03 source=b01_cli marker=SIMULATED status=ok type=raw
+[2026-10-30 02:21:07] [证据] seq=4 evidence_id=EV04 source=b02_memory marker=SIMULATED status=ok type=history
+[2026-10-30 02:21:07] [证据] seq=5 evidence_id=EV05 source=b02_memory marker=SIMULATED status=ok type=trend
+[2026-10-30 02:21:07] [证据] seq=6 evidence_id=EV06 source=b03_weather marker=PUBLIC status=ok type=weather
+[2026-10-30 02:21:07] [证据] seq=7 evidence_id=EV07 source=b04_rag marker=SIMULATED status=ok type=knowledge
+[2026-10-30 02:21:07] [证据] seq=8 evidence_id=EV08 source=b06_ml marker=MODEL_OUTPUT status=ok type=prediction
+[2026-10-30 02:21:07] [判断] conclusion=正常 attention_level=normal trust=高 matched_rules=无 degraded=0 completeness=4/4
+[2026-10-30 02:21:07] [解释] status=omitted reason=no_api_key: 未配置 DEEPSEEK_API_KEY / ANTHROPIC_AUTH_TOKEN,跳过 LLM 解释(结构化判断不受影响)
+[2026-10-30 02:21:07] [校验] verdict=SKIP(LLM 未生成,文本类校验跳过;结构校验见各检查项) strong_words=0 items=强确定词:skip,天气不编造:pass,工具调用校验:skip,关闭来源不编造:skip
+[2026-10-30 02:21:07] [完成] run_id=run_agree_001 scenario=S1 report=report/run_agree_001_report.html run_result=evidence/b07/run_agree_001/run_result.json
+[2026-10-30 02:21:07] [场景] run_id=run_conflict_001 scenario=S2 name=实验·conflict(历史升温 vs 天气降温) anchor=2026-10-27 12:30:00 experiment=conflict sources=history:开/weather:injected_cooling/knowledge:开/prediction:开
+[2026-10-30 02:21:07] [工具] seq=1 tool=b02_current marker=SIMULATED status=ok
+[2026-10-30 02:21:07] [工具] seq=2 tool=b02_anchor marker=SIMULATED status=ok
+[2026-10-30 02:21:07] [工具] seq=3 tool=b01_raw marker=SIMULATED status=ok
+[2026-10-30 02:21:07] [工具] seq=4 tool=b02_history marker=SIMULATED status=ok
+[2026-10-30 02:21:07] [工具] seq=5 tool=b02_stats marker=SIMULATED status=ok
+[2026-10-30 02:21:07] [工具] seq=6 tool=b03_weather marker=SIMULATED status=ok [nested=success]
+[2026-10-30 02:21:07] [工具] seq=7 tool=b04_knowledge marker=SIMULATED status=ok [nested=ok]
+[2026-10-30 02:21:07] [工具] seq=8 tool=b06_predict marker=MODEL_OUTPUT status=ok [nested=ok]
+[2026-10-30 02:21:07] [证据] seq=1 evidence_id=EV01 source=b02_memory marker=SIMULATED status=ok type=current
+[2026-10-30 02:21:07] [证据] seq=2 evidence_id=EV02 source=b02_memory marker=SIMULATED status=ok type=current
+[2026-10-30 02:21:07] [证据] seq=3 evidence_id=EV03 source=b01_cli marker=SIMULATED status=ok type=raw
+[2026-10-30 02:21:07] [证据] seq=4 evidence_id=EV04 source=b02_memory marker=SIMULATED status=ok type=history
+[2026-10-30 02:21:07] [证据] seq=5 evidence_id=EV05 source=b02_memory marker=SIMULATED status=ok type=trend
+[2026-10-30 02:21:07] [证据] seq=6 evidence_id=EV06 source=b03_weather marker=SIMULATED status=ok type=weather
+[2026-10-30 02:21:07] [证据] seq=7 evidence_id=EV07 source=b04_rag marker=SIMULATED status=ok type=knowledge
+[2026-10-30 02:21:07] [证据] seq=8 evidence_id=EV08 source=b06_ml marker=MODEL_OUTPUT status=ok type=prediction
+[2026-10-30 02:21:07] [判断] conclusion=需要关注 attention_level=attention trust=中 matched_rules=无 degraded=3 completeness=4/4
+[2026-10-30 02:21:07] [解释] status=omitted reason=no_api_key: 未配置 DEEPSEEK_API_KEY / ANTHROPIC_AUTH_TOKEN,跳过 LLM 解释(结构化判断不受影响)
+[2026-10-30 02:21:07] [校验] verdict=SKIP(LLM 未生成,文本类校验跳过;结构校验见各检查项) strong_words=0 items=强确定词:skip,天气不编造:pass,工具调用校验:skip,关闭来源不编造:skip
+[2026-10-30 02:21:07] [完成] run_id=run_conflict_001 scenario=S2 report=report/run_conflict_001_report.html run_result=evidence/b07/run_conflict_001/run_result.json
+[2026-10-30 02:21:07] [场景] run_id=run_missing_weather_001 scenario=S1 name=实验·missing_weather(天气证据缺失) anchor=2026-10-28 12:00:00 experiment=missing_weather sources=history:开/weather:off/knowledge:开/prediction:开
+[2026-10-30 02:21:07] [工具] seq=1 tool=b02_current marker=SIMULATED status=ok
+[2026-10-30 02:21:07] [工具] seq=2 tool=b02_anchor marker=SIMULATED status=ok
+[2026-10-30 02:21:07] [工具] seq=3 tool=b01_raw marker=SIMULATED status=ok
+[2026-10-30 02:21:07] [工具] seq=4 tool=b02_history marker=SIMULATED status=ok
+[2026-10-30 02:21:07] [工具] seq=5 tool=b02_stats marker=SIMULATED status=ok
+[2026-10-30 02:21:07] [工具] seq=6 tool=b03_weather marker=PUBLIC status=disabled
+[2026-10-30 02:21:07] [工具] seq=7 tool=b04_knowledge marker=SIMULATED status=ok [nested=ok]
+[2026-10-30 02:21:07] [工具] seq=8 tool=b06_predict marker=MODEL_OUTPUT status=ok [nested=ok]
+[2026-10-30 02:21:07] [证据] seq=1 evidence_id=EV01 source=b02_memory marker=SIMULATED status=ok type=current
+[2026-10-30 02:21:07] [证据] seq=2 evidence_id=EV02 source=b02_memory marker=SIMULATED status=ok type=current
+[2026-10-30 02:21:07] [证据] seq=3 evidence_id=EV03 source=b01_cli marker=SIMULATED status=ok type=raw
+[2026-10-30 02:21:07] [证据] seq=4 evidence_id=EV04 source=b02_memory marker=SIMULATED status=ok type=history
+[2026-10-30 02:21:07] [证据] seq=5 evidence_id=EV05 source=b02_memory marker=SIMULATED status=ok type=trend
+[2026-10-30 02:21:07] [证据] seq=6 evidence_id=EV06 source=b03_weather marker=PUBLIC status=disabled type=weather
+[2026-10-30 02:21:07] [证据] seq=7 evidence_id=EV07 source=b04_rag marker=SIMULATED status=ok type=knowledge
+[2026-10-30 02:21:07] [证据] seq=8 evidence_id=EV08 source=b06_ml marker=MODEL_OUTPUT status=ok type=prediction
+[2026-10-30 02:21:07] [判断] conclusion=正常 attention_level=normal trust=高 matched_rules=无 degraded=0 completeness=3/4
+[2026-10-30 02:21:07] [解释] status=omitted reason=no_api_key: 未配置 DEEPSEEK_API_KEY / ANTHROPIC_AUTH_TOKEN,跳过 LLM 解释(结构化判断不受影响)
+[2026-10-30 02:21:07] [校验] verdict=SKIP(LLM 未生成,文本类校验跳过;结构校验见各检查项) strong_words=0 items=强确定词:skip,天气不编造:pass,工具调用校验:skip,关闭来源不编造:skip
+[2026-10-30 02:21:07] [完成] run_id=run_missing_weather_001 scenario=S1 report=report/run_missing_weather_001_report.html run_result=evidence/b07/run_missing_weather_001/run_result.json
+[2026-10-30 02:21:07] [场景] run_id=run_current_only_001 scenario=S2 name=实验·current_only(仅当前值) anchor=2026-10-27 12:30:00 experiment=current_only sources=history:关/weather:real/knowledge:开/prediction:关
+[2026-10-30 02:21:07] [工具] seq=1 tool=b02_current marker=SIMULATED status=ok
+[2026-10-30 02:21:07] [工具] seq=2 tool=b02_anchor marker=SIMULATED status=ok
+[2026-10-30 02:21:07] [工具] seq=3 tool=b01_raw marker=SIMULATED status=ok
+[2026-10-30 02:21:07] [工具] seq=4/5 tool=b02_history/b02_stats marker=SIMULATED status=disabled
+[2026-10-30 02:21:09] [工具] seq=6 tool=b03_weather marker=PUBLIC status=ok [nested=success]
+[2026-10-30 02:21:09] [工具] seq=7 tool=b04_knowledge marker=SIMULATED status=ok [nested=ok]
+[2026-10-30 02:21:09] [工具] seq=8 tool=b06_predict marker=MODEL_OUTPUT status=disabled
+[2026-10-30 02:21:09] [证据] seq=1 evidence_id=EV01 source=b02_memory marker=SIMULATED status=ok type=current
+[2026-10-30 02:21:09] [证据] seq=2 evidence_id=EV02 source=b02_memory marker=SIMULATED status=ok type=current
+[2026-10-30 02:21:09] [证据] seq=3 evidence_id=EV03 source=b01_cli marker=SIMULATED status=ok type=raw
+[2026-10-30 02:21:09] [证据] seq=4 evidence_id=EV04 source=b02_memory marker=SIMULATED status=disabled type=history
+[2026-10-30 02:21:09] [证据] seq=5 evidence_id=EV05 source=b02_memory marker=SIMULATED status=disabled type=trend
+[2026-10-30 02:21:09] [证据] seq=6 evidence_id=EV06 source=b03_weather marker=PUBLIC status=ok type=weather
+[2026-10-30 02:21:09] [证据] seq=7 evidence_id=EV07 source=b04_rag marker=SIMULATED status=ok type=knowledge
+[2026-10-30 02:21:09] [证据] seq=8 evidence_id=EV08 source=b06_ml marker=MODEL_OUTPUT status=disabled type=prediction
+[2026-10-30 02:21:09] [判断] conclusion=正常 attention_level=normal trust=高 matched_rules=无 degraded=0 completeness=2/4
+[2026-10-30 02:21:09] [解释] status=omitted reason=no_api_key: 未配置 DEEPSEEK_API_KEY / ANTHROPIC_AUTH_TOKEN,跳过 LLM 解释(结构化判断不受影响)
+[2026-10-30 02:21:09] [校验] verdict=SKIP(LLM 未生成,文本类校验跳过;结构校验见各检查项) strong_words=0 items=强确定词:skip,天气不编造:pass,工具调用校验:skip,关闭来源不编造:skip
+[2026-10-30 02:21:09] [完成] run_id=run_current_only_001 scenario=S2 report=report/run_current_only_001_report.html run_result=evidence/b07/run_current_only_001/run_result.json
+[2026-10-30 02:21:09] [场景] run_id=run_with_history_001 scenario=S2 name=实验·with_history(当前+3h历史) anchor=2026-10-27 12:30:00 experiment=with_history sources=history:开/weather:real/knowledge:开/prediction:关
+[2026-10-30 02:21:09] [工具] seq=1 tool=b02_current marker=SIMULATED status=ok
+[2026-10-30 02:21:09] [工具] seq=2 tool=b02_anchor marker=SIMULATED status=ok
+[2026-10-30 02:21:09] [工具] seq=3 tool=b01_raw marker=SIMULATED status=ok
+[2026-10-30 02:21:09] [工具] seq=4 tool=b02_history marker=SIMULATED status=ok
+[2026-10-30 02:21:09] [工具] seq=5 tool=b02_stats marker=SIMULATED status=ok
+[2026-10-30 02:21:10] [工具] seq=6 tool=b03_weather marker=PUBLIC status=ok [nested=success]
+[2026-10-30 02:21:10] [工具] seq=7 tool=b04_knowledge marker=SIMULATED status=ok [nested=ok]
+[2026-10-30 02:21:10] [工具] seq=8 tool=b06_predict marker=MODEL_OUTPUT status=disabled
+[2026-10-30 02:21:10] [证据] seq=1 evidence_id=EV01 source=b02_memory marker=SIMULATED status=ok type=current
+[2026-10-30 02:21:10] [证据] seq=2 evidence_id=EV02 source=b02_memory marker=SIMULATED status=ok type=current
+[2026-10-30 02:21:10] [证据] seq=3 evidence_id=EV03 source=b01_cli marker=SIMULATED status=ok type=raw
+[2026-10-30 02:21:10] [证据] seq=4 evidence_id=EV04 source=b02_memory marker=SIMULATED status=ok type=history
+[2026-10-30 02:21:10] [证据] seq=5 evidence_id=EV05 source=b02_memory marker=SIMULATED status=ok type=trend
+[2026-10-30 02:21:10] [证据] seq=6 evidence_id=EV06 source=b03_weather marker=PUBLIC status=ok type=weather
+[2026-10-30 02:21:10] [证据] seq=7 evidence_id=EV07 source=b04_rag marker=SIMULATED status=ok type=knowledge
+[2026-10-30 02:21:10] [证据] seq=8 evidence_id=EV08 source=b06_ml marker=MODEL_OUTPUT status=disabled type=prediction
+[2026-10-30 02:21:10] [判断] conclusion=需要关注 attention_level=attention trust=高 matched_rules=无 degraded=1 completeness=3/4
+[2026-10-30 02:21:10] [解释] status=omitted reason=no_api_key: 未配置 DEEPSEEK_API_KEY / ANTHROPIC_AUTH_TOKEN,跳过 LLM 解释(结构化判断不受影响)
+[2026-10-30 02:21:10] [校验] verdict=SKIP(LLM 未生成,文本类校验跳过;结构校验见各检查项) strong_words=0 items=强确定词:skip,天气不编造:pass,工具调用校验:skip,关闭来源不编造:skip
+[2026-10-30 02:21:10] [完成] run_id=run_with_history_001 scenario=S2 report=report/run_with_history_001_report.html run_result=evidence/b07/run_with_history_001/run_result.json
+[2026-10-30 02:21:10] [场景] run_id=run_with_history_prediction_001 scenario=S2 name=实验·with_history_prediction(当前+3h历史+B06预测) anchor=2026-10-27 12:30:00 experiment=with_history_prediction sources=history:开/weather:real/knowledge:开/prediction:开
+[2026-10-30 02:21:10] [工具] seq=1 tool=b02_current marker=SIMULATED status=ok
+[2026-10-30 02:21:10] [工具] seq=2 tool=b02_anchor marker=SIMULATED status=ok
+[2026-10-30 02:21:10] [工具] seq=3 tool=b01_raw marker=SIMULATED status=ok
+[2026-10-30 02:21:10] [工具] seq=4 tool=b02_history marker=SIMULATED status=ok
+[2026-10-30 02:21:10] [工具] seq=5 tool=b02_stats marker=SIMULATED status=ok
+[2026-10-30 02:21:11] [工具] seq=6 tool=b03_weather marker=PUBLIC status=ok [nested=success]
+[2026-10-30 02:21:11] [工具] seq=7 tool=b04_knowledge marker=SIMULATED status=ok [nested=ok]
+[2026-10-30 02:21:11] [工具] seq=8 tool=b06_predict marker=MODEL_OUTPUT status=ok [nested=ok]
+[2026-10-30 02:21:11] [证据] seq=1 evidence_id=EV01 source=b02_memory marker=SIMULATED status=ok type=current
+[2026-10-30 02:21:11] [证据] seq=2 evidence_id=EV02 source=b02_memory marker=SIMULATED status=ok type=current
+[2026-10-30 02:21:11] [证据] seq=3 evidence_id=EV03 source=b01_cli marker=SIMULATED status=ok type=raw
+[2026-10-30 02:21:11] [证据] seq=4 evidence_id=EV04 source=b02_memory marker=SIMULATED status=ok type=history
+[2026-10-30 02:21:11] [证据] seq=5 evidence_id=EV05 source=b02_memory marker=SIMULATED status=ok type=trend
+[2026-10-30 02:21:11] [证据] seq=6 evidence_id=EV06 source=b03_weather marker=PUBLIC status=ok type=weather
+[2026-10-30 02:21:11] [证据] seq=7 evidence_id=EV07 source=b04_rag marker=SIMULATED status=ok type=knowledge
+[2026-10-30 02:21:11] [证据] seq=8 evidence_id=EV08 source=b06_ml marker=MODEL_OUTPUT status=ok type=prediction
+[2026-10-30 02:21:11] [判断] conclusion=需要关注 attention_level=attention trust=中 matched_rules=无 degraded=2 completeness=4/4
+[2026-10-30 02:21:11] [解释] status=omitted reason=no_api_key: 未配置 DEEPSEEK_API_KEY / ANTHROPIC_AUTH_TOKEN,跳过 LLM 解释(结构化判断不受影响)
+[2026-10-30 02:21:11] [校验] verdict=SKIP(LLM 未生成,文本类校验跳过;结构校验见各检查项) strong_words=0 items=强确定词:skip,天气不编造:pass,工具调用校验:skip,关闭来源不编造:skip
+[2026-10-30 02:21:12] [完成] run_id=run_with_history_prediction_001 scenario=S2 report=report/run_with_history_prediction_001_report.html run_result=evidence/b07/run_with_history_prediction_001/run_result.json
+[2026-10-30 02:22:18] [场景] run_id=run_20261030_022218_3ca425 scenario=S1 name=稳态基线 anchor=2026-10-28 12:00:00 experiment=无 sources=history:开/weather:real/knowledge:开/prediction:开
+[2026-10-30 02:22:18] [工具] seq=1 tool=b02_current marker=SIMULATED status=ok
+[2026-10-30 02:22:18] [工具] seq=2 tool=b02_anchor marker=SIMULATED status=ok
+[2026-10-30 02:22:18] [工具] seq=3 tool=b01_raw marker=SIMULATED status=ok
+[2026-10-30 02:22:18] [工具] seq=4 tool=b02_history marker=SIMULATED status=ok
+[2026-10-30 02:22:18] [工具] seq=5 tool=b02_stats marker=SIMULATED status=ok
+[2026-10-30 02:22:20] [工具] seq=6 tool=b03_weather marker=PUBLIC status=ok [nested=success]
+[2026-10-30 02:22:20] [工具] seq=7 tool=b04_knowledge marker=SIMULATED status=ok [nested=ok]
+[2026-10-30 02:22:20] [工具] seq=8 tool=b06_predict marker=MODEL_OUTPUT status=ok [nested=ok]
+[2026-10-30 02:22:20] [证据] seq=1 evidence_id=EV01 source=b02_memory marker=SIMULATED status=ok type=current
+[2026-10-30 02:22:20] [证据] seq=2 evidence_id=EV02 source=b02_memory marker=SIMULATED status=ok type=current
+[2026-10-30 02:22:20] [证据] seq=3 evidence_id=EV03 source=b01_cli marker=SIMULATED status=ok type=raw
+[2026-10-30 02:22:20] [证据] seq=4 evidence_id=EV04 source=b02_memory marker=SIMULATED status=ok type=history
+[2026-10-30 02:22:20] [证据] seq=5 evidence_id=EV05 source=b02_memory marker=SIMULATED status=ok type=trend
+[2026-10-30 02:22:20] [证据] seq=6 evidence_id=EV06 source=b03_weather marker=PUBLIC status=ok type=weather
+[2026-10-30 02:22:20] [证据] seq=7 evidence_id=EV07 source=b04_rag marker=SIMULATED status=ok type=knowledge
+[2026-10-30 02:22:20] [证据] seq=8 evidence_id=EV08 source=b06_ml marker=MODEL_OUTPUT status=ok type=prediction
+[2026-10-30 02:22:20] [判断] conclusion=正常 attention_level=normal trust=高 matched_rules=无 degraded=0 completeness=4/4
+[2026-10-30 02:22:20] [解释] status=omitted reason=no_api_key: 未配置 DEEPSEEK_API_KEY / ANTHROPIC_AUTH_TOKEN,跳过 LLM 解释(结构化判断不受影响)
+[2026-10-30 02:22:20] [校验] verdict=SKIP(LLM 未生成,文本类校验跳过;结构校验见各检查项) strong_words=0 items=强确定词:skip,天气不编造:pass,工具调用校验:skip,关闭来源不编造:skip
+[2026-10-30 02:22:20] [完成] run_id=run_20261030_022218_3ca425 scenario=S1 report=report/run_20261030_022218_3ca425_report.html run_result=evidence/b07/run_20261030_022218_3ca425/run_result.json
+[2026-10-30 02:22:24] [场景] run_id=run_20261030_022224_d49bdd scenario=S2 name=渐进漂移 anchor=2026-10-27 12:30:00 experiment=无 sources=history:开/weather:real/knowledge:开/prediction:开
+[2026-10-30 02:22:24] [工具] seq=1 tool=b02_current marker=SIMULATED status=ok
+[2026-10-30 02:22:24] [工具] seq=2 tool=b02_anchor marker=SIMULATED status=ok
+[2026-10-30 02:22:24] [工具] seq=3 tool=b01_raw marker=SIMULATED status=ok
+[2026-10-30 02:22:24] [工具] seq=4 tool=b02_history marker=SIMULATED status=ok
+[2026-10-30 02:22:24] [工具] seq=5 tool=b02_stats marker=SIMULATED status=ok
+[2026-10-30 02:22:26] [工具] seq=6 tool=b03_weather marker=PUBLIC status=ok [nested=success]
+[2026-10-30 02:22:26] [工具] seq=7 tool=b04_knowledge marker=SIMULATED status=ok [nested=ok]
+[2026-10-30 02:22:26] [工具] seq=8 tool=b06_predict marker=MODEL_OUTPUT status=ok [nested=ok]
+[2026-10-30 02:22:26] [证据] seq=1 evidence_id=EV01 source=b02_memory marker=SIMULATED status=ok type=current
+[2026-10-30 02:22:26] [证据] seq=2 evidence_id=EV02 source=b02_memory marker=SIMULATED status=ok type=current
+[2026-10-30 02:22:26] [证据] seq=3 evidence_id=EV03 source=b01_cli marker=SIMULATED status=ok type=raw
+[2026-10-30 02:22:26] [证据] seq=4 evidence_id=EV04 source=b02_memory marker=SIMULATED status=ok type=history
+[2026-10-30 02:22:26] [证据] seq=5 evidence_id=EV05 source=b02_memory marker=SIMULATED status=ok type=trend
+[2026-10-30 02:22:26] [证据] seq=6 evidence_id=EV06 source=b03_weather marker=PUBLIC status=ok type=weather
+[2026-10-30 02:22:26] [证据] seq=7 evidence_id=EV07 source=b04_rag marker=SIMULATED status=ok type=knowledge
+[2026-10-30 02:22:26] [证据] seq=8 evidence_id=EV08 source=b06_ml marker=MODEL_OUTPUT status=ok type=prediction
+[2026-10-30 02:22:26] [判断] conclusion=需要关注 attention_level=attention trust=中 matched_rules=无 degraded=2 completeness=4/4
+[2026-10-30 02:22:26] [解释] status=omitted reason=no_api_key: 未配置 DEEPSEEK_API_KEY / ANTHROPIC_AUTH_TOKEN,跳过 LLM 解释(结构化判断不受影响)
+[2026-10-30 02:22:26] [校验] verdict=SKIP(LLM 未生成,文本类校验跳过;结构校验见各检查项) strong_words=0 items=强确定词:skip,天气不编造:pass,工具调用校验:skip,关闭来源不编造:skip
+[2026-10-30 02:22:26] [完成] run_id=run_20261030_022224_d49bdd scenario=S2 report=report/run_20261030_022224_d49bdd_report.html run_result=evidence/b07/run_20261030_022224_d49bdd/run_result.json
+[2026-10-30 02:22:30] [场景] run_id=run_20261030_022230_4d178f scenario=S3 name=外部扰动 anchor=2026-10-27 13:30:00 experiment=无 sources=history:开/weather:real/knowledge:开/prediction:开
+[2026-10-30 02:22:30] [工具] seq=1 tool=b02_current marker=SIMULATED status=ok
+[2026-10-30 02:22:30] [工具] seq=2 tool=b02_anchor marker=SIMULATED status=ok
+[2026-10-30 02:22:30] [工具] seq=3 tool=b01_raw marker=SIMULATED status=ok
+[2026-10-30 02:22:30] [工具] seq=4 tool=b02_history marker=SIMULATED status=ok
+[2026-10-30 02:22:30] [工具] seq=5 tool=b02_stats marker=SIMULATED status=ok
+[2026-10-30 02:22:32] [工具] seq=6 tool=b03_weather marker=PUBLIC status=ok [nested=success]
+[2026-10-30 02:22:32] [工具] seq=7 tool=b04_knowledge marker=SIMULATED status=ok [nested=ok]
+[2026-10-30 02:22:32] [工具] seq=8 tool=b06_predict marker=MODEL_OUTPUT status=ok [nested=ok]
+[2026-10-30 02:22:32] [证据] seq=1 evidence_id=EV01 source=b02_memory marker=SIMULATED status=ok type=current
+[2026-10-30 02:22:32] [证据] seq=2 evidence_id=EV02 source=b02_memory marker=SIMULATED status=ok type=current
+[2026-10-30 02:22:32] [证据] seq=3 evidence_id=EV03 source=b01_cli marker=SIMULATED status=ok type=raw
+[2026-10-30 02:22:32] [证据] seq=4 evidence_id=EV04 source=b02_memory marker=SIMULATED status=ok type=history
+[2026-10-30 02:22:32] [证据] seq=5 evidence_id=EV05 source=b02_memory marker=SIMULATED status=ok type=trend
+[2026-10-30 02:22:32] [证据] seq=6 evidence_id=EV06 source=b03_weather marker=PUBLIC status=ok type=weather
+[2026-10-30 02:22:32] [证据] seq=7 evidence_id=EV07 source=b04_rag marker=SIMULATED status=ok type=knowledge
+[2026-10-30 02:22:32] [证据] seq=8 evidence_id=EV08 source=b06_ml marker=MODEL_OUTPUT status=ok type=prediction
+[2026-10-30 02:22:32] [判断] conclusion=需要预警 attention_level=warning trust=高 matched_rules=R1,R3,R7 degraded=0 completeness=4/4
+[2026-10-30 02:22:32] [解释] status=omitted reason=no_api_key: 未配置 DEEPSEEK_API_KEY / ANTHROPIC_AUTH_TOKEN,跳过 LLM 解释(结构化判断不受影响)
+[2026-10-30 02:22:32] [校验] verdict=SKIP(LLM 未生成,文本类校验跳过;结构校验见各检查项) strong_words=0 items=强确定词:skip,天气不编造:pass,工具调用校验:skip,关闭来源不编造:skip
+[2026-10-30 02:22:32] [完成] run_id=run_20261030_022230_4d178f scenario=S3 report=report/run_20261030_022230_4d178f_report.html run_result=evidence/b07/run_20261030_022230_4d178f/run_result.json
+[2026-10-30 02:22:36] [场景] run_id=run_20261030_022236_d697fb scenario=S4 name=多源证据分歧 anchor=2026-10-28 09:00:00 experiment=无 sources=history:开/weather:real/knowledge:开/prediction:开
+[2026-10-30 02:22:36] [工具] seq=1 tool=b02_current marker=SIMULATED status=ok
+[2026-10-30 02:22:36] [工具] seq=2 tool=b02_anchor marker=SIMULATED status=ok
+[2026-10-30 02:22:36] [工具] seq=3 tool=b01_raw marker=SIMULATED status=ok
+[2026-10-30 02:22:36] [工具] seq=4 tool=b02_history marker=SIMULATED status=ok
+[2026-10-30 02:22:36] [工具] seq=5 tool=b02_stats marker=SIMULATED status=ok
+[2026-10-30 02:22:37] [工具] seq=6 tool=b03_weather marker=PUBLIC status=ok [nested=success]
+[2026-10-30 02:22:37] [工具] seq=7 tool=b04_knowledge marker=SIMULATED status=ok [nested=ok]
+[2026-10-30 02:22:37] [工具] seq=8 tool=b06_predict marker=MODEL_OUTPUT status=ok [nested=ok]
+[2026-10-30 02:22:37] [证据] seq=1 evidence_id=EV01 source=b02_memory marker=SIMULATED status=ok type=current
+[2026-10-30 02:22:37] [证据] seq=2 evidence_id=EV02 source=b02_memory marker=SIMULATED status=ok type=current
+[2026-10-30 02:22:37] [证据] seq=3 evidence_id=EV03 source=b01_cli marker=SIMULATED status=ok type=raw
+[2026-10-30 02:22:37] [证据] seq=4 evidence_id=EV04 source=b02_memory marker=SIMULATED status=ok type=history
+[2026-10-30 02:22:37] [证据] seq=5 evidence_id=EV05 source=b02_memory marker=SIMULATED status=ok type=trend
+[2026-10-30 02:22:37] [证据] seq=6 evidence_id=EV06 source=b03_weather marker=PUBLIC status=ok type=weather
+[2026-10-30 02:22:37] [证据] seq=7 evidence_id=EV07 source=b04_rag marker=SIMULATED status=ok type=knowledge
+[2026-10-30 02:22:37] [证据] seq=8 evidence_id=EV08 source=b06_ml marker=MODEL_OUTPUT status=ok type=prediction
+[2026-10-30 02:22:37] [判断] conclusion=需要关注 attention_level=attention trust=中 matched_rules=无 degraded=2 completeness=4/4
+[2026-10-30 02:22:37] [解释] status=omitted reason=no_api_key: 未配置 DEEPSEEK_API_KEY / ANTHROPIC_AUTH_TOKEN,跳过 LLM 解释(结构化判断不受影响)
+[2026-10-30 02:22:37] [校验] verdict=SKIP(LLM 未生成,文本类校验跳过;结构校验见各检查项) strong_words=0 items=强确定词:skip,天气不编造:pass,工具调用校验:skip,关闭来源不编造:skip
+[2026-10-30 02:22:37] [完成] run_id=run_20261030_022236_d697fb scenario=S4 report=report/run_20261030_022236_d697fb_report.html run_result=evidence/b07/run_20261030_022236_d697fb/run_result.json
+[2026-10-30 02:22:42] [场景] run_id=run_20261030_022242_c8640e scenario=S5 name=证据退化 anchor=2026-10-28 12:00:00 experiment=无 sources=history:开/weather:real/knowledge:开/prediction:开
+[2026-10-30 02:22:42] [工具] seq=1 tool=b02_current marker=SIMULATED status=ok
+[2026-10-30 02:22:42] [工具] seq=2 tool=b02_anchor marker=SIMULATED status=ok
+[2026-10-30 02:22:42] [工具] seq=3 tool=b01_raw marker=SIMULATED status=ok
+[2026-10-30 02:22:42] [工具] seq=4 tool=b02_history marker=SIMULATED status=ok
+[2026-10-30 02:22:42] [工具] seq=5 tool=b02_stats marker=SIMULATED status=ok
+[2026-10-30 02:22:42] [工具] seq=6 tool=b03_weather marker=PUBLIC status=ok [nested=error]
+[2026-10-30 02:22:42] [工具] seq=7 tool=b04_knowledge marker=SIMULATED status=ok [nested=insufficient]
+[2026-10-30 02:22:42] [工具] seq=8 tool=b06_predict marker=MODEL_OUTPUT status=ok [nested=ok]
+[2026-10-30 02:22:42] [证据] seq=1 evidence_id=EV01 source=b02_memory marker=SIMULATED status=ok type=current
+[2026-10-30 02:22:42] [证据] seq=2 evidence_id=EV02 source=b02_memory marker=SIMULATED status=ok type=current
+[2026-10-30 02:22:42] [证据] seq=3 evidence_id=EV03 source=b01_cli marker=SIMULATED status=ok type=raw
+[2026-10-30 02:22:42] [证据] seq=4 evidence_id=EV04 source=b02_memory marker=SIMULATED status=ok type=history
+[2026-10-30 02:22:42] [证据] seq=5 evidence_id=EV05 source=b02_memory marker=SIMULATED status=ok type=trend
+[2026-10-30 02:22:42] [证据] seq=6 evidence_id=EV06 source=b03_weather marker=PUBLIC status=error type=weather
+[2026-10-30 02:22:42] [证据] seq=7 evidence_id=EV07 source=b04_rag marker=SIMULATED status=insufficient type=knowledge
+[2026-10-30 02:22:42] [证据] seq=8 evidence_id=EV08 source=b06_ml marker=MODEL_OUTPUT status=ok type=prediction
+[2026-10-30 02:22:42] [判断] conclusion=正常 attention_level=normal trust=低 matched_rules=无 degraded=2 completeness=2/4
+[2026-10-30 02:22:42] [解释] status=omitted reason=no_api_key: 未配置 DEEPSEEK_API_KEY / ANTHROPIC_AUTH_TOKEN,跳过 LLM 解释(结构化判断不受影响)
+[2026-10-30 02:22:42] [校验] verdict=SKIP(LLM 未生成,文本类校验跳过;结构校验见各检查项) strong_words=0 items=强确定词:skip,天气不编造:skip,工具调用校验:skip,关闭来源不编造:skip
+[2026-10-30 02:22:42] [完成] run_id=run_20261030_022242_c8640e scenario=S5 report=report/run_20261030_022242_c8640e_report.html run_result=evidence/b07/run_20261030_022242_c8640e/run_result.json
+[2026-10-30 10:56:12] [场景] run_id=run_agree_002 scenario=S1 name=实验·agree(四类证据一致) anchor=2026-10-28 12:00:00 experiment=agree sources=history:开/weather:real/knowledge:开/prediction:开
+[2026-10-30 10:56:12] [工具] seq=1 tool=b02_current marker=SIMULATED status=ok
+[2026-10-30 10:56:12] [工具] seq=2 tool=b02_anchor marker=SIMULATED status=ok
+[2026-10-30 10:56:12] [工具] seq=3 tool=b01_raw marker=SIMULATED status=ok
+[2026-10-30 10:56:12] [工具] seq=4 tool=b02_history marker=SIMULATED status=ok
+[2026-10-30 10:56:12] [工具] seq=5 tool=b02_stats marker=SIMULATED status=ok
+[2026-10-30 10:56:15] [工具] seq=6 tool=b03_weather marker=PUBLIC status=ok [nested=success]
+[2026-10-30 10:56:15] [工具] seq=7 tool=b04_knowledge marker=SIMULATED status=ok [nested=ok]
+[2026-10-30 10:56:16] [工具] seq=8 tool=b06_predict marker=MODEL_OUTPUT status=ok [nested=ok]
+[2026-10-30 10:56:16] [证据] seq=1 evidence_id=EV01 source=b02_memory marker=SIMULATED status=ok type=current
+[2026-10-30 10:56:16] [证据] seq=2 evidence_id=EV02 source=b02_memory marker=SIMULATED status=ok type=current
+[2026-10-30 10:56:16] [证据] seq=3 evidence_id=EV03 source=b01_cli marker=SIMULATED status=ok type=raw
+[2026-10-30 10:56:16] [证据] seq=4 evidence_id=EV04 source=b02_memory marker=SIMULATED status=ok type=history
+[2026-10-30 10:56:16] [证据] seq=5 evidence_id=EV05 source=b02_memory marker=SIMULATED status=ok type=trend
+[2026-10-30 10:56:16] [证据] seq=6 evidence_id=EV06 source=b03_weather marker=PUBLIC status=ok type=weather
+[2026-10-30 10:56:16] [证据] seq=7 evidence_id=EV07 source=b04_rag marker=SIMULATED status=ok type=knowledge
+[2026-10-30 10:56:16] [证据] seq=8 evidence_id=EV08 source=b06_ml marker=MODEL_OUTPUT status=ok type=prediction
+[2026-10-30 10:56:16] [判断] conclusion=正常 attention_level=normal trust=高 matched_rules=无 degraded=0 completeness=4/4
+[2026-10-30 10:56:16] [解释] status=omitted reason=no_api_key: 未配置 DEEPSEEK_API_KEY / ANTHROPIC_AUTH_TOKEN,跳过 LLM 解释(结构化判断不受影响)
+[2026-10-30 10:56:16] [校验] verdict=SKIP(LLM 未生成,文本类校验跳过;结构校验见各检查项) strong_words=0 items=强确定词:skip,天气不编造:pass,工具调用校验:skip,关闭来源不编造:skip
+[2026-10-30 10:56:17] [完成] run_id=run_agree_002 scenario=S1 report=report/run_agree_002_report.html run_result=evidence/b07/run_agree_002/run_result.json
+[2026-10-30 10:56:17] [场景] run_id=run_conflict_002 scenario=S2 name=实验·conflict(历史升温 vs 天气降温) anchor=2026-10-27 12:30:00 experiment=conflict sources=history:开/weather:injected_cooling/knowledge:开/prediction:开
+[2026-10-30 10:56:17] [工具] seq=1 tool=b02_current marker=SIMULATED status=ok
+[2026-10-30 10:56:17] [工具] seq=2 tool=b02_anchor marker=SIMULATED status=ok
+[2026-10-30 10:56:17] [工具] seq=3 tool=b01_raw marker=SIMULATED status=ok
+[2026-10-30 10:56:17] [工具] seq=4 tool=b02_history marker=SIMULATED status=ok
+[2026-10-30 10:56:17] [工具] seq=5 tool=b02_stats marker=SIMULATED status=ok
+[2026-10-30 10:56:17] [工具] seq=6 tool=b03_weather marker=SIMULATED status=ok [nested=success]
+[2026-10-30 10:56:17] [工具] seq=7 tool=b04_knowledge marker=SIMULATED status=ok [nested=ok]
+[2026-10-30 10:56:17] [工具] seq=8 tool=b06_predict marker=MODEL_OUTPUT status=ok [nested=ok]
+[2026-10-30 10:56:17] [证据] seq=1 evidence_id=EV01 source=b02_memory marker=SIMULATED status=ok type=current
+[2026-10-30 10:56:17] [证据] seq=2 evidence_id=EV02 source=b02_memory marker=SIMULATED status=ok type=current
+[2026-10-30 10:56:17] [证据] seq=3 evidence_id=EV03 source=b01_cli marker=SIMULATED status=ok type=raw
+[2026-10-30 10:56:17] [证据] seq=4 evidence_id=EV04 source=b02_memory marker=SIMULATED status=ok type=history
+[2026-10-30 10:56:17] [证据] seq=5 evidence_id=EV05 source=b02_memory marker=SIMULATED status=ok type=trend
+[2026-10-30 10:56:17] [证据] seq=6 evidence_id=EV06 source=b03_weather marker=SIMULATED status=ok type=weather
+[2026-10-30 10:56:17] [证据] seq=7 evidence_id=EV07 source=b04_rag marker=SIMULATED status=ok type=knowledge
+[2026-10-30 10:56:17] [证据] seq=8 evidence_id=EV08 source=b06_ml marker=MODEL_OUTPUT status=ok type=prediction
+[2026-10-30 10:56:17] [判断] conclusion=需要关注 attention_level=attention trust=中 matched_rules=无 degraded=3 completeness=4/4
+[2026-10-30 10:56:17] [解释] status=omitted reason=no_api_key: 未配置 DEEPSEEK_API_KEY / ANTHROPIC_AUTH_TOKEN,跳过 LLM 解释(结构化判断不受影响)
+[2026-10-30 10:56:17] [校验] verdict=SKIP(LLM 未生成,文本类校验跳过;结构校验见各检查项) strong_words=0 items=强确定词:skip,天气不编造:pass,工具调用校验:skip,关闭来源不编造:skip
+[2026-10-30 10:56:17] [完成] run_id=run_conflict_002 scenario=S2 report=report/run_conflict_002_report.html run_result=evidence/b07/run_conflict_002/run_result.json
+[2026-10-30 10:56:17] [场景] run_id=run_missing_weather_002 scenario=S1 name=实验·missing_weather(天气证据缺失) anchor=2026-10-28 12:00:00 experiment=missing_weather sources=history:开/weather:off/knowledge:开/prediction:开
+[2026-10-30 10:56:17] [工具] seq=1 tool=b02_current marker=SIMULATED status=ok
+[2026-10-30 10:56:17] [工具] seq=2 tool=b02_anchor marker=SIMULATED status=ok
+[2026-10-30 10:56:17] [工具] seq=3 tool=b01_raw marker=SIMULATED status=ok
+[2026-10-30 10:56:17] [工具] seq=4 tool=b02_history marker=SIMULATED status=ok
+[2026-10-30 10:56:17] [工具] seq=5 tool=b02_stats marker=SIMULATED status=ok
+[2026-10-30 10:56:17] [工具] seq=6 tool=b03_weather marker=PUBLIC status=disabled
+[2026-10-30 10:56:17] [工具] seq=7 tool=b04_knowledge marker=SIMULATED status=ok [nested=ok]
+[2026-10-30 10:56:17] [工具] seq=8 tool=b06_predict marker=MODEL_OUTPUT status=ok [nested=ok]
+[2026-10-30 10:56:17] [证据] seq=1 evidence_id=EV01 source=b02_memory marker=SIMULATED status=ok type=current
+[2026-10-30 10:56:17] [证据] seq=2 evidence_id=EV02 source=b02_memory marker=SIMULATED status=ok type=current
+[2026-10-30 10:56:17] [证据] seq=3 evidence_id=EV03 source=b01_cli marker=SIMULATED status=ok type=raw
+[2026-10-30 10:56:17] [证据] seq=4 evidence_id=EV04 source=b02_memory marker=SIMULATED status=ok type=history
+[2026-10-30 10:56:17] [证据] seq=5 evidence_id=EV05 source=b02_memory marker=SIMULATED status=ok type=trend
+[2026-10-30 10:56:17] [证据] seq=6 evidence_id=EV06 source=b03_weather marker=PUBLIC status=disabled type=weather
+[2026-10-30 10:56:17] [证据] seq=7 evidence_id=EV07 source=b04_rag marker=SIMULATED status=ok type=knowledge
+[2026-10-30 10:56:17] [证据] seq=8 evidence_id=EV08 source=b06_ml marker=MODEL_OUTPUT status=ok type=prediction
+[2026-10-30 10:56:17] [判断] conclusion=正常 attention_level=normal trust=高 matched_rules=无 degraded=0 completeness=3/4
+[2026-10-30 10:56:17] [解释] status=omitted reason=no_api_key: 未配置 DEEPSEEK_API_KEY / ANTHROPIC_AUTH_TOKEN,跳过 LLM 解释(结构化判断不受影响)
+[2026-10-30 10:56:17] [校验] verdict=SKIP(LLM 未生成,文本类校验跳过;结构校验见各检查项) strong_words=0 items=强确定词:skip,天气不编造:pass,工具调用校验:skip,关闭来源不编造:skip
+[2026-10-30 10:56:17] [完成] run_id=run_missing_weather_002 scenario=S1 report=report/run_missing_weather_002_report.html run_result=evidence/b07/run_missing_weather_002/run_result.json
+[2026-10-30 10:56:17] [场景] run_id=run_current_only_002 scenario=S2 name=实验·current_only(仅当前值) anchor=2026-10-27 12:30:00 experiment=current_only sources=history:关/weather:real/knowledge:开/prediction:关
+[2026-10-30 10:56:17] [工具] seq=1 tool=b02_current marker=SIMULATED status=ok
+[2026-10-30 10:56:17] [工具] seq=2 tool=b02_anchor marker=SIMULATED status=ok
+[2026-10-30 10:56:17] [工具] seq=3 tool=b01_raw marker=SIMULATED status=ok
+[2026-10-30 10:56:17] [工具] seq=4/5 tool=b02_history/b02_stats marker=SIMULATED status=disabled
+[2026-10-30 10:56:19] [工具] seq=6 tool=b03_weather marker=PUBLIC status=ok [nested=success]
+[2026-10-30 10:56:19] [工具] seq=7 tool=b04_knowledge marker=SIMULATED status=ok [nested=ok]
+[2026-10-30 10:56:19] [工具] seq=8 tool=b06_predict marker=MODEL_OUTPUT status=disabled
+[2026-10-30 10:56:19] [证据] seq=1 evidence_id=EV01 source=b02_memory marker=SIMULATED status=ok type=current
+[2026-10-30 10:56:19] [证据] seq=2 evidence_id=EV02 source=b02_memory marker=SIMULATED status=ok type=current
+[2026-10-30 10:56:19] [证据] seq=3 evidence_id=EV03 source=b01_cli marker=SIMULATED status=ok type=raw
+[2026-10-30 10:56:19] [证据] seq=4 evidence_id=EV04 source=b02_memory marker=SIMULATED status=disabled type=history
+[2026-10-30 10:56:19] [证据] seq=5 evidence_id=EV05 source=b02_memory marker=SIMULATED status=disabled type=trend
+[2026-10-30 10:56:19] [证据] seq=6 evidence_id=EV06 source=b03_weather marker=PUBLIC status=ok type=weather
+[2026-10-30 10:56:19] [证据] seq=7 evidence_id=EV07 source=b04_rag marker=SIMULATED status=ok type=knowledge
+[2026-10-30 10:56:19] [证据] seq=8 evidence_id=EV08 source=b06_ml marker=MODEL_OUTPUT status=disabled type=prediction
+[2026-10-30 10:56:19] [判断] conclusion=正常 attention_level=normal trust=高 matched_rules=无 degraded=0 completeness=2/4
+[2026-10-30 10:56:19] [解释] status=omitted reason=no_api_key: 未配置 DEEPSEEK_API_KEY / ANTHROPIC_AUTH_TOKEN,跳过 LLM 解释(结构化判断不受影响)
+[2026-10-30 10:56:19] [校验] verdict=SKIP(LLM 未生成,文本类校验跳过;结构校验见各检查项) strong_words=0 items=强确定词:skip,天气不编造:pass,工具调用校验:skip,关闭来源不编造:skip
+[2026-10-30 10:56:19] [完成] run_id=run_current_only_002 scenario=S2 report=report/run_current_only_002_report.html run_result=evidence/b07/run_current_only_002/run_result.json
+[2026-10-30 10:56:19] [场景] run_id=run_with_history_002 scenario=S2 name=实验·with_history(当前+3h历史) anchor=2026-10-27 12:30:00 experiment=with_history sources=history:开/weather:real/knowledge:开/prediction:关
+[2026-10-30 10:56:19] [工具] seq=1 tool=b02_current marker=SIMULATED status=ok
+[2026-10-30 10:56:19] [工具] seq=2 tool=b02_anchor marker=SIMULATED status=ok
+[2026-10-30 10:56:19] [工具] seq=3 tool=b01_raw marker=SIMULATED status=ok
+[2026-10-30 10:56:19] [工具] seq=4 tool=b02_history marker=SIMULATED status=ok
+[2026-10-30 10:56:19] [工具] seq=5 tool=b02_stats marker=SIMULATED status=ok
+[2026-10-30 10:56:20] [工具] seq=6 tool=b03_weather marker=PUBLIC status=ok [nested=success]
+[2026-10-30 10:56:20] [工具] seq=7 tool=b04_knowledge marker=SIMULATED status=ok [nested=ok]
+[2026-10-30 10:56:20] [工具] seq=8 tool=b06_predict marker=MODEL_OUTPUT status=disabled
+[2026-10-30 10:56:20] [证据] seq=1 evidence_id=EV01 source=b02_memory marker=SIMULATED status=ok type=current
+[2026-10-30 10:56:20] [证据] seq=2 evidence_id=EV02 source=b02_memory marker=SIMULATED status=ok type=current
+[2026-10-30 10:56:20] [证据] seq=3 evidence_id=EV03 source=b01_cli marker=SIMULATED status=ok type=raw
+[2026-10-30 10:56:20] [证据] seq=4 evidence_id=EV04 source=b02_memory marker=SIMULATED status=ok type=history
+[2026-10-30 10:56:20] [证据] seq=5 evidence_id=EV05 source=b02_memory marker=SIMULATED status=ok type=trend
+[2026-10-30 10:56:20] [证据] seq=6 evidence_id=EV06 source=b03_weather marker=PUBLIC status=ok type=weather
+[2026-10-30 10:56:20] [证据] seq=7 evidence_id=EV07 source=b04_rag marker=SIMULATED status=ok type=knowledge
+[2026-10-30 10:56:20] [证据] seq=8 evidence_id=EV08 source=b06_ml marker=MODEL_OUTPUT status=disabled type=prediction
+[2026-10-30 10:56:20] [判断] conclusion=需要关注 attention_level=attention trust=高 matched_rules=无 degraded=1 completeness=3/4
+[2026-10-30 10:56:20] [解释] status=omitted reason=no_api_key: 未配置 DEEPSEEK_API_KEY / ANTHROPIC_AUTH_TOKEN,跳过 LLM 解释(结构化判断不受影响)
+[2026-10-30 10:56:20] [校验] verdict=SKIP(LLM 未生成,文本类校验跳过;结构校验见各检查项) strong_words=0 items=强确定词:skip,天气不编造:pass,工具调用校验:skip,关闭来源不编造:skip
+[2026-10-30 10:56:20] [完成] run_id=run_with_history_002 scenario=S2 report=report/run_with_history_002_report.html run_result=evidence/b07/run_with_history_002/run_result.json
+[2026-10-30 10:56:20] [场景] run_id=run_with_history_prediction_002 scenario=S2 name=实验·with_history_prediction(当前+3h历史+B06预测) anchor=2026-10-27 12:30:00 experiment=with_history_prediction sources=history:开/weather:real/knowledge:开/prediction:开
+[2026-10-30 10:56:20] [工具] seq=1 tool=b02_current marker=SIMULATED status=ok
+[2026-10-30 10:56:20] [工具] seq=2 tool=b02_anchor marker=SIMULATED status=ok
+[2026-10-30 10:56:20] [工具] seq=3 tool=b01_raw marker=SIMULATED status=ok
+[2026-10-30 10:56:20] [工具] seq=4 tool=b02_history marker=SIMULATED status=ok
+[2026-10-30 10:56:20] [工具] seq=5 tool=b02_stats marker=SIMULATED status=ok
+[2026-10-30 10:56:21] [工具] seq=6 tool=b03_weather marker=PUBLIC status=ok [nested=success]
+[2026-10-30 10:56:21] [工具] seq=7 tool=b04_knowledge marker=SIMULATED status=ok [nested=ok]
+[2026-10-30 10:56:21] [工具] seq=8 tool=b06_predict marker=MODEL_OUTPUT status=ok [nested=ok]
+[2026-10-30 10:56:21] [证据] seq=1 evidence_id=EV01 source=b02_memory marker=SIMULATED status=ok type=current
+[2026-10-30 10:56:21] [证据] seq=2 evidence_id=EV02 source=b02_memory marker=SIMULATED status=ok type=current
+[2026-10-30 10:56:21] [证据] seq=3 evidence_id=EV03 source=b01_cli marker=SIMULATED status=ok type=raw
+[2026-10-30 10:56:21] [证据] seq=4 evidence_id=EV04 source=b02_memory marker=SIMULATED status=ok type=history
+[2026-10-30 10:56:21] [证据] seq=5 evidence_id=EV05 source=b02_memory marker=SIMULATED status=ok type=trend
+[2026-10-30 10:56:21] [证据] seq=6 evidence_id=EV06 source=b03_weather marker=PUBLIC status=ok type=weather
+[2026-10-30 10:56:21] [证据] seq=7 evidence_id=EV07 source=b04_rag marker=SIMULATED status=ok type=knowledge
+[2026-10-30 10:56:21] [证据] seq=8 evidence_id=EV08 source=b06_ml marker=MODEL_OUTPUT status=ok type=prediction
+[2026-10-30 10:56:21] [判断] conclusion=需要关注 attention_level=attention trust=中 matched_rules=无 degraded=2 completeness=4/4
+[2026-10-30 10:56:21] [解释] status=omitted reason=no_api_key: 未配置 DEEPSEEK_API_KEY / ANTHROPIC_AUTH_TOKEN,跳过 LLM 解释(结构化判断不受影响)
+[2026-10-30 10:56:21] [校验] verdict=SKIP(LLM 未生成,文本类校验跳过;结构校验见各检查项) strong_words=0 items=强确定词:skip,天气不编造:pass,工具调用校验:skip,关闭来源不编造:skip
+[2026-10-30 10:56:21] [完成] run_id=run_with_history_prediction_002 scenario=S2 report=report/run_with_history_prediction_002_report.html run_result=evidence/b07/run_with_history_prediction_002/run_result.json
+[2026-10-31 01:03:21] [场景] run_id=run_20261031_010321_14f97a scenario=S1 name=稳态基线 anchor=2026-10-28 12:00:00 experiment=无 sources=history:开/weather:real/knowledge:开/prediction:开
+[2026-10-31 01:03:21] [工具] seq=1 tool=b02_current marker=SIMULATED status=ok
+[2026-10-31 01:03:21] [工具] seq=2 tool=b02_anchor marker=SIMULATED status=ok
+[2026-10-31 01:03:21] [工具] seq=3 tool=b01_raw marker=SIMULATED status=ok
+[2026-10-31 01:03:21] [工具] seq=4 tool=b02_history marker=SIMULATED status=ok
+[2026-10-31 01:03:21] [工具] seq=5 tool=b02_stats marker=SIMULATED status=ok
+[2026-10-31 01:03:23] [工具] seq=6 tool=b03_weather marker=PUBLIC status=ok [nested=error]
+[2026-10-31 01:03:23] [工具] seq=7 tool=b04_knowledge marker=SIMULATED status=ok [nested=ok]
+[2026-10-31 01:03:24] [工具] seq=8 tool=b06_predict marker=MODEL_OUTPUT status=ok [nested=ok]
+[2026-10-31 01:03:24] [证据] seq=1 evidence_id=EV01 source=b02_memory marker=SIMULATED status=ok type=current
+[2026-10-31 01:03:24] [证据] seq=2 evidence_id=EV02 source=b02_memory marker=SIMULATED status=ok type=current
+[2026-10-31 01:03:24] [证据] seq=3 evidence_id=EV03 source=b01_cli marker=SIMULATED status=ok type=raw
+[2026-10-31 01:03:24] [证据] seq=4 evidence_id=EV04 source=b02_memory marker=SIMULATED status=ok type=history
+[2026-10-31 01:03:24] [证据] seq=5 evidence_id=EV05 source=b02_memory marker=SIMULATED status=ok type=trend
+[2026-10-31 01:03:24] [证据] seq=6 evidence_id=EV06 source=b03_weather marker=PUBLIC status=error type=weather
+[2026-10-31 01:03:24] [证据] seq=7 evidence_id=EV07 source=b04_rag marker=SIMULATED status=ok type=knowledge
+[2026-10-31 01:03:24] [证据] seq=8 evidence_id=EV08 source=b06_ml marker=MODEL_OUTPUT status=ok type=prediction
+[2026-10-31 01:03:24] [判断] conclusion=正常 attention_level=normal trust=低 matched_rules=无 degraded=1 completeness=3/4
+[2026-10-31 01:03:24] [解释] status=omitted reason=no_api_key: 未配置 DEEPSEEK_API_KEY / ANTHROPIC_AUTH_TOKEN,跳过 LLM 解释(结构化判断不受影响)
+[2026-10-31 01:03:24] [校验] verdict=SKIP(LLM 未生成,文本类校验跳过;结构校验见各检查项) strong_words=0 items=强确定词:skip,天气不编造:skip,工具调用校验:skip,关闭来源不编造:skip
+[2026-10-31 01:03:24] [完成] run_id=run_20261031_010321_14f97a scenario=S1 report=report/run_20261031_010321_14f97a_report.html run_result=evidence/b07/run_20261031_010321_14f97a/run_result.json
+[2026-10-31 01:03:28] [场景] run_id=run_20261031_010328_088f90 scenario=S2 name=渐进漂移 anchor=2026-10-27 12:30:00 experiment=无 sources=history:开/weather:real/knowledge:开/prediction:开
+[2026-10-31 01:03:28] [工具] seq=1 tool=b02_current marker=SIMULATED status=ok
+[2026-10-31 01:03:28] [工具] seq=2 tool=b02_anchor marker=SIMULATED status=ok
+[2026-10-31 01:03:28] [工具] seq=3 tool=b01_raw marker=SIMULATED status=ok
+[2026-10-31 01:03:28] [工具] seq=4 tool=b02_history marker=SIMULATED status=ok
+[2026-10-31 01:03:28] [工具] seq=5 tool=b02_stats marker=SIMULATED status=ok
+[2026-10-31 01:03:29] [工具] seq=6 tool=b03_weather marker=PUBLIC status=ok [nested=success]
+[2026-10-31 01:03:29] [工具] seq=7 tool=b04_knowledge marker=SIMULATED status=ok [nested=ok]
+[2026-10-31 01:03:29] [工具] seq=8 tool=b06_predict marker=MODEL_OUTPUT status=ok [nested=ok]
+[2026-10-31 01:03:29] [证据] seq=1 evidence_id=EV01 source=b02_memory marker=SIMULATED status=ok type=current
+[2026-10-31 01:03:29] [证据] seq=2 evidence_id=EV02 source=b02_memory marker=SIMULATED status=ok type=current
+[2026-10-31 01:03:29] [证据] seq=3 evidence_id=EV03 source=b01_cli marker=SIMULATED status=ok type=raw
+[2026-10-31 01:03:29] [证据] seq=4 evidence_id=EV04 source=b02_memory marker=SIMULATED status=ok type=history
+[2026-10-31 01:03:29] [证据] seq=5 evidence_id=EV05 source=b02_memory marker=SIMULATED status=ok type=trend
+[2026-10-31 01:03:29] [证据] seq=6 evidence_id=EV06 source=b03_weather marker=PUBLIC status=ok type=weather
+[2026-10-31 01:03:29] [证据] seq=7 evidence_id=EV07 source=b04_rag marker=SIMULATED status=ok type=knowledge
+[2026-10-31 01:03:29] [证据] seq=8 evidence_id=EV08 source=b06_ml marker=MODEL_OUTPUT status=ok type=prediction
+[2026-10-31 01:03:29] [判断] conclusion=需要关注 attention_level=attention trust=中 matched_rules=无 degraded=2 completeness=4/4
+[2026-10-31 01:03:29] [解释] status=omitted reason=no_api_key: 未配置 DEEPSEEK_API_KEY / ANTHROPIC_AUTH_TOKEN,跳过 LLM 解释(结构化判断不受影响)
+[2026-10-31 01:03:29] [校验] verdict=SKIP(LLM 未生成,文本类校验跳过;结构校验见各检查项) strong_words=0 items=强确定词:skip,天气不编造:pass,工具调用校验:skip,关闭来源不编造:skip
+[2026-10-31 01:03:29] [完成] run_id=run_20261031_010328_088f90 scenario=S2 report=report/run_20261031_010328_088f90_report.html run_result=evidence/b07/run_20261031_010328_088f90/run_result.json
+[2026-10-31 02:11:47] [场景] run_id=run_20261031_021147_497999 scenario=S1 name=稳态基线 anchor=2026-10-28 12:00:00 experiment=无 sources=history:开/weather:real/knowledge:开/prediction:开
+[2026-10-31 02:11:47] [工具] seq=1 tool=b02_current marker=SIMULATED status=ok
+[2026-10-31 02:11:47] [工具] seq=2 tool=b02_anchor marker=SIMULATED status=ok
+[2026-10-31 02:11:47] [工具] seq=3 tool=b01_raw marker=SIMULATED status=ok
+[2026-10-31 02:11:47] [工具] seq=4 tool=b02_history marker=SIMULATED status=ok
+[2026-10-31 02:11:47] [工具] seq=5 tool=b02_stats marker=SIMULATED status=ok
+[2026-10-31 02:11:50] [工具] seq=6 tool=b03_weather marker=PUBLIC status=ok [nested=success]
+[2026-10-31 02:11:50] [工具] seq=7 tool=b04_knowledge marker=SIMULATED status=ok [nested=ok]
+[2026-10-31 02:11:50] [工具] seq=8 tool=b06_predict marker=MODEL_OUTPUT status=ok [nested=ok]
+[2026-10-31 02:11:50] [证据] seq=1 evidence_id=EV01 source=b02_memory marker=SIMULATED status=ok type=current
+[2026-10-31 02:11:50] [证据] seq=2 evidence_id=EV02 source=b02_memory marker=SIMULATED status=ok type=current
+[2026-10-31 02:11:50] [证据] seq=3 evidence_id=EV03 source=b01_cli marker=SIMULATED status=ok type=raw
+[2026-10-31 02:11:50] [证据] seq=4 evidence_id=EV04 source=b02_memory marker=SIMULATED status=ok type=history
+[2026-10-31 02:11:50] [证据] seq=5 evidence_id=EV05 source=b02_memory marker=SIMULATED status=ok type=trend
+[2026-10-31 02:11:50] [证据] seq=6 evidence_id=EV06 source=b03_weather marker=PUBLIC status=ok type=weather
+[2026-10-31 02:11:50] [证据] seq=7 evidence_id=EV07 source=b04_rag marker=SIMULATED status=ok type=knowledge
+[2026-10-31 02:11:50] [证据] seq=8 evidence_id=EV08 source=b06_ml marker=MODEL_OUTPUT status=ok type=prediction
+[2026-10-31 02:11:50] [判断] conclusion=正常 attention_level=normal trust=高 matched_rules=无 degraded=0 completeness=4/4
+[2026-10-31 02:11:50] [解释] status=omitted reason=no_api_key: 未配置 DEEPSEEK_API_KEY / ANTHROPIC_AUTH_TOKEN,跳过 LLM 解释(结构化判断不受影响)
+[2026-10-31 02:11:50] [校验] verdict=SKIP(LLM 未生成,文本类校验跳过;结构校验见各检查项) strong_words=0 items=强确定词:skip,天气不编造:pass,工具调用校验:skip,关闭来源不编造:skip
+[2026-10-31 02:11:50] [完成] run_id=run_20261031_021147_497999 scenario=S1 report=报告/run_20261031_021147_497999_report.html run_result=证据/b07/run_20261031_021147_497999/run_result.json

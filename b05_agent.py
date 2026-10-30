@@ -31,7 +31,7 @@
 
 【业务边界】
   LLM 只做决策,真实查询/API 请求全部由 Python 代码执行;MCP 外部工具连接为
-  可选扩展,本模块基础实现不包含(见 docs/b05_agent.md 留白说明)。
+  可选扩展,本模块基础实现不包含(见 文档/b05_agent.md 留白说明)。
 =====================================================================
 """
 
@@ -52,8 +52,8 @@ import b04_rag
 
 # ---------------- 配置 ----------------
 BASE_DIR = Path(__file__).resolve().parent
-EVIDENCE_DIR = BASE_DIR / "evidence" / "b05"
-LOG_DIR = BASE_DIR / "logs"
+EVIDENCE_DIR = BASE_DIR / "证据" / "b05"
+LOG_DIR = BASE_DIR / "日志"
 AGENT_LOG = LOG_DIR / "b05_agent.log"
 
 # LLM 配置(b01 同款约定:全部可被环境变量覆盖,代码中零硬编码 API Key)
@@ -85,7 +85,7 @@ def _now_iso():
 
 
 def _log_agent(text):
-    """追加一行时间戳日志到 logs/b05_agent.log 并镜像控制台;绝不记录密钥。
+    """追加一行时间戳日志到 日志/b05_agent.log 并镜像控制台;绝不记录密钥。
     库级路径(B07 import 调用)不会先走 main 的 setup_console,必须在此兜底。"""
     setup_console()
     line = "[%s] %s" % (datetime.now().strftime("%Y-%m-%d %H:%M:%S"), text)
@@ -415,7 +415,7 @@ def _finish_agent(ev):
     ev["ended_at"] = _now_iso()
     filename = "agent_run_%s_%s.json" % (datetime.now().strftime("%Y%m%d_%H%M%S"), secrets.token_hex(3))
     _save_evidence(ev, filename)
-    _log_agent("[最终] status=%s steps=%d tool_calls=%d tool_failures=%d evidence=evidence/b05/%s" % (
+    _log_agent("[最终] status=%s steps=%d tool_calls=%d tool_failures=%d evidence=证据/b05/%s" % (
         ev["status"], ev["steps"], len(ev["tool_calls"]), len(ev["tool_failures"]), filename))
     return ev
 
@@ -559,7 +559,7 @@ def cmd_test():
         "PASS — 工具智能体测试通过" if report["summary"]["failed"] == 0 else "FAIL — 存在未通过用例",
         report["summary"]["passed"], report["summary"]["total"], report["fingerprint"]))
     _save_evidence(report, "test_report.json")
-    print("✓ 测试报告已保存: evidence/b05/test_report.json")
+    print("✓ 测试报告已保存: 证据/b05/test_report.json")
 
 
 def cmd_failtest():
@@ -602,7 +602,7 @@ def cmd_failtest():
     summary = {"checked_at": _now_iso(), "passed": passed, "total": 3,
                "log_lines_added": after - before, "log_ok": log_ok, "cases": summaries}
     _save_evidence(summary, "failtest_summary.json")
-    print("\n  判定: %s(通过 %d/3;失败证据已保存 evidence/b05/fail_00*.json)" % (
+    print("\n  判定: %s(通过 %d/3;失败证据已保存 证据/b05/fail_00*.json)" % (
         "PASS — 执行层失败验证通过" if passed == 3 and log_ok else "FAIL — 未全部通过", passed))
 
 
@@ -616,7 +616,7 @@ def print_usage():
     print("环境变量: B05_LLM_BASE_URL / B05_LLM_MODEL / B05_LLM_TIMEOUT / B05_MAX_STEPS(默认 6)")
     print("          API Key 读取顺序: DEEPSEEK_API_KEY → ANTHROPIC_AUTH_TOKEN")
     print("公开接口(供 B07 复用): run_agent(task) / dispatch_tool(name, arguments) / TOOL_DEFINITIONS")
-    print("日志: logs/b05_agent.log —— 每次调用强制记录 tool/arguments/tool_result/sequence")
+    print("日志: 日志/b05_agent.log —— 每次调用强制记录 tool/arguments/tool_result/sequence")
 
 
 def main():

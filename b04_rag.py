@@ -41,12 +41,12 @@ from pathlib import Path
 
 # ---------------- 配置 ----------------
 BASE_DIR = Path(__file__).resolve().parent
-KNOWLEDGE_DIR = BASE_DIR / "knowledge"
+KNOWLEDGE_DIR = BASE_DIR / "知识库"
 SOURCES_DIR = KNOWLEDGE_DIR / "sources"
 REGISTER_PATH = KNOWLEDGE_DIR / "source_register.json"
 INDEX_PATH = KNOWLEDGE_DIR / "index.json"
-EVIDENCE_DIR = BASE_DIR / "evidence" / "b04"
-LOG_DIR = BASE_DIR / "logs"
+EVIDENCE_DIR = BASE_DIR / "证据" / "b04"
+LOG_DIR = BASE_DIR / "日志"
 RAG_LOG = LOG_DIR / "b04_rag.log"
 
 # 资料登记(固定顺序决定构建确定性)
@@ -273,7 +273,7 @@ def build_knowledge_base():
             "source_id": source_id, "title": title,
             "author": SOURCE_AUTHOR, "date": SOURCE_DATE,
             "origin": SOURCE_ORIGIN,
-            "file": "knowledge/sources/%s" % filename,
+            "file": "知识库/sources/%s" % filename,
             "encoding": "utf-8",
             "char_count": len(raw),
             "sha256": _file_sha256(path),
@@ -592,7 +592,7 @@ def answer_tomato_question(query, k=DEFAULT_K):
 
 # ---------------- 校验 / 落盘 / 打印 / 日志 ----------------
 def save_evidence(ev, filename):
-    """证据落盘 evidence/b04/{filename}(自动建目录,UTF-8)。"""
+    """证据落盘 证据/b04/{filename}(自动建目录,UTF-8)。"""
     try:
         EVIDENCE_DIR.mkdir(parents=True, exist_ok=True)
         with open(EVIDENCE_DIR / filename, "w", encoding="utf-8") as f:
@@ -604,7 +604,7 @@ def save_evidence(ev, filename):
 
 
 def _log_rag(text):
-    """追加一行时间戳日志到 logs/b04_rag.log 并镜像控制台;绝不记录密钥。
+    """追加一行时间戳日志到 日志/b04_rag.log 并镜像控制台;绝不记录密钥。
     库级路径(B07 import 调用)不会先走 main 的 setup_console,必须在此兜底(GBK 教训)。"""
     setup_console()
     line = "[%s] %s" % (datetime.now().strftime("%Y-%m-%d %H:%M:%S"), text)
@@ -680,7 +680,7 @@ def cmd_build():
             r["source_id"], r["title"], r["char_count"], r["chunk_count"], r["sha256"][:8]))
     print("  共 %d 个 chunk,词表 %d 个 gram" % (index["total_chunks"], index["vocab_size"]))
     print("  build_fingerprint: %s" % index["build_fingerprint"])
-    print("✓ 已写入 knowledge/source_register.json 与 knowledge/index.json")
+    print("✓ 已写入 知识库/source_register.json 与 知识库/index.json")
     save_evidence({
         "built_at": index["built_at"], "build_fingerprint": index["build_fingerprint"],
         "total_chunks": index["total_chunks"], "vocab_size": index["vocab_size"],
@@ -725,7 +725,7 @@ def cmd_search(args):
     if "--save" in args:
         filename = "retrieval_%s.json" % datetime.now().strftime("%Y%m%d_%H%M%S")
         if save_evidence(ev, filename):
-            print("✓ 证据已保存: evidence/b04/%s" % filename)
+            print("✓ 证据已保存: 证据/b04/%s" % filename)
 
 
 def cmd_ask(args):
@@ -743,7 +743,7 @@ def cmd_ask(args):
     _print_answer(ev)
     filename = "rag_answer_%s.json" % datetime.now().strftime("%Y%m%d_%H%M%S")
     if save_evidence(ev, filename):
-        print("✓ 证据已保存: evidence/b04/%s" % filename)
+        print("✓ 证据已保存: 证据/b04/%s" % filename)
 
 
 def cmd_calibrate():
@@ -833,7 +833,7 @@ def cmd_test():
     save_evidence(report, "test_report.json")
     for cid, ev in case_evidences.items():
         save_evidence(ev, "test_case_%s.json" % cid)
-    print("✓ 测试报告已保存: evidence/b04/test_report.json 与 test_case_*.json")
+    print("✓ 测试报告已保存: 证据/b04/test_report.json 与 test_case_*.json")
 
 
 def _traceability_check(index, register, case_evidences):

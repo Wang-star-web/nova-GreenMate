@@ -1,0 +1,7 @@
+[2026-10-30 00:10:31] [训练] version=B06-ML-v1 acc=0.8333 macro_f1=0.5634 watch_recall=0.9333 判定=通过
+[2026-10-30 00:11:24] [训练] version=B06-ML-v2 acc=0.8696 macro_f1=0.8600 watch_recall=0.9333 判定=通过
+[2026-10-30 00:11:39] [评估] version=B06-ML-v2 指标一致=是 acc=0.8696
+[2026-10-30 00:11:43] [推理] sample_time=(最新) prediction=NORMAL status=ok
+[2026-10-30 00:11:47] [推理] sample_time=2026-10-28 20:00 prediction=NORMAL status=ok
+[2026-10-30 00:11:51] [推理] sample_time=2026-10-22 00:00 prediction=None status=error
+[2026-10-30 00:12:26] [训练] version=B06-ML-v3 acc=0.8696 macro_f1=0.8600 watch_recall=0.9333 判定=通过

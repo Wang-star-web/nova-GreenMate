@@ -57,10 +57,10 @@ from urllib.parse import parse_qs, urlparse
 
 # ---------------- 配置 ----------------
 BASE_DIR = Path(__file__).resolve().parent        # 脚本所在目录,数据路径不受启动位置影响
-DB_PATH = BASE_DIR / "data" / "environment.db"    # SQLite 数据库文件(B02 交付物)
-ASSETS_DIR = BASE_DIR / "b02_assets"              # 本地静态资源(Chart.js 本地文件,离线可用)
+DB_PATH = BASE_DIR / "数据" / "environment.db"    # SQLite 数据库文件(B02 交付物)
+ASSETS_DIR = BASE_DIR / "前端资源"              # 本地静态资源(Chart.js 本地文件,离线可用)
 CHART_JS_PATH = ASSETS_DIR / "chart.umd.js"       # Chart.js 4.4.9 UMD(npm 官方包,内容已压缩)
-EVIDENCE_DIR = BASE_DIR / "evidence" / "b02"      # B02 证据产物目录(运行时自动创建)
+EVIDENCE_DIR = BASE_DIR / "证据" / "b02"      # B02 证据产物目录(运行时自动创建)
 
 # 4 项环境参数的规格:一次定义,驱动生成、校验、展示(本模块独立副本,不 import 兄弟模块)
 PARAM_KEYS = ("temperature", "humidity", "co2", "light")
@@ -111,7 +111,7 @@ try:
 except ValueError:
     B02_WEB_PORT = 8223
 
-# 建表 SQL(sim_scenario 注释在 docs/b02_schema.md 中详述)
+# 建表 SQL(sim_scenario 注释在 文档/b02_schema.md 中详述)
 SCHEMA_SQL = """
 CREATE TABLE IF NOT EXISTS environment_samples (
     id           INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -367,7 +367,7 @@ def write_meta(conn, anchor, segments, mode):
 
 
 def write_disturbance_manifest(manifest):
-    """扰动片段清单落盘 evidence/b02/disturbance_manifest.json(机器可读交付物)。"""
+    """扰动片段清单落盘 证据/b02/disturbance_manifest.json(机器可读交付物)。"""
     try:
         EVIDENCE_DIR.mkdir(parents=True, exist_ok=True)
         with open(EVIDENCE_DIR / "disturbance_manifest.json", "w", encoding="utf-8") as f:
@@ -751,7 +751,7 @@ def _check_rows(report, conn):
 
 
 def save_quality_report(report):
-    """质量报告落盘 evidence/b02/quality_report.json;返回是否成功。"""
+    """质量报告落盘 证据/b02/quality_report.json;返回是否成功。"""
     try:
         EVIDENCE_DIR.mkdir(parents=True, exist_ok=True)
         with open(EVIDENCE_DIR / "quality_report.json", "w", encoding="utf-8") as f:
@@ -776,7 +776,7 @@ def print_quality_report(report):
 
 
 def dump_sample_stats():
-    """全窗口 / 最近 7 天 / 3 天 / 24 小时 四窗口统计落盘 evidence/b02/sample_stats.json。"""
+    """全窗口 / 最近 7 天 / 3 天 / 24 小时 四窗口统计落盘 证据/b02/sample_stats.json。"""
     start, end = full_window()
     if start is None:
         print("⚠ 数据库为空,无法生成样本统计")
@@ -946,7 +946,7 @@ def cmd_stats(args):
     _print_stats("窗口统计", result)
     if "--hours" not in args and "--from" not in args:
         if dump_sample_stats():
-            print("✓ 样本统计已保存: evidence/b02/sample_stats.json(全窗口/7天/3天/24小时)")
+            print("✓ 样本统计已保存: 证据/b02/sample_stats.json(全窗口/7天/3天/24小时)")
 
 
 def cmd_check():
@@ -954,7 +954,7 @@ def cmd_check():
     report = run_quality_check()
     print_quality_report(report)
     if save_quality_report(report):
-        print("✓ 质量报告已保存: evidence/b02/quality_report.json")
+        print("✓ 质量报告已保存: 证据/b02/quality_report.json")
 
 
 # ---------------- Web 可视化(Chart.js 本地文件,真实 SQL 时间窗查询)----------------
@@ -1631,7 +1631,7 @@ class B02RequestHandler(BaseHTTPRequestHandler):
                     self.wfile.write(data)
                 else:
                     _json_response(self, 404, {"status": "error", "error_type": "chart_missing",
-                                               "message": "Chart.js 本地文件缺失(b02_assets/chart.umd.js)"})
+                                               "message": "Chart.js 本地文件缺失(前端资源/chart.umd.js)"})
                 return
             if path == "/api/current":
                 record = get_current_environment()
