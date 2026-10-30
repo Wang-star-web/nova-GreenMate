@@ -336,44 +336,179 @@ PAGE_HTML = """<!DOCTYPE html>
   --page: #f9f9f7; --surface: #fcfcfb; --ink: #0b0b0b; --ink-2: #52514e; --ink-3: #898781;
   --border: rgba(11, 11, 11, 0.10); --grid: #e1e0d9; --bar: #2a78d6;
   --good: #0ca30c; --warn: #fab219; --serious: #ec835a; --crit: #d03b3b; --ok-text: #006300;
+  --warn-text: #8a5b00;   /* 浅色主题下 warn 直接做文字对比度不足(1.79:1),用深琥珀 */
+  /* 数字孪生变量 */
+  --sky-a: #eaf4fb; --sky-b: #f2f7ec;
+  --glass-a: rgba(165, 214, 255, 0.30); --glass-b: rgba(210, 235, 255, 0.14);
+  --glass-edge: rgba(120, 170, 220, 0.35);
+  --roof-a: rgba(140, 200, 240, 0.55); --roof-b: rgba(200, 232, 252, 0.30);
+  --ground-a: #d8e4d0; --ground-b: #b9c9ae;
+  --sun: #fab219; --fruit: #d8402e; --cloud: rgba(190, 205, 215, 0.9); --cloud-warn: rgba(150, 165, 160, 0.95);
 }
 @media (prefers-color-scheme: dark) {
   :root {
     color-scheme: dark;
     --page: #0d0d0d; --surface: #1a1a19; --ink: #ffffff; --ink-2: #c3c2b7; --ink-3: #898781;
     --border: rgba(255, 255, 255, 0.10); --grid: #2c2c2a; --bar: #3987e5; --ok-text: #0ca30c;
+    --warn-text: #fab219;
+    --sky-a: #12171c; --sky-b: #0f1512;
+    --glass-a: rgba(90, 145, 200, 0.20); --glass-b: rgba(70, 110, 160, 0.10);
+    --glass-edge: rgba(140, 180, 220, 0.22);
+    --roof-a: rgba(70, 120, 170, 0.45); --roof-b: rgba(50, 90, 140, 0.25);
+    --ground-a: #232a24; --ground-b: #161c17;
+    --sun: #ffb347; --fruit: #e05a45; --cloud: rgba(120, 135, 150, 0.75); --cloud-warn: rgba(130, 140, 135, 0.85);
   }
 }
 * { box-sizing: border-box; }
 body { margin: 0; background: var(--page); color: var(--ink);
   font-family: system-ui, -apple-system, "Segoe UI", sans-serif; line-height: 1.6; }
-.wrap { max-width: 720px; margin: 0 auto; padding: 24px 20px 48px; }
-h1 { font-size: 22px; }
+.wrap { max-width: 980px; margin: 0 auto; padding: 24px 20px 48px; }
+h1 { font-size: 24px; margin: 0 0 4px; }
 .sub { color: var(--ink-3); font-size: 12px; }
-.panel { background: var(--surface); border: 1px solid var(--border); border-radius: 10px; padding: 14px 18px; margin: 14px 0; }
-.panel h2 { font-size: 15px; margin: 0 0 8px; }
+.panel { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 16px 18px; margin: 16px 0; }
+.panel h2 { font-size: 15px; margin: 0 0 10px; }
+.hero { display: grid; grid-template-columns: 1fr 460px; gap: 20px; align-items: center; margin-bottom: 8px; }
+@media (max-width: 860px) { .hero { grid-template-columns: 1fr; } }
+/* ---------- TWIN:CSS-START(三页同源复制块)---------- */
+.twin { position: relative; perspective: 900px; perspective-origin: 50% 20%; height: 300px;
+        overflow: hidden; border-radius: 16px; border: 1px solid var(--border);
+        background: linear-gradient(180deg, var(--sky-a), var(--sky-b)); transition: background .6s; }
+.twin-scene { position: absolute; left: 50%; top: 0; width: 460px; height: 320px; margin-left: -230px;
+              transform-style: preserve-3d; }
+.twin-sun { position: absolute; top: 26px; right: 36px; width: 64px; height: 64px;
+            animation: sun-pulse 6s ease-in-out infinite; transition: transform .6s, filter .6s; }
+/* SVG 呈现属性不支持 var(),颜色一律经 CSS 规则注入 */
+.twin-sun circle { fill: var(--sun); }
+.twin-sun g { stroke: var(--sun); }
+.twin-clouds svg path { fill: var(--cloud); }
+.crops circle { fill: var(--fruit); }
+.twin-clouds { position: absolute; top: 8px; left: 0; right: 0; height: 46px; opacity: .25; transition: opacity .6s; }
+.twin-clouds svg { position: absolute; width: 96px; height: 40px; animation: cloud-drift 14s ease-in-out infinite alternate; }
+.twin-clouds .cloud2 { left: 300px; top: 10px; opacity: 0; animation-delay: -7s; transition: opacity .6s; }
+.gh { position: absolute; left: 100px; bottom: 40px; width: 260px; height: 150px;
+      transform-style: preserve-3d; transform: rotateX(-16deg) rotateY(-26deg);
+      animation: twin-in 1.1s ease-out both; }
+.gh-wall { position: absolute; border: 1px solid var(--glass-edge);
+           background-image: repeating-linear-gradient(90deg, var(--glass-edge) 0 2px, transparent 2px 44px),
+                             linear-gradient(180deg, var(--glass-a), var(--glass-b)); }
+.gh-back { width: 260px; height: 150px; transform: rotateY(180deg) translateZ(90px); }
+.gh-front { width: 260px; height: 150px; transform: translateZ(90px); }
+.gh-left, .gh-right { width: 180px; height: 150px; left: 40px;
+                      background-image: repeating-linear-gradient(90deg, var(--glass-edge) 0 2px, transparent 2px 36px),
+                                        linear-gradient(180deg, var(--glass-b), var(--glass-a)); }
+.gh-left { transform: rotateY(-90deg) translateZ(130px); }
+.gh-right { transform: rotateY(90deg) translateZ(130px); }
+.gh-roof { position: absolute; left: 0; width: 260px; height: 150px; top: -123px;
+           transform-origin: 50% 0; border: 1px solid var(--glass-edge);
+           background: linear-gradient(180deg, var(--roof-a), var(--roof-b)); transition: background .6s; }
+.gh-roof-a { transform: rotateX(-35deg); }
+.gh-roof-b { transform: rotateX(35deg); }
+.crops { position: absolute; left: 30px; bottom: 0; width: 200px; height: 96px; transform-style: preserve-3d;
+         animation: crop-sway 8s ease-in-out infinite alternate; }
+.crop-row { position: absolute; bottom: 0; width: 200px; height: 96px; }
+.crop-row.r1 { transform: translateZ(-60px); }
+.crop-row.r2 { transform: translateZ(0); }
+.crop-row.r3 { transform: translateZ(60px); }
+.mist { position: absolute; left: 0; right: 0; top: 12px; height: 120px; opacity: .15;
+        animation: mist-drift 7s ease-in-out infinite alternate; transition: opacity .6s; }
+.mist-drop { position: absolute; width: 26px; height: 14px; border-radius: 50%;
+             background: radial-gradient(ellipse at center, rgba(255,255,255,.85), rgba(255,255,255,0));
+             animation: drop-rise 3.2s linear infinite; animation-play-state: paused; }
+.mist-drop:nth-child(1) { left: 12%; top: 78%; animation-delay: 0s; }
+.mist-drop:nth-child(2) { left: 30%; top: 60%; animation-delay: .45s; }
+.mist-drop:nth-child(3) { left: 48%; top: 84%; animation-delay: .9s; }
+.mist-drop:nth-child(4) { left: 64%; top: 56%; animation-delay: 1.35s; }
+.mist-drop:nth-child(5) { left: 80%; top: 80%; animation-delay: 1.8s; }
+.mist-drop:nth-child(6) { left: 88%; top: 48%; animation-delay: 2.25s; }
+.fan { position: absolute; right: 0; top: 52px; width: 44px; height: 44px;
+       transform: rotateY(90deg) translateZ(130px); }
+.fan svg { animation: fan-spin 2.4s linear infinite; }
+.rays { position: absolute; left: 40px; top: 0; width: 180px; height: 150px; opacity: .85;
+        transform: translateZ(60px); transition: opacity .6s; }
+.ray { position: absolute; top: -10px; width: 34px; height: 170px; border-radius: 40%;
+       background: linear-gradient(180deg, rgba(255,240,190,.75), rgba(255,240,190,0));
+       animation: ray-shimmer 4s ease-in-out infinite; }
+.ray.r1 { left: 20px; transform: rotate(14deg); }
+.ray.r2 { left: 76px; animation-delay: .9s; }
+.ray.r3 { left: 132px; transform: rotate(-14deg); animation-delay: 1.8s; }
+.gh-platform { position: absolute; left: 50%; bottom: 6px; width: 400px; height: 44px; margin-left: -200px;
+               border-radius: 50%; background: radial-gradient(ellipse at center, var(--ground-a), var(--ground-b)); }
+.twin-badge { position: absolute; left: 14px; bottom: 12px; padding: 3px 12px; border-radius: 999px;
+              font-size: 12px; background: var(--surface); border: 1px solid var(--border); color: var(--ink-2); }
+.twin.watch::after { content: ""; position: absolute; inset: 0; border-radius: 16px; pointer-events: none;
+                     animation: watch-pulse 1.8s ease-out infinite; }
+/* 状态 class:阈值对齐 B03 规则 R1/R3/R6/R7 */
+.twin.temp-hot .twin-sun { fill: var(--serious); transform: translateY(-8px) scale(1.16); }
+.twin.temp-hot .twin-sun circle { fill: var(--serious); }
+.twin.temp-hot .twin-sun g { stroke: var(--serious); }
+.twin.temp-hot .gh-roof { background: linear-gradient(180deg, var(--roof-a), var(--roof-b)),
+                          rgba(236, 131, 90, 0.25); }
+.twin.temp-hot .fan svg { animation-duration: 1.1s; }
+.twin.hum-high .mist { opacity: .82; }
+.twin.hum-high .mist-drop { animation-play-state: running; }
+.twin.co2-high .twin-clouds { opacity: .9; }
+.twin.co2-high .twin-clouds svg path { fill: var(--cloud-warn); }
+.twin.co2-high .cloud2 { opacity: 1; }
+.twin.co2-high .twin-clouds svg { animation-duration: 8s; }
+.twin.light-low .rays { opacity: .12; }
+.twin.light-low .ray { animation-play-state: paused; }
+.twin.light-low .twin-sun { filter: brightness(.75); }
+.twin.light-low { background: linear-gradient(180deg, #c7ccd4, #dfe3da); }
+@keyframes twin-in { from { transform: rotateX(-4deg) rotateY(-26deg) scale(.92) translateY(26px); opacity: 0; }
+                     to { transform: rotateX(-16deg) rotateY(-26deg) scale(1) translateY(0); opacity: 1; } }
+@keyframes sun-pulse { 0%,100% { transform: scale(1); filter: brightness(1); } 50% { transform: scale(1.06); filter: brightness(1.08); } }
+@keyframes ray-shimmer { 0%,100% { opacity: .5; } 50% { opacity: .9; } }
+@keyframes mist-drift { from { transform: translateX(-5%); } to { transform: translateX(5%); } }
+@keyframes drop-rise { 0% { transform: translateY(6px) scale(.7); opacity: 0; }
+                       30% { opacity: .85; } 100% { transform: translateY(-10px) scale(1); opacity: 0; } }
+@keyframes fan-spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+@keyframes cloud-drift { from { transform: translateX(-10%); } to { transform: translateX(10%); } }
+@keyframes watch-pulse { 0% { box-shadow: 0 0 0 3px rgba(250,178,25,.55); } 100% { box-shadow: 0 0 0 16px rgba(250,178,25,0); } }
+@keyframes crop-sway { from { transform: rotateX(1.5deg); } to { transform: rotateX(-1.5deg); } }
+@media (max-width: 760px) {
+  .twin { height: 230px; }
+  .twin-scene { transform: scale(.72); transform-origin: 50% 0; }
+  .mist-drop:nth-child(n+4) { display: none; }
+  .crops { animation: none; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .twin * { animation: none !important; }
+}
+/* ---------- TWIN:CSS-END ---------- */
 .state-row { display: flex; align-items: center; gap: 14px; flex-wrap: wrap; }
 .state-row label { font-size: 14px; }
-.cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 12px; }
-.metric-card { background: var(--surface); border: 1px solid var(--border); border-radius: 8px; padding: 10px 14px; }
-.metric-name { color: var(--ink-3); font-size: 12px; }
-.metric-value { font-size: 22px; font-weight: 600; font-variant-numeric: tabular-nums; }
+.switch-seg { display: inline-flex; border: 1px solid var(--border); border-radius: 999px; overflow: hidden; background: var(--surface); }
+.switch-seg label { position: relative; padding: 6px 18px; cursor: pointer; font-size: 13px; color: var(--ink-2); }
+.switch-seg input { position: absolute; opacity: 0; width: 0; }
+.switch-seg label:has(input:checked) { background: var(--bar); color: #fff; }
+.cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(170px, 1fr)); gap: 12px; }
+.metric-card { background: var(--surface); border: 1px solid var(--border); border-left: 4px solid var(--good);
+               border-radius: 10px; padding: 12px 14px; display: flex; flex-direction: column; gap: 4px; }
+.metric-card.bad { border-left-color: var(--serious); }
+.metric-head { display: flex; align-items: center; gap: 8px; color: var(--ink-3); font-size: 12px; }
+.metric-head svg { width: 18px; height: 18px; }
+.metric-value { font-size: 24px; font-weight: 600; font-variant-numeric: tabular-nums; }
 .metric-unit { font-size: 12px; color: var(--ink-2); }
-.sim-badge { display: inline-block; margin-top: 6px; padding: 1px 8px; border: 1px solid var(--bar); color: var(--bar); border-radius: 4px; font-size: 11px; }
+.metric-tip { font-size: 12px; }
+.metric-tip.ok { color: var(--ok-text); }
+.metric-tip.bad { color: var(--warn-text); }
+.sim-badge { display: inline-block; margin-top: 2px; padding: 1px 8px; border: 1px solid var(--bar); color: var(--bar); border-radius: 4px; font-size: 11px; }
 button { padding: 7px 18px; border: 1px solid var(--border); border-radius: 8px; background: var(--surface); color: var(--ink); cursor: pointer; font-size: 14px; }
 button:hover { border-color: var(--bar); }
+button.primary { background: var(--bar); border-color: var(--bar); color: #fff; }
 #answer-box { margin-top: 10px; padding: 10px 14px; border-radius: 8px; white-space: pre-wrap; font-size: 14px; }
 #answer-box.ok { border: 1px solid var(--good); color: var(--ok-text); }
 #answer-box.err { border: 1px solid var(--crit); color: var(--crit); }
 #answer-box.empty { border: 1px dashed var(--grid); color: var(--ink-3); }
 .hidden { display: none; }
-#degrade-banner { margin: 14px 0; padding: 10px 14px; border: 1px solid var(--warn); color: var(--warn); border-radius: 8px; font-size: 13px; background: var(--surface); }
-.collect-row { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; margin: 6px 0; }
-.collect-label { width: 70px; font-size: 14px; }
+#degrade-banner { margin: 14px 0; padding: 10px 14px; border: 1px solid var(--warn); color: var(--warn-text); border-radius: 8px; font-size: 13px; background: var(--surface); }
+.collect-row { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; margin: 8px 0; }
+.collect-label { width: 86px; font-size: 14px; display: flex; align-items: center; gap: 6px; }
+.collect-label svg { width: 16px; height: 16px; }
 .collect-row input[type=text] { flex: 1; min-width: 150px; padding: 6px 10px; border: 1px solid var(--border); border-radius: 6px; background: var(--surface); color: var(--ink); font-size: 14px; }
 .collect-row input[type=text].input-err { border-color: var(--crit); }
 .collect-unit { width: 44px; color: var(--ink-3); font-size: 12px; }
-.collect-err { flex-basis: 100%; color: var(--crit); font-size: 12px; margin-left: 80px; }
+.collect-err { flex-basis: 100%; color: var(--crit); font-size: 12px; margin-left: 96px; }
 #collect-box { margin-top: 10px; padding: 10px 14px; border-radius: 8px; white-space: pre-wrap; font-size: 14px; }
 #collect-box.ok { border: 1px solid var(--good); color: var(--ok-text); }
 #collect-box.err { border: 1px solid var(--crit); color: var(--crit); }
@@ -388,14 +523,78 @@ table.history { width: 100%; border-collapse: collapse; font-size: 13px; }
 </head>
 <body>
 <div class="wrap">
-  <h1>GreenMate B01 环境监测 — Web 展示</h1>
-  <p class="sub">环境数据均为模拟采集,每项指标标记 source_type=SIMULATED</p>
+  <div class="hero">
+    <div>
+      <h1>🌱 GreenMate B01 环境监测</h1>
+      <p class="sub">数字孪生 · 实时联动环境状态(A/B 切换即见孪生变化)· 数据标记 source_type=SIMULATED</p>
+    </div>
+    <!-- TWIN:HTML-START(三页同源复制块)-->
+    <div class="twin" id="twin">
+      <div class="twin-scene">
+        <svg class="twin-sun" viewBox="0 0 64 64" aria-hidden="true">
+          <circle cx="32" cy="32" r="14"/>
+          <g stroke="var(--sun)" stroke-width="3" stroke-linecap="round">
+            <line x1="32" y1="4" x2="32" y2="12"/><line x1="32" y1="52" x2="32" y2="60"/>
+            <line x1="4" y1="32" x2="12" y2="32"/><line x1="52" y1="32" x2="60" y2="32"/>
+            <line x1="12" y1="12" x2="18" y2="18"/><line x1="46" y1="46" x2="52" y2="52"/>
+            <line x1="12" y1="52" x2="18" y2="46"/><line x1="46" y1="18" x2="52" y2="12"/>
+          </g>
+        </svg>
+        <div class="twin-clouds" aria-hidden="true">
+          <svg viewBox="0 0 96 40"><path d="M22 30 a10 10 0 0 1 0 -20 a13 13 0 0 1 24 -2 a9 9 0 0 1 8 14 a10 10 0 0 1 -4 8 z" fill="var(--cloud)"/></svg>
+          <svg class="cloud2" viewBox="0 0 96 40"><path d="M22 30 a10 10 0 0 1 0 -20 a13 13 0 0 1 24 -2 a9 9 0 0 1 8 14 a10 10 0 0 1 -4 8 z" fill="var(--cloud)"/></svg>
+        </div>
+        <div class="gh">
+          <div class="gh-wall gh-back"></div>
+          <div class="gh-wall gh-left"></div>
+          <div class="gh-wall gh-right"></div>
+          <div class="gh-wall gh-front"></div>
+          <div class="gh-roof gh-roof-a"></div>
+          <div class="gh-roof gh-roof-b"></div>
+          <div class="crops" aria-hidden="true">
+            <svg class="crop-row r1" viewBox="0 0 200 96">
+              <g transform="translate(20,0)"><path d="M30 92 C30 62 30 40 30 22" stroke="#3f7d3a" stroke-width="3" fill="none"/><path d="M30 40 C22 35 14 32 8 27 C14 23 22 20 30 26 Z" fill="#4f9c46"/><path d="M30 50 C38 45 46 42 52 38 C46 34 38 31 30 36 Z" fill="#4f9c46"/><circle cx="24" cy="32" r="4.5" fill="var(--fruit)"/><circle cx="37" cy="26" r="4.5" fill="var(--fruit)"/><circle cx="30" cy="18" r="4.5" fill="var(--fruit)"/></g>
+              <g transform="translate(90,0)"><path d="M30 92 C30 62 30 40 30 22" stroke="#3f7d3a" stroke-width="3" fill="none"/><path d="M30 40 C22 35 14 32 8 27 C14 23 22 20 30 26 Z" fill="#4f9c46"/><path d="M30 50 C38 45 46 42 52 38 C46 34 38 31 30 36 Z" fill="#4f9c46"/><circle cx="24" cy="32" r="4.5" fill="var(--fruit)"/><circle cx="37" cy="26" r="4.5" fill="var(--fruit)"/><circle cx="30" cy="18" r="4.5" fill="var(--fruit)"/></g>
+              <g transform="translate(160,0)"><path d="M30 92 C30 62 30 40 30 22" stroke="#3f7d3a" stroke-width="3" fill="none"/><path d="M30 40 C22 35 14 32 8 27 C14 23 22 20 30 26 Z" fill="#4f9c46"/><path d="M30 50 C38 45 46 42 52 38 C46 34 38 31 30 36 Z" fill="#4f9c46"/><circle cx="24" cy="32" r="4.5" fill="var(--fruit)"/><circle cx="37" cy="26" r="4.5" fill="var(--fruit)"/><circle cx="30" cy="18" r="4.5" fill="var(--fruit)"/></g>
+            </svg>
+            <svg class="crop-row r2" viewBox="0 0 200 96">
+              <g transform="translate(20,0)"><path d="M30 92 C30 62 30 40 30 22" stroke="#3f7d3a" stroke-width="3" fill="none"/><path d="M30 40 C22 35 14 32 8 27 C14 23 22 20 30 26 Z" fill="#4f9c46"/><path d="M30 50 C38 45 46 42 52 38 C46 34 38 31 30 36 Z" fill="#4f9c46"/><circle cx="24" cy="32" r="4.5" fill="var(--fruit)"/><circle cx="37" cy="26" r="4.5" fill="var(--fruit)"/><circle cx="30" cy="18" r="4.5" fill="var(--fruit)"/></g>
+              <g transform="translate(90,0)"><path d="M30 92 C30 62 30 40 30 22" stroke="#3f7d3a" stroke-width="3" fill="none"/><path d="M30 40 C22 35 14 32 8 27 C14 23 22 20 30 26 Z" fill="#4f9c46"/><path d="M30 50 C38 45 46 42 52 38 C46 34 38 31 30 36 Z" fill="#4f9c46"/><circle cx="24" cy="32" r="4.5" fill="var(--fruit)"/><circle cx="37" cy="26" r="4.5" fill="var(--fruit)"/><circle cx="30" cy="18" r="4.5" fill="var(--fruit)"/></g>
+              <g transform="translate(160,0)"><path d="M30 92 C30 62 30 40 30 22" stroke="#3f7d3a" stroke-width="3" fill="none"/><path d="M30 40 C22 35 14 32 8 27 C14 23 22 20 30 26 Z" fill="#4f9c46"/><path d="M30 50 C38 45 46 42 52 38 C46 34 38 31 30 36 Z" fill="#4f9c46"/><circle cx="24" cy="32" r="4.5" fill="var(--fruit)"/><circle cx="37" cy="26" r="4.5" fill="var(--fruit)"/><circle cx="30" cy="18" r="4.5" fill="var(--fruit)"/></g>
+            </svg>
+            <svg class="crop-row r3" viewBox="0 0 200 96">
+              <g transform="translate(20,0)"><path d="M30 92 C30 62 30 40 30 22" stroke="#3f7d3a" stroke-width="3" fill="none"/><path d="M30 40 C22 35 14 32 8 27 C14 23 22 20 30 26 Z" fill="#4f9c46"/><path d="M30 50 C38 45 46 42 52 38 C46 34 38 31 30 36 Z" fill="#4f9c46"/><circle cx="24" cy="32" r="4.5" fill="var(--fruit)"/><circle cx="37" cy="26" r="4.5" fill="var(--fruit)"/><circle cx="30" cy="18" r="4.5" fill="var(--fruit)"/></g>
+              <g transform="translate(90,0)"><path d="M30 92 C30 62 30 40 30 22" stroke="#3f7d3a" stroke-width="3" fill="none"/><path d="M30 40 C22 35 14 32 8 27 C14 23 22 20 30 26 Z" fill="#4f9c46"/><path d="M30 50 C38 45 46 42 52 38 C46 34 38 31 30 36 Z" fill="#4f9c46"/><circle cx="24" cy="32" r="4.5" fill="var(--fruit)"/><circle cx="37" cy="26" r="4.5" fill="var(--fruit)"/><circle cx="30" cy="18" r="4.5" fill="var(--fruit)"/></g>
+              <g transform="translate(160,0)"><path d="M30 92 C30 62 30 40 30 22" stroke="#3f7d3a" stroke-width="3" fill="none"/><path d="M30 40 C22 35 14 32 8 27 C14 23 22 20 30 26 Z" fill="#4f9c46"/><path d="M30 50 C38 45 46 42 52 38 C46 34 38 31 30 36 Z" fill="#4f9c46"/><circle cx="24" cy="32" r="4.5" fill="var(--fruit)"/><circle cx="37" cy="26" r="4.5" fill="var(--fruit)"/><circle cx="30" cy="18" r="4.5" fill="var(--fruit)"/></g>
+            </svg>
+          </div>
+          <div class="mist" aria-hidden="true">
+            <span class="mist-drop"></span><span class="mist-drop"></span><span class="mist-drop"></span>
+            <span class="mist-drop"></span><span class="mist-drop"></span><span class="mist-drop"></span>
+          </div>
+          <div class="fan" aria-hidden="true">
+            <svg viewBox="0 0 44 44"><circle cx="22" cy="22" r="5" fill="#8a929b"/><g fill="#aab3bc">
+              <path d="M22 17 C27 17 29 12 29 7 C24 7 19 12 19 17 Z"/><path d="M22 27 C27 27 29 32 29 37 C24 37 19 32 19 27 Z"/>
+              <path d="M17 22 C17 17 12 15 7 15 C7 20 12 25 17 25 Z"/><path d="M27 22 C27 17 32 15 37 15 C37 20 32 25 27 25 Z"/></g></svg>
+          </div>
+          <div class="rays" aria-hidden="true">
+            <span class="ray r1"></span><span class="ray r2"></span><span class="ray r3"></span>
+          </div>
+        </div>
+        <div class="gh-platform" aria-hidden="true"></div>
+      </div>
+      <div class="twin-badge" id="twin-badge">数字孪生 · 实时状态</div>
+    </div>
+    <!-- TWIN:HTML-END -->
+  </div>
   <div class="panel">
-    <h2>环境状态(A/B 切换)</h2>
+    <h2>环境状态(A/B 切换 · 孪生实时联动)</h2>
     <div class="state-row">
       <span>当前状态: <b id="state-label">__STATE__</b></span>
-      <label><input type="radio" name="state" value="A"> 状态 A · 适宜环境</label>
-      <label><input type="radio" name="state" value="B"> 状态 B · 异常环境</label>
+      <span class="switch-seg">
+        <label><input type="radio" name="state" value="A"> 状态 A · 适宜环境</label>
+        <label><input type="radio" name="state" value="B"> 状态 B · 异常环境</label>
+      </span>
     </div>
   </div>
   <div class="panel">
@@ -407,7 +606,7 @@ table.history { width: 100%; border-collapse: collapse; font-size: 13px; }
     <h2>新建采集(与命令行同规则,服务端校验)</h2>
     <p class="sub">合法范围与 CLI 采集一致;提交成功后自动保存到 evidence/raw/ 并刷新历史列表。</p>
     __COLLECT_FORM__
-    <button type="button" id="btn-collect">提交采集</button>
+    <button type="button" id="btn-collect" class="primary">提交采集</button>
     <div id="collect-box" class="empty hidden"></div>
   </div>
   <div class="panel">
@@ -420,12 +619,45 @@ table.history { width: 100%; border-collapse: collapse; font-size: 13px; }
   </div>
   <div class="panel">
     <h2>固定提问</h2>
-    <p><b>当前环境怎么样?</b> <button id="btn-ask">提问</button></p>
+    <p><b>当前环境怎么样?</b> <button id="btn-ask" class="primary">提问</button></p>
     <div id="answer-box" class="empty hidden"></div>
   </div>
 </div>
 <script>
 function stateLabel(s) { return s + (s === "A" ? "(适宜环境)" : "(异常环境)"); }
+// 指标图标(内联 SVG,零外部资源)
+var PARAM_ICONS = {
+  "温度": '<svg viewBox="0 0 20 20" fill="none"><path d="M10 3a2 2 0 0 0-2 2v7.2a4 4 0 1 0 4 0V5a2 2 0 0 0-2-2Z" stroke="currentColor" stroke-width="1.5"/><circle cx="10" cy="14.5" r="1.8" fill="currentColor"/></svg>',
+  "湿度": '<svg viewBox="0 0 20 20" fill="none"><path d="M10 3S4.5 9.2 4.5 13a5.5 5.5 0 0 0 11 0C15.5 9.2 10 3 10 3Z" stroke="currentColor" stroke-width="1.5"/></svg>',
+  "CO₂浓度": '<svg viewBox="0 0 20 20" fill="none"><circle cx="7" cy="11" r="2.2" stroke="currentColor" stroke-width="1.5"/><circle cx="11.5" cy="8.5" r="1.5" stroke="currentColor" stroke-width="1.5"/><circle cx="11.5" cy="13.5" r="2.8" stroke="currentColor" stroke-width="1.5"/></svg>',
+  "光照": '<svg viewBox="0 0 20 20" fill="none"><circle cx="10" cy="10" r="3.2" stroke="currentColor" stroke-width="1.5"/><path d="M10 1.5v2M10 16.5v2M1.5 10h2M16.5 10h2M4 4l1.4 1.4M14.6 14.6 16 16M16 4l-1.4 1.4M5.4 14.6 4 16" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>'
+};
+// 状态阈值:对齐 B03 规则 R1/R3/R6/R7(单一事实源仅此处;服务端不注入状态类)
+function paramState(name, value) {
+  var v = parseFloat(value);
+  if (isNaN(v)) { return null; }
+  if (name === "温度" && v > 30) { return { cls: "bad", tip: "偏高(>30℃,R1)" }; }
+  if (name === "湿度" && v > 85) { return { cls: "bad", tip: "偏高(>85%RH,R3)" }; }
+  if (name === "CO₂浓度" && v > 1500) { return { cls: "bad", tip: "偏高(>1500ppm,R6)" }; }
+  if (name === "光照" && v < 10000) { return { cls: "bad", tip: "弱光(<10000lux,R7)" }; }
+  return { cls: "ok", tip: "适宜" };
+}
+function setCls(el, name, on) { if (on) { el.classList.add(name); } else { el.classList.remove(name); } }
+function updateTwin(items) {
+  var t = document.getElementById("twin");
+  if (!t) { return; }
+  var map = {};
+  for (var i = 0; i < items.length; i++) { map[items[i].name] = parseFloat(items[i].value); }
+  setCls(t, "temp-hot", map["温度"] > 30);
+  setCls(t, "hum-high", map["湿度"] > 85);
+  setCls(t, "co2-high", map["CO₂浓度"] > 1500);
+  setCls(t, "light-low", map["光照"] < 10000);
+  var watch = t.classList.contains("temp-hot") || t.classList.contains("hum-high")
+           || t.classList.contains("co2-high") || t.classList.contains("light-low");
+  setCls(t, "watch", watch);
+  var badge = document.getElementById("twin-badge");
+  if (badge) { badge.textContent = watch ? "数字孪生 · 需要关注" : "数字孪生 · 适宜"; }
+}
 function render(data) {
   document.getElementById("state-label").innerText = stateLabel(data.state);
   var radios = document.querySelectorAll('input[name="state"]');
@@ -434,11 +666,15 @@ function render(data) {
   var items = data.metrics.items;
   for (var i = 0; i < items.length; i++) {
     var it = items[i];
-    cards += '<div class="metric-card"><div class="metric-name">' + it.name + '</div>'
+    var st = paramState(it.name, it.value) || { cls: "ok", tip: "—" };
+    cards += '<div class="metric-card ' + st.cls + '"><div class="metric-head">' + (PARAM_ICONS[it.name] || "")
+      + '<span>' + it.name + '</span></div>'
       + '<div class="metric-value">' + it.value + '<span class="metric-unit"> ' + it.unit + '</span></div>'
+      + '<div class="metric-tip ' + st.cls + '">' + st.tip + '</div>'
       + '<span class="sim-badge">source_type=' + it.source_type + '</span></div>';
   }
   document.getElementById("metrics").innerHTML = cards;
+  updateTwin(items);
   if (data.llm) {
     if (data.llm.key_configured) { if (!llmFailed) { hideBanner(); } }
     else { showBanner("未配置 LLM API Key(需设置 DEEPSEEK_API_KEY 或 ANTHROPIC_AUTH_TOKEN),在线问答暂不可用;"); }
@@ -568,30 +804,41 @@ def build_metrics(state):
 
 
 def metrics_cards_html(state):
-    """渲染指标卡片 HTML(服务端注入,页面初始即含 SIMULATED 徽章)。"""
+    """渲染指标卡片 HTML(服务端注入初始内容;页面 render() 首载会按同一结构重建,
+    状态类由页面 JS 单一阈值事实源注入,服务端不注入避免双源漂移)。"""
+    icons = {"温度": '<svg viewBox="0 0 20 20" fill="none"><path d="M10 3a2 2 0 0 0-2 2v7.2a4 4 0 1 0 4 0V5a2 2 0 0 0-2-2Z" stroke="currentColor" stroke-width="1.5"/><circle cx="10" cy="14.5" r="1.8" fill="currentColor"/></svg>',
+             "湿度": '<svg viewBox="0 0 20 20" fill="none"><path d="M10 3S4.5 9.2 4.5 13a5.5 5.5 0 0 0 11 0C15.5 9.2 10 3 10 3Z" stroke="currentColor" stroke-width="1.5"/></svg>',
+             "CO₂浓度": '<svg viewBox="0 0 20 20" fill="none"><circle cx="7" cy="11" r="2.2" stroke="currentColor" stroke-width="1.5"/><circle cx="11.5" cy="8.5" r="1.5" stroke="currentColor" stroke-width="1.5"/><circle cx="11.5" cy="13.5" r="2.8" stroke="currentColor" stroke-width="1.5"/></svg>',
+             "光照": '<svg viewBox="0 0 20 20" fill="none"><circle cx="10" cy="10" r="3.2" stroke="currentColor" stroke-width="1.5"/><path d="M10 1.5v2M10 16.5v2M1.5 10h2M16.5 10h2M4 4l1.4 1.4M14.6 14.6 16 16M16 4l-1.4 1.4M5.4 14.6 4 16" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>'}
     cards = []
     for item in build_metrics(state):
         cards.append(
-            '<div class="metric-card"><div class="metric-name">%s</div>'
+            '<div class="metric-card"><div class="metric-head">%s<span>%s</span></div>'
             '<div class="metric-value">%s<span class="metric-unit"> %s</span></div>'
+            '<div class="metric-tip ok">适宜</div>'
             '<span class="sim-badge">source_type=%s</span></div>'
-            % (html.escape(item["name"]), html.escape(item["value"]),
+            % (icons.get(item["name"], ""), html.escape(item["name"]), html.escape(item["value"]),
                html.escape(item["unit"]), html.escape(item["source_type"])))
     return "".join(cards)
 
 
 def collect_form_html():
     """按 PARAM_SPECS 生成新建采集表单字段(服务端注入,范围文案与 CLI 校验一致)。"""
+    icons = {"temperature": '<svg viewBox="0 0 16 16" fill="none"><path d="M8 2a1.6 1.6 0 0 0-1.6 1.6v6a3.4 3.4 0 1 0 3.2 0v-6A1.6 1.6 0 0 0 8 2Z" stroke="currentColor" stroke-width="1.2"/><circle cx="8" cy="11.8" r="1.4" fill="currentColor"/></svg>',
+             "humidity": '<svg viewBox="0 0 16 16" fill="none"><path d="M8 2S3.6 7 3.6 10.2a4.4 4.4 0 0 0 8.8 0C12.4 7 8 2 8 2Z" stroke="currentColor" stroke-width="1.2"/></svg>',
+             "co2": '<svg viewBox="0 0 16 16" fill="none"><circle cx="5.5" cy="9" r="1.8" stroke="currentColor" stroke-width="1.2"/><circle cx="9" cy="7" r="1.2" stroke="currentColor" stroke-width="1.2"/><circle cx="9" cy="11" r="2.2" stroke="currentColor" stroke-width="1.2"/></svg>',
+             "light": '<svg viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="2.6" stroke="currentColor" stroke-width="1.2"/><path d="M8 1v1.6M8 13.4V15M1 8h1.6M13.4 8H15M3.2 3.2l1.1 1.1M11.7 11.7l1.1 1.1M12.8 3.2l-1.1 1.1M4.3 11.7l-1.1 1.1" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/></svg>'}
     rows = []
     for spec in PARAM_SPECS:
         rows.append(
             '<div class="collect-row">'
-            '<label class="collect-label" for="in-%s">%s</label>'
+            '<label class="collect-label" for="in-%s">%s%s</label>'
             '<input type="text" id="in-%s" name="%s" inputmode="decimal" placeholder="合法范围 %s">'
             '<span class="collect-unit">%s</span>'
             '<span class="collect-err hidden" id="err-%s"></span>'
-            '</div>' % (spec["key"], html.escape(spec["name"]), spec["key"], spec["key"],
-                        html.escape(range_text(spec)), html.escape(spec["unit"]), spec["key"]))
+            '</div>' % (spec["key"], icons.get(spec["key"], ""), html.escape(spec["name"]),
+                        spec["key"], spec["key"], html.escape(range_text(spec)),
+                        html.escape(spec["unit"]), spec["key"]))
     return "".join(rows)
 
 
@@ -654,6 +901,7 @@ def _json_response(handler, code, obj):
 class B01RequestHandler(BaseHTTPRequestHandler):
     """B01 补全 Web 服务: 页面 / 状态 / 切换 / 提问 / 新建采集 / 历史记录。任何异常均以 JSON 如实返回,零 traceback。"""
     server_version = "GreenMateB01/1.0"
+    protocol_version = "HTTP/1.1"   # keep-alive:全部 200 响应路径均显式 Content-Length(已核实)
 
     def log_message(self, format, *args):  # 请求日志统一由 log_llm 记录,关闭默认 stderr 噪音
         pass
@@ -779,21 +1027,24 @@ class B01RequestHandler(BaseHTTPRequestHandler):
                 pass
 
 
-def run_web_server():
-    """启动 B01 补全 Web 页面服务(127.0.0.1,端口可用 B01_WEB_PORT 覆盖)。"""
+def run_web_server(port=None):
+    """启动 B01 补全 Web 页面服务(127.0.0.1,端口默认 B01_WEB_PORT 可被 port 形参覆盖)。
+    port 形参供 b09_portal 线程同起复用;端口占用时打印提示并返回(不 sys.exit,
+    避免子线程/重复启动静默退出无反馈)。"""
+    listen_port = port if port is not None else B01_WEB_PORT
     setup_console()
     print("================ GreenMate B01 环境监测 Web 展示 ================")
-    print("页面地址: http://%s:%d" % (B01_WEB_HOST, B01_WEB_PORT))
+    print("页面地址: http://%s:%d" % (B01_WEB_HOST, listen_port))
     print("当前状态: %s (%s)   固定提问: %s" % (CURRENT_STATE, STATE_NAMES[CURRENT_STATE], FIXED_QUESTION))
     print("环境数据标记: source_type=SIMULATED")
     print("Web 能力: A/B 切换 / LLM 问答 / 新建采集(服务端同规则校验) / 最近 %d 条历史" % HISTORY_WEB_LIMIT)
     print("按 Ctrl+C 停止服务。")
     try:
-        server = ThreadingHTTPServer((B01_WEB_HOST, B01_WEB_PORT), B01RequestHandler)
+        server = ThreadingHTTPServer((B01_WEB_HOST, listen_port), B01RequestHandler)
         server.daemon_threads = True
     except OSError as e:
-        print("⚠ 端口 %d 启动失败: %s。请设置 B01_WEB_PORT 环境变量换一个端口。" % (B01_WEB_PORT, e))
-        sys.exit(1)
+        print("⚠ 端口 %d 启动失败(可能已被占用): %s。请设置 B01_WEB_PORT 环境变量换一个端口。" % (listen_port, e))
+        return
     try:
         server.serve_forever()
     except KeyboardInterrupt:
