@@ -1030,3 +1030,24 @@
 [2026-10-31 02:11:50] [解释] status=omitted reason=no_api_key: 未配置 DEEPSEEK_API_KEY / ANTHROPIC_AUTH_TOKEN,跳过 LLM 解释(结构化判断不受影响)
 [2026-10-31 02:11:50] [校验] verdict=SKIP(LLM 未生成,文本类校验跳过;结构校验见各检查项) strong_words=0 items=强确定词:skip,天气不编造:pass,工具调用校验:skip,关闭来源不编造:skip
 [2026-10-31 02:11:50] [完成] run_id=run_20261031_021147_497999 scenario=S1 report=报告/run_20261031_021147_497999_report.html run_result=证据/b07/run_20261031_021147_497999/run_result.json
+[2026-11-01 18:56:20] [场景] run_id=run_20261101_185620_0b3424 scenario=S1 name=稳态基线 anchor=2026-10-28 12:00:00 experiment=无 sources=history:开/weather:real/knowledge:开/prediction:开
+[2026-11-01 18:56:20] [工具] seq=1 tool=b02_current marker=SIMULATED status=ok
+[2026-11-01 18:56:20] [工具] seq=2 tool=b02_anchor marker=SIMULATED status=ok
+[2026-11-01 18:56:20] [工具] seq=3 tool=b01_raw marker=SIMULATED status=ok
+[2026-11-01 18:56:20] [工具] seq=4 tool=b02_history marker=SIMULATED status=ok
+[2026-11-01 18:56:20] [工具] seq=5 tool=b02_stats marker=SIMULATED status=ok
+[2026-11-01 18:56:21] [工具] seq=6 tool=b03_weather marker=PUBLIC status=ok [nested=success]
+[2026-11-01 18:56:21] [工具] seq=7 tool=b04_knowledge marker=SIMULATED status=ok [nested=ok]
+[2026-11-01 18:56:22] [工具] seq=8 tool=b06_predict marker=MODEL_OUTPUT status=ok [nested=ok]
+[2026-11-01 18:56:22] [证据] seq=1 evidence_id=EV01 source=b02_memory marker=SIMULATED status=ok type=current
+[2026-11-01 18:56:22] [证据] seq=2 evidence_id=EV02 source=b02_memory marker=SIMULATED status=ok type=current
+[2026-11-01 18:56:22] [证据] seq=3 evidence_id=EV03 source=b01_cli marker=SIMULATED status=ok type=raw
+[2026-11-01 18:56:22] [证据] seq=4 evidence_id=EV04 source=b02_memory marker=SIMULATED status=ok type=history
+[2026-11-01 18:56:22] [证据] seq=5 evidence_id=EV05 source=b02_memory marker=SIMULATED status=ok type=trend
+[2026-11-01 18:56:22] [证据] seq=6 evidence_id=EV06 source=b03_weather marker=PUBLIC status=ok type=weather
+[2026-11-01 18:56:22] [证据] seq=7 evidence_id=EV07 source=b04_rag marker=SIMULATED status=ok type=knowledge
+[2026-11-01 18:56:22] [证据] seq=8 evidence_id=EV08 source=b06_ml marker=MODEL_OUTPUT status=ok type=prediction
+[2026-11-01 18:56:22] [判断] conclusion=正常 attention_level=normal trust=高 matched_rules=无 degraded=0 completeness=4/4
+[2026-11-01 18:56:22] [解释] status=omitted reason=no_api_key: 未配置 DEEPSEEK_API_KEY / ANTHROPIC_AUTH_TOKEN,跳过 LLM 解释(结构化判断不受影响)
+[2026-11-01 18:56:22] [校验] verdict=SKIP(LLM 未生成,文本类校验跳过;结构校验见各检查项) strong_words=0 items=强确定词:skip,天气不编造:pass,工具调用校验:skip,关闭来源不编造:skip
+[2026-11-01 18:56:22] [完成] run_id=run_20261101_185620_0b3424 scenario=S1 report=报告/run_20261101_185620_0b3424_report.html run_result=证据/b07/run_20261101_185620_0b3424/run_result.json

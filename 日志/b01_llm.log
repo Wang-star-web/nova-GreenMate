@@ -77,3 +77,18 @@
 [2026-10-28 20:58:35] [请求] state=B 问句=当前环境怎么样? 环境=温度: 33 ℃ / 湿度: 88 %RH / CO₂浓度: 900 ppm / 光照: 8000 lux
 [2026-10-28 20:58:35] [失败] state=B error_type=no_api_key message=未配置 API Key(需设置环境变量 DEEPSEEK_API_KEY 或 ANTHROPIC_AUTH_TOKEN)
 [2026-10-28 21:11:22] [采集] run_id=run_20261028_211122_3e8259 温度=25 湿度=60 co2=800 光照=6000
+[2026-11-01 10:10:48] [请求] state=A 问句=当前环境怎么样? 环境=温度: 25 ℃ / 湿度: 60 %RH / CO₂浓度: 850 ppm / 光照: 30000 lux
+[2026-11-01 10:10:48] [失败] state=A error_type=no_api_key message=未配置 API Key(需设置环境变量 DEEPSEEK_API_KEY 或 ANTHROPIC_AUTH_TOKEN)
+[2026-11-01 10:10:48] [请求] state=B 问句=当前环境怎么样? 环境=温度: 33 ℃ / 湿度: 88 %RH / CO₂浓度: 900 ppm / 光照: 8000 lux
+[2026-11-01 10:10:48] [失败] state=B error_type=no_api_key message=未配置 API Key(需设置环境变量 DEEPSEEK_API_KEY 或 ANTHROPIC_AUTH_TOKEN)
+[2026-11-01 18:42:46] [采集] run_id=run_20261101_184246_fb62c2 温度=25.5 湿度=60 co2=800 光照=30000
+[2026-11-01 18:42:46] [切换] state=A -> B
+[2026-11-01 18:42:46] [切换] state=B -> A
+[2026-11-01 19:06:38] [切换] state=A -> B
+[2026-11-01 19:19:35] [采集] run_id=run_20261101_191935_1137fd 温度=25.5 湿度=60 co2=800 光照=30000
+[2026-11-01 19:21:03] [请求] state=B 问句=当前环境怎么样? 环境=温度: 33 ℃ / 湿度: 88 %RH / CO₂浓度: 900 ppm / 光照: 8000 lux
+[2026-11-01 19:21:03] [失败] state=B error_type=no_api_key message=未配置 API Key(需设置环境变量 DEEPSEEK_API_KEY 或 ANTHROPIC_AUTH_TOKEN)
+[2026-11-01 19:21:53] [采集] run_id=run_20261101_192153_8b344d 温度=25.5 湿度=60 co2=800 光照=30000
+[2026-11-01 19:22:13] [请求] state=B 问句=当前环境怎么样? 环境=温度: 33 ℃ / 湿度: 88 %RH / CO₂浓度: 900 ppm / 光照: 8000 lux
+[2026-11-01 19:22:13] [失败] state=B error_type=no_api_key message=未配置 API Key(需设置环境变量 DEEPSEEK_API_KEY 或 ANTHROPIC_AUTH_TOKEN)
+[2026-11-01 19:38:28] [采集] run_id=run_20261101_193828_bc968e 温度=35 湿度=60 co2=800 光照=6000

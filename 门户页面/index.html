@@ -145,8 +145,31 @@ main { max-width:1200px; margin:0 auto; padding:20px 24px 70px; }
 .cmd { background: var(--page); border: 1px solid var(--border); border-radius: 8px; padding: 6px 12px;
        font-family: Consolas, "Courier New", monospace; font-size: 12.5px; display: inline-block; margin: 4px 6px 4px 0; }
 .note { color: var(--ink-3); font-size: 12px; margin-top: 8px; }
-iframe { width: 100%; height: 340px; border: 1px solid var(--border); border-radius: 12px;
-         background: var(--surface); margin-top: 12px; }
+.quick-row { display: flex; flex-wrap: wrap; gap: 10px; }
+.quick-row .chip { font-size: 13px; padding: 6px 14px; }
+.quick-row .cmd { margin: 0 0 0 6px; font-size: 12px; }
+.portal-video { width: 100%; max-height: 520px; border-radius: 14px; border: 1px solid var(--border);
+                background: #000; display: block; }
+.svc-card { display: grid; grid-template-columns: minmax(0, 2fr) minmax(240px, 1fr); gap: 18px;
+            background: var(--surface); border: 1px solid var(--border); border-radius: 16px;
+            padding: 18px; align-items: center; margin-bottom: 16px; }
+@media (max-width: 860px) { .svc-card { grid-template-columns: 1fr; } }
+.svc-shot { position: relative; min-height: 260px; border-radius: 12px; overflow: hidden;
+            border: 1px solid var(--border);
+            background: linear-gradient(135deg, var(--glass-a), var(--glass-b)); }
+.svc-shot img { position: relative; z-index: 1; width: 100%; height: 100%; max-height: 420px;
+                object-fit: cover; object-position: top; display: block; }
+.svc-shot .fallback { position: absolute; inset: 0; display: flex; align-items: center;
+                      justify-content: center; color: var(--ink-3); font-size: 14px; padding: 20px; }
+.svc-info h4 { margin: 0 0 8px; font-size: 18px; }
+.btn-big { display: inline-block; padding: 10px 28px; border-radius: 10px; background: var(--accent);
+           color: #fff; text-decoration: none; font-size: 15px; font-weight: 600; margin-top: 12px; }
+.btn-big:hover { filter: brightness(1.08); }
+.svc-head { display: flex; justify-content: space-between; align-items: center; gap: 12px;
+            flex-wrap: wrap; margin-bottom: 10px; }
+.svc-head h4 { margin: 0; font-size: 18px; }
+.embed-frame { width: 100%; border: 1px solid var(--border); border-radius: 12px;
+               background: var(--surface); display: block; }
 .rep-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 12px; }
 .rep-card { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 14px 16px; }
 .rep-card h4 { margin: 0 0 6px; font-size: 14px; }
@@ -184,11 +207,9 @@ a { color: var(--accent); }
   <div class="hero">
     <div>
       <h1>🌱 GreenMate 番茄大棚<br>环境监测系统 · 整合门户</h1>
-      <p class="sub">B01~S5 全部网页与功能统一入口 · 数字孪生 · 报告列表扫描 证据/b07/ 存档(只读,生成于 2026-10-31T02:13:16+08:00)</p>
+      <p class="sub">B01~S5 全部网页与功能统一入口 · 数字孪生 · 报告列表扫描 证据/b07/ 存档(只读,生成于 2026-11-01T19:30:26+08:00)</p>
       <span class="cmd">py b09_portal.py serve</span>
-      <span class="cmd">py b01_cli.py web</span>
-      <span class="cmd">py b02_memory.py web</span>
-      <div class="note">serve 一键同起三服务:门户 8300 + B01 8123 + B02 8223,下方预览即刻显示。</div>
+      <div class="note">一键同起三服务:门户 8300 + B01 8123 + B02 8223。</div>
     </div>
     <!-- TWIN:HTML-START(三页同源复制块)-->
     <div class="twin" id="twin">
@@ -249,93 +270,73 @@ a { color: var(--accent); }
     <!-- TWIN:HTML-END -->
   </div>
 
+  <div class="section"><h3>🎬 系统演示片(旁白 + 字幕 + 实操录屏)</h3><video class="portal-video" src="../前端资源/portal_video.mp4" controls autoplay muted loop playsinline></video><div class="note">由 tools/demo_video.py 全自动生成(分段实操录屏 + 中文旁白 + 字幕);重新生成: py tools/demo_video.py。点击播放器可开启声音。</div></div>
+
   <div class="section">
     <h3>🚀 快速开始</h3>
-    <div class="step-grid">
-      <div class="step-card">
-        <h4><span class="step-num">1</span>一键起服务</h4>
-        <p>门户 + B01 + B02 三服务一并启动(已运行自动跳过)</p>
-        <span class="cmd">py b09_portal.py serve</span>
-      </div>
-      <div class="step-card">
-        <h4><span class="step-num">2</span>生成运行</h4>
-        <p>单场景或一键 6 组可复现实验</p>
-        <span class="cmd">py b07_main.py run S1</span>
-        <span class="cmd">py b07_main.py exp-all</span>
-      </div>
-      <div class="step-card">
-        <h4><span class="step-num">3</span>刷新首页</h4>
-        <p>报告列表扫描存档生成,新 run 后重跑一次</p>
-        <span class="cmd">py b09_portal.py</span>
-      </div>
+    <div class="quick-row">
+      <span class="chip">① 一键起服务:<span class="cmd">py b09_portal.py serve</span></span>
+      <span class="chip">② 生成运行:<span class="cmd">py b07_main.py run S1 / exp-all</span></span>
+      <span class="chip">③ 刷新首页:<span class="cmd">py b09_portal.py</span></span>
     </div>
   </div>
 
   <div class="section">
-    <h3>🌐 在线服务(iframe 预览,serve 一键托管)</h3>
-    <div class="grid2">
-      <div class="card">
-        <h4><svg viewBox="0 0 20 20" fill="none"><circle cx="10" cy="10" r="3" stroke="currentColor" stroke-width="1.5"/><path d="M1.5 10h2M16.5 10h2M10 1.5v2M10 16.5v2M4 4l1.4 1.4M14.6 14.6 16 16M16 4l-1.4 1.4M5.4 14.6 4 16" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>B01 智能采集 Web<span class="badge">8123</span></h4>
-        <div class="url">http://127.0.0.1:8123</div>
-        <div class="chips">
-          <span class="chip">数字孪生联动</span><span class="chip">A/B 切换</span><span class="chip">LLM 问答</span><span class="chip">新建采集</span><span class="chip">历史记录</span>
+    <h3>🌐 在线服务(整页直显 · 表单与问答可直接操作)</h3>
+    <div class="svc-head">
+      <h4>🌡 B01 智能采集 Web <span class="badge">8123</span></h4>
+      <a class="btn-big" href="http://127.0.0.1:8123" target="_blank" rel="noopener">打开新标签 ↗</a>
+    </div>
+    <div class="embed-fallback hidden" id="fb-b01">
+      <div class="svc-card">
+        <div class="svc-shot">
+          <div class="fallback">B01 界面截图</div>
+          <img src="../前端资源/portal_assets/b01_web.png" alt="B01 智能采集 Web 截图" loading="lazy" onerror="this.remove()">
         </div>
-        <span class="cmd">py b01_cli.py web</span>
-        <div class="note">serve 一键托管后此处即显示页面;API Key 读 DEEPSEEK_API_KEY → ANTHROPIC_AUTH_TOKEN。</div>
-        <iframe src="http://127.0.0.1:8123" loading="lazy" title="B01 采集 Web 预览"></iframe>
-      </div>
-      <div class="card">
-        <h4><svg viewBox="0 0 20 20" fill="none"><path d="M2 14 6 9l4 4 4-6 4 7" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>B02 数据记忆可视化<span class="badge">8223</span></h4>
-        <div class="url">http://127.0.0.1:8223</div>
-        <div class="chips">
-          <span class="chip">数字孪生联动</span><span class="chip">时序曲线</span><span class="chip">时间窗查询</span><span class="chip">窗口统计</span>
+        <div class="svc-info">
+          <div class="chips">
+            <span class="chip">数字孪生联动</span><span class="chip">A/B 切换</span><span class="chip">LLM 问答</span><span class="chip">新建采集</span><span class="chip">历史记录</span>
+          </div>
+          <div class="note">B01 服务(127.0.0.1:8123)未启动,当前展示截图;运行 py b09_portal.py serve 后自动切换为整页直显。</div>
         </div>
-        <span class="cmd">py b02_memory.py web</span>
-        <div class="note">端口可用 --port 或环境变量 B02_WEB_PORT 覆盖。</div>
-        <iframe src="http://127.0.0.1:8223" loading="lazy" title="B02 可视化 Web 预览"></iframe>
       </div>
     </div>
+    <iframe class="embed-frame hidden" id="frame-b01" title="B01 整页直显" loading="lazy"></iframe>
+
+    <div class="svc-head" style="margin-top:26px;">
+      <h4>📈 B02 数据记忆可视化 <span class="badge">8223</span></h4>
+      <a class="btn-big" href="http://127.0.0.1:8223" target="_blank" rel="noopener">打开新标签 ↗</a>
+    </div>
+    <div class="embed-fallback hidden" id="fb-b02">
+      <div class="svc-card">
+        <div class="svc-shot">
+          <div class="fallback">B02 界面截图</div>
+          <img src="../前端资源/portal_assets/b02_web.png" alt="B02 数据记忆可视化 Web 截图" loading="lazy" onerror="this.remove()">
+        </div>
+        <div class="svc-info">
+          <div class="chips">
+            <span class="chip">数字孪生联动</span><span class="chip">时序曲线</span><span class="chip">时间窗查询</span><span class="chip">窗口统计</span>
+          </div>
+          <div class="note">B02 服务(127.0.0.1:8223)未启动,当前展示截图;运行 py b09_portal.py serve 后自动切换为整页直显。</div>
+        </div>
+      </div>
+    </div>
+    <iframe class="embed-frame hidden" id="frame-b02" title="B02 整页直显" loading="lazy"></iframe>
   </div>
 
   <div class="section">
     <h3>📊 报告中心(B07 HTML 报告,file:// 直开,零运行时网络请求)</h3>
-    <div class="section"><h3>① 场景报告 S1~S5(每场景最新一次)</h3><div class="rep-grid"><div class="rep-card"><h4>📄 SS1 稳态基线</h4><div class="rep-meta">run_20261031_021147_497999 · 信任 高</div><span class="status-chip st-ok">● 正常</span> <a class="rep-link" href="../报告/run_20261031_021147_497999_report.html" target="_blank">打开报告 ↗</a></div><div class="rep-card"><h4>📄 SS2 渐进漂移</h4><div class="rep-meta">run_20261031_010328_088f90 · 信任 中</div><span class="status-chip st-warn">● 需要关注</span> <a class="rep-link" href="../报告/run_20261031_010328_088f90_report.html" target="_blank">打开报告 ↗</a></div><div class="rep-card"><h4>📄 SS3 外部扰动</h4><div class="rep-meta">run_20261030_022230_4d178f · 信任 高</div><span class="status-chip st-crit">● 需要预警</span> <a class="rep-link" href="../报告/run_20261030_022230_4d178f_report.html" target="_blank">打开报告 ↗</a></div><div class="rep-card"><h4>📄 SS4 多源证据分歧</h4><div class="rep-meta">run_20261030_022236_d697fb · 信任 中</div><span class="status-chip st-warn">● 需要关注</span> <a class="rep-link" href="../报告/run_20261030_022236_d697fb_report.html" target="_blank">打开报告 ↗</a></div><div class="rep-card"><h4>📄 SS5 证据退化</h4><div class="rep-meta">run_20261030_022242_c8640e · 信任 低</div><span class="status-chip st-ok">● 正常</span> <a class="rep-link" href="../报告/run_20261030_022242_c8640e_report.html" target="_blank">打开报告 ↗</a></div></div></div><div class="section"><h3>② 实验报告(案例A 第二遍·第三遍,可复现实验)</h3><div class="rep-grid"><div class="rep-card"><h4>🧪 证据一致</h4><div class="rep-meta">run_agree_002 · 信任 高</div><span class="status-chip st-ok">● 正常</span> <a class="rep-link" href="../报告/run_agree_002_report.html" target="_blank">打开报告 ↗</a></div><div class="rep-card"><h4>🧪 证据分歧(历史升温 vs 天气降温)</h4><div class="rep-meta">run_conflict_002 · 信任 中</div><span class="status-chip st-warn">● 需要关注</span> <a class="rep-link" href="../报告/run_conflict_002_report.html" target="_blank">打开报告 ↗</a></div><div class="rep-card"><h4>🧪 天气证据缺失</h4><div class="rep-meta">run_missing_weather_002 · 信任 高</div><span class="status-chip st-ok">● 正常</span> <a class="rep-link" href="../报告/run_missing_weather_002_report.html" target="_blank">打开报告 ↗</a></div><div class="rep-card"><h4>🧪 仅当前值</h4><div class="rep-meta">run_current_only_002 · 信任 高</div><span class="status-chip st-ok">● 正常</span> <a class="rep-link" href="../报告/run_current_only_002_report.html" target="_blank">打开报告 ↗</a></div><div class="rep-card"><h4>🧪 当前+3h历史</h4><div class="rep-meta">run_with_history_002 · 信任 高</div><span class="status-chip st-warn">● 需要关注</span> <a class="rep-link" href="../报告/run_with_history_002_report.html" target="_blank">打开报告 ↗</a></div><div class="rep-card"><h4>🧪 当前+3h历史+B06预测</h4><div class="rep-meta">run_with_history_prediction_002 · 信任 中</div><span class="status-chip st-warn">● 需要关注</span> <a class="rep-link" href="../报告/run_with_history_prediction_002_report.html" target="_blank">打开报告 ↗</a></div></div></div><div class="section"><h3>③ 最近运行(倒序,全部历史见 py b07_main.py list)</h3><table class="tbl"><tr><th>run_id</th><th>场景</th><th>名称</th><th>结论</th><th>信任</th><th>报告</th></tr><tr><td class="mono">run_with_history_prediction_002</td><td>S2·实验·</td><td>实验·with_history_prediction(当前+3h历史+B06预测)</td><td><span class="status-chip st-warn">● 需要关注</span></td><td>中</td><td><a class="rep-link" href="../报告/run_with_history_prediction_002_report.html" target="_blank">报告 ↗</a></td></tr><tr><td class="mono">run_with_history_prediction_001</td><td>S2·实验·</td><td>实验·with_history_prediction(当前+3h历史+B06预测)</td><td><span class="status-chip st-warn">● 需要关注</span></td><td>中</td><td><a class="rep-link" href="../报告/run_with_history_prediction_001_report.html" target="_blank">报告 ↗</a></td></tr><tr><td class="mono">run_with_history_002</td><td>S2·实验·</td><td>实验·with_history(当前+3h历史)</td><td><span class="status-chip st-warn">● 需要关注</span></td><td>高</td><td><a class="rep-link" href="../报告/run_with_history_002_report.html" target="_blank">报告 ↗</a></td></tr><tr><td class="mono">run_with_history_001</td><td>S2·实验·</td><td>实验·with_history(当前+3h历史)</td><td><span class="status-chip st-warn">● 需要关注</span></td><td>高</td><td><a class="rep-link" href="../报告/run_with_history_001_report.html" target="_blank">报告 ↗</a></td></tr><tr><td class="mono">run_missing_weather_002</td><td>S1·实验·</td><td>实验·missing_weather(天气证据缺失)</td><td><span class="status-chip st-ok">● 正常</span></td><td>高</td><td><a class="rep-link" href="../报告/run_missing_weather_002_report.html" target="_blank">报告 ↗</a></td></tr><tr><td class="mono">run_missing_weather_001</td><td>S1·实验·</td><td>实验·missing_weather(天气证据缺失)</td><td><span class="status-chip st-ok">● 正常</span></td><td>高</td><td><a class="rep-link" href="../报告/run_missing_weather_001_report.html" target="_blank">报告 ↗</a></td></tr><tr><td class="mono">run_current_only_002</td><td>S2·实验·</td><td>实验·current_only(仅当前值)</td><td><span class="status-chip st-ok">● 正常</span></td><td>高</td><td><a class="rep-link" href="../报告/run_current_only_002_report.html" target="_blank">报告 ↗</a></td></tr><tr><td class="mono">run_current_only_001</td><td>S2·实验·</td><td>实验·current_only(仅当前值)</td><td><span class="status-chip st-ok">● 正常</span></td><td>高</td><td><a class="rep-link" href="../报告/run_current_only_001_report.html" target="_blank">报告 ↗</a></td></tr><tr><td class="mono">run_conflict_002</td><td>S2·实验·</td><td>实验·conflict(历史升温 vs 天气降温)</td><td><span class="status-chip st-warn">● 需要关注</span></td><td>中</td><td><a class="rep-link" href="../报告/run_conflict_002_report.html" target="_blank">报告 ↗</a></td></tr><tr><td class="mono">run_conflict_001</td><td>S2·实验·</td><td>实验·conflict(历史升温 vs 天气降温)</td><td><span class="status-chip st-warn">● 需要关注</span></td><td>中</td><td><a class="rep-link" href="../报告/run_conflict_001_report.html" target="_blank">报告 ↗</a></td></tr></table></div>
+    <div class="section"><h3>① 场景报告 S1~S5(每场景最新一次)</h3><div class="rep-grid"><div class="rep-card"><h4>📄 SS1 稳态基线</h4><div class="rep-meta">run_20261101_185620_0b3424 · 信任 高</div><span class="status-chip st-ok">● 正常</span> <a class="rep-link" href="../报告/run_20261101_185620_0b3424_report.html" target="_blank">打开报告 ↗</a></div><div class="rep-card"><h4>📄 SS2 渐进漂移</h4><div class="rep-meta">run_20261031_010328_088f90 · 信任 中</div><span class="status-chip st-warn">● 需要关注</span> <a class="rep-link" href="../报告/run_20261031_010328_088f90_report.html" target="_blank">打开报告 ↗</a></div><div class="rep-card"><h4>📄 SS3 外部扰动</h4><div class="rep-meta">run_20261030_022230_4d178f · 信任 高</div><span class="status-chip st-crit">● 需要预警</span> <a class="rep-link" href="../报告/run_20261030_022230_4d178f_report.html" target="_blank">打开报告 ↗</a></div><div class="rep-card"><h4>📄 SS4 多源证据分歧</h4><div class="rep-meta">run_20261030_022236_d697fb · 信任 中</div><span class="status-chip st-warn">● 需要关注</span> <a class="rep-link" href="../报告/run_20261030_022236_d697fb_report.html" target="_blank">打开报告 ↗</a></div><div class="rep-card"><h4>📄 SS5 证据退化</h4><div class="rep-meta">run_20261030_022242_c8640e · 信任 低</div><span class="status-chip st-ok">● 正常</span> <a class="rep-link" href="../报告/run_20261030_022242_c8640e_report.html" target="_blank">打开报告 ↗</a></div></div></div><div class="section"><h3>② 实验报告(案例A 第二遍·第三遍,可复现实验)</h3><div class="rep-grid"><div class="rep-card"><h4>🧪 证据一致</h4><div class="rep-meta">run_agree_002 · 信任 高</div><span class="status-chip st-ok">● 正常</span> <a class="rep-link" href="../报告/run_agree_002_report.html" target="_blank">打开报告 ↗</a></div><div class="rep-card"><h4>🧪 证据分歧(历史升温 vs 天气降温)</h4><div class="rep-meta">run_conflict_002 · 信任 中</div><span class="status-chip st-warn">● 需要关注</span> <a class="rep-link" href="../报告/run_conflict_002_report.html" target="_blank">打开报告 ↗</a></div><div class="rep-card"><h4>🧪 天气证据缺失</h4><div class="rep-meta">run_missing_weather_002 · 信任 高</div><span class="status-chip st-ok">● 正常</span> <a class="rep-link" href="../报告/run_missing_weather_002_report.html" target="_blank">打开报告 ↗</a></div><div class="rep-card"><h4>🧪 仅当前值</h4><div class="rep-meta">run_current_only_002 · 信任 高</div><span class="status-chip st-ok">● 正常</span> <a class="rep-link" href="../报告/run_current_only_002_report.html" target="_blank">打开报告 ↗</a></div><div class="rep-card"><h4>🧪 当前+3h历史</h4><div class="rep-meta">run_with_history_002 · 信任 高</div><span class="status-chip st-warn">● 需要关注</span> <a class="rep-link" href="../报告/run_with_history_002_report.html" target="_blank">打开报告 ↗</a></div><div class="rep-card"><h4>🧪 当前+3h历史+B06预测</h4><div class="rep-meta">run_with_history_prediction_002 · 信任 中</div><span class="status-chip st-warn">● 需要关注</span> <a class="rep-link" href="../报告/run_with_history_prediction_002_report.html" target="_blank">打开报告 ↗</a></div></div></div><div class="section"><h3>③ 最近运行(倒序,全部历史见 py b07_main.py list)</h3><table class="tbl"><tr><th>run_id</th><th>场景</th><th>名称</th><th>结论</th><th>信任</th><th>报告</th></tr><tr><td class="mono">run_with_history_prediction_002</td><td>S2·实验·</td><td>实验·with_history_prediction(当前+3h历史+B06预测)</td><td><span class="status-chip st-warn">● 需要关注</span></td><td>中</td><td><a class="rep-link" href="../报告/run_with_history_prediction_002_report.html" target="_blank">报告 ↗</a></td></tr><tr><td class="mono">run_with_history_prediction_001</td><td>S2·实验·</td><td>实验·with_history_prediction(当前+3h历史+B06预测)</td><td><span class="status-chip st-warn">● 需要关注</span></td><td>中</td><td><a class="rep-link" href="../报告/run_with_history_prediction_001_report.html" target="_blank">报告 ↗</a></td></tr><tr><td class="mono">run_with_history_002</td><td>S2·实验·</td><td>实验·with_history(当前+3h历史)</td><td><span class="status-chip st-warn">● 需要关注</span></td><td>高</td><td><a class="rep-link" href="../报告/run_with_history_002_report.html" target="_blank">报告 ↗</a></td></tr><tr><td class="mono">run_with_history_001</td><td>S2·实验·</td><td>实验·with_history(当前+3h历史)</td><td><span class="status-chip st-warn">● 需要关注</span></td><td>高</td><td><a class="rep-link" href="../报告/run_with_history_001_report.html" target="_blank">报告 ↗</a></td></tr><tr><td class="mono">run_missing_weather_002</td><td>S1·实验·</td><td>实验·missing_weather(天气证据缺失)</td><td><span class="status-chip st-ok">● 正常</span></td><td>高</td><td><a class="rep-link" href="../报告/run_missing_weather_002_report.html" target="_blank">报告 ↗</a></td></tr><tr><td class="mono">run_missing_weather_001</td><td>S1·实验·</td><td>实验·missing_weather(天气证据缺失)</td><td><span class="status-chip st-ok">● 正常</span></td><td>高</td><td><a class="rep-link" href="../报告/run_missing_weather_001_report.html" target="_blank">报告 ↗</a></td></tr><tr><td class="mono">run_current_only_002</td><td>S2·实验·</td><td>实验·current_only(仅当前值)</td><td><span class="status-chip st-ok">● 正常</span></td><td>高</td><td><a class="rep-link" href="../报告/run_current_only_002_report.html" target="_blank">报告 ↗</a></td></tr><tr><td class="mono">run_current_only_001</td><td>S2·实验·</td><td>实验·current_only(仅当前值)</td><td><span class="status-chip st-ok">● 正常</span></td><td>高</td><td><a class="rep-link" href="../报告/run_current_only_001_report.html" target="_blank">报告 ↗</a></td></tr><tr><td class="mono">run_conflict_002</td><td>S2·实验·</td><td>实验·conflict(历史升温 vs 天气降温)</td><td><span class="status-chip st-warn">● 需要关注</span></td><td>中</td><td><a class="rep-link" href="../报告/run_conflict_002_report.html" target="_blank">报告 ↗</a></td></tr><tr><td class="mono">run_conflict_001</td><td>S2·实验·</td><td>实验·conflict(历史升温 vs 天气降温)</td><td><span class="status-chip st-warn">● 需要关注</span></td><td>中</td><td><a class="rep-link" href="../报告/run_conflict_001_report.html" target="_blank">报告 ↗</a></td></tr></table></div>
   </div>
 
   <div class="section">
-    <h3>🛠 无网页模块(B03~B06 / B08)</h3>
-    <div class="cli-grid">
-      <div class="cli-card">
-        <h4>🌤 B03 天气证据接口</h4>
-        <div class="note">真实天气 API · A/B 与失败验证</div>
-        <span class="cmd">py b03_weather.py forecast 北京</span>
-        <span class="cmd">py b03_weather.py abtest</span>
-        <span class="cmd">py b03_weather.py failtest</span>
-      </div>
-      <div class="cli-card">
-        <h4>📚 B04 RAG 检索增强</h4>
-        <div class="note">番茄知识库 · 引用回答 · 资料不足边界</div>
-        <span class="cmd">py b04_rag.py search "番茄适宜温度"</span>
-        <span class="cmd">py b04_rag.py ask "灰霉病怎么防治"</span>
-        <span class="cmd">py b04_rag.py test</span>
-      </div>
-      <div class="cli-card">
-        <h4>🤖 B05 工具智能体闭环</h4>
-        <div class="note">LLM tool_calls · 四工具真实执行</div>
-        <span class="cmd">py b05_agent.py run "分析当前大棚环境"</span>
-        <span class="cmd">py b05_agent.py failtest</span>
-      </div>
-      <div class="cli-card">
-        <h4>🧠 B06 传统机器学习闭环</h4>
-        <div class="note">3h 窗口 → 1~2h WATCH/NORMAL 预测</div>
-        <span class="cmd">py b06_ml.py train</span>
-        <span class="cmd">py b06_ml.py predict</span>
-      </div>
-      <div class="cli-card">
-        <h4>✅ B08 契约校验</h4>
-        <div class="note">run_result.json 五项校验 + sha256</div>
-        <span class="cmd">py b08_verify.py --json-path 证据/b07/&lt;run_id&gt;/run_result.json</span>
-      </div>
+    <h3>🛠 无网页模块(悬停查看命令)</h3>
+    <div class="chips">
+      <span class="chip" title="py b03_weather.py forecast 北京 · abtest · failtest">🌤 B03 天气证据</span>
+      <span class="chip" title="py b04_rag.py search / ask / test">📚 B04 知识 RAG</span>
+      <span class="chip" title="py b05_agent.py run / failtest">🤖 B05 工具智能体</span>
+      <span class="chip" title="py b06_ml.py train / predict">🧠 B06 短时预测</span>
+      <span class="chip" title="py b08_verify.py --json-path 证据/b07/<run_id>/run_result.json">✅ B08 契约校验</span>
     </div>
   </div>
 
@@ -357,7 +358,38 @@ a { color: var(--accent); }
     </div>
   </div>
 
-  <footer>GreenMate 整合门户 · 首页与全部报告均为静态页面(只读存档,零运行时 API/LLM 调用)· 生成于 2026-10-31T02:13:16+08:00</footer>
+  <footer>GreenMate 整合门户 · 首页与全部报告均为静态页面(只读存档,零运行时 API/LLM 调用)· 生成于 2026-11-01T19:30:26+08:00</footer>
 </main>
+<script>
+function setupEmbed(id, prefix) {
+  var frame = document.getElementById("frame-" + id);
+  var fb = document.getElementById("fb-" + id);
+  fetch(prefix).then(function (r) {
+    if (r.ok) {                       // 同源代理可达:整页直显;否则回退截图卡片
+      frame.src = prefix;
+      frame.classList.remove("hidden");
+      fb.classList.add("hidden");
+    } else {
+      fb.classList.remove("hidden");
+    }
+  }).catch(function () { fb.classList.remove("hidden"); });
+}
+function fitFrames() {
+  var frames = document.querySelectorAll(".embed-frame:not(.hidden)");
+  for (var i = 0; i < frames.length; i++) {
+    try {
+      var doc = frames[i].contentDocument;
+      if (doc && doc.documentElement) {
+        var h = doc.documentElement.scrollHeight;   // 同源可读:随内容自然高度,无小框内滚动
+        if (h > 0) { frames[i].style.height = h + "px"; }
+      }
+    } catch (e) { /* 非同源时忽略,保持默认高度 */ }
+  }
+}
+setupEmbed("b01", "/b01/");
+setupEmbed("b02", "/b02/");
+setInterval(fitFrames, 1500);   // 内容变化(表单校验/A-B 切换)时持续校准
+window.addEventListener("resize", function () { setTimeout(fitFrames, 150); });
+</script>
 </body>
 </html>

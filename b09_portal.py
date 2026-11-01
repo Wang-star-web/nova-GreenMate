@@ -23,8 +23,11 @@
   py b09_portal.py --help       # 查看用法说明
 
 【说明】
-  首页不调用任何 API/LLM;iframe 预览仅在对应服务已启动时显示内容,
-  未启动时显示空白/浏览器错误提示,卡片上给出启动命令。
+  首页不调用任何 API/LLM。B01/B02 经同源代理(/b01/、/b02/ → 8123/8223)
+  整页直显于门户内:随内容自然高度、无小框内滚动,采集表单、A/B 切换、
+  LLM 问答、时序查询全部可直接操作;服务未启动时回退展示自动截图。
+  截图与视频均由 tools/shot_services.py 用本机 Edge(Playwright)全自动生成;
+  存在 前端资源/portal_video.webm 时自动嵌入播放。
 =====================================================================
 """
 
@@ -34,9 +37,12 @@ import os
 import socket
 import sys
 import threading
+import urllib.error
+import urllib.request
 from datetime import datetime
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 from pathlib import Path
+from urllib.parse import unquote
 
 # ---------------- 配置 ----------------
 BASE_DIR = Path(__file__).resolve().parent
@@ -319,8 +325,31 @@ main { max-width:1200px; margin:0 auto; padding:20px 24px 70px; }
 .cmd { background: var(--page); border: 1px solid var(--border); border-radius: 8px; padding: 6px 12px;
        font-family: Consolas, "Courier New", monospace; font-size: 12.5px; display: inline-block; margin: 4px 6px 4px 0; }
 .note { color: var(--ink-3); font-size: 12px; margin-top: 8px; }
-iframe { width: 100%; height: 340px; border: 1px solid var(--border); border-radius: 12px;
-         background: var(--surface); margin-top: 12px; }
+.quick-row { display: flex; flex-wrap: wrap; gap: 10px; }
+.quick-row .chip { font-size: 13px; padding: 6px 14px; }
+.quick-row .cmd { margin: 0 0 0 6px; font-size: 12px; }
+.portal-video { width: 100%; max-height: 520px; border-radius: 14px; border: 1px solid var(--border);
+                background: #000; display: block; }
+.svc-card { display: grid; grid-template-columns: minmax(0, 2fr) minmax(240px, 1fr); gap: 18px;
+            background: var(--surface); border: 1px solid var(--border); border-radius: 16px;
+            padding: 18px; align-items: center; margin-bottom: 16px; }
+@media (max-width: 860px) { .svc-card { grid-template-columns: 1fr; } }
+.svc-shot { position: relative; min-height: 260px; border-radius: 12px; overflow: hidden;
+            border: 1px solid var(--border);
+            background: linear-gradient(135deg, var(--glass-a), var(--glass-b)); }
+.svc-shot img { position: relative; z-index: 1; width: 100%; height: 100%; max-height: 420px;
+                object-fit: cover; object-position: top; display: block; }
+.svc-shot .fallback { position: absolute; inset: 0; display: flex; align-items: center;
+                      justify-content: center; color: var(--ink-3); font-size: 14px; padding: 20px; }
+.svc-info h4 { margin: 0 0 8px; font-size: 18px; }
+.btn-big { display: inline-block; padding: 10px 28px; border-radius: 10px; background: var(--accent);
+           color: #fff; text-decoration: none; font-size: 15px; font-weight: 600; margin-top: 12px; }
+.btn-big:hover { filter: brightness(1.08); }
+.svc-head { display: flex; justify-content: space-between; align-items: center; gap: 12px;
+            flex-wrap: wrap; margin-bottom: 10px; }
+.svc-head h4 { margin: 0; font-size: 18px; }
+.embed-frame { width: 100%; border: 1px solid var(--border); border-radius: 12px;
+               background: var(--surface); display: block; }
 .rep-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 12px; }
 .rep-card { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 14px 16px; }
 .rep-card h4 { margin: 0 0 6px; font-size: 14px; }
@@ -360,9 +389,7 @@ a { color: var(--accent); }
       <h1>🌱 GreenMate 番茄大棚<br>环境监测系统 · 整合门户</h1>
       <p class="sub">B01~S5 全部网页与功能统一入口 · 数字孪生 · 报告列表扫描 证据/b07/ 存档(只读,生成于 {{GENERATED_AT}})</p>
       <span class="cmd">py b09_portal.py serve</span>
-      <span class="cmd">py b01_cli.py web</span>
-      <span class="cmd">py b02_memory.py web</span>
-      <div class="note">serve 一键同起三服务:门户 8300 + B01 8123 + B02 8223,下方预览即刻显示。</div>
+      <div class="note">一键同起三服务:门户 8300 + B01 8123 + B02 8223。</div>
     </div>
     <!-- TWIN:HTML-START(三页同源复制块)-->
     <div class="twin" id="twin">
@@ -423,52 +450,58 @@ a { color: var(--accent); }
     <!-- TWIN:HTML-END -->
   </div>
 
+  {{VIDEO_BLOCK}}
+
   <div class="section">
     <h3>🚀 快速开始</h3>
-    <div class="step-grid">
-      <div class="step-card">
-        <h4><span class="step-num">1</span>一键起服务</h4>
-        <p>门户 + B01 + B02 三服务一并启动(已运行自动跳过)</p>
-        <span class="cmd">py b09_portal.py serve</span>
-      </div>
-      <div class="step-card">
-        <h4><span class="step-num">2</span>生成运行</h4>
-        <p>单场景或一键 6 组可复现实验</p>
-        <span class="cmd">py b07_main.py run S1</span>
-        <span class="cmd">py b07_main.py exp-all</span>
-      </div>
-      <div class="step-card">
-        <h4><span class="step-num">3</span>刷新首页</h4>
-        <p>报告列表扫描存档生成,新 run 后重跑一次</p>
-        <span class="cmd">py b09_portal.py</span>
-      </div>
+    <div class="quick-row">
+      <span class="chip">① 一键起服务:<span class="cmd">py b09_portal.py serve</span></span>
+      <span class="chip">② 生成运行:<span class="cmd">py b07_main.py run S1 / exp-all</span></span>
+      <span class="chip">③ 刷新首页:<span class="cmd">py b09_portal.py</span></span>
     </div>
   </div>
 
   <div class="section">
-    <h3>🌐 在线服务(iframe 预览,serve 一键托管)</h3>
-    <div class="grid2">
-      <div class="card">
-        <h4><svg viewBox="0 0 20 20" fill="none"><circle cx="10" cy="10" r="3" stroke="currentColor" stroke-width="1.5"/><path d="M1.5 10h2M16.5 10h2M10 1.5v2M10 16.5v2M4 4l1.4 1.4M14.6 14.6 16 16M16 4l-1.4 1.4M5.4 14.6 4 16" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>B01 智能采集 Web<span class="badge">8123</span></h4>
-        <div class="url">http://127.0.0.1:8123</div>
-        <div class="chips">
-          <span class="chip">数字孪生联动</span><span class="chip">A/B 切换</span><span class="chip">LLM 问答</span><span class="chip">新建采集</span><span class="chip">历史记录</span>
+    <h3>🌐 在线服务(整页直显 · 表单与问答可直接操作)</h3>
+    <div class="svc-head">
+      <h4>🌡 B01 智能采集 Web <span class="badge">8123</span></h4>
+      <a class="btn-big" href="http://127.0.0.1:8123" target="_blank" rel="noopener">打开新标签 ↗</a>
+    </div>
+    <div class="embed-fallback hidden" id="fb-b01">
+      <div class="svc-card">
+        <div class="svc-shot">
+          <div class="fallback">B01 界面截图</div>
+          <img src="../前端资源/portal_assets/b01_web.png" alt="B01 智能采集 Web 截图" loading="lazy" onerror="this.remove()">
         </div>
-        <span class="cmd">py b01_cli.py web</span>
-        <div class="note">serve 一键托管后此处即显示页面;API Key 读 DEEPSEEK_API_KEY → ANTHROPIC_AUTH_TOKEN。</div>
-        <iframe src="http://127.0.0.1:8123" loading="lazy" title="B01 采集 Web 预览"></iframe>
-      </div>
-      <div class="card">
-        <h4><svg viewBox="0 0 20 20" fill="none"><path d="M2 14 6 9l4 4 4-6 4 7" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>B02 数据记忆可视化<span class="badge">8223</span></h4>
-        <div class="url">http://127.0.0.1:8223</div>
-        <div class="chips">
-          <span class="chip">数字孪生联动</span><span class="chip">时序曲线</span><span class="chip">时间窗查询</span><span class="chip">窗口统计</span>
+        <div class="svc-info">
+          <div class="chips">
+            <span class="chip">数字孪生联动</span><span class="chip">A/B 切换</span><span class="chip">LLM 问答</span><span class="chip">新建采集</span><span class="chip">历史记录</span>
+          </div>
+          <div class="note">B01 服务(127.0.0.1:8123)未启动,当前展示截图;运行 py b09_portal.py serve 后自动切换为整页直显。</div>
         </div>
-        <span class="cmd">py b02_memory.py web</span>
-        <div class="note">端口可用 --port 或环境变量 B02_WEB_PORT 覆盖。</div>
-        <iframe src="http://127.0.0.1:8223" loading="lazy" title="B02 可视化 Web 预览"></iframe>
       </div>
     </div>
+    <iframe class="embed-frame hidden" id="frame-b01" title="B01 整页直显" loading="lazy"></iframe>
+
+    <div class="svc-head" style="margin-top:26px;">
+      <h4>📈 B02 数据记忆可视化 <span class="badge">8223</span></h4>
+      <a class="btn-big" href="http://127.0.0.1:8223" target="_blank" rel="noopener">打开新标签 ↗</a>
+    </div>
+    <div class="embed-fallback hidden" id="fb-b02">
+      <div class="svc-card">
+        <div class="svc-shot">
+          <div class="fallback">B02 界面截图</div>
+          <img src="../前端资源/portal_assets/b02_web.png" alt="B02 数据记忆可视化 Web 截图" loading="lazy" onerror="this.remove()">
+        </div>
+        <div class="svc-info">
+          <div class="chips">
+            <span class="chip">数字孪生联动</span><span class="chip">时序曲线</span><span class="chip">时间窗查询</span><span class="chip">窗口统计</span>
+          </div>
+          <div class="note">B02 服务(127.0.0.1:8223)未启动,当前展示截图;运行 py b09_portal.py serve 后自动切换为整页直显。</div>
+        </div>
+      </div>
+    </div>
+    <iframe class="embed-frame hidden" id="frame-b02" title="B02 整页直显" loading="lazy"></iframe>
   </div>
 
   <div class="section">
@@ -477,39 +510,13 @@ a { color: var(--accent); }
   </div>
 
   <div class="section">
-    <h3>🛠 无网页模块(B03~B06 / B08)</h3>
-    <div class="cli-grid">
-      <div class="cli-card">
-        <h4>🌤 B03 天气证据接口</h4>
-        <div class="note">真实天气 API · A/B 与失败验证</div>
-        <span class="cmd">py b03_weather.py forecast 北京</span>
-        <span class="cmd">py b03_weather.py abtest</span>
-        <span class="cmd">py b03_weather.py failtest</span>
-      </div>
-      <div class="cli-card">
-        <h4>📚 B04 RAG 检索增强</h4>
-        <div class="note">番茄知识库 · 引用回答 · 资料不足边界</div>
-        <span class="cmd">py b04_rag.py search "番茄适宜温度"</span>
-        <span class="cmd">py b04_rag.py ask "灰霉病怎么防治"</span>
-        <span class="cmd">py b04_rag.py test</span>
-      </div>
-      <div class="cli-card">
-        <h4>🤖 B05 工具智能体闭环</h4>
-        <div class="note">LLM tool_calls · 四工具真实执行</div>
-        <span class="cmd">py b05_agent.py run "分析当前大棚环境"</span>
-        <span class="cmd">py b05_agent.py failtest</span>
-      </div>
-      <div class="cli-card">
-        <h4>🧠 B06 传统机器学习闭环</h4>
-        <div class="note">3h 窗口 → 1~2h WATCH/NORMAL 预测</div>
-        <span class="cmd">py b06_ml.py train</span>
-        <span class="cmd">py b06_ml.py predict</span>
-      </div>
-      <div class="cli-card">
-        <h4>✅ B08 契约校验</h4>
-        <div class="note">run_result.json 五项校验 + sha256</div>
-        <span class="cmd">py b08_verify.py --json-path 证据/b07/&lt;run_id&gt;/run_result.json</span>
-      </div>
+    <h3>🛠 无网页模块(悬停查看命令)</h3>
+    <div class="chips">
+      <span class="chip" title="py b03_weather.py forecast 北京 · abtest · failtest">🌤 B03 天气证据</span>
+      <span class="chip" title="py b04_rag.py search / ask / test">📚 B04 知识 RAG</span>
+      <span class="chip" title="py b05_agent.py run / failtest">🤖 B05 工具智能体</span>
+      <span class="chip" title="py b06_ml.py train / predict">🧠 B06 短时预测</span>
+      <span class="chip" title="py b08_verify.py --json-path 证据/b07/<run_id>/run_result.json">✅ B08 契约校验</span>
     </div>
   </div>
 
@@ -533,6 +540,37 @@ a { color: var(--accent); }
 
   <footer>GreenMate 整合门户 · 首页与全部报告均为静态页面(只读存档,零运行时 API/LLM 调用)· 生成于 {{GENERATED_AT}}</footer>
 </main>
+<script>
+function setupEmbed(id, prefix) {
+  var frame = document.getElementById("frame-" + id);
+  var fb = document.getElementById("fb-" + id);
+  fetch(prefix).then(function (r) {
+    if (r.ok) {                       // 同源代理可达:整页直显;否则回退截图卡片
+      frame.src = prefix;
+      frame.classList.remove("hidden");
+      fb.classList.add("hidden");
+    } else {
+      fb.classList.remove("hidden");
+    }
+  }).catch(function () { fb.classList.remove("hidden"); });
+}
+function fitFrames() {
+  var frames = document.querySelectorAll(".embed-frame:not(.hidden)");
+  for (var i = 0; i < frames.length; i++) {
+    try {
+      var doc = frames[i].contentDocument;
+      if (doc && doc.documentElement) {
+        var h = doc.documentElement.scrollHeight;   // 同源可读:随内容自然高度,无小框内滚动
+        if (h > 0) { frames[i].style.height = h + "px"; }
+      }
+    } catch (e) { /* 非同源时忽略,保持默认高度 */ }
+  }
+}
+setupEmbed("b01", "/b01/");
+setupEmbed("b02", "/b02/");
+setInterval(fitFrames, 1500);   // 内容变化(表单校验/A-B 切换)时持续校准
+window.addEventListener("resize", function () { setTimeout(fitFrames, 150); });
+</script>
 </body>
 </html>
 """
@@ -542,7 +580,19 @@ def build_portal():
     """生成 门户页面/index.html(首页 + 全部功能入口)。返回是否成功。"""
     report_sections = _report_sections()
     generated_at = datetime.now().astimezone().isoformat(timespec="seconds")
+    video_src = ""
+    for name in ("portal_video.webm", "portal_video.mp4"):
+        if (ASSETS_DIR / name).exists():
+            video_src = "前端资源/" + name   # 相对门户页面/ 的路径:serve 与 file:// 双模式可用
+            break
+    video_html = ""
+    if video_src:
+        video_html = ('<div class="section"><h3>🎬 系统演示片(旁白 + 字幕 + 实操录屏)</h3>'
+                      '<video class="portal-video" src="../%s" controls autoplay muted loop playsinline></video>'
+                      '<div class="note">由 tools/demo_video.py 全自动生成(分段实操录屏 + 中文旁白 + 字幕);'
+                      '重新生成: py tools/demo_video.py。点击播放器可开启声音。</div></div>' % video_src)
     page = _PORTAL_TEMPLATE.replace("{{REPORT_SECTIONS}}", report_sections)
+    page = page.replace("{{VIDEO_BLOCK}}", video_html)
     page = page.replace("{{GENERATED_AT}}", _esc(generated_at))
     try:
         WEB_DIR.mkdir(parents=True, exist_ok=True)
@@ -558,8 +608,32 @@ def build_portal():
 # ---------------- 本地门户服务(可选)----------------
 _CONTENT_TYPES = {".html": "text/html; charset=utf-8", ".js": "application/javascript",
                   ".json": "application/json; charset=utf-8", ".css": "text/css; charset=utf-8",
-                  ".png": "image/png", ".jpg": "image/jpeg", ".svg": "image/svg+xml",
-                  ".ico": "image/x-icon"}
+                  ".png": "image/png", ".jpg": "image/jpeg", ".webp": "image/webp",
+                  ".svg": "image/svg+xml", ".ico": "image/x-icon",
+                  ".mp4": "video/mp4", ".mov": "video/quicktime", ".webm": "video/webm"}
+
+# 同源代理:门户 8300 上以 /b01/、/b02/ 前缀转发到本地子服务,门户内整页直显可交互
+UPSTREAMS = {"/b01/": "http://127.0.0.1:8123", "/b02/": "http://127.0.0.1:8223"}
+REWRITES = {
+    "/b01/": (('"/api/', '"/b01/api/'),),
+    "/b02/": (('"/api/', '"/b02/api/'), ('"/chart.umd.js"', '"/b02/chart.umd.js"')),
+}
+
+
+def _decode_path(raw_path):
+    """还原请求路径:浏览器会把中文目录百分号编码,curl 直发 UTF-8 字节则被
+    http.server 按 latin-1 解码——两种情况都要还原成真实中文路径。"""
+    url = raw_path.split("?", 1)[0]
+    try:
+        url = unquote(url)                    # ① %-编码(浏览器)
+    except Exception:
+        pass
+    if url and "%" not in url:
+        try:
+            url = url.encode("latin-1").decode("utf-8")   # ② 原始 UTF-8 字节(curl)
+        except (UnicodeEncodeError, UnicodeDecodeError):
+            pass
+    return url
 
 
 class _PortalHandler(BaseHTTPRequestHandler):
@@ -579,8 +653,50 @@ class _PortalHandler(BaseHTTPRequestHandler):
 
     protocol_version = "HTTP/1.1"   # keep-alive:_send_file 均显式 Content-Length
 
+    def _proxy(self, prefix):
+        """把 /b01/…、/b02/… 转发到本地子服务(同源直显的核心)。
+        转发方法/请求体(≤64KB)/状态码/响应头;对 HTML 响应做路径重写;
+        上游未启动时返回 502(ASCII 消息,latin-1 编码边界)。"""
+        upstream = UPSTREAMS[prefix]
+        rest = _decode_path(self.path)[len(prefix) - 1:]          # 含查询串
+        try:
+            length = int(self.headers.get("Content-Length", "0") or "0")
+        except ValueError:
+            length = 0
+        if length > 65536:
+            self.send_error(413, "body too large")
+            return
+        body = self.rfile.read(length) if length else b""
+        ctype = self.headers.get("Content-Type", "")
+        req = urllib.request.Request(upstream + rest, data=body or None, method=self.command,
+                                     headers={"Content-Type": ctype} if ctype else {})
+        try:
+            with urllib.request.urlopen(req, timeout=30) as resp:
+                data, status = resp.read(), resp.status
+                rtype = resp.headers.get("Content-Type", "application/octet-stream")
+        except urllib.error.HTTPError as e:                      # 上游业务 4xx/5xx 如实转发
+            data, status = e.read(), e.code
+            rtype = e.headers.get("Content-Type", "application/octet-stream")
+        except Exception:
+            self.send_error(502, "upstream service not available")
+            return
+        if rtype.startswith("text/html"):
+            text = data.decode("utf-8", errors="replace")
+            for old, new in REWRITES[prefix]:
+                text = text.replace(old, new)
+            data = text.encode("utf-8")
+        self.send_response(status)
+        self.send_header("Content-Type", rtype)
+        self.send_header("Content-Length", str(len(data)))
+        self.end_headers()
+        self.wfile.write(data)
+
     def do_GET(self):
-        url = self.path.split("?", 1)[0]
+        url = _decode_path(self.path)
+        for prefix in UPSTREAMS:
+            if url.startswith(prefix):
+                self._proxy(prefix)
+                return
         if url in ("/", "/index.html"):
             self._send_file(PORTAL_FILE)
         elif url.startswith("/报告/") and ".." not in url:
@@ -589,6 +705,14 @@ class _PortalHandler(BaseHTTPRequestHandler):
             self._send_file(BASE_DIR / url.lstrip("/"))
         else:
             self.send_error(404, "path not served")   # 错误消息只用 ASCII(latin-1 编码边界)
+
+    def do_POST(self):
+        url = _decode_path(self.path)
+        for prefix in UPSTREAMS:
+            if url.startswith(prefix):
+                self._proxy(prefix)
+                return
+        self.send_error(404, "path not served")
 
     def log_message(self, fmt, *args):
         print("[%s] %s" % (datetime.now().strftime("%H:%M:%S"), fmt % args))
@@ -634,7 +758,7 @@ def serve(port, with_children=True):
         return                     # daemon 子线程随进程退出,无泄漏
     print("✓ GreenMate 整合门户已启动: http://127.0.0.1:%s/" % port)
     if with_children:
-        print("  · B01(8123)/B02(8223)由本进程一并托管,iframe 即刻显示;亦可单独启动")
+        print("  · B01(8123)/B02(8223)由本进程一并托管;门户上经同源代理整页直显")
     print("  Ctrl+C 停止全部服务。")
     try:
         server.serve_forever()
@@ -646,15 +770,19 @@ def print_usage():
     print("""GreenMate B09 整合门户 — 用法
   py b09_portal.py              # (重新)生成整合首页 门户页面/index.html(含最新报告列表)
   py b09_portal.py serve        # 一键同起三服务:门户 8300 + B01 8123 + B02 8223
-                                # (B01/B02 已在运行则跳过;iframe 即刻显示内容)
+                                # (B01/B02 已在运行则跳过;门户以大图卡片呈现)
   py b09_portal.py serve --portal-only   # 只起门户,不带 B01/B02
   py b09_portal.py serve --port 8300     # 自定义门户端口(或环境变量 B09_WEB_PORT)
   py b09_portal.py --help       # 查看用法说明
+  py tools/shot_services.py shots       # 自动截图(Playwright + 本机 Edge):三张整页截图
+  py tools/shot_services.py video       # 自动录制数字孪生动画 → 前端资源/portal_video.webm
+  py tools/portal_assets.py collect     # 汇集截图为门户图库(生成 manifest.json)
 
 首页内容:
-  · 3D 数字孪生大棚 hero + B01(8123)/B02(8223)服务卡(iframe 预览,一键托管)
+  · 3D 数字孪生大棚 hero + 系统动画短片(存在 前端资源/portal_video.webm 时自动嵌入)
+  · B01(8123)/B02(8223)经同源代理整页直显:随内容自然高度、无小框内滚动、表单与问答可操作
   · 报告中心:S1~S5 场景报告 + 6 组实验报告 + 最近运行(全部来自 证据/b07/ 存档,只读)
-  · B03/B04/B05/B06/B08 无网页模块:功能图标卡 + 终端命令
+  · B03/B04/B05/B06/B08 无网页模块:图标 chips(悬停显示命令)
 新 run 生成后重新执行 py b09_portal.py 即可刷新报告列表。""")
 
 

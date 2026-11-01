@@ -1,0 +1,262 @@
+{
+  "items": [
+    {
+      "file": "b01_web.png",
+      "title": "B01 智能采集 Web(8123)",
+      "caption": "在线服务大图卡片",
+      "source": "自动截图(Playwright)"
+    },
+    {
+      "file": "b02_web.png",
+      "title": "B02 数据记忆可视化(8223)",
+      "caption": "在线服务大图卡片",
+      "source": "自动截图(Playwright)"
+    },
+    {
+      "file": "portal_home.png",
+      "title": "整合门户首页(8300)",
+      "caption": "在线服务大图卡片 / LiBTV 素材",
+      "source": "自动截图(Playwright)"
+    },
+    {
+      "file": "gallery/B03_依赖清单导出.png",
+      "title": "B03_依赖清单导出",
+      "caption": "项目截图",
+      "source": "文档/screenshots/B03_依赖清单导出.png"
+    },
+    {
+      "file": "gallery/B03_无效key_403鉴权失败.png",
+      "title": "B03_无效key_403鉴权失败",
+      "caption": "项目截图",
+      "source": "文档/screenshots/B03_无效key_403鉴权失败.png"
+    },
+    {
+      "file": "gallery/B05_主功能_run命令.png",
+      "title": "B05_主功能_run命令",
+      "caption": "项目截图",
+      "source": "文档/screenshots/B05_主功能_run命令.png"
+    },
+    {
+      "file": "gallery/B07_S2_渐进漂移.png",
+      "title": "B07_S2_渐进漂移",
+      "caption": "项目截图",
+      "source": "文档/screenshots/B07_S2_渐进漂移.png"
+    },
+    {
+      "file": "gallery/A适宜环境B异常环境分支测试.png",
+      "title": "A（适宜环境）、B（异常环境）分支测试",
+      "caption": "项目截图",
+      "source": "证据/B01/A（适宜环境）、B（异常环境）分支测试.png"
+    },
+    {
+      "file": "gallery/CLI主菜单测试假密钥.png",
+      "title": "CLI主菜单测试（假密钥）",
+      "caption": "项目截图",
+      "source": "证据/B01/CLI主菜单测试（假密钥）.png"
+    },
+    {
+      "file": "gallery/web网页模式测试终端窗口.png",
+      "title": "web网页模式测试（终端窗口）",
+      "caption": "项目截图",
+      "source": "证据/B01/web网页模式测试（终端窗口）.png"
+    },
+    {
+      "file": "gallery/web网页界面.png",
+      "title": "web网页界面",
+      "caption": "项目截图",
+      "source": "证据/B01/web网页界面.png"
+    },
+    {
+      "file": "gallery/空密钥场景测试.png",
+      "title": "空密钥场景测试",
+      "caption": "项目截图",
+      "source": "证据/B01/空密钥场景测试.png"
+    },
+    {
+      "file": "gallery/SQLite数据库浏览表.png",
+      "title": "SQLite数据库浏览表",
+      "caption": "项目截图",
+      "source": "证据/b02/png/SQLite数据库浏览表.png"
+    },
+    {
+      "file": "gallery/Web可视化时序图表.png",
+      "title": "Web可视化时序图表",
+      "caption": "项目截图",
+      "source": "证据/b02/png/Web可视化时序图表.png"
+    },
+    {
+      "file": "gallery/写入生成日志.png",
+      "title": "写入生成日志",
+      "caption": "项目截图",
+      "source": "证据/b02/png/写入生成日志.png"
+    },
+    {
+      "file": "gallery/重启后history查询结果.png",
+      "title": "重启后history查询结果",
+      "caption": "项目截图",
+      "source": "证据/b02/png/重启后history查询结果.png"
+    },
+    {
+      "file": "gallery/AB测试命令北京广州两组独立天气结果.png",
+      "title": "AB测试命令（北京、广州两组独立天气结果）",
+      "caption": "项目截图",
+      "source": "证据/b03/png/AB测试命令（北京、广州两组独立天气结果）.png"
+    },
+    {
+      "file": "gallery/READMEmd文档.png",
+      "title": "README.md文档",
+      "caption": "项目截图",
+      "source": "证据/b03/png/README.md文档.png"
+    },
+    {
+      "file": "gallery/失败用例1超时测试.png",
+      "title": "失败用例1：超时测试",
+      "caption": "项目截图",
+      "source": "证据/b03/png/失败用例1：超时测试.png"
+    },
+    {
+      "file": "gallery/库导入测试成功.png",
+      "title": "库导入测试成功",
+      "caption": "项目截图",
+      "source": "证据/b03/png/库导入测试成功.png"
+    },
+    {
+      "file": "gallery/正向调用北京生成证据json.png",
+      "title": "正向调用北京（生成证据json）",
+      "caption": "项目截图",
+      "source": "证据/b03/png/正向调用北京（生成证据json）.png"
+    },
+    {
+      "file": "gallery/正向调用北京终端输出.png",
+      "title": "正向调用北京（终端输出）",
+      "caption": "项目截图",
+      "source": "证据/b03/png/正向调用北京（终端输出）.png"
+    },
+    {
+      "file": "gallery/非法纬度测试.png",
+      "title": "非法纬度测试",
+      "caption": "项目截图",
+      "source": "证据/b03/png/非法纬度测试.png"
+    },
+    {
+      "file": "gallery/B04模块README文档内容.png",
+      "title": "B04模块README文档内容",
+      "caption": "项目截图",
+      "source": "证据/b04/png/B04模块README文档内容.png"
+    },
+    {
+      "file": "gallery/完整RAG_ask检索LLM回答带引用.png",
+      "title": "完整RAG_ask检索+LLM回答带引用",
+      "caption": "项目截图",
+      "source": "证据/b04/png/完整RAG_ask检索+LLM回答带引用.png"
+    },
+    {
+      "file": "gallery/帮助文档help命令说明.png",
+      "title": "帮助文档help命令说明",
+      "caption": "项目截图",
+      "source": "证据/b04/png/帮助文档help命令说明.png"
+    },
+    {
+      "file": "gallery/构建知识库build执行结果.png",
+      "title": "构建知识库build执行结果",
+      "caption": "项目截图",
+      "source": "证据/b04/png/构建知识库build执行结果.png"
+    },
+    {
+      "file": "gallery/查看来源登记表sources输出.png",
+      "title": "查看来源登记表sources输出",
+      "caption": "项目截图",
+      "source": "证据/b04/png/查看来源登记表sources输出.png"
+    },
+    {
+      "file": "gallery/检索search_番茄晚疫病查询结果.png",
+      "title": "检索search_番茄晚疫病查询结果",
+      "caption": "项目截图",
+      "source": "证据/b04/png/检索search_番茄晚疫病查询结果.png"
+    },
+    {
+      "file": "gallery/自动测试test_资料存在资料不足两组用例.png",
+      "title": "自动测试test_资料存在+资料不足两组用例",
+      "caption": "项目截图",
+      "source": "证据/b04/png/自动测试test_资料存在+资料不足两组用例.png"
+    },
+    {
+      "file": "gallery/阈值校准calibrate相似度分数与推荐阈值.png",
+      "title": "阈值校准calibrate相似度分数与推荐阈值",
+      "caption": "项目截图",
+      "source": "证据/b04/png/阈值校准calibrate相似度分数与推荐阈值.png"
+    },
+    {
+      "file": "gallery/test单元测试.png",
+      "title": "test单元测试",
+      "caption": "项目截图",
+      "source": "证据/b05/png/test单元测试.png"
+    },
+    {
+      "file": "gallery/B06-b06_report运行结果.png",
+      "title": "B06-b06_report运行结果",
+      "caption": "项目截图",
+      "source": "证据/b06/png/B06-b06_report运行结果.png"
+    },
+    {
+      "file": "gallery/B06新增修改文件列表.png",
+      "title": "B06新增修改文件列表",
+      "caption": "项目截图",
+      "source": "证据/b06/png/B06新增修改文件列表.png"
+    },
+    {
+      "file": "gallery/S1稳态基线.png",
+      "title": "S1稳态基线",
+      "caption": "项目截图",
+      "source": "证据/b07/png/S1稳态基线.png"
+    },
+    {
+      "file": "gallery/S3外部扰动.png",
+      "title": "S3外部扰动",
+      "caption": "项目截图",
+      "source": "证据/b07/png/S3外部扰动.png"
+    },
+    {
+      "file": "gallery/S3预警网页.png",
+      "title": "S3预警网页",
+      "caption": "项目截图",
+      "source": "证据/b07/png/S3预警网页.png"
+    },
+    {
+      "file": "gallery/S4多源证据分歧.png",
+      "title": "S4多源证据分歧",
+      "caption": "项目截图",
+      "source": "证据/b07/png/S4多源证据分歧.png"
+    },
+    {
+      "file": "gallery/S4证据分歧网页.png",
+      "title": "S4证据分歧网页",
+      "caption": "项目截图",
+      "source": "证据/b07/png/S4证据分歧网页.png"
+    },
+    {
+      "file": "gallery/S5证据退化.png",
+      "title": "S5证据退化",
+      "caption": "项目截图",
+      "source": "证据/b07/png/S5证据退化.png"
+    },
+    {
+      "file": "gallery/列出全部历史运行与结论.png",
+      "title": "列出全部历史运行与结论",
+      "caption": "项目截图",
+      "source": "证据/b07/png/列出全部历史运行与结论.png"
+    },
+    {
+      "file": "gallery/安装依赖.png",
+      "title": "安装依赖",
+      "caption": "项目截图",
+      "source": "证据/b07/png/安装依赖.png"
+    },
+    {
+      "file": "gallery/生成S1-S5报告终端日志.png",
+      "title": "生成S1-S5报告终端日志",
+      "caption": "项目截图",
+      "source": "证据/b07/png/生成S1-S5报告终端日志.png"
+    }
+  ]
+}
